@@ -1,0 +1,6 @@
+#user
+#Wed Jul 26 19:17:59 CST 2017
+address=\u5E7F\u4E1C\u5E7F\u5DDE
+age=19
+name=你画上肯定
+sex=\u7537
