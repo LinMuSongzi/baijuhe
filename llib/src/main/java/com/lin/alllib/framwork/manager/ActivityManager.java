@@ -26,6 +26,7 @@ public class ActivityManager implements ILife {
     private ActivityManager(){
         activities = new Stack<>();
         AppLife.getInstance().add(this);
+
     }
 
     public static ActivityManager getInstance(){

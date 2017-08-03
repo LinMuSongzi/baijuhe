@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.lin.alllib.data.EmptyEntity;
 import com.lin.alllib.framwork.DebugGod;
+import com.lin.alllib.framwork.commander.ILife;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -20,55 +21,64 @@ public abstract class Model {
     private AppCompatActivity activity;
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessage(EmptyEntity emptyEntity){
-        DebugGod.i(TAG,"EmptyEntity");
+    public void onMessage(EmptyEntity emptyEntity) {
+        DebugGod.i(TAG, "EmptyEntity");
     }
 
-    public final void onCreate(AppCompatActivity activity, Bundle savedInstanceState){
+    protected final void onCreate(AppCompatActivity activity, Bundle savedInstanceState) {
         this.activity = activity;
         init(savedInstanceState);
     }
 
-    void onResume() {
+    protected void onResume() {
 
     }
 
-    void onRestart() {
+    protected void onRestart() {
 
     }
 
-    void onStart() {
+    protected void onStart() {
 
     }
 
-    void onPause() {
+    protected void onPause() {
 
     }
 
-    void onStop() {
+    protected void onStop() {
 
     }
 
-    void onDestroy() {
+    protected void onDestroy() {
 
     }
 
-    void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
 
     }
 
-    protected void onCreateBefore(){};
+    protected void onCreateBefore() {
+    }
+
+    ;
 
     protected abstract int getContentView();
 
-    protected AppCompatActivity getActivity(){
+    protected final AppCompatActivity getActivity() {
         return activity;
     }
 
     protected abstract void init(Bundle savedInstanceState);
 
-    protected final View findViewById(int id){
+    protected final View findViewById(int id) {
         return activity.findViewById(id);
+    }
+
+    protected final void runOnUiThread(Runnable runnable) {
+        if (activity != null && !activity.isFinishing()) {
+            activity.runOnUiThread(runnable);
+        }
     }
 
 }

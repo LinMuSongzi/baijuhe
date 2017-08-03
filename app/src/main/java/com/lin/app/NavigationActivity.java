@@ -9,8 +9,6 @@ import com.lin.app.model.NavigationModel;
 
 public class NavigationActivity extends WoodActivity {
 
-
-
     @Override
     protected Model configurationModel() {
        return new NavigationModel();

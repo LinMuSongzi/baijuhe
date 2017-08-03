@@ -2,14 +2,6 @@ package com.lin.alllib;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
-import com.lin.alllib.data.EmptyEntity;
-import com.lin.alllib.framwork.DebugGod;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -29,7 +21,7 @@ public abstract class WoodActivity extends AppCompatActivity{
         model.onCreateBefore();
         super.onCreate(savedInstanceState);
         setContentView(model.getContentView());
-        ButterKnife.bind(this);
+        ButterKnife.bind(model,getWindow().getDecorView());
         model.onCreate(this,savedInstanceState);
     }
 
@@ -41,8 +33,8 @@ public abstract class WoodActivity extends AppCompatActivity{
 
     @Override
     protected final void onDestroy() {
-        ButterKnife.unbind(this);
         super.onDestroy();
+        ButterKnife.unbind(model);
         model.onDestroy();
     }
 
