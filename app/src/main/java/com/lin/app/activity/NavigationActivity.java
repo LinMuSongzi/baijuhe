@@ -1,4 +1,4 @@
-package com.lin.app;
+package com.lin.app.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

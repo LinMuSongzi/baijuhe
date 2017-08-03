@@ -1,29 +1,19 @@
 package com.lin.app.model;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.JsonObject;
 import com.lin.alllib.Model;
-import com.lin.alllib.framwork.manager.ActivityManager;
-import com.lin.app.NavigationActivity;
 import com.lin.app.R;
 import com.lin.app.data.respone.WeatherRespone;
 import com.lin.app.request.RequestManager;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import butterknife.Bind;
 import rx.Observable;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by lpds on 2017/7/26.
