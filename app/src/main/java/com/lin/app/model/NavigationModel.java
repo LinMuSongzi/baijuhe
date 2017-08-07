@@ -66,8 +66,14 @@ public class NavigationModel extends Model {
                         }).
                         subscribe(new Action1<String>() {
                             @Override
-                            public void call(String district) {
-                                id_content_tv.setText(id_content_tv.getText() + " " + district + "  ");
+                            public void call(final String district) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        id_content_tv.setText(id_content_tv.getText() + " " + district + "  ");
+                                    }
+                                });
+
                             }
                         });
             }

@@ -3,11 +3,9 @@ package com.lin.app.request.retrofit;
 import com.lin.app.data.entity.UserEntity;
 import com.lin.app.data.respone.UserOprateRespone;
 
-import retrofit.http.Body;
-import retrofit.http.GET;
-import retrofit.http.Headers;
-import retrofit.http.POST;
-import retrofit.http.Path;
+import retrofit2.http.Body;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import rx.Observable;
 
 /**
