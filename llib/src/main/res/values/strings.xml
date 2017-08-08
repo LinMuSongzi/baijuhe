@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">linlib</string>
+
+    <string-array name="meta_apis">
+        </string-array>
+
 </resources>
