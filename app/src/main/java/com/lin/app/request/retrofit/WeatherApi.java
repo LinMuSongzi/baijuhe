@@ -1,7 +1,7 @@
 package com.lin.app.request.retrofit;
 
 import com.google.gson.JsonObject;
-import com.lin.app.data.respone.WeatherRespone;
+import com.lin.alllib.data.respone.CityRespone;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -20,6 +20,6 @@ public interface WeatherApi {
 
 
     @GET("citys?")
-    Observable<WeatherRespone> getAllMsg(@Query("key") String key);
+    Observable<CityRespone> getAllMsg(@Query("key") String key);
 
 }

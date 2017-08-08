@@ -2,13 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lin.app">
 
+
+
     <application
-        android:name="com.lin.alllib.AppGod"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="api_s_1" android:value="com.lin.app.request.retrofit.AnXingApi"/>
+        <meta-data android:name="api_s_2" android:value="com.lin.app.request.retrofit.WeatherApi"/>
+
+
         <activity
             android:name=".activity.NavigationActivity"
             android:label="@string/app_name"

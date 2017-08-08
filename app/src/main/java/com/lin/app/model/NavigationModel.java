@@ -6,8 +6,9 @@ import android.widget.TextView;
 
 import com.lin.alllib.Model;
 import com.lin.app.R;
-import com.lin.app.data.respone.WeatherRespone;
-import com.lin.app.request.RequestManager;
+import com.lin.alllib.data.respone.CityRespone;
+import com.lin.alllib.framwork.RequestManager;
+import com.lin.app.request.ApiImp;
 
 import butterknife.Bind;
 import rx.Observable;
@@ -31,7 +32,7 @@ public class NavigationModel extends Model {
     @Override
     protected void init(Bundle savedInstanceState) {
         id_content_tv.setText("hello");
-        RequestManager.getInstance().getAll(new Subscriber<WeatherRespone>() {
+        ApiImp.getAllCity(new Subscriber<CityRespone>() {
             @Override
             public void onCompleted() {
                 Log.i(TAG, "onCompleted: 请求完毕");
@@ -43,24 +44,24 @@ public class NavigationModel extends Model {
             }
 
             @Override
-            public void onNext(final WeatherRespone weatherRespone) {
+            public void onNext(final CityRespone cityRespone) {
                 Observable.
-                        from(weatherRespone.getResult()).
-                        flatMap(new Func1<WeatherRespone.ResultBean, Observable<WeatherRespone.ResultBean.CityBean>>() {
+                        from(cityRespone.getResult()).
+                        flatMap(new Func1<CityRespone.ResultBean, Observable<CityRespone.ResultBean.CityBean>>() {
                             @Override
-                            public Observable<WeatherRespone.ResultBean.CityBean> call(WeatherRespone.ResultBean resultBean) {
+                            public Observable<CityRespone.ResultBean.CityBean> call(CityRespone.ResultBean resultBean) {
                                 return Observable.from(resultBean.getCity());
                             }
                         }).
-                        flatMap(new Func1<WeatherRespone.ResultBean.CityBean, Observable<WeatherRespone.ResultBean.CityBean.DistrictBean>>() {
+                        flatMap(new Func1<CityRespone.ResultBean.CityBean, Observable<CityRespone.ResultBean.CityBean.DistrictBean>>() {
                             @Override
-                            public Observable<WeatherRespone.ResultBean.CityBean.DistrictBean> call(WeatherRespone.ResultBean.CityBean cityBean) {
+                            public Observable<CityRespone.ResultBean.CityBean.DistrictBean> call(CityRespone.ResultBean.CityBean cityBean) {
                                 return Observable.from(cityBean.getDistrict());
                             }
                         }).
-                        map(new Func1<WeatherRespone.ResultBean.CityBean.DistrictBean, String>() {
+                        map(new Func1<CityRespone.ResultBean.CityBean.DistrictBean, String>() {
                             @Override
-                            public String call(WeatherRespone.ResultBean.CityBean.DistrictBean districtBean) {
+                            public String call(CityRespone.ResultBean.CityBean.DistrictBean districtBean) {
                                 return districtBean.getDistrict();
                             }
                         }).

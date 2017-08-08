@@ -1,16 +1,16 @@
-package com.lin.app.data.respone;
+package com.lin.alllib.data.respone;
 
 import java.util.List;
 
 /**
  * Created by lpds on 2017/7/27.
  */
-public class WeatherRespone {
+public class CityRespone extends BaseRespone{
 
 
     @Override
     public String toString() {
-        return "WeatherRespone{" +
+        return "CityRespone{" +
                 "msg='" + msg + '\'' +
                 ", retCode='" + retCode + '\'' +
                 ", result=" + result +
