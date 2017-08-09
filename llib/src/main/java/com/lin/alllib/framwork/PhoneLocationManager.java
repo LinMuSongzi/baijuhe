@@ -12,21 +12,30 @@ import okhttp3.Interceptor;
 /**
  * Created by linhui on 2017/8/8.
  */
-public class PhoneLocationManager {
+public class PhoneLocationManager implements IRequestInterceptor {
 
-    private static final String TAG = "liv_LocationManager";
+    private static final String TAG ="liv_LocationManager";
 
     private static PhoneLocationManager phoneLocationManager;
-
     {
         phoneLocationManager = new PhoneLocationManager();
     }
+    public PhoneLocationManager(){
+        RequestManager.getInstance().addRequestInterceptor(this);
+    }
 
-    public static final PhoneLocationManager getInstance() {
+    public static final PhoneLocationManager getInstance(){
         return phoneLocationManager;
     }
 
-    public PhoneLocationManager() {
+    @Override
+    public void onRequest(Interceptor.Chain request) {
+        DebugGod.i(TAG,request.toString());
+    }
 
+    @Override
+    public boolean onResponse(Object o) {
+        DebugGod.i(TAG,o.toString());
+        return true;
     }
 }

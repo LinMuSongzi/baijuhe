@@ -5,17 +5,8 @@ import java.util.List;
 /**
  * Created by lpds on 2017/7/27.
  */
-public class CityRespone extends BaseRespone{
+public class CityRespone extends BaseRespone<CityRespone>{
 
-
-    @Override
-    public String toString() {
-        return "CityRespone{" +
-                "msg='" + msg + '\'' +
-                ", retCode='" + retCode + '\'' +
-                ", result=" + result +
-                '}';
-    }
 
     /**
      * msg : success
@@ -26,6 +17,15 @@ public class CityRespone extends BaseRespone{
     private String msg;
     private String retCode;
     private List<ResultBean> result;
+
+    @Override
+    public String toString() {
+        return "CityRespone{" +
+                "msg='" + msg + '\'' +
+                ", retCode='" + retCode + '\'' +
+                ", result=" + result +
+                '}';
+    }
 
     public String getMsg() {
         return msg;

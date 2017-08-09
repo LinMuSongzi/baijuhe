@@ -30,13 +30,10 @@ import rx.schedulers.Schedulers;
  * Created by lpds on 2017/7/26.
  */
 public final class RequestManager {
+    public static final String K_API = "api_s";
     private static final String TAG = "lib_RequestManager";
     private static RequestManager requestManager;
     private static OkHttpClient okHttpClient;
-    public static final String K_API = "api_s";
-    private IRequestInterceptor iRequestInterceptor;
-
-    private Map<Class, Object> apis = new Hashtable<>();
 
     static {
         requestManager = new RequestManager();
@@ -44,27 +41,13 @@ public final class RequestManager {
 //        requestManager.init();
     }
 
+    private List<IRequestInterceptor> iRequestInterceptors;
+    private Map<Class, Object> apis = new Hashtable<>();
+    private Observable<IRequestInterceptor> interceptorObservable;
+
     private RequestManager() {
-    }
-
-    public <T> void initApi(Class<T> tClass, String str) {
-        if (!apis.containsKey(tClass)) {
-            apis.put(tClass, getImp(tClass, str));
-            DebugGod.i(TAG, tClass.getSimpleName() + " api init ");
-        }
-    }
-
-    public void setRequestInterceptor(IRequestInterceptor iRequestInterceptor) {
-        this.iRequestInterceptor = iRequestInterceptor;
-    }
-
-    public void removeRequestInterceptor(IRequestInterceptor iRequestInterceptor) {
-        this.iRequestInterceptor = null;
-    }
-
-    public <T> T getApi(Class<T> tClass) {
-        DebugGod.i(TAG, tClass.getSimpleName() + " api get ");
-        return (T) apis.get(tClass);
+        iRequestInterceptors = new LinkedList<>();
+        interceptorObservable = Observable.from(iRequestInterceptors);
     }
 
     public static RequestManager getInstance() {
@@ -76,10 +59,35 @@ public final class RequestManager {
         okHttpClient = okHttpClient.newBuilder().readTimeout(8 * 1000, TimeUnit.SECONDS).connectTimeout(5 * 1000, TimeUnit.SECONDS)
                 .writeTimeout(8 * 1000, TimeUnit.SECONDS)
                 .cache(new Cache(AppGod.$THIS.getCacheDir(), 1024 * 1024 * 20))
-                .build();
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(final Chain chain) throws IOException {
+                        DebugGod.i(TAG, "request url : " + chain.request().url());
+                        return chain.proceed(chain.request());
+                    }
+                }).build();
 
     }
 
+    public <T> void initApi(Class<T> tClass, String str) {
+        if (!apis.containsKey(tClass)) {
+            apis.put(tClass, getImp(tClass, str));
+            DebugGod.i(TAG, tClass.getSimpleName() + " api init ");
+        }
+    }
+
+    public void addRequestInterceptor(IRequestInterceptor iRequestInterceptor) {
+        iRequestInterceptors.add(iRequestInterceptor);
+    }
+
+    public void removeRequestInterceptor(IRequestInterceptor iRequestInterceptor) {
+        iRequestInterceptors.remove(iRequestInterceptor);
+    }
+
+    public <T> T getApi(Class<T> tClass) {
+        DebugGod.i(TAG, tClass.getSimpleName() + " api get ");
+        return (T) apis.get(tClass);
+    }
 
     private <T> T getImp(Class<T> tClass, String path) {
         return new Retrofit.
@@ -105,17 +113,7 @@ public final class RequestManager {
 
             @Override
             public void onNext(final T t) {
-                if (iRequestInterceptor != null) {
-                    if (iRequestInterceptor.onResponse(t)) {
-                        subscriber.onNext(t);
-                    }else{
-                        final BaseRespone r = (BaseRespone) t;
-                        DebugGod.i(TAG, "data is interceptor ,url = " + r.getUrl());
-                    }
-                }else{
-                    subscriber.onNext(t);
-                }
-
+                subscriber.onNext(t);
             }
         });
     }
