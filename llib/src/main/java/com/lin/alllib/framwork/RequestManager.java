@@ -29,14 +29,14 @@ import rx.schedulers.Schedulers;
 /**
  * Created by lpds on 2017/7/26.
  */
-public final class RequestManager{
+public final class RequestManager {
     private static final String TAG = "lib_RequestManager";
     private static RequestManager requestManager;
     private static OkHttpClient okHttpClient;
-    public  static final String K_API = "api_s";
-    private List<IRequestInterceptor> iRequestInterceptors;
+    public static final String K_API = "api_s";
+    private IRequestInterceptor iRequestInterceptor;
 
-    private Map<Class,Object> apis = new Hashtable<>();
+    private Map<Class, Object> apis = new Hashtable<>();
 
     static {
         requestManager = new RequestManager();
@@ -44,32 +44,28 @@ public final class RequestManager{
 //        requestManager.init();
     }
 
-    private RequestManager(){
-        iRequestInterceptors = new LinkedList<>();
-        interceptorObservable = Observable.from(iRequestInterceptors);
+    private RequestManager() {
     }
 
-    public <T> void initApi(Class<T> tClass,String str){
-        if(!apis.containsKey(tClass)) {
-            apis.put(tClass,getImp(tClass, str));
-            DebugGod.i(TAG,tClass.getSimpleName()+" api init ");
+    public <T> void initApi(Class<T> tClass, String str) {
+        if (!apis.containsKey(tClass)) {
+            apis.put(tClass, getImp(tClass, str));
+            DebugGod.i(TAG, tClass.getSimpleName() + " api init ");
         }
     }
 
-    public void addRequestInterceptor(IRequestInterceptor iRequestInterceptor){
-        iRequestInterceptors.add(iRequestInterceptor);
+    public void setRequestInterceptor(IRequestInterceptor iRequestInterceptor) {
+        this.iRequestInterceptor = iRequestInterceptor;
     }
 
-    public void removeRequestInterceptor(IRequestInterceptor iRequestInterceptor){
-        iRequestInterceptors.remove(iRequestInterceptor);
+    public void removeRequestInterceptor(IRequestInterceptor iRequestInterceptor) {
+        this.iRequestInterceptor = null;
     }
 
-    public <T> T getApi(Class<T> tClass){
-        DebugGod.i(TAG,tClass.getSimpleName()+" api get ");
+    public <T> T getApi(Class<T> tClass) {
+        DebugGod.i(TAG, tClass.getSimpleName() + " api get ");
         return (T) apis.get(tClass);
     }
-
-    private Observable<IRequestInterceptor> interceptorObservable;
 
     public static RequestManager getInstance() {
         return requestManager;
@@ -78,24 +74,11 @@ public final class RequestManager{
     private static final void initOkHttpClient() {
         okHttpClient = new OkHttpClient();
         okHttpClient = okHttpClient.newBuilder().readTimeout(8 * 1000, TimeUnit.SECONDS).connectTimeout(5 * 1000, TimeUnit.SECONDS)
-                .writeTimeout(8 * 1000,TimeUnit.SECONDS)
+                .writeTimeout(8 * 1000, TimeUnit.SECONDS)
                 .cache(new Cache(AppGod.$THIS.getCacheDir(), 1024 * 1024 * 20))
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(final Chain chain) throws IOException {
-                        requestManager.interceptorObservable.subscribe(new Action1<IRequestInterceptor>() {
-                            @Override
-                            public void call(IRequestInterceptor iRequestInterceptor) {
-                                iRequestInterceptor.onRequest(chain);
-                            }
-                        });
-                        return chain.proceed(chain.request());
-                    }
-                }).build();
+                .build();
 
     }
-
-
 
 
     private <T> T getImp(Class<T> tClass, String path) {
@@ -108,7 +91,7 @@ public final class RequestManager{
     }
 
 
-    public <T> Subscription config(Observable observable,final Subscriber<T> subscriber) {
+    public <T> Subscription config(Observable observable, final Subscriber<T> subscriber) {
         return observable.subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe(new Subscriber<T>() {
             @Override
             public void onCompleted() {
@@ -122,17 +105,17 @@ public final class RequestManager{
 
             @Override
             public void onNext(final T t) {
-                requestManager.interceptorObservable.subscribe(new Action1<IRequestInterceptor>() {
-                    @Override
-                    public void call(IRequestInterceptor iRequestInterceptor) {
-                        if(iRequestInterceptor.onResponse(t)){
-                            subscriber.onNext(t);
-                        }else{
-                            final BaseRespone r = (BaseRespone) t;
-                            DebugGod.i(TAG,"data is interceptor ,url = "+r.getUrl());
-                        }
+                if (iRequestInterceptor != null) {
+                    if (iRequestInterceptor.onResponse(t)) {
+                        subscriber.onNext(t);
+                    }else{
+                        final BaseRespone r = (BaseRespone) t;
+                        DebugGod.i(TAG, "data is interceptor ,url = " + r.getUrl());
                     }
-                });
+                }else{
+                    subscriber.onNext(t);
+                }
+
             }
         });
     }

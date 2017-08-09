@@ -9,7 +9,7 @@ import okhttp3.Request;
 public interface IRequestInterceptor {
 
 
-    void onRequest(Interceptor.Chain request);
+    boolean onRequest(Interceptor.Chain request);
 
 
     boolean onResponse(Object o);

@@ -45,8 +45,7 @@ public class NavigationModel extends Model {
 
             @Override
             public void onNext(final CityRespone cityRespone) {
-                Observable.
-                        from(cityRespone.getResult()).
+                Observable.from(cityRespone.getResult()).
                         flatMap(new Func1<CityRespone.ResultBean, Observable<CityRespone.ResultBean.CityBean>>() {
                             @Override
                             public Observable<CityRespone.ResultBean.CityBean> call(CityRespone.ResultBean resultBean) {
