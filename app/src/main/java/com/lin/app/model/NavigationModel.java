@@ -1,6 +1,8 @@
 package com.lin.app.model;
 
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
@@ -44,12 +46,17 @@ public class NavigationModel extends Model {
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        id_content_RecyclerView.setLayoutManager(linearLayoutManager);
         id_content_RecyclerView.setAdapter(new BaseQuickAdapter<CityRespone.ResultBean,BaseViewHolder>(R.layout.item_provinces,provinces) {
             @Override
             protected void convert(BaseViewHolder baseViewHolder, CityRespone.ResultBean province) {
                 baseViewHolder.setText(R.id.id_provinces_tv,province.getProvince());
             }
         });
+        id_content_RecyclerView.setItemAnimator(new DefaultItemAnimator());
         ApiImp.getAllCity();
     }
 

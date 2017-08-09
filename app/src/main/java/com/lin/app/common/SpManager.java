@@ -19,7 +19,6 @@ public class SpManager {
         SharedPreferences sharedPreferences = MyApplication.$THIS.getSharedPreferences(CITYS_SP, Context.MODE_PRIVATE);
         String values = sharedPreferences.getString(CITYS,"-1");
         if(!"-1".equals(values)){
-
             Gson gson = new Gson();
             return gson.fromJson(values,CityRespone.class);
         }else{
