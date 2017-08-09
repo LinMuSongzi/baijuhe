@@ -12,5 +12,4 @@ import rx.functions.Func1;
  */
 public class ExampleUnitTest {
 
-
 }

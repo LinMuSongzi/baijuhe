@@ -1,14 +1,25 @@
 package com.lin.app.model;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.lin.alllib.Model;
 import com.lin.app.R;
 import com.lin.alllib.data.respone.CityRespone;
 import com.lin.alllib.framwork.RequestManager;
+import com.lin.app.common.SpManager;
+import com.lin.app.common.SubscriberImp;
 import com.lin.app.request.ApiImp;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import rx.Observable;
@@ -21,9 +32,11 @@ import rx.functions.Func1;
  */
 public class NavigationModel extends Model {
 
-    @Bind(R.id.id_content_tv)
-    TextView id_content_tv;
+    @Bind(R.id.id_content_RecyclerView)
+    RecyclerView id_content_RecyclerView;
 
+    private CityRespone cityRespone;
+    private List<CityRespone.ResultBean> provinces = new ArrayList<>();
     @Override
     protected int getContentView() {
         return R.layout.activity_navigation;
@@ -31,53 +44,28 @@ public class NavigationModel extends Model {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        id_content_tv.setText("hello");
-        ApiImp.getAllCity(new Subscriber<CityRespone>() {
+        id_content_RecyclerView.setAdapter(new BaseQuickAdapter<CityRespone.ResultBean,BaseViewHolder>(R.layout.item_provinces,provinces) {
             @Override
-            public void onCompleted() {
-                Log.i(TAG, "onCompleted: 请求完毕");
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-                throwable.printStackTrace();
-            }
-
-            @Override
-            public void onNext(final CityRespone cityRespone) {
-                Observable.
-                        from(cityRespone.getResult()).
-                        flatMap(new Func1<CityRespone.ResultBean, Observable<CityRespone.ResultBean.CityBean>>() {
-                            @Override
-                            public Observable<CityRespone.ResultBean.CityBean> call(CityRespone.ResultBean resultBean) {
-                                return Observable.from(resultBean.getCity());
-                            }
-                        }).
-                        flatMap(new Func1<CityRespone.ResultBean.CityBean, Observable<CityRespone.ResultBean.CityBean.DistrictBean>>() {
-                            @Override
-                            public Observable<CityRespone.ResultBean.CityBean.DistrictBean> call(CityRespone.ResultBean.CityBean cityBean) {
-                                return Observable.from(cityBean.getDistrict());
-                            }
-                        }).
-                        map(new Func1<CityRespone.ResultBean.CityBean.DistrictBean, String>() {
-                            @Override
-                            public String call(CityRespone.ResultBean.CityBean.DistrictBean districtBean) {
-                                return districtBean.getDistrict();
-                            }
-                        }).
-                        subscribe(new Action1<String>() {
-                            @Override
-                            public void call(final String district) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        id_content_tv.setText(id_content_tv.getText() + " " + district + "  ");
-                                    }
-                                });
-
-                            }
-                        });
+            protected void convert(BaseViewHolder baseViewHolder, CityRespone.ResultBean province) {
+                baseViewHolder.setText(R.id.id_provinces_tv,province.getProvince());
             }
         });
+        ApiImp.getAllCity();
     }
+
+    private void getProvince(){
+        provinces.clear();
+        provinces.addAll(cityRespone.getResult());
+        id_content_RecyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessage(CityRespone cityRespone){
+
+        this.cityRespone = cityRespone;
+        getProvince();
+    }
+
+
+
 }

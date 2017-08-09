@@ -20,12 +20,12 @@ public class PhoneLocationManager implements IRequestInterceptor {
     {
         phoneLocationManager = new PhoneLocationManager();
     }
-    public static final PhoneLocationManager getInstance(){
-        return phoneLocationManager;
-    }
-
     public PhoneLocationManager(){
         RequestManager.getInstance().addRequestInterceptor(this);
+    }
+
+    public static final PhoneLocationManager getInstance(){
+        return phoneLocationManager;
     }
 
     @Override
@@ -36,6 +36,6 @@ public class PhoneLocationManager implements IRequestInterceptor {
     @Override
     public boolean onResponse(Object o) {
         DebugGod.i(TAG,o.toString());
-        return false;
+        return true;
     }
 }

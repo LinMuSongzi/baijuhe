@@ -9,6 +9,8 @@ import com.lin.app.request.retrofit.WeatherApi;
  * Created by linhui on 2017/8/8.
  */
 public class MyApplication extends AppGod {
+
+
     @Override
     public void onCreate() {
         super.onCreate();
