@@ -13,8 +13,6 @@ import com.lin.alllib.framwork.DebugGod;
 import com.lin.alllib.framwork.FragmentModel;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 

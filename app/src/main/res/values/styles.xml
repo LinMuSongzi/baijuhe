@@ -10,6 +10,7 @@
 
     <style name="AppTheme.fill" parent="AppTheme.NoActionBar">
         <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowFullscreen">?android:windowNoTitle</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
