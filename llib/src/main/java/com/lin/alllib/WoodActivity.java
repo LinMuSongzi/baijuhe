@@ -2,6 +2,9 @@ package com.lin.alllib;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.lin.alllib.framwork.DebugGod;
+
 import butterknife.ButterKnife;
 
 /**

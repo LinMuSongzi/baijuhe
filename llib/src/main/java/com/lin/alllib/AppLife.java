@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import com.lin.alllib.framwork.DebugGod;
 import com.lin.alllib.framwork.commander.ILife;
 import com.lin.alllib.framwork.commander.CommanderLife;
 
@@ -18,15 +19,17 @@ public class AppLife implements Application.ActivityLifecycleCallbacks,Commander
     static{
         appLife = new AppLife();
     }
+
+    private Set<ILife> lifeSet;
     private AppLife(){
         lifeSet = new LinkedHashSet<>();
     }
-    public static CommanderLife getInstance(){return appLife;}
 
-    private Set<ILife> lifeSet;
+    public static CommanderLife getInstance(){return appLife;}
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        DebugGod.i(activity.getClass().getSimpleName(),activity.hashCode()+" onActivityCreated");
         for(ILife iLife : lifeSet){
             iLife.onCreate(activity,savedInstanceState);
         }
@@ -34,6 +37,7 @@ public class AppLife implements Application.ActivityLifecycleCallbacks,Commander
 
     @Override
     public void onActivityStarted(Activity activity) {
+        DebugGod.i(activity.getClass().getSimpleName(),activity.hashCode()+" onActivityStarted");
         for(ILife iLife : lifeSet){
             iLife.onStart(activity);
         }
@@ -41,6 +45,7 @@ public class AppLife implements Application.ActivityLifecycleCallbacks,Commander
 
     @Override
     public void onActivityResumed(Activity activity) {
+        DebugGod.i(activity.getClass().getSimpleName(),activity.hashCode()+" onActivityResumed");
         for(ILife iLife : lifeSet){
             iLife.onResume(activity);
         }
@@ -48,6 +53,7 @@ public class AppLife implements Application.ActivityLifecycleCallbacks,Commander
 
     @Override
     public void onActivityPaused(Activity activity) {
+        DebugGod.i(activity.getClass().getSimpleName(),activity.hashCode()+" onActivityPaused");
         for(ILife iLife : lifeSet){
             iLife.onPause(activity);
         }
@@ -55,6 +61,7 @@ public class AppLife implements Application.ActivityLifecycleCallbacks,Commander
 
     @Override
     public void onActivityStopped(Activity activity) {
+        DebugGod.i(activity.getClass().getSimpleName(),activity.hashCode()+" onActivityStopped");
         for(ILife iLife : lifeSet){
             iLife.onStop(activity);
         }
@@ -62,6 +69,7 @@ public class AppLife implements Application.ActivityLifecycleCallbacks,Commander
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+        DebugGod.i(activity.getClass().getSimpleName(),activity.hashCode()+" onActivitySaveInstanceState");
         for(ILife iLife : lifeSet){
             iLife.onSaveInstanceState(activity,outState);
         }
@@ -69,6 +77,7 @@ public class AppLife implements Application.ActivityLifecycleCallbacks,Commander
 
     @Override
     public void onActivityDestroyed(Activity activity) {
+        DebugGod.i(activity.getClass().getSimpleName(),activity.hashCode()+" onActivityDestroyed");
         for(ILife iLife : lifeSet){
             iLife.onDestroy(activity);
         }

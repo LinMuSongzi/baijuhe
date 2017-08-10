@@ -61,8 +61,6 @@ public abstract class Model {
     protected void onCreateBefore() {
     }
 
-    ;
-
     protected abstract int getContentView();
 
     protected final AppCompatActivity getActivity() {
