@@ -30,15 +30,15 @@ public class NavigationModel extends Model {
     @Override
     protected void init(Bundle savedInstanceState) {
         NavigationFragment navigationFragment1 = new NavigationFragment();
-        navigationFragment1.setData(R.drawable.logo_white);
+        navigationFragment1.setData(R.mipmap.one_navigation);
         fragmentList.add(navigationFragment1);
 
         NavigationFragment navigationFragment2 = new NavigationFragment();
-        navigationFragment2.setData(R.drawable.logo_white);
+        navigationFragment2.setData(R.mipmap.tow_navigation);
         fragmentList.add(navigationFragment2);
 
         NavigationFragment navigationFragment3 = new NavigationFragment();
-        navigationFragment3.setData(R.drawable.logo_white);
+        navigationFragment3.setData(R.mipmap.three_navigation);
         fragmentList.add(navigationFragment3);
 
         id_navigation_ViewPager.setAdapter(new FragmentStatePagerAdapter(getActivity().getSupportFragmentManager()) {

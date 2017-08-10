@@ -33,9 +33,8 @@ public abstract class WoodFragment extends Fragment{
         DebugGod.i(TAG,"Fragment : onCreateView");
         if(contentView == null){
             contentView = LayoutInflater.from(getActivity()).inflate(model.getContentView(),null);
-            ButterKnife.bind(model,contentView);
         }
-
+        ButterKnife.bind(model,contentView);
         model.onCreate((AppCompatActivity) getActivity(),savedInstanceState);
         return contentView;
     }
@@ -58,8 +57,11 @@ public abstract class WoodFragment extends Fragment{
     public final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DebugGod.i(TAG,"Fragment : onCreate");
-        EventBus.getDefault().register(this);
-        model = getFragmentModel();
+        if(model == null) {
+            model = getFragmentModel();
+            model.setFragment(this);
+        }
+        EventBus.getDefault().register(model);
         model.onCreateBefore();
     }
 
@@ -68,7 +70,7 @@ public abstract class WoodFragment extends Fragment{
     @Override
     public final void onDestroy() {
         DebugGod.i(TAG,"Fragment : onDestroy");
-        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(model);
         model.onDestroy();
         ButterKnife.unbind(model);
         super.onDestroy();
@@ -95,9 +97,5 @@ public abstract class WoodFragment extends Fragment{
         model.onDestroyView();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessage(EmptyEntity emptyEntity){
-
-    }
 
 }

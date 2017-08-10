@@ -27,7 +27,7 @@ public class NavigationFragmentModel extends FragmentModel implements IShipment<
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        Glide.with(getActivity()).load(resource).fitCenter().into(id_content_iv);
+        Glide.with(getFrament()).load(resource).fitCenter().into(id_content_iv);
     }
 
     @Override
