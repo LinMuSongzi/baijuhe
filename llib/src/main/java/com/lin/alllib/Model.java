@@ -19,6 +19,7 @@ import org.greenrobot.eventbus.ThreadMode;
 public abstract class Model {
     protected final String TAG = getClass().getSimpleName();
     private AppCompatActivity activity;
+    private boolean isSystemUiVisibility = true;
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessage(EmptyEntity emptyEntity) {
@@ -28,6 +29,16 @@ public abstract class Model {
     protected final void onCreate(AppCompatActivity activity, Bundle savedInstanceState) {
         this.activity = activity;
         init(savedInstanceState);
+        if(!isSystemUiVisibility){
+            View decorView = getActivity().getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
+    }
+
+    protected void setSystemUiVisibility(boolean isSystemUiVisibility){
+        this.isSystemUiVisibility = isSystemUiVisibility;
     }
 
     protected void onResume() {
@@ -60,8 +71,6 @@ public abstract class Model {
 
     protected void onCreateBefore() {
     }
-
-    ;
 
     protected abstract int getContentView();
 
