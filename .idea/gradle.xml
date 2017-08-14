@@ -8,15 +8,19 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/IMsdk" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/llib" />
+            <option value="$PROJECT_DIR$/sqlitesdk" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/IMsdk" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/llib" />
+            <option value="$PROJECT_DIR$/sqlitesdk" />
           </set>
         </option>
       </GradleProjectSettings>
