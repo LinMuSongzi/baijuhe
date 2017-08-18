@@ -1,1 +1,1 @@
-include ':app', ':llib', ':sqlitesdk', ':IMsdk'
+include ':app', ':llib', ':sqlitesdk', ':IMsdk', ':ipc', ':dextest'

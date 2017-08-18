@@ -15,13 +15,13 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:clickable="true"
             android:id="@+id/muc_left_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="2dp"
+            android:background="@drawable/information_select"
+            android:clickable="true"
             android:paddingBottom="6dp"
-            android:background="@drawable/information_select">
+            android:paddingTop="2dp">
 
 
             <RelativeLayout
@@ -36,10 +36,10 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_centerVertical="true"
+                    android:clickable="false"
                     android:scaleType="centerCrop"
                     android:src="@drawable/logo_round"
                     app:corner_radius="90dp"
-                    android:clickable="false"
                     app:oval="false" />
 
             </RelativeLayout>

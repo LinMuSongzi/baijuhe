@@ -48,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="30dp">
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="3dp">
 
             <com.ifeimo.im.framwork.view.RoundedImageView
                 android:id="@+id/muc_left_face"
@@ -92,9 +92,9 @@
         <RelativeLayout
             android:id="@+id/muc_right_layout"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="13dp"
-            android:layout_marginTop="3dp"
-            android:layout_height="wrap_content">
+            android:layout_marginTop="3dp">
 
             <com.ifeimo.im.framwork.view.RoundedImageView
                 android:id="@+id/muc_right_face"
@@ -118,8 +118,8 @@
                     android:id="@+id/muc_right_msg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="220dp"
                     android:layout_centerVertical="true"
+                    android:maxWidth="220dp"
                     android:textColor="#000000"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -134,16 +134,16 @@
                 android:src="@drawable/a3g" />
 
             <RelativeLayout
-                android:layout_toLeftOf="@+id/id_content_layout"
                 android:id="@+id/id_process"
-                android:layout_centerVertical="true"
                 android:layout_width="42dp"
-                android:layout_height="42dp">
+                android:layout_height="42dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/id_content_layout">
 
                 <ProgressBar
-                    android:layout_centerInParent="true"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     />
             </RelativeLayout>

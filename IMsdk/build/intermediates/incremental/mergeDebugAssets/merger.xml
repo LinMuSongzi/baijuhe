@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="F:\sysj2\sysj_master\sysj_android\IMsdk\src\main\assets"/><source path="F:\sysj2\sysj_master\sysj_android\IMsdk\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="F:\sysj2\sysj_master\sysj_android\IMsdk\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="F:\l2017_06_23_lpds\OnewaySdk-Feed\OnewaySdk-Feed\baijuhe\IMsdk\src\main\assets"/><source path="F:\l2017_06_23_lpds\OnewaySdk-Feed\OnewaySdk-Feed\baijuhe\IMsdk\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="F:\l2017_06_23_lpds\OnewaySdk-Feed\OnewaySdk-Feed\baijuhe\IMsdk\src\debug\assets"/></dataSet></merger>

@@ -10,6 +10,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/IMsdk" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/dextest" />
+            <option value="$PROJECT_DIR$/ipc" />
             <option value="$PROJECT_DIR$/llib" />
             <option value="$PROJECT_DIR$/sqlitesdk" />
           </set>
@@ -19,6 +21,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/IMsdk" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/dextest" />
+            <option value="$PROJECT_DIR$/ipc" />
             <option value="$PROJECT_DIR$/llib" />
             <option value="$PROJECT_DIR$/sqlitesdk" />
           </set>

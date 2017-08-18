@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_height="44dp"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent"
+        android:layout_height="44dp"/>
 
     <Space
         android:layout_width="1px"
@@ -17,31 +17,31 @@
 
     <EditText
         android:id="@+id/servierEt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:hint="默认服务器地址: op.17sysj.com"
-        android:layout_width="match_parent"/>
+        android:hint="默认服务器地址: op.17sysj.com"/>
 
     <EditText
         android:id="@+id/portEt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:hint="默认端口: 5222"
-        android:inputType="number"
-        android:layout_width="match_parent"/>
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/roomEt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:hint="默认房间: 10098"
-        android:layout_width="match_parent"/>
+        android:hint="默认房间: 10098"/>
 
     <Space
         android:layout_width="1px"
@@ -49,11 +49,11 @@
         android:layout_weight="3"/>
 
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:onClick="saveOnClick"
-        android:text="完成"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="完成" />
 
 
 </LinearLayout>
