@@ -47,14 +47,19 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
                     | View.SYSTEM_UI_FLAG_FULLSCREEN;
             decorView.setSystemUiVisibility(uiOptions);
         }
-        getToolbar().setNavigationIcon(R.drawable.ic_keyboard_backspace_white_36dp);
+        getToolbar().setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
         getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navigationOnClick(v);
             }
         });
-//        getToolbar().setme
+//        getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                return false;
+//            }
+//        });
     }
 
     protected void navigationOnClick(View v) {
