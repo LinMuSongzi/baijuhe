@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.lin.alllib.Model;
 import com.lin.app.R;
@@ -18,9 +20,8 @@ import butterknife.Bind;
  * Created by linhui on 2017/8/10.
  */
 public class NavigationModel extends Model {
-    @Bind(R.id.id_navigation_ViewPager)
-    ViewPager id_navigation_ViewPager;
-    private List<Fragment> fragmentList = new ArrayList<>();
+
+    private Toolbar toolbar;
 
     @Override
     protected int getContentView() {
@@ -29,29 +30,8 @@ public class NavigationModel extends Model {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        NavigationFragment navigationFragment1 = new NavigationFragment();
-        navigationFragment1.setData(R.mipmap.one_navigation);
-        fragmentList.add(navigationFragment1);
 
-        NavigationFragment navigationFragment2 = new NavigationFragment();
-        navigationFragment2.setData(R.mipmap.tow_navigation);
-        fragmentList.add(navigationFragment2);
-
-        NavigationFragment navigationFragment3 = new NavigationFragment();
-        navigationFragment3.setData(R.mipmap.three_navigation);
-        fragmentList.add(navigationFragment3);
-
-        id_navigation_ViewPager.setAdapter(new FragmentStatePagerAdapter(getActivity().getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return fragmentList.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return fragmentList.size();
-            }
-        });
+        toolbar = getToolbar();
 
     }
 }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.lin.alllib.data.EmptyEntity;
 import com.lin.alllib.framwork.DebugGod;
 import com.lin.alllib.framwork.FragmentModel;
+import com.lin.alllib.framwork.commander.IDeal;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -19,7 +20,7 @@ import butterknife.ButterKnife;
 /**
  * Created by linhui on 2017/8/10.
  */
-public abstract class WoodFragment extends Fragment{
+public abstract class WoodFragment<T> extends Fragment implements IDeal<T>{
 
     private final String TAG = getClass().getSimpleName();
     private FragmentModel model;
@@ -33,7 +34,7 @@ public abstract class WoodFragment extends Fragment{
             contentView = LayoutInflater.from(getActivity()).inflate(model.getContentView(),null);
         }
         ButterKnife.bind(model,contentView);
-        model.onCreate((AppCompatActivity) getActivity(),savedInstanceState);
+        model.onCreate((WoodActivity) getActivity(),savedInstanceState);
         return contentView;
     }
 
@@ -96,4 +97,28 @@ public abstract class WoodFragment extends Fragment{
     }
 
 
+    @Override
+    public String getValueOfString(String key) {
+        return null;
+    }
+
+    @Override
+    public int getValueOfInteger(String key) {
+        return 0;
+    }
+
+    @Override
+    public float getValueOfFloat(String key) {
+        return 0;
+    }
+
+    @Override
+    public Object getValueOfObject(String key) {
+        return null;
+    }
+
+    @Override
+    public T getAffirmObject(String key) {
+        return null;
+    }
 }
