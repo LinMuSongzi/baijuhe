@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    //铺满整个屏幕
     <style name="AppTheme.fill" parent="AppTheme.NoActionBar">
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowFullscreen">?android:windowNoTitle</item>

@@ -2,6 +2,7 @@ package com.lin.alllib;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 
 import com.lin.alllib.framwork.DebugGod;
 
@@ -70,6 +71,12 @@ public abstract class WoodActivity extends AppCompatActivity{
         model.onSaveInstanceState(outState);
         super.onSaveInstanceState(outState);
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
     }
 
     public Model getModel() {
