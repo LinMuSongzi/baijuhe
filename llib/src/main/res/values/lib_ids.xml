@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="lib_toolbar" type="id">false</item>
+    <item name="root_layout" type="id">false</item>
+</resources>

@@ -8,92 +8,124 @@
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_select_dialog_material.xml"
     },
     {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_search_view.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_search_view.xml"
+    },
+    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\fragment_contract.xml",
         "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_contract.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_part_chronometer.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_part_chronometer.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_popup_menu_header_item_layout.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_up_container.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_bar_up_container.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_dialog_title_material.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_dialog_title_material.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_content_include.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_screen_content_include.xml"
     },
     {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item_separator.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item_separator.xml"
+    },
+    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_big_media.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\notification_template_big_media.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\popup_add.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\popup_add.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\fragment_friends.xml",
         "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_friends.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\item_contract.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\item_contract.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\item_fast_reply_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\item_fast_reply_layout.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_contract_list.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_contract_list.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item_subheader.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_navigation_item_subheader.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\mucchat_item.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\mucchat_item.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_menu_item_layout.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_action_menu_item_layout.xml"
     },
     {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_chat_recycler.xml",
-        "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_chat_recycler.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_part_chronometer.xml"
     },
     {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_menu_layout.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_action_menu_layout.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_tab_icon.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_snackbar_include.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_layout_snackbar_include.xml"
+    },
+    {
+        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_chat_recycler.xml",
+        "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_chat_recycler.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\chat_item.xml",
         "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\chat_item.xml"
     },
     {
+        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\fragment_friends.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_friends.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_tab_text.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_layout_tab_text.xml"
+    },
+    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_menu_item_action_area.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_menu_item_action_area.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_tab_text.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_layout_tab_text.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_icon.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_multichoice_material.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\select_dialog_multichoice_material.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\top_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\top_layout.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_layout.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_layout.xml"
-    },
-    {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_item_material.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\select_dialog_item_material.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\information_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\information_layout.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_search_view.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_search_view.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_icon.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_icon.xml"
+        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\select_dialog_item_material.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_toolbar.xml",
@@ -116,92 +148,116 @@
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_menu_item_layout.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_menu_item_layout.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\chat_item.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\chat_item.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_media_action.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_media_action.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\fragment_friends.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_friends.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\mucchat_item.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\mucchat_item.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_mode_bar.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_item_material.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\select_dialog_item_material.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item_subheader.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item_subheader.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_layout.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_select_dialog_material.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_select_dialog_material.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_bottom_sheet_dialog.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_bottom_sheet_dialog.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_menu_item.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_menu_item.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_dialog_title_material.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_menu_item_action_area.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_menu_item_action_area.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_expanded_menu_layout.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_expanded_menu_layout.xml"
     },
     {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_chat_recycler.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_chat_recycler.xml"
+    },
+    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_up_container.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item_header.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item_header.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_part_time.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_part_time.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_toolbar.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_toolbar.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_chat.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_chat.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_content_include.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_content_include.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_big_media.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_big_media.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_lines.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\notification_template_lines.xml"
     },
     {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_media.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item_subheader.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_mode_close_item_material.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_mucchat.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_mucchat.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item_header.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_navigation_item_header.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_menu_layout.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_menu_layout.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_menu.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_menu.xml"
-    },
-    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_multichoice_material.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_media_cancel_action.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_alert_dialog_material.xml",
@@ -212,12 +268,20 @@
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_bottom_sheet_dialog.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_part_time.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_part_time.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\fragment_contract.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_contract.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_radio.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_radio.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_expanded_menu_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_menu_item.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\top_layout_chat.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\top_layout_chat.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item_separator.xml",
@@ -226,6 +290,14 @@
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_navigation_item.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_test.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_test.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\top_layout.xml",
@@ -240,32 +312,16 @@
         "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\item_contract.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_chat_recycler.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_chat_recycler.xml"
-    },
-    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_big_media.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_big_media.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\view_connectivitychange.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\view_connectivitychange.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_singlechoice_material.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_title_item.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_bar_title_item.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\view_connectivitychange.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\view_connectivitychange.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_alert_dialog_material.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_alert_dialog_material.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
@@ -276,36 +332,32 @@
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_screen_simple.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_media.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_media.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_menu.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_menu.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_mode_close_item_material.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_popup_menu_item_layout.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_big_media_narrow.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_big_media_narrow.xml"
-    },
-    {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_icon.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_list_menu_item_icon.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_title_item.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_action_bar_title_item.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_menu_item_action_area.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_menu_item_action_area.xml"
+        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_list_menu_item_icon.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_mucchat.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_mucchat.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_group_chat_recycler.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_group_chat_recycler.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_activity_chooser_view.xml",
@@ -316,44 +368,36 @@
         "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\information_layout.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\select_dialog_multichoice_material.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_test.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_test.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item_separator.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item_separator.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\fragment_contract.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\fragment_contract.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_snackbar.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_layout_snackbar.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_media.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\notification_template_media.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_tab_icon.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_layout_tab_icon.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_layout.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_list_menu_item_layout.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\load_item.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\load_item.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_content_include.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_text_input_password_icon.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_text_input_password_icon.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_select_dialog_material.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_select_dialog_material.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_mucchat.xml",
@@ -372,20 +416,16 @@
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_dialog_title_material.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_media_cancel_action.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_media_cancel_action.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_mode_bar.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\item_fast_reply_layout.xml",
         "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\item_fast_reply_layout.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_group_chat_recycler.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_group_chat_recycler.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item_header.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item_header.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\popup_add.xml",
@@ -404,20 +444,28 @@
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\notification_media_action.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_chat.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_chat.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_media_action.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_media_action.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_menu.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_navigation_menu.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_simple.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_simple.xml"
-    },
-    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_chat.xml",
         "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_chat.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\load_item.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\load_item.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_text_input_password_icon.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_text_input_password_icon.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
@@ -428,40 +476,36 @@
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
-    },
-    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_radio.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\abc_list_menu_item_radio.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\select_dialog_singlechoice_material.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\select_dialog_singlechoice_material.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_test_information.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_test_information.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\item_contract.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\item_contract.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_tab_icon.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_layout_tab_icon.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
-    },
-    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_snackbar_include.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_layout_snackbar_include.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_snackbar.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_layout_snackbar.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_activity_chooser_view.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_snackbar_include.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_layout_snackbar_include.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_popup_menu_item_layout.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_lines.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_lines.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\top_layout_chat.xml",
@@ -472,48 +516,20 @@
         "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_contract_list.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_activity_chooser_view.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_activity_chooser_view.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\support_simple_spinner_dropdown_item.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_contract_list.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_contract_list.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_test_information.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_test_information.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\item_fast_reply_layout.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\item_fast_reply_layout.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_big_media_narrow.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_big_media_narrow.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_snackbar.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_layout_snackbar.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_lines.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\notification_template_lines.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\chat_item.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\chat_item.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\notification_template_big_media_narrow.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\layout\\notification_template_big_media_narrow.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\top_layout_chat.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\top_layout_chat.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_test_information.xml",
@@ -524,39 +540,23 @@
         "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_test.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_bottom_sheet_dialog.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_bottom_sheet_dialog.xml"
-    },
-    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\activity_group_chat_recycler.xml",
         "source": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\activity_group_chat_recycler.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\popup_add.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\popup_add.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_search_view.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_search_view.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\top_layout.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\top_layout.xml"
     },
     {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_layout_tab_text.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_layout_tab_text.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_expanded_menu_layout.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_expanded_menu_layout.xml"
-    },
-    {
         "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_menu_item.xml",
         "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\layout\\design_navigation_menu_item.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\information_layout.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\layout\\information_layout.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_screen_simple.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_simple.xml"
     }
 ]
