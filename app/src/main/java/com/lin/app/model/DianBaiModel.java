@@ -32,7 +32,7 @@ public class DianBaiModel extends Model {
             @Override
             public void onClick(View v) {
 //                Snackbar.make(v)
-                Toast.makeText(v.getContext(),"hello",0).show();
+                Toast.makeText(v.getContext(),"hello",Toast.LENGTH_SHORT).show();
             }
         });
     }
