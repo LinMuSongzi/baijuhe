@@ -21,7 +21,7 @@
             android:gravity="center"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="2007年12月12"
+            android:action="2007年12月12"
             android:textColor="#fff"
             android:textSize="10dp" />
 
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
                 android:layout_toRightOf="@+id/muc_left_face"
-                android:text="test2"
+                android:action="test2"
                 android:textColor="#8B8B8B"
                 android:textSize="11sp" />
 

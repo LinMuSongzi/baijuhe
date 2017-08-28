@@ -61,7 +61,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_weight="1"
                     android:maxLines="1"
-                    android:text="test2"
+                    android:action="test2"
                     android:textColor="#333333"
                     android:textSize="13dp" />
 
@@ -72,7 +72,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="10dp"
-                    android:text="12:00123123123123"
+                    android:action="12:00123123123123"
                     android:textColor="#999999"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -107,7 +107,7 @@
                     android:layout_toLeftOf="@+id/id_content_layout"
                     android:background="@drawable/shape_item_cache"
                     android:gravity="center"
-                    android:text="!"
+                    android:action="!"
                     android:textColor="#fff"
                     android:textSize="12dp"
                     android:textStyle="bold" />
@@ -120,7 +120,7 @@
                     android:layout_marginRight="13dp"
                     android:layout_weight="1"
                     android:maxLines="1"
-                    android:text="哈哈哈"
+                    android:action="哈哈哈"
                     android:textColor="#999999"
                     android:textSize="12dp" />
 
@@ -133,7 +133,7 @@
                     android:background="@drawable/shape_item_cache"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="1"
+                    android:action="1"
                     android:textColor="#fff"
                     android:textSize="10sp" />
 
@@ -159,7 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="删除"
+            android:action="删除"
             android:textColor="@color/color_ffffff" />
 
 

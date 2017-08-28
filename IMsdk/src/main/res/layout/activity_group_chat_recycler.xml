@@ -112,7 +112,7 @@
                 android:background="@null"
                 android:gravity="center"
                 android:onClick="sendOnclick"
-                android:text="发送"
+                android:action="发送"
                 android:textColor="#2979FF"
                 android:textSize="15sp" />
         </LinearLayout>

@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:onClick="saveOnClick"
-        android:text="完成" />
+        android:action="完成" />
 
 
 </LinearLayout>
