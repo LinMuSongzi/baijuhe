@@ -355,12 +355,19 @@ public final class BusinessUtil {
 //                    uniqueFields.add(field);
 //                    break;
 //                }
-            }
+        }
         }
         return uniqueFields.toArray(new Field[uniqueFields.size()]);
     }
 
 
+    /**
+     * cursor转换实体类
+     * @param tClass
+     * @param cursor
+     * @param <T>
+     * @return
+     */
     public static <T extends IModel<T>> T getLineModelByCursor(Class<T> tClass, Cursor cursor){
 
         String[] column = cursor.getColumnNames();

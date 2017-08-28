@@ -565,7 +565,7 @@ int id status_bar_latest_event_content 0x7f0a0056
 int id submenuarrow 0x7f0a003f
 int id submit_area 0x7f0a0050
 int id tabMode 0x7f0a000b
-int id text 0x7f0a005e
+int id action 0x7f0a005e
 int id text2 0x7f0a005c
 int id textSpacerNoButtons 0x7f0a0037
 int id time 0x7f0a005a

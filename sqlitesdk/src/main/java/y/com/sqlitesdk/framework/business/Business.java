@@ -28,6 +28,7 @@ import y.com.sqlitesdk.framework.util.StringDdUtil;
 /**
  * Created by lpds on 2017/4/15.
  */
+@Deprecated
 public final class Business {
 
     /**
