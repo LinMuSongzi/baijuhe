@@ -41,9 +41,9 @@ public class ExceptioPen implements IPen {
     }
 
     private void create() {
-
+        checkCacheFile();
         if (!check()) {
-            checkCacheFile();
+
             return;
         }
 
