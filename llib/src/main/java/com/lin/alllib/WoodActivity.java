@@ -32,6 +32,7 @@ public abstract class WoodActivity<T> extends AppCompatActivity implements IDeal
         checkBar();
         ButterKnife.bind(model, getWindow().getDecorView());
         model.onCreate(this, savedInstanceState);
+        model.loadData();
     }
 
     private void checkBar(){

@@ -1,16 +1,23 @@
 package com.lin.app.model;
 
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.lin.alllib.Model;
+import com.lin.alllib.common.ScreenUtil;
 import com.lin.app.R;
 import com.lin.alllib.data.respone.CityRespone;
+import com.lin.app.common.GlideCircleTransform;
+import com.lin.app.data.entity.NotifyInfoEntity;
 import com.lin.app.request.ApiImp;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -26,11 +33,11 @@ import butterknife.Bind;
  */
 public class MainModel extends Model {
 
-    @Bind(R.id.id_content_RecyclerView)
-    RecyclerView id_content_RecyclerView;
 
-    private CityRespone cityRespone;
-    private List<CityRespone.ResultBean> provinces = new ArrayList<>();
+    @Bind(R.id.id_content_RecyclerView)
+    RecyclerView recyclerView;
+    private List<NotifyInfoEntity> datas = new ArrayList<>();
+
 
     @Override
     protected int getContentView() {
@@ -39,38 +46,49 @@ public class MainModel extends Model {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
-        id_content_RecyclerView.setLayoutManager(linearLayoutManager);
-        id_content_RecyclerView.setAdapter(new BaseQuickAdapter<CityRespone.ResultBean, BaseViewHolder>(R.layout.item_provinces, provinces) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
-            protected void convert(BaseViewHolder baseViewHolder, CityRespone.ResultBean province) {
-                baseViewHolder.setText(R.id.id_provinces_tv, province.getProvince());
-                String color = "#" + String.valueOf((int) ((Math.random() * 8 +1 ) * 100000));
-                System.err.println(color);
-                baseViewHolder.setBackgroundColor(R.id.id_provinces_tv, Color.parseColor(color));
-//                baseViewHolder.getView()
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+
+                outRect.top = ScreenUtil.dp2px(20);
+                outRect.left = ScreenUtil.dp2px(20);
+                outRect.right = ScreenUtil.dp2px(20);
+                if (parent.getChildAdapterPosition(view) + 1 == datas.size()) {
+                    outRect.bottom = ScreenUtil.dp2px(20);
+                }
             }
         });
-        ((BaseQuickAdapter)id_content_RecyclerView.getAdapter()).openLoadAnimation();
-        id_content_RecyclerView.setItemAnimator(new DefaultItemAnimator());
-        ApiImp.getAllCity();
-        setSystemUiVisibility(false);
+        recyclerView.setAdapter(new BaseQuickAdapter<NotifyInfoEntity, BaseViewHolder>(R.layout.adapter_main, datas) {
+            @Override
+            protected void convert(BaseViewHolder baseViewHolder, NotifyInfoEntity notifyInfoEntity) {
+//                baseViewHolder.setText(R.id.item_main_text_id, notifyInfoEntity.getContentText());
+//                baseViewHolder.setText(R.id.item_main_time_id, notifyInfoEntity.getTime());
+//                baseViewHolder.setText(R.id.item_main_title_id, notifyInfoEntity.getTitle());
+                Glide.
+                        with(getActivity()).
+                        load(notifyInfoEntity.getPic_rs()).
+                        bitmapTransform(new GlideCircleTransform(getActivity())).
+                        crossFade(1000).
+                        into((ImageView) baseViewHolder.getView(R.id.item_main_iv_id));
+
+
+            }
+        });
+
     }
 
-    private void getProvince() {
-        provinces.clear();
-        provinces.addAll(cityRespone.getResult());
-        id_content_RecyclerView.getAdapter().notifyDataSetChanged();
+    @Override
+    protected void loadData() {
+        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.one_navigation));
+        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.three_navigation));
+        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.tow_navigation));
+        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.ic_launcher));
+        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.tow_navigation));
+        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.one_navigation));
+        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.three_navigation));
+        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.tow_navigation));
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessage(CityRespone cityRespone) {
-
-        this.cityRespone = cityRespone;
-        getProvince();
-    }
-
-
 }

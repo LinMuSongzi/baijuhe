@@ -1,7 +1,5 @@
 package com.lin.alllib;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +12,11 @@ import android.widget.Toast;
 import com.lin.alllib.data.EmptyEntity;
 import com.lin.alllib.framwork.DebugGod;
 import com.lin.alllib.framwork.commander.IDeal;
-import com.lin.alllib.framwork.commander.ILife;
 import com.lin.alllib.framwork.commander.LibModel;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 
 /**
  * Created by lpds on 2017/7/26.
@@ -33,6 +31,8 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
 
     private Toast t;
 
+    View root_layout;
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessage(EmptyEntity emptyEntity) {
         DebugGod.i(TAG, "EmptyEntity");
@@ -40,6 +40,7 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
 
     protected final void onCreate(WoodActivity activity, Bundle savedInstanceState) {
         this.activity = activity;
+        root_layout = findViewById(R.id.root_layout);
         init(savedInstanceState);
         if (!isSystemUiVisibility) {
             View decorView = getActivity().getWindow().getDecorView();
@@ -47,19 +48,15 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
                     | View.SYSTEM_UI_FLAG_FULLSCREEN;
             decorView.setSystemUiVisibility(uiOptions);
         }
-        getToolbar().setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
-        getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigationOnClick(v);
-            }
-        });
-//        getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                return false;
-//            }
-//        });
+        if(getToolbar()!=null) {
+            getToolbar().setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
+            getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    navigationOnClick(v);
+                }
+            });
+        }
     }
 
     protected void navigationOnClick(View v) {
@@ -139,7 +136,7 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
     }
 
     protected final void showSnackbar(String msg) {
-        showSnackbar(findViewById(R.id.root_layout),msg);
+        showSnackbar(root_layout,msg);
     }
 
     @Override
@@ -181,4 +178,6 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
     public T getAffirmObject(String key) {
         return null;
     }
+
+    protected void loadData(){}
 }
