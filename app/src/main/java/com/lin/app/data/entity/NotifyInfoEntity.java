@@ -9,4 +9,5 @@ public class NotifyInfoEntity extends BaseEntity<NotifyInfoEntity>{
 
 
 
+
 }

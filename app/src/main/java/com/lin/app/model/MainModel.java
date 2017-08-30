@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -63,7 +64,7 @@ public class MainModel extends Model {
         });
         recyclerView.setAdapter(new BaseQuickAdapter<NotifyInfoEntity, BaseViewHolder>(R.layout.adapter_main, datas) {
             @Override
-            protected void convert(BaseViewHolder baseViewHolder, NotifyInfoEntity notifyInfoEntity) {
+            protected void convert(BaseViewHolder baseViewHolder, final NotifyInfoEntity notifyInfoEntity) {
 //                baseViewHolder.setText(R.id.item_main_text_id, notifyInfoEntity.getContentText());
 //                baseViewHolder.setText(R.id.item_main_time_id, notifyInfoEntity.getTime());
 //                baseViewHolder.setText(R.id.item_main_title_id, notifyInfoEntity.getTitle());
@@ -73,8 +74,12 @@ public class MainModel extends Model {
                         bitmapTransform(new GlideCircleTransform(getActivity())).
                         crossFade(1000).
                         into((ImageView) baseViewHolder.getView(R.id.item_main_iv_id));
-
-
+                baseViewHolder.setOnClickListener(R.id.root_layout, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showSnackbar(notifyInfoEntity.toString());
+                    }
+                });
             }
         });
 

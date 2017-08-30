@@ -56,4 +56,15 @@ public class BaseEntity<T extends BaseEntity> {
     public void setTime(String time) {
         this.time = time;
     }
+
+    @Override
+    public String toString() {
+        return "BaseEntity{" +
+                "pic_url='" + pic_url + '\'' +
+                ", pic_rs=" + pic_rs +
+                ", title='" + title + '\'' +
+                ", contentText='" + contentText + '\'' +
+                ", time='" + time + '\'' +
+                '}';
+    }
 }
