@@ -144,8 +144,12 @@ public class ExceptioPen implements IPen {
                             ex.printStackTrace();
                             return true;
                         }
-
-                        int n = Integer.parseInt(FILE.getName());
+                        int n = 0;
+                        try {
+                            n = Integer.parseInt(FILE.getName());
+                        }catch (Exception ex){
+                            ex.printStackTrace();
+                        }
 
                         if (n - l > CACHE_MAX_DAY) {
                             return true;

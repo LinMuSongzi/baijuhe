@@ -48,7 +48,7 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
                     | View.SYSTEM_UI_FLAG_FULLSCREEN;
             decorView.setSystemUiVisibility(uiOptions);
         }
-        if(getToolbar()!=null) {
+        if (getToolbar() != null) {
             getToolbar().setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
             getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
@@ -131,17 +131,17 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
 
     protected final void showSnackbar(View view, String msg) {
         if (view != null) {
-            Snackbar.make(view,msg,1500).show();
+            Snackbar.make(view, msg, 1500).show();
         }
     }
 
     protected final void showSnackbar(String msg) {
-        showSnackbar(root_layout,msg);
+        showSnackbar(root_layout, msg);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        activity.getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+//        activity.getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 
@@ -179,5 +179,6 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
         return null;
     }
 
-    protected void loadData(){}
+    protected void loadData() {
+    }
 }

@@ -8,8 +8,6 @@ import y.com.sqlitesdk.framework.interface_model.IModel;
  */
 public final class SupportServer{
 
-    public static <T extends IModel<T>> Regime inster(T t){
-        return new Regime(t);
-    }
+
 
 }

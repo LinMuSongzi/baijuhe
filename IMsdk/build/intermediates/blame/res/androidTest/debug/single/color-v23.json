@@ -1,9 +1,5 @@
 [
     {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_edittext.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\color-v23\\abc_tint_edittext.xml"
-    },
-    {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_switch_thumb.xml",
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_switch_thumb.xml"
     },
@@ -12,32 +8,8 @@
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_spinner.xml"
     },
     {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_color_highlight_material.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\color-v23\\abc_color_highlight_material.xml"
-    },
-    {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_seek_thumb.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\color-v23\\abc_tint_seek_thumb.xml"
-    },
-    {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_btn_checkable.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\color-v23\\abc_tint_btn_checkable.xml"
-    },
-    {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_switch_thumb.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\color-v23\\abc_tint_switch_thumb.xml"
-    },
-    {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_spinner.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\color-v23\\abc_tint_spinner.xml"
-    },
-    {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_btn_checkable.xml",
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_btn_checkable.xml"
-    },
-    {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_switch_track.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\color-v23\\abc_tint_switch_track.xml"
     },
     {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_btn_colored_borderless_text_material.xml",
@@ -52,14 +24,6 @@
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_seek_thumb.xml"
     },
     {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\design_tint_password_toggle.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\d6b2a94dd2441e50392e2b901d76ac5422fadaba\\output\\res\\color-v23\\design_tint_password_toggle.xml"
-    },
-    {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_default.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\color-v23\\abc_tint_default.xml"
-    },
-    {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_color_highlight_material.xml",
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_color_highlight_material.xml"
     },
@@ -70,10 +34,6 @@
     {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_default.xml",
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_default.xml"
-    },
-    {
-        "merged": "F:\\sysj2\\sysj_master\\sysj_android\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_btn_colored_borderless_text_material.xml",
-        "source": "C:\\Users\\lpds\\.android\\build-cache\\6452c966e06d960dd73cebba79356d91fa0eed8b\\output\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
     },
     {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_switch_track.xml",
