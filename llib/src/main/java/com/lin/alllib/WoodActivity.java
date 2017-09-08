@@ -46,6 +46,11 @@ public abstract class WoodActivity<T> extends AppCompatActivity implements IDeal
         }
     }
 
+    public boolean isHadBar(){
+        return t != null;
+    }
+
+
     public Toolbar getToolbar() {
         return t;
     }
