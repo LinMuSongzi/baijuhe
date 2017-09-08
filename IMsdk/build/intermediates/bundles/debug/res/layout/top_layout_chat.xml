@@ -40,7 +40,7 @@
                 android:layout_marginRight="42dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="聊天"
+                android:action="聊天"
                 android:textColor="#dd333333"
                 android:textSize="16sp"
                 android:visibility="visible" />
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="QQ: 45456464"
+                android:action="QQ: 45456464"
                 android:textColor="#666666"
                 android:textSize="11sp"
                 android:visibility="gone" />
@@ -65,7 +65,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
             android:gravity="center"
-            android:text=""
+            android:action=""
             android:textColor="#000"
             android:textSize="16dp" />
 
@@ -98,7 +98,7 @@
         android:layout_height="30dp"
         android:background="#ffffff"
         android:gravity="center"
-        android:text="如陪练不回复，可QQ联系,对方QQ："
+        android:action="如陪练不回复，可QQ联系,对方QQ："
         android:textColor="#666666"
         android:textSize="12sp" />
 </LinearLayout>

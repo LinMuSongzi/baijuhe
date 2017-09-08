@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="12dp"
             android:gravity="center"
-            android:text="视界这么大，联网才能看~"
+            android:action="视界这么大，联网才能看~"
             android:textColor="#565656"
             android:textSize="12sp"/>
     </LinearLayout>

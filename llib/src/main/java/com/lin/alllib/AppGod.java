@@ -19,6 +19,8 @@ public class AppGod extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         $THIS = this;
+
+
         ActivityManager.getInstance();
         RequestManager.getInstance();
         registerActivityLifecycleCallbacks(AppLife.getInstance().getActivityLifecycleCallbacks());
