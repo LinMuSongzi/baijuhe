@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/dextest" />
             <option value="$PROJECT_DIR$/ipc" />
             <option value="$PROJECT_DIR$/llib" />
+            <option value="$PROJECT_DIR$/pathtest" />
             <option value="$PROJECT_DIR$/sqlitesdk" />
           </set>
         </option>
@@ -24,6 +25,7 @@
             <option value="$PROJECT_DIR$/dextest" />
             <option value="$PROJECT_DIR$/ipc" />
             <option value="$PROJECT_DIR$/llib" />
+            <option value="$PROJECT_DIR$/pathtest" />
             <option value="$PROJECT_DIR$/sqlitesdk" />
           </set>
         </option>

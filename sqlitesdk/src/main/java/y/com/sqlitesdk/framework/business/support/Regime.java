@@ -48,7 +48,7 @@ public abstract class Regime<T extends IModel<T>> implements Plant,Execute {
 
     public static final <T extends Class<T>> Plant query() {
 
-        return new QueryRegime<>();
+        return null;
     }
 
 
