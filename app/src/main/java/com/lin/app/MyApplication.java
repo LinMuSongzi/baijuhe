@@ -1,6 +1,6 @@
 package com.lin.app;
 
-import com.lin.alllib.AppGod;
+import com.lin.alllib.LibApplication;
 import com.lin.alllib.framwork.RequestManager;
 import com.lin.app.request.retrofit.AnXingApi;
 import com.lin.app.request.retrofit.WeatherApi;
@@ -8,7 +8,7 @@ import com.lin.app.request.retrofit.WeatherApi;
 /**
  * Created by linhui on 2017/8/8.
  */
-public class MyApplication extends AppGod {
+public class MyApplication extends LibApplication {
 
 
     @Override

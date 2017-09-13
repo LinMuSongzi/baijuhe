@@ -1,8 +1,7 @@
 package com.lin.alllib.framwork;
 
-import com.lin.alllib.AppGod;
-import com.lin.alllib.R;
-import com.lin.alllib.data.respone.BaseRespone;
+import com.lin.alllib.AppLife;
+import com.lin.alllib.LibApplication;
 import com.lin.alllib.framwork.commander.IRequestInterceptor;
 
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -23,7 +21,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -58,7 +55,7 @@ public final class RequestManager {
         okHttpClient = new OkHttpClient();
         okHttpClient = okHttpClient.newBuilder().readTimeout(8 * 1000, TimeUnit.SECONDS).connectTimeout(5 * 1000, TimeUnit.SECONDS)
                 .writeTimeout(8 * 1000, TimeUnit.SECONDS)
-                .cache(new Cache(AppGod.$THIS.getCacheDir(), 1024 * 1024 * 20))
+                .cache(new Cache(AppLife.getInstance().getApplication().getCacheDir(), 1024 * 1024 * 20))
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(final Chain chain) throws IOException {

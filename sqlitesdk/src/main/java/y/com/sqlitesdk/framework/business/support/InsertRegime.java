@@ -1,5 +1,7 @@
 package y.com.sqlitesdk.framework.business.support;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import y.com.sqlitesdk.framework.interface_model.IModel;
 
 /**
@@ -13,5 +15,10 @@ public class InsertRegime<T extends IModel<T>> extends Regime<T> {
     @Override
     public String buildSql() {
         return null;
+    }
+
+    @Override
+    public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+
     }
 }
