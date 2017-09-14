@@ -12,13 +12,17 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -27,7 +31,10 @@ import com.lin.alllib.Model;
 import com.lin.alllib.common.ScreenUtil;
 import com.lin.app.R;
 import com.lin.alllib.data.respone.CityRespone;
+import com.lin.app.activity.NavigationActivity;
+import com.lin.app.common.AndroidAppManager;
 import com.lin.app.common.GlideCircleTransform;
+import com.lin.app.data.entity.AppEntity;
 import com.lin.app.data.entity.NotifyInfoEntity;
 import com.lin.app.request.ApiImp;
 import com.lin.app.service.PostmanService;
@@ -36,6 +43,7 @@ import com.lin.app.service.binder.PostmanBinder;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,10 +56,12 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
     @Bind(R.id.id_content_RecyclerView)
     RecyclerView recyclerView;
-    private List<NotifyInfoEntity> datas = new ArrayList<>();
+    private List<AppEntity> datas = new ArrayList<>();
 
     private Messenger mService;
     private Messenger mClient = new Messenger(new Handler(this));
+
+    private SearchView mSearchView;
 
     @Override
     protected int getContentView() {
@@ -75,36 +85,19 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
                 }
             }
         });
-        recyclerView.setAdapter(new BaseQuickAdapter<NotifyInfoEntity, BaseViewHolder>(R.layout.adapter_main, datas) {
+        recyclerView.setAdapter(new BaseQuickAdapter<AppEntity, BaseViewHolder>(R.layout.adapter_appentity, datas) {
             @Override
-            protected void convert(BaseViewHolder baseViewHolder, final NotifyInfoEntity notifyInfoEntity) {
-//                baseViewHolder.setText(R.id.item_main_text_id, notifyInfoEntity.getContentText());
-//                baseViewHolder.setText(R.id.item_main_time_id, notifyInfoEntity.getTime());
-//                baseViewHolder.setText(R.id.item_main_title_id, notifyInfoEntity.getTitle());
-                Glide.
-                        with(getActivity()).
-                        load(notifyInfoEntity.getPic_rs()).
-                        bitmapTransform(new GlideCircleTransform(getActivity())).
-                        crossFade(1000).
-                        into((ImageView) baseViewHolder.getView(R.id.item_main_iv_id));
+            protected void convert(BaseViewHolder baseViewHolder, final AppEntity appEntity) {
+                ((ImageView) baseViewHolder.getView(R.id.item_main_iv_id)).setImageDrawable(appEntity.getIcon());
+                ((TextView) baseViewHolder.getView(R.id.item_main_time_id)).setText(
+                        new SimpleDateFormat("yyyyMMdd").format(appEntity.getFirstInstallTime()));
+                ((TextView) baseViewHolder.getView(R.id.item_main_text_version)).setText(appEntity.getVersionCode());
+                ((TextView) baseViewHolder.getView(R.id.item_main_package)).setText(appEntity.getPackageName());
+                ((TextView) baseViewHolder.getView(R.id.item_main_title_id)).setText(appEntity.getAppname());
                 baseViewHolder.setOnClickListener(R.id.root_layout, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-
-                        if (mService != null) {
-                            Message message = Message.obtain();
-                            message.what = PostmanService.SUM;
-                            message.arg2 = (int) (Math.random() * 100);
-                            message.arg1 = (int) (Math.random() * 100);
-                            message.replyTo = mClient;
-                            try {
-                                mService.send(message);
-                            } catch (RemoteException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
+                        getActivity().startActivity(new Intent(v.getContext(),NavigationActivity.class));
                     }
                 });
             }
@@ -116,32 +109,58 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getActivity().getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+
+        final MenuItem item = menu.findItem(R.id.lib_toolbar);
+        mSearchView = (SearchView) MenuItemCompat.getActionView(item);
+        setSearchView();
         return true;
+    }
+    private void setSearchView() {
+        //设置展开后图标的样式,false时ICON在搜索框外,true为在搜索框内，无法修改
+        mSearchView.setIconifiedByDefault(false);
+        final ImageView imageView = (ImageView) mSearchView.findViewById(R.id.search_close_btn);
+        imageView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                imageView.setImageResource(R.drawable.ic_keyboard_backspace_white_24dp);
+            }
+        },200);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                AndroidAppManager.getInstance().postAndroidApp(newText);
+
+                return true;
+            }
+        });
+        mSearchView.setQueryHint("搜索");
+        mSearchView.setSubmitButtonEnabled(false);//设置最右侧的提交按钮
+//        mSearchView.setActionView(searchView);
     }
 
     @Override
     protected void loadData() {
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.one_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.three_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.tow_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.ic_launcher));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.tow_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.one_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.one_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.three_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.tow_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.ic_launcher));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.tow_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.three_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.tow_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.one_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.three_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.tow_navigation));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.ic_launcher));
-        datas.add(new NotifyInfoEntity().setPic_rs(R.mipmap.tow_navigation));
+        AndroidAppManager.getInstance().postAndroidApp();
+
         getActivity().startService(new Intent(getActivity(), PostmanService.class));
         getActivity().bindService(new Intent(getActivity(), PostmanService.class), this, Context.BIND_AUTO_CREATE);
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessager(List<AppEntity> list){
+        if(list!=null){
+            datas.clear();
+            datas.addAll(list);
+            recyclerView.getAdapter().notifyDataSetChanged();
+        }
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -159,6 +178,22 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
 
     }
+
+    private void sum(){
+        if (mService != null) {
+            Message message = Message.obtain();
+            message.what = PostmanService.SUM;
+            message.arg2 = (int) (Math.random() * 100);
+            message.arg1 = (int) (Math.random() * 100);
+            message.replyTo = mClient;
+            try {
+                mService.send(message);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     @Override
     public boolean handleMessage(Message msg) {
