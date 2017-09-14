@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import com.lin.alllib.Model;
 import com.pathtest.R;
 
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import butterknife.Bind;
@@ -38,25 +39,60 @@ public class PathModel extends Model<IPathModel> implements IPathModel, SurfaceH
     private ValueAnimator valueAnimator;
     private int MID_WIDTH;
     private int MID_HEIGHT;
-    private final Path path = new Path();
+//    private final Path path = new Path();
+
+    /**
+     * 顺时针
+     */
     private PathMeasure pathMeasure;
+
+    /**
+     * 逆时针
+     */
+    private PathMeasure pathMeasure2;
+
+
+    Float[] abc1 = new Float[3];
+
 
     @Override
     protected int getContentView() {
         return R.layout.activity_scrolling;
     }
 
-    @Override
-    protected void init(Bundle savedInstanceState) {
+    private void initPath() {
         mPaint.setColor(Color.CYAN);
         mPaint.setStrokeWidth(15);
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.STROKE);
-        path.moveTo(MID_WIDTH / 2, MID_HEIGHT / 2);
-        path.addCircle(MID_WIDTH / 2, MID_HEIGHT / 2, 200, Path.Direction.CW);
+
+        Path path = new Path();
+
 //        path.addCircle(MID_WIDTH / 2, MID_HEIGHT / 2, 200, Path.Direction.CW);
+        path.addCircle(MID_WIDTH / 2, MID_HEIGHT / 2, 200, Path.Direction.CW);
+
         pathMeasure = new PathMeasure(path, false);
 
+        path = new Path();
+
+        path.addCircle(MID_WIDTH / 2, MID_HEIGHT / 2, 200, Path.Direction.CCW);
+        pathMeasure2 = new PathMeasure(path, false);
+
+
+        abc1[0] = 300f;
+        abc1[1] = 250f;
+        abc1[2] = pathMeasure.getLength();
+
+
+        maxS = pathMeasure.getLength() / 9;
+
+    }
+
+    float maxS;
+
+    @Override
+    protected void init(Bundle savedInstanceState) {
+        initPath();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getActivity().setSupportActionBar(toolbar);
 
@@ -89,8 +125,18 @@ public class PathModel extends Model<IPathModel> implements IPathModel, SurfaceH
         isStart.set(true);
         synchronized (id_surfaceView) {
             if (valueAnimator == null) {
-                valueAnimator = ValueAnimator.ofFloat(0.0f, pathMeasure.getLength() * 2);
-                valueAnimator.setDuration(3000);
+                valueAnimator = ValueAnimator.ofFloat(
+                        0.0f,
+                        pathMeasure.getLength() / 4,
+                        pathMeasure.getLength() / 2,
+                        pathMeasure.getLength() / 2 / 4 + pathMeasure.getLength() / 2,
+                        pathMeasure.getLength() / 2 / 2 + pathMeasure.getLength() / 2,
+                        pathMeasure.getLength() + pathMeasure.getLength() / 2 / 4,
+                        pathMeasure.getLength() + pathMeasure.getLength() / 2 / 2,
+                        pathMeasure.getLength() + pathMeasure.getLength() / 3,
+                        pathMeasure.getLength() * 2);
+
+                valueAnimator.setDuration(3_000);
                 valueAnimator.setRepeatCount(-1);
 //                valueAnimator.setRepeatMode(ValueAnimator.RESTART);
                 valueAnimator.addUpdateListener(this);
@@ -132,17 +178,27 @@ public class PathModel extends Model<IPathModel> implements IPathModel, SurfaceH
     @Override
     public void onAnimationUpdate(ValueAnimator valueAnimator) {
         float values = (Float) valueAnimator.getAnimatedValue();
+        float time = valueAnimator.getDuration();
         if (surfaceHolder != null) {
 
             final Canvas canvas = surfaceHolder.lockCanvas();
             canvas.drawColor(Color.WHITE);
             Path path = new Path();
+
+            float s = (float) (maxS * Math.sqrt(time));
+
             if (values < pathMeasure.getLength()) {
+//                pathMeasure.getSegment(0, s, path, true);
                 pathMeasure.getSegment(0, values, path, true);
             } else {
-                pathMeasure.getSegment(0, pathMeasure.getLength() * 2 - values, path, true);
+                pathMeasure2.getSegment(0, pathMeasure2.getLength() * 2 - values, path, true);
             }
+
+//            float a = values * 1f / pathMeasure.getLength();
+//            path.offset(MID_WIDTH, MID_HEIGHT * a/2);
+
             path.offset(MID_WIDTH, MID_HEIGHT);
+
             canvas.drawPath(path, mPaint);
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
