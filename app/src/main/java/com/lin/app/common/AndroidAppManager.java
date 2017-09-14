@@ -1,6 +1,7 @@
 package com.lin.app.common;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
@@ -68,7 +69,7 @@ public final class AndroidAppManager {
 
     private List<AppEntity> getAllAndroidApp3(String filter) {
         List<AppEntity> list = new LinkedList<>();
-        for(AppEntity appEntity : list){
+        for(AppEntity appEntity : this.list){
 
             AppEntity a = new AppEntity();
             a.setPackageName(appEntity.getPackageName());
@@ -102,8 +103,22 @@ public final class AndroidAppManager {
             list.add(a);
         }
         this.list.clear();
-        list.addAll(new ArrayList<AppEntity>(list));
+        this.list.addAll(new ArrayList<AppEntity>(list));
         return list;
     }
+
+
+    public void startApp(String packageName){
+
+        PackageManager packageManager = AppGod.$THIS.getPackageManager();
+
+        Intent intent = packageManager.getLaunchIntentForPackage(packageName);
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_CLEAR_TOP) ;
+
+        AppGod.$THIS.startActivity(intent);
+    }
+
+
 
 }

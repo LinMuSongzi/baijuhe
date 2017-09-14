@@ -97,7 +97,8 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
                 baseViewHolder.setOnClickListener(R.id.root_layout, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        getActivity().startActivity(new Intent(v.getContext(),NavigationActivity.class));
+//                        getActivity().startActivity(new Intent(v.getContext(),NavigationActivity.class));
+                        AndroidAppManager.getInstance().startApp(appEntity.getPackageName());
                     }
                 });
             }
@@ -116,15 +117,6 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
         return true;
     }
     private void setSearchView() {
-        //设置展开后图标的样式,false时ICON在搜索框外,true为在搜索框内，无法修改
-        mSearchView.setIconifiedByDefault(false);
-        final ImageView imageView = (ImageView) mSearchView.findViewById(R.id.search_close_btn);
-        imageView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                imageView.setImageResource(R.drawable.ic_keyboard_backspace_white_24dp);
-            }
-        },200);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -133,15 +125,27 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
-                AndroidAppManager.getInstance().postAndroidApp(newText);
-
+                if(newText.isEmpty()){
+                    AndroidAppManager.getInstance().postAndroidApp("***&");
+                }else {
+                    AndroidAppManager.getInstance().postAndroidApp(newText);
+                }
                 return true;
             }
         });
-        mSearchView.setQueryHint("搜索");
-        mSearchView.setSubmitButtonEnabled(false);//设置最右侧的提交按钮
-//        mSearchView.setActionView(searchView);
+        mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                AndroidAppManager.getInstance().postAndroidApp("");
+                return false;
+            }
+        });
+//        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AndroidAppManager.getInstance().postAndroidApp("*(&*(&*(!&*(&");
+//            }
+//        });
     }
 
     @Override
