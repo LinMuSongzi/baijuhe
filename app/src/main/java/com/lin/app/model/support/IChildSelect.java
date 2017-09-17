@@ -1,6 +1,7 @@
 package com.lin.app.model.support;
 
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 /**
  * Created by Hui on 2017/9/16.
@@ -11,7 +12,7 @@ import android.support.v4.app.Fragment;
 
 public interface IChildSelect extends IDataImpl{
 
-    Fragment getFragment();
+    View getFragment();
 
     String getTitle();
 

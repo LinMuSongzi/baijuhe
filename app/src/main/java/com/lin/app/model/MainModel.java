@@ -37,6 +37,8 @@ import com.lin.app.common.AndroidAppManager;
 import com.lin.app.common.GlideCircleTransform;
 import com.lin.app.data.entity.AppEntity;
 import com.lin.app.data.entity.NotifyInfoEntity;
+import com.lin.app.model.support.popupwindow.IPopup;
+import com.lin.app.model.support.popupwindow.MyPopupwindow;
 import com.lin.app.request.ApiImp;
 import com.lin.app.service.PostmanService;
 import com.lin.app.service.binder.PostmanBinder;
@@ -64,6 +66,8 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
     private SearchView mSearchView;
 
+    private IPopup popup;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_main;
@@ -71,6 +75,8 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        popup = new MyPopupwindow(getActivity());
+        popup.loadData();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
@@ -100,7 +106,9 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
                     public void onClick(View v) {
 //                        getActivity().startActivity(new Intent(v.getContext(),NavigationActivity.class));
 //                        AndroidAppManager.getInstance().startApp(appEntity.getPackageName());
-                        getActivity().startActivity(new Intent(getActivity(), SelectInfoActivity.class));
+//                        if(appEnti)
+//                        getActivity().startActivity(new Intent(getActivity(), SelectInfoActivity.class));
+                        popup.show();
                     }
                 });
             }
@@ -171,6 +179,7 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         getActivity().unbindService(this);
     }
 

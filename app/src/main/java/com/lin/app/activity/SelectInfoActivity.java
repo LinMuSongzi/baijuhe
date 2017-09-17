@@ -32,7 +32,12 @@ public class SelectInfoActivity extends AppCompatActivity implements IActivityIm
     }
 
     @Override
-    public AppCompatActivity getAtivity() {
+    public AppCompatActivity getActivity() {
         return this;
+    }
+
+    @Override
+    public void close() {
+
     }
 }

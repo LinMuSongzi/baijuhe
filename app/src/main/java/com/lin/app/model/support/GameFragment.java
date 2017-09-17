@@ -3,16 +3,13 @@ package com.lin.app.model.support;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.util.ArrayMap;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +38,7 @@ import butterknife.ButterKnife;
  * Created by Hui on 2017/9/16.
  */
 
-public class GameFragment extends Fragment implements IChildSelect {
+public class GameFragment implements IChildSelect ,IActivityImpl{
 
     private View contentView;
     private final String XML_NAME = "cache_selcet";
@@ -60,13 +57,16 @@ public class GameFragment extends Fragment implements IChildSelect {
     @Bind(R.id.id_hot_game_rc)
     RecyclerView id_hot_game_rc;
 
+    private IActivityImpl iActivity;
+
     private final int HOT_GAME_FLAG = 0x123;
     private final int CACHE_FLAG = 0x1221;
     private int flag;
 
     private ISelecImpl iSelec;
 
-    public GameFragment() {
+    public GameFragment(IActivityImpl iActivity) {
+        this.iActivity = iActivity;
     }
 
     public void setSelec(ISelecImpl selec) {
@@ -102,8 +102,7 @@ public class GameFragment extends Fragment implements IChildSelect {
     }
 
 
-    @Nullable
-    @Override
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (contentView == null) {
             contentView = inflater.inflate(getContentView(), container, false);
@@ -233,8 +232,8 @@ public class GameFragment extends Fragment implements IChildSelect {
     }
 
     @Override
-    public Fragment getFragment() {
-        return this;
+    public View getFragment() {
+        return contentView;
     }
 
     @Override
@@ -244,8 +243,18 @@ public class GameFragment extends Fragment implements IChildSelect {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+//        super.onDestroy();
         EventBus.getDefault().unregister(this);
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public AppCompatActivity getActivity() {
+        return iActivity.getActivity();
+    }
+
+    @Override
+    public void close() {
+
     }
 }
