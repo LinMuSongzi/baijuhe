@@ -32,6 +32,7 @@ import com.lin.alllib.common.ScreenUtil;
 import com.lin.app.R;
 import com.lin.alllib.data.respone.CityRespone;
 import com.lin.app.activity.NavigationActivity;
+import com.lin.app.activity.SelectInfoActivity;
 import com.lin.app.common.AndroidAppManager;
 import com.lin.app.common.GlideCircleTransform;
 import com.lin.app.data.entity.AppEntity;
@@ -98,7 +99,8 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
                     @Override
                     public void onClick(View v) {
 //                        getActivity().startActivity(new Intent(v.getContext(),NavigationActivity.class));
-                        AndroidAppManager.getInstance().startApp(appEntity.getPackageName());
+//                        AndroidAppManager.getInstance().startApp(appEntity.getPackageName());
+                        getActivity().startActivity(new Intent(getActivity(), SelectInfoActivity.class));
                     }
                 });
             }

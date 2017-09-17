@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="lpds_hot_game">
+
+        <item>王者荣耀1</item>
+        <item>王者荣耀2</item>
+        <item>王者荣耀3</item>
+        <item>王者荣耀4</item>
+        <item>王者荣耀5</item>
+        <item>王者荣耀6</item>
+        <item>王者荣耀7</item>
+        <item>王者荣耀8</item>
+        <item>王者荣耀9</item>
+        <item>王者荣耀10</item>
+        <item>王者荣耀11</item>
+        <item>王者荣耀12</item>
+        <item>王者荣耀13</item>
+        <item>王者荣耀14</item>
+        <item>王者荣耀15</item>
+        <item>王者荣耀16</item>
+        <item>王者荣耀17</item>
+        <item>王者荣耀18</item>
+        <item>王者荣耀18</item>
+        <item>王者荣耀19</item>
+        <item>王者荣耀20</item>
+        <item>王者荣耀21</item>
+
+
+    </string-array>
+    <string-array name="lpds_life">
+        <item>手机教程1</item>
+        <item>手机教程2</item>
+        <item>手机教程3</item>
+        <item>手机教程4</item>
+        <item>手机教程5</item>
+        <item>手机教程6</item>
+        <item>手机教程7</item>
+        <item>手机教程8</item>
+        <item>手机教程9</item>
+        <item>手机教程10</item>
+        <item>手机教程11</item>
+        <item>手机教程12</item>
+    </string-array>
+
+</resources>

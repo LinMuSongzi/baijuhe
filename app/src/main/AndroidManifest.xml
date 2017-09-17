@@ -39,6 +39,8 @@
             android:screenOrientation="portrait"/>
 
 
+        <activity android:name=".activity.SelectInfoActivity"></activity>
+
         <service
             android:name=".service.PostmanService"
             android:enabled="true"
