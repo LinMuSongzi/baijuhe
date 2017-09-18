@@ -1,4 +1,4 @@
-package com.lin.app.activity.fragment;
+package com.lin.app.ui.activity.fragment;
 
 import com.lin.alllib.framwork.FragmentModel;
 import com.lin.alllib.WoodFragment;

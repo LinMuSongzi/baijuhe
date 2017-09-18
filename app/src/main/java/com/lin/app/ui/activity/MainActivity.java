@@ -1,4 +1,4 @@
-package com.lin.app.activity;
+package com.lin.app.ui.activity;
 
 import com.lin.alllib.Model;
 import com.lin.alllib.WoodActivity;

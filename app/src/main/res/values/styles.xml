@@ -9,6 +9,7 @@
         <item name="android:windowBackground">@color/window_bg</item>
         <item name="android:textColorPrimary">@color/color_white</item>
         <item name="android:colorControlHighlight" tools:targetApi="lollipop">@color/colorAccent</item>
+
     </style>
 
 

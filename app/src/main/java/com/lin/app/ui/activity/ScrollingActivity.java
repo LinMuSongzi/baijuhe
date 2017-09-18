@@ -1,4 +1,4 @@
-package com.lin.app.activity;
+package com.lin.app.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

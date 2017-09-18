@@ -49,7 +49,7 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
             decorView.setSystemUiVisibility(uiOptions);
         }
         if (getToolbar() != null) {
-            getToolbar().setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
+
             getToolbar().setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
