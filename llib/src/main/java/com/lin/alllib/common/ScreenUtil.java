@@ -9,7 +9,8 @@ import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.lin.alllib.AppGod;
+import com.lin.alllib.AppLife;
+import com.lin.alllib.LibApplication;
 
 /**
  * 功能：屏幕工具
@@ -24,7 +25,7 @@ public class ScreenUtil {
 	 * 功能：屏幕单位转换
 	 */
 	public static int px2dp(float pxValue) {
-		Context context = AppGod.$THIS;
+		Context context = AppLife.getInstance().getApplication();
 		return px2dp(context, pxValue);
 	}
 
@@ -32,7 +33,7 @@ public class ScreenUtil {
 	 * 功能：屏幕单位转换
 	 */
 	public static int dp2px(float dpValue) {
-		Context context = AppGod.$THIS;
+		Context context = AppLife.getInstance().getApplication();
 		return dp2px(context, dpValue);
 	}
 
@@ -59,15 +60,15 @@ public class ScreenUtil {
 	/**
 	 * 功能：获得屏幕宽度（px）
 	 */
-	public static int getScreenWidth(Context context) {
-		return context.getResources().getDisplayMetrics().widthPixels;
+	public static int getScreenWidth() {
+		return AppLife.getInstance().getApplication().getResources().getDisplayMetrics().widthPixels;
 	}
 	
 	/**
 	 * 功能：获得屏幕高度（px）
 	 */
-	public static int getScreenHeight(Context context) {
-		return context.getResources().getDisplayMetrics().heightPixels;
+	public static int getScreenHeight() {
+		return AppLife.getInstance().getApplication().getResources().getDisplayMetrics().heightPixels;
 	}
 
 	/**

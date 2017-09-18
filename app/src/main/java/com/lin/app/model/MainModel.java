@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,17 +20,28 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.lin.alllib.Model;
 import com.lin.alllib.common.ScreenUtil;
 import com.lin.app.R;
+import com.lin.alllib.data.respone.CityRespone;
+import com.lin.app.activity.NavigationActivity;
+import com.lin.app.activity.SelectInfoActivity;
 import com.lin.app.common.AndroidAppManager;
+import com.lin.app.common.GlideCircleTransform;
 import com.lin.app.data.entity.AppEntity;
+import com.lin.app.data.entity.NotifyInfoEntity;
+import com.lin.app.model.support.popupwindow.IPopup;
+import com.lin.app.model.support.popupwindow.MyPopupwindow;
+import com.lin.app.request.ApiImp;
 import com.lin.app.service.PostmanService;
+import com.lin.app.service.binder.PostmanBinder;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -54,6 +66,8 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
     private SearchView mSearchView;
 
+    private IPopup popup;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_main;
@@ -61,6 +75,8 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
     @Override
     protected void init(Bundle savedInstanceState) {
+        popup = new MyPopupwindow(getActivity());
+        popup.loadData();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
@@ -89,7 +105,10 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
                     @Override
                     public void onClick(View v) {
 //                        getActivity().startActivity(new Intent(v.getContext(),NavigationActivity.class));
-                        AndroidAppManager.getInstance().startApp(appEntity.getPackageName());
+//                        AndroidAppManager.getInstance().startApp(appEntity.getPackageName());
+//                        if(appEnti)
+//                        getActivity().startActivity(new Intent(getActivity(), SelectInfoActivity.class));
+                        popup.show();
                     }
                 });
             }
@@ -127,16 +146,16 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
         mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                AndroidAppManager.getInstance().postAndroidApp();
-                return true;
+                AndroidAppManager.getInstance().postAndroidApp("");
+                return false;
             }
         });
-        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getToolbar().setNavigationIcon(R.drawable.ic_keyboard_backspace_white_24dp);
-            }
-        });
+//        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AndroidAppManager.getInstance().postAndroidApp("*(&*(&*(!&*(&");
+//            }
+//        });
     }
 
     @Override
@@ -160,6 +179,7 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         getActivity().unbindService(this);
     }
 

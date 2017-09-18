@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.lin.alllib.framwork.DebugGod;
 import com.lin.alllib.framwork.commander.ILife;
 import com.lin.alllib.framwork.commander.CommanderLife;
+import com.lin.alllib.framwork.manager.ActivityManager;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -16,6 +17,7 @@ import java.util.Set;
  */
 public class AppLife implements Application.ActivityLifecycleCallbacks,CommanderLife{
     private static AppLife appLife;
+    private Application application;
     static{
         appLife = new AppLife();
     }
@@ -24,6 +26,14 @@ public class AppLife implements Application.ActivityLifecycleCallbacks,Commander
     private AppLife(){
         lifeSet = new LinkedHashSet<>();
     }
+
+    void setApplication(Application application){
+        this.application = application;
+        this.application.registerActivityLifecycleCallbacks(AppLife.getInstance().getActivityLifecycleCallbacks());
+        ActivityManager.getInstance();
+    }
+
+
 
     public static CommanderLife getInstance(){return appLife;}
 
@@ -96,5 +106,10 @@ public class AppLife implements Application.ActivityLifecycleCallbacks,Commander
     @Override
     public Application.ActivityLifecycleCallbacks getActivityLifecycleCallbacks() {
         return this;
+    }
+
+    @Override
+    public Application getApplication() {
+        return application;
     }
 }

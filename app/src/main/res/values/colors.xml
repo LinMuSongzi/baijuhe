@@ -9,6 +9,6 @@
     <color name="color_999999">#999999</color>
     <color name="color_666666">#666666</color>
 
-
+    <color name="bg_main_blue">#167edf</color>
     <color name="window_bg">#dedbdb</color>
 </resources>

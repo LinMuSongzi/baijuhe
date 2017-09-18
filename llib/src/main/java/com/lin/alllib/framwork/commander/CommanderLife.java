@@ -13,4 +13,6 @@ public interface CommanderLife {
 
     Application.ActivityLifecycleCallbacks getActivityLifecycleCallbacks();
 
+    Application getApplication();
+
 }

@@ -12,7 +12,7 @@ import okhttp3.Interceptor;
 /**
  * Created by linhui on 2017/8/8.
  */
-public class PhoneLocationManager implements IRequestInterceptor {
+public class PhoneLocationManager{
 
     private static final String TAG ="liv_LocationManager";
 
@@ -21,21 +21,11 @@ public class PhoneLocationManager implements IRequestInterceptor {
         phoneLocationManager = new PhoneLocationManager();
     }
     public PhoneLocationManager(){
-        RequestManager.getInstance().addRequestInterceptor(this);
+
     }
 
     public static final PhoneLocationManager getInstance(){
         return phoneLocationManager;
     }
 
-    @Override
-    public void onRequest(Interceptor.Chain request) {
-        DebugGod.i(TAG,request.toString());
-    }
-
-    @Override
-    public boolean onResponse(Object o) {
-        DebugGod.i(TAG,o.toString());
-        return true;
-    }
 }
