@@ -1,4 +1,4 @@
-package com.fileengine.commander;
+package com.fileengine.commander.entity;
 
 /**
  * Created by linhui on 2017/9/27.
@@ -7,6 +7,12 @@ package com.fileengine.commander;
  *
  */
 public interface IFileEntity {
+
+    int SIMPLE_FILE_GENRE = 100;
+    int VIDEO_GENRE = 109;
+    int MUSIC_GENRE = 108;
+    int PHOTO_GRNRE = 102;
+    int FOLDER_GRNRE = 200;
 
     String getName();
 
@@ -18,6 +24,6 @@ public interface IFileEntity {
 
     String getPostfix();
 
-
+    int getCurrentGenre();
 
 }
