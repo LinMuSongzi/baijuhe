@@ -11,13 +11,26 @@
             <option value="$PROJECT_DIR$/IMsdk" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/dextest" />
+            <option value="$PROJECT_DIR$/fileengine" />
             <option value="$PROJECT_DIR$/ipc" />
             <option value="$PROJECT_DIR$/llib" />
             <option value="$PROJECT_DIR$/pathtest" />
             <option value="$PROJECT_DIR$/sqlitesdk" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="myModules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/IMsdk" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/dextest" />
+            <option value="$PROJECT_DIR$/fileengine" />
+            <option value="$PROJECT_DIR$/ipc" />
+            <option value="$PROJECT_DIR$/llib" />
+            <option value="$PROJECT_DIR$/pathtest" />
+            <option value="$PROJECT_DIR$/sqlitesdk" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>

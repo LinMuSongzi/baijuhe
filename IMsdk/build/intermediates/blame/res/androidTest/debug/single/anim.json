@@ -1,31 +1,31 @@
 [
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_in_bottom.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_in_bottom.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\right_in.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\anim\\right_in.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_popup_enter.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_popup_enter.xml"
     },
     {
         "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_snackbar_in.xml",
         "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_snackbar_in.xml"
     },
     {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_popup_exit.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
         "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_fade_in.xml",
         "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_fade_in.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_top.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_out_top.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\right_in.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\anim\\right_in.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\right_out.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\anim\\right_out.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_snackbar_in.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_snackbar_in.xml"
     },
     {
         "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_fade_out.xml",
@@ -36,8 +36,84 @@
         "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\anim\\left_out.xml"
     },
     {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_bottom_sheet_slide_out.xml",
+        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_fab_out.xml",
+        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_fab_out.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_fab_in.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_fab_in.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_bottom_sheet_slide_in.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\right_out.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\anim\\right_out.xml"
+    },
+    {
+        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\right_in.xml",
+        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\anim\\right_in.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_in_top.xml"
+    },
+    {
+        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_fade_in.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\left_out.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\anim\\left_out.xml"
+    },
+    {
+        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\right_out.xml",
+        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\anim\\right_out.xml"
+    },
+    {
+        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_in_bottom.xml"
+    },
+    {
         "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_bottom.xml",
         "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_fade_out.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_fade_out.xml"
     },
     {
         "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_popup_enter.xml",
@@ -60,23 +136,27 @@
         "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_fab_in.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_bottom_sheet_slide_out.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_bottom_sheet_slide_out.xml"
-    },
-    {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_fab_out.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_fab_out.xml"
-    },
-    {
         "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_snackbar_out.xml",
         "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_snackbar_out.xml"
     },
     {
-        "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
-        "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_fab_out.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_fab_out.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_bottom_sheet_slide_out.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_snackbar_out.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\anim\\design_snackbar_out.xml"
     },
     {
         "merged": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_popup_exit.xml",
         "source": "G:\\as_project\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\left_in.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\bundles\\debug\\res\\anim\\left_in.xml"
     }
 ]

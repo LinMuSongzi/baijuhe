@@ -68,7 +68,7 @@ public final class SupportSelectInfo implements ISelecImpl{
         id_viewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
-                return 2;
+                return FRAGMENTS.size();
             }
             // 来判断显示的是否是同一张图片，这里我们将两个参数相比较返回即可
             @Override
@@ -90,7 +90,8 @@ public final class SupportSelectInfo implements ISelecImpl{
             }
 
         });
-        id_tabLayout.setupWithViewPager(id_viewPager);id_tabLayout.setSelectedTabIndicatorColor(ActivityCompat.getColor(getActivity(),R.color.bg_main_blue));
+        id_tabLayout.setupWithViewPager(id_viewPager);
+        id_tabLayout.setSelectedTabIndicatorColor(ActivityCompat.getColor(getActivity(),R.color.bg_main_blue));
         for(int i = 0;i < id_tabLayout.getTabCount();i++){
             id_tabLayout.getTabAt(i).setText(FRAGMENTS.get(i).getTitle());
         }

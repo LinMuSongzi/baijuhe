@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="G:\as_project\baijuhe\IMsdk\src\main\shaders"/></dataSet><dataSet config="debug"><source path="G:\as_project\baijuhe\IMsdk\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="F:\l2017_06_23_lpds\OnewaySdk-Feed\OnewaySdk-Feed\baijuhe\IMsdk\src\main\shaders"/></dataSet><dataSet config="debug"><source path="F:\l2017_06_23_lpds\OnewaySdk-Feed\OnewaySdk-Feed\baijuhe\IMsdk\src\debug\shaders"/></dataSet></merger>
