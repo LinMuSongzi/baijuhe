@@ -21,17 +21,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        beforeOnCreate();
         setContentView(getContentView());
         ButterKnife.bind(this);
         init();
     }
+
+
 
     @Override
     public final void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
     }
 
-    @Override
+    protected void beforeOnCreate() {
+
+    }
     protected void onDestroy() {
         ButterKnife.unbind(this);
         super.onDestroy();

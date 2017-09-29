@@ -3,8 +3,10 @@ package com.mr.huang;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,10 @@ import com.mr.huang.common.SaveUitl;
 import com.mr.huang.common.ScreenUtil;
 import com.mr.huang.data.entity.NumberAllEntity;
 import com.mr.huang.data.entity.NumberAttributeEntity;
+import com.mr.huang.data.entity.SaveEntity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -34,9 +40,37 @@ public class MainActivity extends BaseActivity {
 
     private final List<NumberAttributeEntity> datas = new ArrayList<>();
 
+    private NumberAttributeEntity editEntity = null;
+
+
     @Override
     public void init() {
 
+
+        Toolbar t = (Toolbar) findViewById(R.id.lib_toolbar);
+        t.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        setSupportActionBar(t);
+        t.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveTaskToBack(true);
+            }
+        });
+        t.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.add:
+                        startActivity(new Intent(MainActivity.this, NumberInfoActivity.class));
+                        break;
+                    case R.id.save:
+                        save();
+                        break;
+                }
+                return true;
+            }
+        });
 
         getNumberData();
 
@@ -63,6 +97,7 @@ public class MainActivity extends BaseActivity {
                 baseViewHolder.setOnClickListener(R.id.root_layout, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        editEntity = appEntity;
                         Intent i = new Intent(v.getContext(), NumberInfoActivity.class);
                         try {
                             i.putExtra("NumberAttributeEntity", (Serializable) appEntity.clone());
@@ -78,6 +113,25 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    private void save() {
+        NumberAllEntity n = new NumberAllEntity();
+        n.setLineEntityList(datas);
+        SaveUitl.saveNumberList(n);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                getNumberData();
+                Snackbar.make(getWindow().getDecorView(),"保存成功",1500).show();
+            }
+        });
+
+    }
+
+    @Override
+    protected void beforeOnCreate() {
+
+    }
+
     @Override
     protected int getContentView() {
         return R.layout.activity_main;
@@ -89,18 +143,14 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId() == R.id.lib_toolbar){
-
-
-
-        }
-
-        return true;
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onMessage(SaveEntity saveEntity){
+        editEntity.setIntegers(saveEntity.getIntegers());
+        editEntity.setName(saveEntity.getName());
+        editEntity.setPrices(saveEntity.getPrices());
+        save();
     }
+
 
     public void getNumberData() {
         NumberAllEntity a = SaveUitl.getNumberList();
