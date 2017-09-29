@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-    applicationId "com.fileengine"
+        applicationId "com.mr.huang"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
@@ -42,4 +42,5 @@ dependencies {
     compile('com.github.florent37:materialviewpager:1.0.1@aar') {
         transitive = true
     }
+    compile project(':sqlitesdk')
 }

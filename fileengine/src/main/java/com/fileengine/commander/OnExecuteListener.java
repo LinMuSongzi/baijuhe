@@ -15,6 +15,6 @@ public interface OnExecuteListener {
 
     void onError(Exception ex);
 
-    void onNext(Collection<IFileEntity> collection);
+    void onNext(IFileEntity collection);
 
 }

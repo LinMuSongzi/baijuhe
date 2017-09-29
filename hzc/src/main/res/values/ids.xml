@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="id_content_RecyclerView" type="id" >false</item>
+    <item name="item_main_iv_id" type="id" >false</item>
+    <item name="item_main_title_id" type="id" >false</item>
+    <item name="item_main_text_id" type="id" >false</item>
+    <item name="item_main_time_id" type="id" >false</item>
+</resources>
