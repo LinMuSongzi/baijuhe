@@ -10,7 +10,20 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+
+
     }
+
+    signingConfigs {
+        feimo {
+            keyAlias 'fmkeystore'
+            keyPassword 'fm123456'
+            storeFile file('d:/ScrEecSDK.keystore')
+            storePassword 'fm123456'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
