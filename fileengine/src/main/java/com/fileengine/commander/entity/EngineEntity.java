@@ -1,5 +1,7 @@
 package com.fileengine.commander.entity;
 
+import android.os.Environment;
+
 import com.fileengine.commander.IEngine;
 
 import java.io.File;
@@ -13,9 +15,9 @@ public class EngineEntity {
 
     int nextTime = IEngine.DEFAULT_TIME;;
 
-    File file;
+    File file = Environment.getExternalStorageDirectory();
 
-    String[] postfix;
+    String[] postfix = new String[]{".jpg", ".jpeg", "png"};
 
     public File getFile() {
         return file;

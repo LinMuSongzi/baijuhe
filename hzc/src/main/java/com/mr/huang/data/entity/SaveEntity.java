@@ -9,8 +9,17 @@ import java.util.Set;
 public class SaveEntity {
     int prices;
     String name;
-    Set<Integer> integers = new HashSet<>();
+    Set<IntegerEntity> integers = new HashSet<>();
 
+    boolean isAdd;
+
+    public boolean isAdd() {
+        return isAdd;
+    }
+
+    public void setAdd(boolean add) {
+        isAdd = add;
+    }
 
     public int getPrices() {
         return prices;
@@ -28,11 +37,11 @@ public class SaveEntity {
         this.name = name;
     }
 
-    public Set<Integer> getIntegers() {
+    public Set<IntegerEntity> getIntegers() {
         return integers;
     }
 
-    public void setIntegers(Set<Integer> integers) {
+    public void setIntegers(Set<IntegerEntity> integers) {
         this.integers = integers;
     }
 }

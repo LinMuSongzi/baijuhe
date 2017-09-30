@@ -6,16 +6,21 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fileengine.R;
 import com.fileengine.commander.Engine;
+import com.fileengine.commander.Engine3;
 import com.fileengine.commander.IEngine;
 import com.fileengine.commander.OnExecuteListener;
+import com.fileengine.commander.entity.DocBean;
+import com.fileengine.commander.entity.EngineEntity;
 import com.fileengine.commander.entity.IFileEntity;
 
 import java.io.File;
@@ -39,62 +44,106 @@ public class ScrollingActivity extends AppCompatActivity {
     TextView id_text_speed;
     @Bind(R.id.id_spinner_postfix)
     Spinner id_spinner_postfix;
-//    @Bind(R.id.id_go)
-//    TextView id_go;
-
+    private Toast toast = null;
     IEngine iEngine;
-    private int i = 0;
     private long time = 0;
+    EngineEntity engineEntityConfig;
+
     @OnClick(R.id.id_go)
     public void go() {
-        i = 0;
+        engineEntityConfig = new EngineEntity();
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                new Engine3().queryFiles(docBeanOnExecuteListener,engineEntityConfig);
+//            }
+//        }.start();
+
         time = 0;
-        if(iEngine == null) {
+        if (iEngine == null) {
             iEngine = new Engine();
-        }
-        if (id_text_speed.getText().toString().isEmpty()) {
-            iEngine.setSpeed(10);
-        } else {
-            iEngine.setSpeed(Integer.parseInt(id_text_speed.getText().toString()));
-        }
-        iEngine.prepare();
-        iEngine.startScanner(new IEngine.ScannerFileConfig() {
-            @Override
-            public File getRootFile() {
-                return Environment.getExternalStorageDirectory();
-            }
+            iEngine.init(new OnExecuteListener<IFileEntity>() {
 
-            @Override
-            public String[] getPostfix() {
-                return chooseString;
-            }
-        }, new OnExecuteListener() {
-            @Override
-            public void onSucceed() {
-            }
-
-            @Override
-            public void onError(Exception ex) {
-
-            }
-
-            @Override
-            public void onNext(IFileEntity collection) {
-                if (collection == null) {
+                @Override
+                public void onStart() {
                     time = System.currentTimeMillis();
-                    id_text.setText("开始：线程数" +id_text_speed.getText().toString()+"   "+ new SimpleDateFormat("HH:mm:ss:SSS").format(time));
-                } else {
-                    final String txt = "用时" + new SimpleDateFormat("ss:SSS").format(System.currentTimeMillis() - time) + "找到" + (++i) + "个文件";
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            id_text.setText(Html.fromHtml("开始：线程数 <font color=#89ac9f>" + engineEntityConfig.getSpeed()
+                                    + "</font>  " + new SimpleDateFormat("HH:mm:ss:SSS").format(time)));
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onNext(IFileEntity collection, int count) {
+                    final String txt = "用时" + new SimpleDateFormat("mm:ss:SSS").format(System.currentTimeMillis() - time) + "  " +
+                            " 找到 <font color=#ff0000>" + count + "</font>个文件 " + collection.getFilePath();
                     Log.i("onNext", txt);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            id_text_2.setText(txt);
+                            id_text_2.setText(Html.fromHtml(txt));
                         }
                     });
+
                 }
-            }
-        });
+            });
+        }
+        engineEntityConfig = new EngineEntity();
+
+        engineEntityConfig.setPostfix(chooseString);
+        if (id_text_speed.getText().toString().isEmpty()) {
+            engineEntityConfig.setSpeed(1);
+        } else {
+            engineEntityConfig.setSpeed(Integer.parseInt(id_text_speed.getText().toString()));
+        }
+        iEngine.prepare(engineEntityConfig);
+        iEngine.startQueryFile();
+    }
+
+    OnExecuteListener<DocBean> docBeanOnExecuteListener = new OnExecuteListener<DocBean>() {
+
+        @Override
+        public void onStart() {
+            time = System.currentTimeMillis();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    id_text.setText(Html.fromHtml("开始：线程数 <font color=#89ac9f>" + engineEntityConfig.getSpeed()
+                            + "</font>  " + new SimpleDateFormat("HH:mm:ss:SSS").format(time)));
+
+                }
+            });
+        }
+
+        @Override
+        public void onNext(DocBean collection, int count) {
+            final String txt = "用时" + new SimpleDateFormat("mm:ss:SSS").format(System.currentTimeMillis() - time) + "  " +
+                    " 找到 <font color=#ff0000>" + count + "</font>个文件 " + collection.getPath();
+            Log.i("onNext", txt);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    id_text_2.setText(Html.fromHtml(txt));
+                }
+            });
+
+        }
+    };
+
+    @OnClick(R.id.id_stop)
+    public void id_stop(View v) {
+        iEngine.stop();
+    }
+
+
+    private void show(String msg) {
+
+        toast.setText(msg);
+        toast.show();
 
     }
 
@@ -117,6 +166,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
         initList();
 
+        toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 
         id_spinner_postfix.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -137,7 +187,7 @@ public class ScrollingActivity extends AppCompatActivity {
         CHOOSE_STRING.add(null);
         CHOOSE_STRING.add(new String[]{".txt"});
         CHOOSE_STRING.add(new String[]{".3gp", ".mp4", "rmvb", "avi", ".fly"});
-        CHOOSE_STRING.add(new String[]{".jpg", ".jpeg", ".png", ".gif"});
+        CHOOSE_STRING.add(new String[]{".jpg", ".jpeg"});
         CHOOSE_STRING.add(new String[]{".html", ".xml", ".json"});
 
     }

@@ -9,7 +9,10 @@ import com.mr.huang.framwork.commande.IAppManager;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by linhui on 2017/9/29.
@@ -17,15 +20,15 @@ import java.util.List;
 public class AppManager implements Application.ActivityLifecycleCallbacks,IAppManager{
 
     private Application application;
-    private List<Activity> activities;
+    private Stack<Activity> activities;
     private AppManager(){
-        activities = new ArrayList<>();
+        activities = new Stack<>();
     }
 
     private static AppManager appManager = new AppManager();
 
 
-    public static IAppManager getInstance(){
+    public static AppManager getInstance(){
         return appManager;
     }
 
@@ -71,6 +74,12 @@ public class AppManager implements Application.ActivityLifecycleCallbacks,IAppMa
         activities.remove(activity);
 
     }
+
+
+    public Activity getCurrentActivity(){
+        return activities.peek();
+    }
+
 
     @Override
     public Application getApplicationContext() {

@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.activity.ScrollingActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/query"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="查询"
+        android:icon="@drawable/ic_search_white_24dp"
+        app:showAsAction="ifRoom" />
 </menu>

@@ -15,13 +15,13 @@ public class NumberAttributeEntity implements Serializable,Cloneable{
 
     int prices;
 
-    Set<Integer> integers = new HashSet<>();
+    Set<IntegerEntity> integers = new HashSet<>();
 
-    public Set<Integer> getIntegers() {
+    public Set<IntegerEntity> getIntegers() {
         return integers;
     }
 
-    public void setIntegers(Set<Integer> integers) {
+    public void setIntegers(Set<IntegerEntity> integers) {
         this.integers = integers;
     }
 

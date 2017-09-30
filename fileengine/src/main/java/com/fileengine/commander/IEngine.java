@@ -1,5 +1,7 @@
 package com.fileengine.commander;
 
+import com.fileengine.commander.entity.EngineEntity;
+
 import java.io.File;
 
 /**
@@ -8,22 +10,11 @@ import java.io.File;
 public interface IEngine {
     int DEFAULT_TIME = 1000;
     int DEFAULT_THREAD_COUNT = 5;
-    void prepare();
+    void init(OnExecuteListener onExecuteListener);
+    void prepare(EngineEntity engineEntity);
     void setConvert(IConvertFile c);
-    void setNextTime(int time);
-    void setSpeed(int threadCount);
-    void startScanner(ScannerFileConfig scannerFileConfig,OnExecuteListener onExecuteListener);
-    void startQueryFile(QueryFileConfig scannerFileConfig,OnExecuteListener onExecuteListener);
-    void startQueryFolder(QueryFileConfig scannerFileConfig,OnExecuteListener onExecuteListener);
+    void startScanner();
+    void startQueryFile();
+    void startQueryFolder();
     void stop();
-    interface ScannerFileConfig{
-        File getRootFile();
-        String[] getPostfix();
-    }
-    interface QueryFileConfig{
-        String getQueryFileName();
-    }
-    interface QueryFolderConfig{
-        String getQueryFolderName();
-    }
 }

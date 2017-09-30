@@ -5,14 +5,14 @@ import com.fileengine.commander.entity.IFileEntity;
 /**
  * Created by linhui on 2017/9/28.
  */
-class DefaultFile implements IFileEntity {
+public class DefaultFile implements IFileEntity {
 
-    String name;
-    String SimpleName;
-    String filePath;
-    long lenght;
-    String postfix;
-    int currentGenre;
+    public String name;
+    public String SimpleName;
+    public String filePath;
+    public long lenght;
+    public String postfix;
+    public int currentGenre;
 
     @Override
     public String getName() {

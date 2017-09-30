@@ -9,12 +9,10 @@ import java.util.Set;
 /**
  * Created by linhui on 2017/9/27.
  */
-public interface OnExecuteListener {
+public interface OnExecuteListener<T> {
 
-    void onSucceed();
+    void onStart();
 
-    void onError(Exception ex);
-
-    void onNext(IFileEntity collection);
+    void onNext(T collection,int count);
 
 }

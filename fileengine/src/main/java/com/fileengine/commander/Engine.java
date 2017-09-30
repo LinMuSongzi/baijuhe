@@ -1,9 +1,11 @@
 package com.fileengine.commander;
 
 import android.graphics.Canvas;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.fileengine.commander.entity.EngineEntity;
 import com.fileengine.commander.entity.IFileEntity;
@@ -14,6 +16,7 @@ import java.io.FilenameFilter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -29,14 +32,15 @@ import rx.functions.Action1;
 public final class Engine implements IEngine {
 
 
-    private EngineEntity engineEntity = new EngineEntity();
+    private EngineEntity engineEntity;
     private AtomicBoolean isPrepare = new AtomicBoolean(false);
     private AtomicBoolean isStop = new AtomicBoolean(false);
     private Handler[] handlers;
-    private final Set<IFileEntity> FILES = new HashSet<IFileEntity>() {
+    public OnExecuteListener onExecuteListener;
+    private final Set<IFileEntity> FILES = new LinkedHashSet<IFileEntity>() {
         @Override
         public boolean add(IFileEntity o) {
-            onExecuteListener.onNext(o);
+            onExecuteListener.onNext(o, FILES.size() + 1);
             return super.add(o);
         }
     };
@@ -44,68 +48,15 @@ public final class Engine implements IEngine {
     private int lastCount = 0;
     private int index = 0;
 
-    public void setConvert(IConvertFile c) {
-        this.convert = c;
-    }
-
-    public OnExecuteListener onExecuteListener;
-
-    public void Engine() {
-
-
-    }
-
-    private class EngineRunnable implements Runnable {
-        private File f;
-
-        public EngineRunnable(File f) {
-            this.f = f;
-        }
-
-        @Override
-        public void run() {
-            findByDir(f);
-        }
-    }
-
     @Override
-    public void setNextTime(int time) {
-        engineEntity.setNextTime(time);
-    }
-
-    @Override
-    public void setSpeed(int threadCount) {
-        engineEntity.setSpeed(threadCount);
-    }
-
-    @Override
-    public void startScanner(final ScannerFileConfig scannerFileConfig, final OnExecuteListener onExecuteListener) {
+    public void init(OnExecuteListener onExecuteListener) {
         this.onExecuteListener = onExecuteListener;
-        this.onExecuteListener.onNext(null);
-        engineEntity.setPostfix(scannerFileConfig.getPostfix());
-        engineEntity.setFile(new File(scannerFileConfig.getRootFile().getAbsolutePath()));
-        handlers[0].post(new EngineRunnable(engineEntity.getFile()));
     }
 
     @Override
-    public void startQueryFile(QueryFileConfig scannerFileConfig, OnExecuteListener onExecuteListener) {
-
-    }
-
-    @Override
-    public void startQueryFolder(QueryFileConfig scannerFileConfig, OnExecuteListener onExecuteListener) {
-
-    }
-
-    @Override
-    public void stop() {
-        isStop.set(true);
-    }
-
-
-    public void prepare() {
-
+    public void prepare(EngineEntity engineEntity) {
         removeAllCallBack();
+        this.engineEntity = engineEntity;
         isStop.set(false);
         handlers = new Handler[engineEntity.getSpeed()];
         for (int i = 0; i < handlers.length; i++) {
@@ -132,6 +83,60 @@ public final class Engine implements IEngine {
         isPrepare.set(true);
     }
 
+    public void setConvert(IConvertFile c) {
+        this.convert = c;
+    }
+
+    @Override
+    public void startScanner() {
+        if (start()) {
+            onExecuteListener.onStart();
+            handlers[0].post(new EngineRunnable(Environment.getExternalStorageDirectory()));
+        }
+    }
+
+    @Override
+    public void startQueryFile() {
+        if (Environment.getExternalStorageDirectory().getAbsolutePath()
+                .equals(engineEntity.getFile().getAbsolutePath())) {
+            startScanner();
+        } else if (start()) {
+            handlers[0].post(new EngineRunnable(engineEntity.getFile()));
+        }
+    }
+
+    @Override
+    public void startQueryFolder() {
+    }
+
+
+    private boolean start() {
+        if (isPrepare.get()) {
+            isStop.set(false);
+            return true;
+        }
+        return false;
+    }
+
+    private class EngineRunnable implements Runnable {
+        private File f;
+
+        public EngineRunnable(File f) {
+            this.f = f;
+        }
+
+        @Override
+        public void run() {
+            findByDir(f);
+        }
+    }
+
+    @Override
+    public void stop() {
+        isStop.set(true);
+        isPrepare.set(false);
+    }
+
     private void findByDir(File file) {
         file.listFiles(new FileFilter() {
             @Override
@@ -141,7 +146,7 @@ public final class Engine implements IEngine {
                     return false;
                 }
 
-                if (pathname.isDirectory()) {
+                if (pathname.isDirectory() && pathname.canRead()) {
                     synchronized (FILES) {
                         index = index + 1;
                         if (index >= engineEntity.getSpeed()) {
@@ -151,16 +156,19 @@ public final class Engine implements IEngine {
                     }
 //                    handlers[new Random().nextInt(engineEntity.getSpeed())].post(new EngineRunnable(pathname));
                 } else {
-                    Log.i("FILES", new SimpleDateFormat("ss:SSS").format(new Date()) + "  file = " + pathname.getAbsolutePath());
-                    if (engineEntity.getPostfix() == null || engineEntity.getPostfix().length == 0) {
-                        FILES.add(convert.getEntity(pathname));
-                    } else {
-                        for (String p : engineEntity.getPostfix()) {
-                            if (pathname.getAbsolutePath().endsWith(p)) {
-                                FILES.add(convert.getEntity(pathname));
-                                break;
+                    try {
+                        if (engineEntity.getPostfix() == null || engineEntity.getPostfix().length == 0) {
+                            FILES.add(convert.getEntity(pathname));
+                        } else {
+                            for (String p : engineEntity.getPostfix()) {
+                                if (pathname.getAbsolutePath().endsWith(p)) {
+                                    FILES.add(convert.getEntity(pathname));
+                                    break;
+                                }
                             }
                         }
+                    }catch (Exception ex){
+                        ex.printStackTrace();
                     }
                 }
                 return false;
@@ -173,7 +181,7 @@ public final class Engine implements IEngine {
         return lastCount;
     }
 
-    private void removeAllCallBack() {
+    private synchronized void removeAllCallBack() {
 
         if (handlers != null) {
             stop();
