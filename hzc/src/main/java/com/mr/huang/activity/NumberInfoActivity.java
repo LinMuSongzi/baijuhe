@@ -129,7 +129,7 @@ public class NumberInfoActivity extends BaseActivity {
             }
 
             @Override
-            public void onBindViewHolder(NumberInfoHolder holder, final int position) {
+            public void onBindViewHolder(final NumberInfoHolder holder, final int position) {
                 holder.id_number.setText(integerList.get(position).getElement() + "");
                 holder.id_number.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
@@ -167,7 +167,13 @@ public class NumberInfoActivity extends BaseActivity {
 
                     @Override
                     public void afterTextChanged(Editable s) {
-//                        integerList.get(position).setElement(Integer.parseInt(s.toString()));
+                        if(holder.id_number.hasFocus()
+                                && holder.id_number.hasFocusable()) {
+                            if(s.toString().isEmpty()){
+                                return;
+                            }
+                            integerList.get(position).setElement(Integer.parseInt(s.toString()));
+                        }
                     }
                 });
             }
