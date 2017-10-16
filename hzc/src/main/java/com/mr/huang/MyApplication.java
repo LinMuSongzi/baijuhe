@@ -1,13 +1,14 @@
 package com.mr.huang;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.mr.huang.framwork.AppManager;
 
 /**
  * Created by linhui on 2017/9/29.
  */
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
 
 
     @Override

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.mr.huang.activity.NumberInfoActivity;
+import com.mr.huang.common.CalculateImp;
 import com.mr.huang.common.SaveUitl;
 import com.mr.huang.common.ScreenUtil;
 import com.mr.huang.common.ShowTip;
@@ -153,6 +154,10 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
+
+        CalculateImp calculateImp = new CalculateImp(this);
+        calculateImp.sum(10,20);
 
     }
 
