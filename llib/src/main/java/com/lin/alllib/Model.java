@@ -21,7 +21,7 @@ import org.greenrobot.eventbus.ThreadMode;
 /**
  * Created by lpds on 2017/7/26.
  */
-public abstract class Model<T> implements LibModel, IDeal<T> {
+public abstract class Model<I> implements LibModel, IDeal<I> {
     protected final String TAG = getClass().getSimpleName();
     private WoodActivity activity;
     /**
@@ -171,11 +171,6 @@ public abstract class Model<T> implements LibModel, IDeal<T> {
 
     @Override
     public Object getValueOfObject(String key) {
-        return null;
-    }
-
-    @Override
-    public T getAffirmObject(String key) {
         return null;
     }
 

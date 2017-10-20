@@ -216,4 +216,9 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
         return true;
     }
+
+    @Override
+    public Object getAffirmObject() {
+        return null;
+    }
 }

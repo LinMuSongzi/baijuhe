@@ -52,6 +52,7 @@ public class ActivityManager implements ILife {
     @Override
     public void onCreate(Activity activity, Bundle savedInstanceState) {
         activities.push(activity);
+        EventBus.getDefault().register(activity);
         if(activity instanceof WoodActivity) {
             EventBus.getDefault().register(((WoodActivity) activity).getModel());
         }
@@ -87,6 +88,7 @@ public class ActivityManager implements ILife {
         if(activity instanceof WoodActivity) {
             EventBus.getDefault().unregister(((WoodActivity) activity).getModel());
         }
+        EventBus.getDefault().unregister(activity);
         activities.remove(activity);
     }
 

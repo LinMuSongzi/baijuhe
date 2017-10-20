@@ -24,4 +24,9 @@ public class NavigationModel extends Model {
         toolbar = getToolbar();
 
     }
+
+    @Override
+    public Object getAffirmObject() {
+        return null;
+    }
 }

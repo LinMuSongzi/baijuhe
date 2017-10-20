@@ -117,8 +117,9 @@ public abstract class WoodFragment<T> extends Fragment implements IDeal<T>{
         return null;
     }
 
+
     @Override
-    public T getAffirmObject(String key) {
+    public T getAffirmObject() {
         return null;
     }
 }

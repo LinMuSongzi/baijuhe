@@ -158,7 +158,9 @@ public class MainActivity extends BaseActivity {
 
         CalculateImp calculateImp = new CalculateImp(this);
         calculateImp.sum(10,20);
-
+        calculateImp.multiplication(10,20);
+        calculateImp.subtraction(10,20);
+        calculateImp.division(10,20);
     }
 
     private void save(final String succeedMsg) {

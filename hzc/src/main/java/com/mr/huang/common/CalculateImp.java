@@ -39,16 +39,52 @@ public class CalculateImp implements Calculate {
 
     @Override
     public double subtraction(float one, float two) {
+        try {
+            Method method = object.getClass().getDeclaredMethod("subtraction",float.class,float.class);
+            Object invoke = method.invoke(object,one,two);
+            Log.i(TAG, "subtraction: "+(double)invoke);
+            return (double) invoke;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public double multiplication(float one, float two) {
+        try {
+            Method method = object.getClass().getDeclaredMethod("multiplication",float.class,float.class);
+            Object invoke = method.invoke(object,one,two);
+            Log.i(TAG, "multiplication: "+(double)invoke);
+            return (double) invoke;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public double division(float one, float two) {
+        try {
+            Method method = object.getClass().getDeclaredMethod("division",float.class,float.class);
+            Object invoke = method.invoke(object,one,two);
+            Log.i(TAG, "division: "+(double)invoke);
+            return (double) invoke;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 }

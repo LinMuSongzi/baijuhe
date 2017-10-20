@@ -34,4 +34,9 @@ public class NavigationFragmentModel extends FragmentModel implements IShipment<
     public void setData(Integer integer) {
         resource = integer;
     }
+
+    @Override
+    public Object getAffirmObject() {
+        return null;
+    }
 }
