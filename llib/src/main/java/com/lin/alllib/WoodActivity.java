@@ -7,18 +7,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.lin.alllib.data.EmptyEntity;
 import com.lin.alllib.framwork.DebugGod;
 import com.lin.alllib.framwork.commander.IDeal;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 
 /**
  * Created by lpds on 2017/7/26.
  */
-public abstract class WoodActivity<T> extends AppCompatActivity implements IDeal<T> {
+public abstract class WoodActivity<T,M extends Model<?>> extends AppCompatActivity implements IDeal<T> {
 
     protected final String TAG = getClass().getSimpleName();
-    private Model model;
+    private M model;
     private Toolbar t;
 
     @Override
@@ -119,11 +123,11 @@ public abstract class WoodActivity<T> extends AppCompatActivity implements IDeal
 
     }
 
-    public Model getModel() {
+    public M getModel() {
         return model;
     }
 
-    protected abstract Model configurationModel();
+    protected abstract M configurationModel();
 
 
     @Override
@@ -147,7 +151,12 @@ public abstract class WoodActivity<T> extends AppCompatActivity implements IDeal
     }
 
     @Override
-    public T getAffirmObject(String key) {
+    public T getAffirmObject() {
         return null;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessage(EmptyEntity emptyEntity) {
+        DebugGod.i(TAG, "EmptyEntity");
     }
 }

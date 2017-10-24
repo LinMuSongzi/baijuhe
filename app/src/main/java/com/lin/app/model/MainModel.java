@@ -17,6 +17,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +31,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.lin.alllib.Model;
 import com.lin.alllib.common.ScreenUtil;
 import com.lin.app.R;
-import com.lin.alllib.data.respone.CityRespone;
-import com.lin.app.activity.NavigationActivity;
-import com.lin.app.activity.SelectInfoActivity;
 import com.lin.app.common.AndroidAppManager;
 import com.lin.app.common.GlideCircleTransform;
 import com.lin.app.data.entity.AppEntity;
@@ -217,5 +215,10 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
         showSnackbar(msg.arg1 + " + " + msg.arg2 + " = " + ((Bundle)msg.obj).getInt("sum"));
 
         return true;
+    }
+
+    @Override
+    public Object getAffirmObject() {
+        return null;
     }
 }

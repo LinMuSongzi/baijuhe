@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#323341</color>
+    <color name="colorPrimaryDark">#282931</color>
+    <color name="colorAccent">#69e47d</color>
+
+    <color name="color_white">#ffffff</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_666666">#666666</color>
+
+    <color name="bg_main_blue">#167edf</color>
+    <color name="window_bg">@color/color_white</color>
+</resources>

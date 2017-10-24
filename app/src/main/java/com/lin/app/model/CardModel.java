@@ -24,4 +24,9 @@ public class CardModel extends Model {
     protected void init(Bundle savedInstanceState) {
 
     }
+
+    @Override
+    public Object getAffirmObject() {
+        return null;
+    }
 }

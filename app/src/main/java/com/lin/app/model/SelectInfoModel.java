@@ -20,4 +20,9 @@ public class SelectInfoModel extends Model<SelectInfoModel> {
     protected void init(Bundle savedInstanceState) {
 
     }
+
+    @Override
+    public SelectInfoModel getAffirmObject() {
+        return null;
+    }
 }

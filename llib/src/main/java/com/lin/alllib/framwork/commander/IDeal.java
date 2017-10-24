@@ -14,5 +14,5 @@ public interface IDeal<T>{
 
     Object getValueOfObject(String key);
 
-    T getAffirmObject(String key);
+    T getAffirmObject();
 }

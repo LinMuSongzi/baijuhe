@@ -36,4 +36,9 @@ public class DianBaiModel extends Model {
             }
         });
     }
+
+    @Override
+    public Object getAffirmObject() {
+        return null;
+    }
 }

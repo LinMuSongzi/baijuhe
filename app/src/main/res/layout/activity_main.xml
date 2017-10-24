@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_white"
 
-    tools:context=".activity.NavigationActivity">
+    tools:context=".ui.activity.NavigationActivity">
 
 
     <android.support.design.widget.AppBarLayout
