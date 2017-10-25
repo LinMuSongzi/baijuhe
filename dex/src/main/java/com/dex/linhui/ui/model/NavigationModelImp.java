@@ -1,6 +1,8 @@
 package com.dex.linhui.ui.model;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,7 +38,7 @@ public class NavigationModelImp extends Model<INavigationModel> implements INavi
 
     private Resources apkResources;
 
-    private Object layout,anim,drawable;
+    private Object layout, anim, drawable;
 
     @Bind(R.id.center_iv)
     ImageView center_iv;
@@ -72,38 +74,46 @@ public class NavigationModelImp extends Model<INavigationModel> implements INavi
 
         getLayout();
 
+//        getContextActivity();
+
     }
 
-    private void getLayout(){
-        if(layout == null) {
+    private void getLayout() {
+        if (layout == null) {
             layout = DexLoadUtil.loadDex(DexLoadUtil.DEX_KEY_APP, "com.lin.app.R$layout");
         }
-        if(apkResources == null) {
+        if (apkResources == null) {
             apkResources = ResouceDex.newInstance(new File(DexLoadUtil.PARENT_FILE, DexLoadUtil.DEFUALT_APP_APK_NAME));
         }
+
+        changeResource();
+
+        Field field = null;
         try {
-            Field field = layout.getClass().getDeclaredField("activity_card");
-            int values = field.getInt(layout);
-
-
-            View view = LayoutInflater.from(getActivity()).inflate(apkResources.getLayout(values),null);
-
-            getActivity().setContentView(view);
+            field = layout.getClass().getDeclaredField("activity_card_1");
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
+        }
+        View view = null;
+        try {
+            view = LayoutInflater.from(getActivity()).inflate(field.getInt(layout), null);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
 
+        getActivity().setContentView(view);
+
     }
 
-    private void getDrawable(){
-        if(drawable == null) {
+    private void getDrawable() {
+        if (drawable == null) {
             drawable = DexLoadUtil.loadDex(DexLoadUtil.DEX_KEY_APP, "com.lin.app.R$drawable");
         }
-        if(apkResources == null) {
+        if (apkResources == null) {
             apkResources = ResouceDex.newInstance(new File(DexLoadUtil.PARENT_FILE, DexLoadUtil.DEFUALT_APP_APK_NAME));
         }
+
+
         try {
             Field field = drawable.getClass().getDeclaredField("ic_share_black_36dp");
             int values = field.getInt(drawable);
@@ -116,5 +126,31 @@ public class NavigationModelImp extends Model<INavigationModel> implements INavi
         }
 
     }
+
+    private void changeResource() {
+        setSoucreField(Activity.class, "mResources");
+    }
+
+    public void setSoucreField(Class c, String fieldName) {
+        try {
+            Field field = c.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(getActivity(), apkResources);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Class s = c.getSuperclass();
+            if (s != null) {
+                setSoucreField(s, fieldName);
+            }
+        }
+    }
+
+
+//    public void getContextActivity() {
+//       Activity mainActivity = (Activity) DexLoadUtil.loadDex(DexLoadUtil.DEX_KEY_APP,"com.lin.app.ui.activity.MainActivity");
+//
+//        mainActivity.getClass().getMethod("attach",)
+//    }
+
 
 }
