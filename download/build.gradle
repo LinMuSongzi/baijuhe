@@ -6,9 +6,9 @@ android {
 
     defaultConfig {
         applicationId "com.lin.download"
-        minSdkVersion 21
-        targetSdkVersion 26
-        versionCode 1
+        minSdkVersion 19
+        targetSdkVersion 22
+        versionCode 20171121
         versionName "1.0"
     }
     buildTypes {

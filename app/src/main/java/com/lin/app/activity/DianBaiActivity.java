@@ -16,4 +16,11 @@ public class DianBaiActivity extends WoodActivity {
     protected Model configurationModel() {
         return dianBaiModel;
     }
+
+
+    private void a(){
+
+
+    }
+
 }
