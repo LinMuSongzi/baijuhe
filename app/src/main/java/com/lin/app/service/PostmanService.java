@@ -17,7 +17,6 @@ import android.util.Log;
 public class PostmanService extends Service implements Handler.Callback{
 
     private final String TAG = this.getClass().getSimpleName();
-
     private Handler handler;
     private Messenger messenger;
 
@@ -63,6 +62,7 @@ public class PostmanService extends Service implements Handler.Callback{
         messenger = new Messenger(handler);
 
         Log.i(TAG, "onCreate: ");
+
     }
 
     @Override
