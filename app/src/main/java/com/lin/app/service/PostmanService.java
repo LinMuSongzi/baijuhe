@@ -14,49 +14,24 @@ import android.util.Log;
 
 import com.lin.app.service.binder.PostmanWrapper;
 import com.lin.app.service.binder.ServerSupport;
+import com.lin.app.service.commander.Business;
 
 /**
  * Created by linhui on 2017/8/31.
  */
 public class PostmanService extends Service implements Handler.Callback {
-
+    private final Business business = new BusinessSupport();
     private final String TAG = this.getClass().getSimpleName();
     private Handler handler;
     private Messenger messenger;
-    /**
-     * @param msg
-     * @return
-     */
-    public static final int SUM = 0x9123;
-
-    public static final int STOP = 0x19123;
-
-    public static final int START_MUSIC = 0x98;
-
     @Override
     public boolean handleMessage(Message msg) {
-        switch (msg.what) {
-            case SUM:
-                Message message = Message.obtain();
-                message.what = SUM;
-                message.arg1 = msg.arg1;
-                message.arg2 = msg.arg2;
-                Bundle bundle = new Bundle();
-                bundle.putInt("sum", msg.arg1 + msg.arg2);
-                message.obj = bundle;
-                try {
-                    msg.replyTo.send(message);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case STOP:
-                stopSelf();
-                break;
-            case START_MUSIC:
-                PostmanWrapper.getInstance().getMusicEmployee().startMusic(msg.getData().getString("path"));
-                break;
-
+        if(!business.handlerMsg(msg)){
+            switch (msg.what){
+                case Business.STOP:
+                    stopSelf();
+                    break;
+            }
         }
         return true;
     }
