@@ -7,9 +7,8 @@ public interface MusicEmployee extends ServiceEmployee {
 
 
     void startMusic(String filepath);
-
+    void startMusic(int filepath);
     void pause();
-
     void stop();
 
 }

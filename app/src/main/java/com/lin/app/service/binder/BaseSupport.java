@@ -15,5 +15,8 @@ abstract class BaseSupport<T extends Service> implements ServerSupport<T>{
     @Override
     public void attach(T server) {
         this.service = server;
+        attachAfter();
     }
+
+    protected abstract void attachAfter();
 }

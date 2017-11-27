@@ -11,17 +11,19 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import com.lin.app.service.binder.PostmanWrapper;
+import com.lin.app.service.binder.ServerSupport;
+
 /**
  * Created by linhui on 2017/8/31.
  */
-public class PostmanService extends Service implements Handler.Callback{
+public class PostmanService extends Service implements Handler.Callback {
 
     private final String TAG = this.getClass().getSimpleName();
     private Handler handler;
     private Messenger messenger;
-
     /**
-     *
      * @param msg
      * @return
      */
@@ -29,16 +31,18 @@ public class PostmanService extends Service implements Handler.Callback{
 
     public static final int STOP = 0x19123;
 
+    public static final int START_MUSIC = 0x98;
+
     @Override
     public boolean handleMessage(Message msg) {
-        switch (msg.what){
+        switch (msg.what) {
             case SUM:
                 Message message = Message.obtain();
                 message.what = SUM;
                 message.arg1 = msg.arg1;
                 message.arg2 = msg.arg2;
                 Bundle bundle = new Bundle();
-                bundle.putInt("sum",msg.arg1 + msg.arg2);
+                bundle.putInt("sum", msg.arg1 + msg.arg2);
                 message.obj = bundle;
                 try {
                     msg.replyTo.send(message);
@@ -48,6 +52,9 @@ public class PostmanService extends Service implements Handler.Callback{
                 break;
             case STOP:
                 stopSelf();
+                break;
+            case START_MUSIC:
+                PostmanWrapper.getInstance().getMusicEmployee().startMusic(msg.getData().getString("path"));
                 break;
 
         }
@@ -60,7 +67,7 @@ public class PostmanService extends Service implements Handler.Callback{
         super.onCreate();
         handler = new Handler(this);
         messenger = new Messenger(handler);
-
+        PostmanWrapper.getInstance().attach(this);
         Log.i(TAG, "onCreate: ");
 
     }

@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
@@ -36,6 +38,7 @@ import com.lin.app.service.PostmanService;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,11 +114,24 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
     public boolean onCreateOptionsMenu(Menu menu) {
         getActivity().getMenuInflater().inflate(R.menu.toolbar_menu, menu);
 
-        final MenuItem item = menu.findItem(R.id.lib_toolbar);
+        final MenuItem item = menu.findItem(R.id.sreach_layout);
         mSearchView = (SearchView) MenuItemCompat.getActionView(item);
         setSearchView();
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_settings:
+                startMusic();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setSearchView() {
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -125,9 +141,9 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(newText.isEmpty()){
+                if (newText.isEmpty()) {
                     AndroidAppManager.getInstance().postAndroidApp("***&");
-                }else {
+                } else {
                     AndroidAppManager.getInstance().postAndroidApp(newText);
                 }
                 return true;
@@ -157,8 +173,8 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessager(List<AppEntity> list){
-        if(list!=null){
+    public void onMessager(List<AppEntity> list) {
+        if (list != null) {
             datas.clear();
             datas.addAll(list);
             recyclerView.getAdapter().notifyDataSetChanged();
@@ -178,13 +194,33 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
         mService = new Messenger(service);
     }
 
+    private void startMusic() {
+        if (mService != null) {
+
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "kgmusic" + File.separator + "download"
+                    + File.separator + "Alan Walker - Legends Never Die (Alan Walker Remix).mp3";
+            Bundle bundle = new Bundle();
+            bundle.putString("path",path);
+            Message message =Message.obtain();
+            message.setData(bundle);
+            message.what = PostmanService.START_MUSIC;
+            message.replyTo = mClient;
+            try {
+                mService.send(message);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     @Override
     public void onServiceDisconnected(ComponentName name) {
 
 
     }
 
-    private void sum(){
+    private void sum() {
         if (mService != null) {
             Message message = Message.obtain();
             message.what = PostmanService.SUM;
@@ -204,7 +240,7 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
     public boolean handleMessage(Message msg) {
 
 
-        showSnackbar(msg.arg1 + " + " + msg.arg2 + " = " + ((Bundle)msg.obj).getInt("sum"));
+        showSnackbar(msg.arg1 + " + " + msg.arg2 + " = " + ((Bundle) msg.obj).getInt("sum"));
 
         return true;
     }

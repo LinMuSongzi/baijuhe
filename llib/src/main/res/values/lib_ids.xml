@@ -3,4 +3,5 @@
 
     <item name="lib_toolbar" type="id">false</item>
     <item name="root_layout" type="id">false</item>
+    <item name="sreach_layout" type="id">false</item>
 </resources>

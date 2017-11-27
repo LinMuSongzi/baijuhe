@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.lin.app"
         minSdkVersion 19
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 20170726
         versionName "1.0.0"
     }
