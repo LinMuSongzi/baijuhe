@@ -1,5 +1,7 @@
 package com.lin.app.service;
 
+import android.media.MediaPlayer;
+
 import com.lin.app.service.commander.MusicManager;
 
 import java.util.List;
@@ -18,6 +20,13 @@ final class MusicManagerImp implements MusicManager<String> {
     }
 
     private MusicManagerImp() {
+        init();
+    }
+
+    private MediaPlayer mediaPlayer = new MediaPlayer();
+
+    private void init() {
+//        mediaPlayer =
     }
 
     @Override

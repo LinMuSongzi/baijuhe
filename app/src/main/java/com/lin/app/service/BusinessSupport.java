@@ -33,7 +33,7 @@ class BusinessSupport implements Business{
             case STOP:
                 return false;
             case START_MUSIC:
-                PostmanWrapper.getInstance().getMusicEmployee().startMusic(msg.getData().getString("path"));
+                PostmanWrapper.getInstance().getMusicEmployee().play(msg.getData().getString("path"));
                 break;
 
         }

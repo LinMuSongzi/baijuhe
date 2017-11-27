@@ -1,5 +1,6 @@
 package com.lin.app.service;
 
+import com.lin.app.service.binder.PostmanWrapper;
 import com.lin.app.service.commander.MusicManager;
 import com.lin.app.service.commander.VideoManager;
 
