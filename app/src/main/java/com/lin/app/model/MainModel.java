@@ -34,6 +34,7 @@ import com.lin.app.data.entity.AppEntity;
 import com.lin.app.model.support.popupwindow.IPopup;
 import com.lin.app.model.support.popupwindow.MyPopupwindow;
 import com.lin.app.service.PostmanService;
+import com.lin.app.service.commander.Business;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -203,7 +204,7 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
             bundle.putString("path",path);
             Message message =Message.obtain();
             message.setData(bundle);
-            message.what = PostmanService.START_MUSIC;
+            message.what = Business.START_MUSIC;
             message.replyTo = mClient;
             try {
                 mService.send(message);

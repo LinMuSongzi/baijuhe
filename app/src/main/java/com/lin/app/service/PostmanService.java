@@ -9,17 +9,22 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.media.MediaBrowserCompat;
+import android.support.v4.media.MediaBrowserServiceCompat;
 import android.util.Log;
 
 import com.lin.app.service.binder.PostmanWrapper;
 import com.lin.app.service.binder.ServerSupport;
 import com.lin.app.service.commander.Business;
 
+import java.util.List;
+
 /**
  * Created by linhui on 2017/8/31.
  */
-public class PostmanService extends Service implements Handler.Callback {
+public class PostmanService extends MediaBrowserServiceCompat implements Handler.Callback {
     private final Business business = new BusinessSupport();
     private final String TAG = this.getClass().getSimpleName();
     private Handler handler;
@@ -76,6 +81,17 @@ public class PostmanService extends Service implements Handler.Callback {
     public IBinder onBind(Intent intent) {
         Log.i(TAG, "onBind: ");
         return messenger.getBinder();
+    }
+
+    @Nullable
+    @Override
+    public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
+        return null;
+    }
+
+    @Override
+    public void onLoadChildren(@NonNull String parentId, @NonNull Result<List<MediaBrowserCompat.MediaItem>> result) {
+
     }
 
 }

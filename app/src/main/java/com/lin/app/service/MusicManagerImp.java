@@ -26,11 +26,12 @@ final class MusicManagerImp implements MusicManager<String> {
     private MediaPlayer mediaPlayer = new MediaPlayer();
 
     private void init() {
-//        mediaPlayer =
     }
 
     @Override
     public void play(String musicPath) {
+
+
 
     }
 
