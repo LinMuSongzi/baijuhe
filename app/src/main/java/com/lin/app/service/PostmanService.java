@@ -25,6 +25,9 @@ import java.util.List;
  * Created by linhui on 2017/8/31.
  */
 public class PostmanService extends MediaBrowserServiceCompat implements Handler.Callback {
+
+    public static final String ROOT_ID = "0x91241";
+
     private final Business business = new BusinessSupport();
     private final String TAG = this.getClass().getSimpleName();
     private Handler handler;
@@ -86,7 +89,12 @@ public class PostmanService extends MediaBrowserServiceCompat implements Handler
     @Nullable
     @Override
     public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
-        return null;
+
+        if(clientPackageName.equals(getPackageName())){
+            return new BrowserRoot(null,null);
+        }
+
+        return new BrowserRoot(ROOT_ID,null);
     }
 
     @Override
