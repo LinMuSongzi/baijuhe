@@ -22,7 +22,7 @@ public abstract class Regime<T extends IModel<T>> implements Plant,Execute {
     protected String sql;
     protected Map<String,String> whereMap;
 
-    private Regime(){};
+    private Regime(){}
 
     protected Regime(T t){
         model = t;
