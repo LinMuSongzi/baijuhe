@@ -14,6 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/llib/llib.iml" filepath="$PROJECT_DIR$/llib/llib.iml" />
       <module fileurl="file://$PROJECT_DIR$/pathtest/pathtest.iml" filepath="$PROJECT_DIR$/pathtest/pathtest.iml" />
       <module fileurl="file://$PROJECT_DIR$/sqlitesdk/sqlitesdk.iml" filepath="$PROJECT_DIR$/sqlitesdk/sqlitesdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yuanyuanweb/yuanyuanweb.iml" filepath="$PROJECT_DIR$/yuanyuanweb/yuanyuanweb.iml" />
     </modules>
   </component>
 </project>

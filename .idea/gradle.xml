@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/llib" />
             <option value="$PROJECT_DIR$/pathtest" />
             <option value="$PROJECT_DIR$/sqlitesdk" />
+            <option value="$PROJECT_DIR$/yuanyuanweb" />
           </set>
         </option>
         <option name="myModules">
@@ -35,6 +36,7 @@
             <option value="$PROJECT_DIR$/llib" />
             <option value="$PROJECT_DIR$/pathtest" />
             <option value="$PROJECT_DIR$/sqlitesdk" />
+            <option value="$PROJECT_DIR$/yuanyuanweb" />
           </set>
         </option>
       </GradleProjectSettings>

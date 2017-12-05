@@ -18,11 +18,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.LoginFilter;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -108,6 +113,18 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
             }
         });
 
+
+        recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Toast.makeText(getActivity(),
+                        "init:  width = " + recyclerView.getMeasuredWidth() + "  height = " + recyclerView.getMeasuredHeight(),Toast.LENGTH_SHORT).show();
+                recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+
+//        Toast.makeText(getActivity(),
+//                "init:  width = " + recyclerView.getMeasuredWidth() + "  height = " + recyclerView.getMeasuredHeight(),Toast.LENGTH_SHORT).show();
     }
 
 
@@ -124,7 +141,7 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_settings:
                 startMusic();
                 break;
@@ -201,8 +218,8 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
             String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "kgmusic" + File.separator + "download"
                     + File.separator + "Alan Walker - Legends Never Die (Alan Walker Remix).mp3";
             Bundle bundle = new Bundle();
-            bundle.putString("path",path);
-            Message message =Message.obtain();
+            bundle.putString("path", path);
+            Message message = Message.obtain();
             message.setData(bundle);
             message.what = Business.START_MUSIC;
             message.replyTo = mClient;
@@ -221,20 +238,20 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
     }
 
-    private void sum() {
-        if (mService != null) {
-            Message message = Message.obtain();
-            message.what = PostmanService.SUM;
-            message.arg2 = (int) (Math.random() * 100);
-            message.arg1 = (int) (Math.random() * 100);
-            message.replyTo = mClient;
-            try {
-                mService.send(message);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    private void sum() {
+//        if (mService != null) {
+//            Message message = Message.obtain();
+//            message.what = PostmanService.SUM;
+//            message.arg2 = (int) (Math.random() * 100);
+//            message.arg1 = (int) (Math.random() * 100);
+//            message.replyTo = mClient;
+//            try {
+//                mService.send(message);
+//            } catch (RemoteException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 
     @Override

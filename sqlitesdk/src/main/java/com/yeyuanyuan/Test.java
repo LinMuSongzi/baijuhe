@@ -10,7 +10,7 @@ public class Test {
 
     public static void main(String[] agrs){
 
-        Factory.createPlan(Test.class).execute(new Reserve() {
+        Factory.createPlan(Test.class).where(null,null).column(null).execute(new Reserve() {
             @Override
             public void result(Object... objects) {
                 Test tests = (Test) objects[0];
