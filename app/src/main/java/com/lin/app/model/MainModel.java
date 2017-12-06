@@ -28,6 +28,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.lin.alllib.Model;
 import com.lin.alllib.common.ScreenUtil;
 import com.lin.app.R;
+import com.lin.app.activity.SelectInfoActivity;
+import com.lin.app.activity.TowActivity;
 import com.lin.app.common.AndroidAppManager;
 import com.lin.app.data.entity.AppEntity;
 import com.lin.app.data.respone.InitEntity;
@@ -104,8 +106,8 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 //                        getActivity().startActivity(new Intent(v.getContext(),NavigationActivity.class));
 //                        AndroidAppManager.getInstance().startApp(appEntity.getPackageName());
 //                        if(appEnti)
-//                        getActivity().startActivity(new Intent(getActivity(), SelectInfoActivity.class));
-                        popup.show();
+                        getActivity().startActivity(new Intent(getActivity(), TowActivity.class));
+//                        popup.show();
                     }
                 });
             }
@@ -121,7 +123,7 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 //            }
 //        });
 
-        test();
+//        test();
 
 
 //        Toast.makeText(getActivity(),
@@ -143,14 +145,7 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
         Zygote.createGet(InitEntity.class, uri, map).asyncExecute();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessage(InitEntity strEntity) {
 
-        if (strEntity.getRequet() != null) {
-            showMsg(strEntity.toString());
-        }
-
-    }
 
 
     @Override

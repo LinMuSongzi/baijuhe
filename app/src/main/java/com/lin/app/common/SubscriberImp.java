@@ -1,5 +1,7 @@
 package com.lin.app.common;
 
+import android.util.Log;
+
 import rx.Subscriber;
 
 /**
@@ -7,14 +9,17 @@ import rx.Subscriber;
  */
 public abstract class SubscriberImp<T> extends Subscriber<T> {
 
+    private static final String TAG = "retrofit_Subscriber";
+
     @Override
     public void onCompleted() {
-
+        Log.i(TAG, "onCompleted: ");
     }
 
     @Override
     public void onError(Throwable e) {
-
+        Log.i(TAG, "onError: ");
+        e.printStackTrace();
     }
 
     @Override

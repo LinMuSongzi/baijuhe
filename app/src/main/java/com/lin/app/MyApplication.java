@@ -3,6 +3,7 @@ package com.lin.app;
 import com.lin.alllib.LibApplication;
 import com.lin.alllib.framwork.RequestManager;
 import com.lin.app.request.retrofit.AnXingApi;
+import com.lin.app.request.retrofit.LpdsApi;
 import com.lin.app.request.retrofit.WeatherApi;
 
 /**
@@ -17,6 +18,7 @@ public class MyApplication extends LibApplication {
         {
             RequestManager.getInstance().initApi(WeatherApi.class, WeatherApi.PATH);
             RequestManager.getInstance().initApi(AnXingApi.class, AnXingApi.PATH);
+            RequestManager.getInstance().initApi(LpdsApi.class, LpdsApi.PATH);
         }
     }
 }

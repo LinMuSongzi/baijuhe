@@ -17,10 +17,4 @@ public class DianBaiActivity extends WoodActivity {
         return dianBaiModel;
     }
 
-
-    private void a(){
-
-
-    }
-
 }

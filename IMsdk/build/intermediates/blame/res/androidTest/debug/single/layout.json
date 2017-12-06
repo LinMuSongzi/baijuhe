@@ -136,12 +136,12 @@
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_alert_dialog_material.xml"
     },
     {
-        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
-    },
-    {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_text_input_password_icon.xml",
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_text_input_password_icon.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_checkbox.xml"
     },
     {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_item.xml",

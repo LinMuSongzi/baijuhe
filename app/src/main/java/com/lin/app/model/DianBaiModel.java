@@ -8,6 +8,10 @@ import android.widget.Toast;
 
 import com.lin.alllib.Model;
 import com.lin.app.R;
+import com.lin.app.data.respone.InitEntity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.Bind;
 
@@ -41,4 +45,14 @@ public class DianBaiModel extends Model {
     public Object getAffirmObject() {
         return null;
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessage(InitEntity strEntity) {
+
+        if (strEntity.getRequet() != null) {
+            showMsg(strEntity.toString());
+        }
+
+    }
+
 }

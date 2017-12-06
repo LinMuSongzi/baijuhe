@@ -41,7 +41,9 @@
             android:screenOrientation="portrait"/>
 
 
-        <activity android:name=".activity.SelectInfoActivity"></activity>
+        <activity android:name=".activity.TowActivity"
+            android:launchMode="singleTask"
+            android:alwaysRetainTaskState="true"/>
 
         <service
             android:name=".service.PostmanService"
