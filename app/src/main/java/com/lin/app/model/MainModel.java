@@ -28,6 +28,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.lin.alllib.Model;
 import com.lin.alllib.common.ScreenUtil;
 import com.lin.app.R;
+import com.lin.app.activity.DianBaiActivity;
 import com.lin.app.activity.SelectInfoActivity;
 import com.lin.app.activity.TowActivity;
 import com.lin.app.common.AndroidAppManager;
@@ -37,6 +38,7 @@ import com.lin.app.model.support.popupwindow.IPopup;
 import com.lin.app.model.support.popupwindow.MyPopupwindow;
 import com.lin.app.service.PostmanService;
 import com.lin.app.service.commander.Business;
+import com.lin.app.ui.activity.NavigationActivity;
 import com.yeyuanyuan.web.Zygote;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -104,49 +106,17 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
                     @Override
                     public void onClick(View v) {
 //                        getActivity().startActivity(new Intent(v.getContext(),NavigationActivity.class));
+                        getActivity().startActivity(new Intent(v.getContext(),DianBaiActivity.class));
+//                        getActivity().moveTaskToBack(false);
 //                        AndroidAppManager.getInstance().startApp(appEntity.getPackageName());
 //                        if(appEnti)
-                        getActivity().startActivity(new Intent(getActivity(), TowActivity.class));
+//                        getActivity().startActivity(new Intent(getActivity(), TowActivity.class));
 //                        popup.show();
                     }
                 });
             }
         });
-
-
-//        recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                Toast.makeText(getActivity(),
-//                        "init:  width = " + recyclerView.getMeasuredWidth() + "  height = " + recyclerView.getMeasuredHeight(),Toast.LENGTH_SHORT).show();
-//                recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-//            }
-//        });
-
-//        test();
-
-
-//        Toast.makeText(getActivity(),
-//                "init:  width = " + recyclerView.getMeasuredWidth() + "  height = " + recyclerView.getMeasuredHeight(),Toast.LENGTH_SHORT).show();
     }
-
-
-    private String uri = "http://apps.ifeimo.com/lpds229/LpdsInitialize/AdvertisementController";//?channel=lenovo&current_version=2.3.0.11&target=a_lpds&version_code=20171204";
-
-
-    private void test() {
-        Zygote.init(getActivity());
-
-        Map<String,Object> map = new HashMap<>();
-        map.put("channel","lenovo");
-        map.put("current_version","2.3.0.11");
-        map.put("target","a_lpds");
-        map.put("version_code","20171204");
-        Zygote.createGet(InitEntity.class, uri, map).asyncExecute();
-    }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -276,10 +246,7 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 
     @Override
     public boolean handleMessage(Message msg) {
-
-
         showSnackbar(msg.arg1 + " + " + msg.arg2 + " = " + ((Bundle) msg.obj).getInt("sum"));
-
         return true;
     }
 

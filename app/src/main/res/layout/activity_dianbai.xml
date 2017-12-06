@@ -1,27 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    android:orientation="vertical">
 
-
-
-    <android.support.v7.widget.RecyclerView
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/id_AppBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@id/lib_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/id_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/color_white"
+            app:tabTextColor="@color/colorAccent"
+            app:tabSelectedTextColor="@color/colorPrimaryDark"
+            app:tabIndicatorColor="@color/colorPrimaryDark"
+            app:tabMode="fixed" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/id_viewpage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/id_share_floatingActionButton"
         android:layout_width="wrap_content"
-        android:layout_marginBottom="50dp"
-        app:rippleColor="#0ac1da"
-        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        app:pressedTranslationZ="10dp"
-        app:elevation="3dp"
-        app:borderWidth="0dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="25dp"
         android:src="@drawable/ic_share_black_36dp"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+        app:borderWidth="0dp"
+        app:elevation="3dp"
+        app:layout_anchorGravity="bottom"
+        app:pressedTranslationZ="10dp"
+        app:rippleColor="#0ac1da" />
+
+
+</android.support.design.widget.CoordinatorLayout>

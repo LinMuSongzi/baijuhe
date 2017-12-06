@@ -29,27 +29,15 @@ public class SelectInfoModel extends Model<SelectInfoModel> {
     @Override
     protected void init(Bundle savedInstanceState) {
 
-
-//        RequestManager requestManager = RequestManager.getInstance();
-//        requestManager.config(requestManager.getApi(LpdsApi.class).requstinit(map), new SubscriberImp<InitEntity>() {
-//
-//            @Override
-//            public void onNext2(InitEntity initEntity) {
-//                showMsg(initEntity.toString());
-//            }
-//        });
-//        ApiImp.getAllCity();
-        LpdsImp.reuqestInit(new SubscriberImp<InitEntity>() {
-            @Override
-            public void onNext2(InitEntity initEntity) {
-                Log.i(TAG, "onNext2: initEntity = "+initEntity);
-            }
-        });
-
     }
 
     @Override
     public SelectInfoModel getAffirmObject() {
         return null;
     }
+
+
+
+
+
 }
