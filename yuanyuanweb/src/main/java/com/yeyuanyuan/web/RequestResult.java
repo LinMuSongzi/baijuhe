@@ -5,6 +5,6 @@ package com.yeyuanyuan.web;
  */
 public interface RequestResult {
 
-    void setRequest(RequetEntity request);
+    void setRequest(RequetParameter request);
 
 }

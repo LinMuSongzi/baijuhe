@@ -5,16 +5,16 @@ package com.yeyuanyuan.web;
  */
 public class BaseRequetResult implements RequestResult {
 
-    RequetEntity requetEntity;
+    RequetParameter requetParameter;
 
 
     @Override
-    public void setRequest(RequetEntity request) {
-        this.requetEntity = request;
+    public void setRequest(RequetParameter request) {
+        this.requetParameter = request;
     }
 
-    public RequetEntity getRequet() {
-        return requetEntity;
+    public RequetParameter getRequet() {
+        return requetParameter;
     }
 
 }

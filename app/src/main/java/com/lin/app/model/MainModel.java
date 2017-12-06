@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Debug;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
@@ -19,47 +17,37 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.text.LoginFilter;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.lin.alllib.Model;
 import com.lin.alllib.common.ScreenUtil;
-import com.lin.alllib.framwork.DebugGod;
 import com.lin.app.R;
 import com.lin.app.common.AndroidAppManager;
 import com.lin.app.data.entity.AppEntity;
+import com.lin.app.data.respone.InitEntity;
 import com.lin.app.model.support.popupwindow.IPopup;
 import com.lin.app.model.support.popupwindow.MyPopupwindow;
 import com.lin.app.service.PostmanService;
 import com.lin.app.service.commander.Business;
-import com.yeyuanyuan.web.Completed;
-import com.yeyuanyuan.web.RequestResult;
-import com.yeyuanyuan.web.RequetEntity;
-import com.yeyuanyuan.web.StrEntity;
 import com.yeyuanyuan.web.Zygote;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
-import okhttp3.Call;
-import okhttp3.Response;
 
 /**
  * Created by lpds on 2017/7/26.
@@ -140,37 +128,26 @@ public class MainModel extends Model implements ServiceConnection, Handler.Callb
 //                "init:  width = " + recyclerView.getMeasuredWidth() + "  height = " + recyclerView.getMeasuredHeight(),Toast.LENGTH_SHORT).show();
     }
 
+
+    private String uri = "http://apps.ifeimo.com/lpds229/LpdsInitialize/AdvertisementController";//?channel=lenovo&current_version=2.3.0.11&target=a_lpds&version_code=20171204";
+
+
     private void test() {
-
-
-//        if(DebugGod.isDebug()){
         Zygote.init(getActivity());
-//            Zygote.addCallBack(new Completed() {
-//                @Override
-//                public <T extends RequestResult> void onFailure(Call call, IOException e, RequetEntity<T> requetEntity) {
-//                    showMsg(call.toString());
-//                }
-//
-//                @Override
-//                public <T extends RequestResult> void onResponse(Call call, Response response, RequetEntity<T> requetEntity) {
-//                    try {
-//                        showMsg(response.body().string());
-//                    } catch (IOException e) {
-//                        showMsg("IOException");
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-        Zygote.createGet(StrEntity.class, "http://www.baidu.com", null).asyncExecute();
-//        }
 
+        Map<String,Object> map = new HashMap<>();
+        map.put("channel","lenovo");
+        map.put("current_version","2.3.0.11");
+        map.put("target","a_lpds");
+        map.put("version_code","20171204");
+        Zygote.createGet(InitEntity.class, uri, map).asyncExecute();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessage(StrEntity strEntity) {
+    public void onMessage(InitEntity strEntity) {
 
         if (strEntity.getRequet() != null) {
-            showMsg(strEntity.getStrHrml());
+            showMsg(strEntity.toString());
         }
 
     }

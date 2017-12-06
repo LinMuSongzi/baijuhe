@@ -1,20 +1,15 @@
 package com.yeyuanyuan.web;
 
-import com.google.gson.Gson;
-
-import org.greenrobot.eventbus.EventBus;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -23,7 +18,7 @@ import okhttp3.Response;
 final class Access implements IAccessNetwork<RequestResult> {
 
 
-
+    private static final String TAG = "Access";
 
     static IAccessNetwork create() {
         return new Access();
@@ -37,7 +32,8 @@ final class Access implements IAccessNetwork<RequestResult> {
     }
 
     @Override
-    public void asyncExecute(final RequetEntity<RequestResult> requetEntity) {
+    public void asyncExecute(final RequetParameter<RequestResult> requetEntity) {
+        Log.i(TAG, "asyncExecute: "+requetEntity);
         baseOkHttpClient.newCall(requetEntity.getRequest()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -53,7 +49,8 @@ final class Access implements IAccessNetwork<RequestResult> {
     }
 
     @Override
-    public void execute(RequetEntity<RequestResult> requetEntity) {
+    public void execute(RequetParameter<RequestResult> requetEntity) {
+        Log.i(TAG, "asyncExecute: "+requetEntity);
         try {
             Response response = baseOkHttpClient.newCall(requetEntity.getRequest()).execute();
             requetEntity.setResult(response.body().string());

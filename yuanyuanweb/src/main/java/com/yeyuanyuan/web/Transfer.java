@@ -1,18 +1,14 @@
 package com.yeyuanyuan.web;
 
-import android.content.Intent;
-
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
@@ -33,14 +29,14 @@ class Transfer implements InterceptorManager {
 
     final Completed DEFUALT_CALLBACK = new Completed() {
         @Override
-        public <T extends RequestResult> void onFailure(Call call, IOException e, RequetEntity<T> requetEntity) {
+        public <T extends RequestResult> void onFailure(Call call, IOException e, RequetParameter<T> requetEntity) {
             requetEntity.isOk = false;
             requetEntity.object.setRequest(requetEntity);
             EventBus.getDefault().post(requetEntity.object);
         }
 
         @Override
-        public <T extends RequestResult> void onResponse(Call call, Response response, RequetEntity<T> requetEntity) {
+        public <T extends RequestResult> void onResponse(Call call, Response response, RequetParameter<T> requetEntity) {
             requetEntity.isOk = true;
             try {
                 if (requetEntity.object != null && !(requetEntity.object instanceof StrEntity)) {
@@ -116,12 +112,12 @@ class Transfer implements InterceptorManager {
     }
 
     @Override
-    public <T extends RequestResult> void onFailure(Call call, IOException e ,RequetEntity<T> requetEntity) {
+    public <T extends RequestResult> void onFailure(Call call, IOException e ,RequetParameter<T> requetEntity) {
         callback.onFailure(call,e,requetEntity);
     }
 
     @Override
-    public <T extends RequestResult> void onResponse(Call call, Response response,RequetEntity<T> requetEntity) {
+    public <T extends RequestResult> void onResponse(Call call, Response response,RequetParameter<T> requetEntity) {
         callback.onResponse(call,response,requetEntity);
     }
 

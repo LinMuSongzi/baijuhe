@@ -22,12 +22,12 @@ class ANWrap implements IAccessNetwork{
     }
 
     @Override
-    public void asyncExecute(RequetEntity o) {
+    public void asyncExecute(RequetParameter o) {
         mBase.asyncExecute(o);
     }
 
     @Override
-    public  void execute(RequetEntity requetEntity) {
+    public  void execute(RequetParameter requetEntity) {
         mBase.execute(requetEntity);
     }
 }
