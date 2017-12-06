@@ -16,6 +16,12 @@ import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadLargeFileListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.model.FileDownloadModel;
+import com.yeyuanyuan.web.StrEntity;
+import com.yeyuanyuan.web.Zygote;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 
@@ -87,6 +93,21 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         id_puase_btn.setEnabled(false);
+        test();
+
+    }
+
+    private void test() {
+        EventBus.getDefault().register(this);
+        Zygote.createGet(StrEntity.class,"http://www.baidu.com",null).asyncExecute();
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessage(StrEntity strEntity){
+        if(strEntity.getRequet()!=null){
+
+        }
     }
 
 
@@ -120,5 +141,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+        EventBus.getDefault().unregister(this);
     }
 }

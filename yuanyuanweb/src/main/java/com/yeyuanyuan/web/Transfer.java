@@ -2,6 +2,10 @@ package com.yeyuanyuan.web;
 
 import android.content.Intent;
 
+import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,9 +29,40 @@ class Transfer implements InterceptorManager {
 
     private final Set<Interceptor> interceptors = new HashSet<>();
     private final Set<Interceptor> interceptorNetWorks = new HashSet<>();
-    private final Set<Completed> callbacks = new HashSet<>();
 
-    private Transfer(){}
+
+    final Completed DEFUALT_CALLBACK = new Completed() {
+        @Override
+        public <T extends RequestResult> void onFailure(Call call, IOException e, RequetEntity<T> requetEntity) {
+            requetEntity.isOk = false;
+            requetEntity.object.setRequest(requetEntity);
+            EventBus.getDefault().post(requetEntity.object);
+        }
+
+        @Override
+        public <T extends RequestResult> void onResponse(Call call, Response response, RequetEntity<T> requetEntity) {
+            requetEntity.isOk = true;
+            try {
+                if (requetEntity.object != null && !(requetEntity.object instanceof StrEntity)) {
+                    requetEntity.object = (T) new Gson().fromJson(response.body().string(), requetEntity.object.getClass());
+                }else{
+                    StrEntity strEntity = new StrEntity();
+                    strEntity.setStrHrml(response.body().string());
+                    requetEntity.object = (T) strEntity;
+                }
+                requetEntity.object.setRequest(requetEntity);
+                EventBus.getDefault().post(requetEntity.object);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    private Completed callback = DEFUALT_CALLBACK;
+
+    private Transfer(){
+
+    }
 
     public static InterceptorManager getInstance() {
         return instance;
@@ -48,9 +83,9 @@ class Transfer implements InterceptorManager {
     }
 
     @Override
-    public void removeCallBack(Completed callback) {
-        if (callback != null && callbacks.contains(callback)) {
-            callbacks.remove(callback);
+    public void eraseCallBack() {
+        if (callback != null) {
+            callback = null;
         }
     }
 
@@ -69,26 +104,25 @@ class Transfer implements InterceptorManager {
     }
 
     @Override
-    public void addCallBack(Completed callback) {
-        if (callback != null && !callbacks.contains(callback)) {
-            callbacks.add(callback);
+    public void setCallBack(Completed callback) {
+        if (callback != null) {
+            this.callback = callback;
         }
     }
 
     @Override
-    public <T> void onFailure(Call call, IOException e ,RequetEntity<T> requetEntity) {
-        final Iterator<Completed> i = callbacks.iterator();
-        while (i.hasNext()){
-            i.next().onFailure(call,e,requetEntity);
-        }
+    public boolean hadCallBack() {
+        return callback != null;
     }
 
     @Override
-    public <T> void onResponse(Call call, Response response,RequetEntity<T> requetEntity) {
-        final Iterator<Completed> i = callbacks.iterator();
-        while (i.hasNext()){
-            i.next().onResponse(call,response,requetEntity);
-        }
+    public <T extends RequestResult> void onFailure(Call call, IOException e ,RequetEntity<T> requetEntity) {
+        callback.onFailure(call,e,requetEntity);
+    }
+
+    @Override
+    public <T extends RequestResult> void onResponse(Call call, Response response,RequetEntity<T> requetEntity) {
+        callback.onResponse(call,response,requetEntity);
     }
 
     @Override

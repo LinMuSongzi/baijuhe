@@ -17,14 +17,14 @@ public interface InterceptorManager extends Interceptor,Completed{
 
     void removeNetWorkInterceptor(Interceptor a);
 
-    void removeCallBack(Completed callback);
+    void eraseCallBack();
 
     void addNetWorkInterceptor(Interceptor a);
 
     void addInterceptor(Interceptor a);
 
-    void addCallBack(Completed callback);
+    void setCallBack(Completed callback);
 
-
+    boolean hadCallBack();
 
 }

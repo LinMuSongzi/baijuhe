@@ -10,8 +10,8 @@ import okhttp3.Response;
  */
 public interface Completed {
 
-    <T> void onFailure(Call call, IOException e , RequetEntity<T> requetEntity);
+    <T extends RequestResult> void onFailure(Call call, IOException e, RequetEntity<T> requetEntity);
 
-    <T> void onResponse(Call call, Response response, RequetEntity<T> requetEntity);
+    <T extends RequestResult> void onResponse(Call call, Response response, RequetEntity<T> requetEntity);
 
 }

@@ -11,6 +11,7 @@ import com.lin.alllib.data.EmptyEntity;
 import com.lin.alllib.framwork.DebugGod;
 import com.lin.alllib.framwork.commander.IDeal;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -30,6 +31,7 @@ public abstract class WoodActivity<T,M extends Model<?>> extends AppCompatActivi
         if (model == null) {
             model = configurationModel();
         }
+
         model.onCreateBefore();
         super.onCreate(savedInstanceState);
         setContentView(model.getContentView());

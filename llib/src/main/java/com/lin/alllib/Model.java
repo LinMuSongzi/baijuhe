@@ -14,6 +14,7 @@ import com.lin.alllib.framwork.DebugGod;
 import com.lin.alllib.framwork.commander.IDeal;
 import com.lin.alllib.framwork.commander.LibModel;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -120,13 +121,19 @@ public abstract class Model<I> implements LibModel, IDeal<I> {
         }
     }
 
-    protected final void showMsg(String msg) {
-        if (t == null) {
-            t = Toast.makeText(activity, msg, Toast.LENGTH_SHORT);
-        } else {
-            t.setText(msg);
-        }
-        t.show();
+    protected final void showMsg(final String msg) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (t == null) {
+                    t = Toast.makeText(activity, msg, Toast.LENGTH_SHORT);
+                } else {
+                    t.setText(msg);
+                }
+                t.show();
+            }
+        });
+
     }
 
     protected final void showSnackbar(View view, String msg) {

@@ -19,7 +19,7 @@ import okhttp3.RequestBody;
 /**
  * Created by linhui on 2017/12/5.
  */
-public class RequetEntity<T> implements Cloneable {
+public class RequetEntity<T extends RequestResult> implements Cloneable {
 
     public static MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public static final String GET = "GET";
@@ -30,7 +30,8 @@ public class RequetEntity<T> implements Cloneable {
     Map<String, Object> para;
     String jsonPara;
     String result;
-    T t;
+    T object;
+    boolean isOk;
 
     RequetEntity() {
     }
@@ -138,7 +139,7 @@ public class RequetEntity<T> implements Cloneable {
                 "request=" + request +
                 ", para=" + para +
                 ", result='" + result + '\'' +
-                ", t=" + t +
+                ", object =" + object +
                 '}';
     }
 
@@ -158,11 +159,19 @@ public class RequetEntity<T> implements Cloneable {
         return request;
     }
 
-    public T getT() {
-        return t;
+    public T getObject() {
+        return object;
     }
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public void execute(){
+        Zygote.execute(this);
+    }
+
+    public void asyncExecute(){
+        Zygote.asyncExecute(this);
     }
 }
