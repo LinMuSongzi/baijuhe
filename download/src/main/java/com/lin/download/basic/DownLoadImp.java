@@ -33,7 +33,18 @@ public class DownLoadImp implements DownLoadExpress {
 
 
     @Override
-    public BaseDownloadTask download(IBasicInfo info) {
+    public BaseDownloadTask download(final IBasicInfo info) {
+        final BaseDownloadTask[] baseDownloadTask = new BaseDownloadTask[1];
+        SupportProvide.queryLine(context,info,new Runnable(){
+            @Override
+            public void run() {
+                baseDownloadTask[0] = download2(info);
+            }
+        });
+        return baseDownloadTask[0];
+    }
+
+    private BaseDownloadTask download2(IBasicInfo info){
         BaseDownloadTask baseDownloadTask;
         final int i = (baseDownloadTask = FileDownloader.getImpl().
                 create(info.getDownLoadUrl()).setListener(new SimpleFileListenerImp() {
@@ -60,6 +71,7 @@ public class DownLoadImp implements DownLoadExpress {
         }).setPath(info.getSavePath()).setSyncCallback(true).setAutoRetryTimes(AUTO_RETRY_TIMES)).start();
         info.setDownLoadId(String.valueOf(i));
         return baseDownloadTask;
+
     }
 
 
