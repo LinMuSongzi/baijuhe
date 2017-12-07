@@ -16,9 +16,4 @@ public interface AppMain {
 
     SQLiteDatabase getSQLiteDatabase();
 
-    SQLiteOpenHelper getSQLiteOpenHelper();
-
-    void stopAllRunnable();
-
-
 }

@@ -3,6 +3,7 @@ package com.lin.download.basic.provide;
 import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
@@ -14,6 +15,8 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.lin.download.BuildConfig;
+import com.lin.download.basic.Factory;
 import com.lin.download.basic.provide.table.DownLoadTable;
 
 import y.com.sqlitesdk.framework.AppMain;
@@ -26,7 +29,7 @@ import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 /**
  * Created by linhui on 2017/12/7.
  */
-public final class DownLoadProviderImp implements AppMain{
+public final class DownLoadProviderImp implements AppMain {
 
     private DatabaseErrorHandler mDatabaseErrorHandler;
     @Deprecated
@@ -37,18 +40,18 @@ public final class DownLoadProviderImp implements AppMain{
         this.mContext = mContext;
     }
 
-    boolean create(){
+    boolean create() {
         try {
             mDatabaseErrorHandler = new DatabaseErrorHandler() {
                 @Override
                 public void onCorruption(SQLiteDatabase dbObj) {
-                    Log.i(DownLoadProvider.TAG, "sqlite onCorruption: ");
+                    Log.i(Factory.TAG, "sqlite onCorruption: ");
                 }
             };
-            mSqLiteDatabase = mContext.openOrCreateDatabase(DownLoadProvider.DOWNLOAD_DB_NAME, Context.MODE_PRIVATE,null,mDatabaseErrorHandler);
+            mSqLiteDatabase = mContext.openOrCreateDatabase(DownLoadProvider.DOWNLOAD_DB_NAME, Context.MODE_PRIVATE, null, mDatabaseErrorHandler);
             IfeimoSqliteSdk.init(this);
-            createTable();
-        }catch (Exception e){
+            checkUpdateSqlite();
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -63,19 +66,56 @@ public final class DownLoadProviderImp implements AppMain{
         }
     }
 
-    Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    Cursor query(Uri uri, String[] projection, final String selection, final String[] selectionArgs, String sortOrder) {
 
-        Cursor cursor = null;
+        final Cursor[] cursor = new Cursor[1];
 
         switch (DownLoadProvider.matcher.match(uri)) {
             case DownLoadProvider.QUERY_ALL_CODE:
-//                mSqLiteDatabase.query()
+                Access.runCustomThread(new Execute() {
+                    @Override
+                    public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+                        cursor[0] = sqLiteDatabase.rawQuery("select * from " + DownLoadTable.TB_NAME, null);
+                    }
+
+                    @Override
+                    public void onExternalError() {
+
+                    }
+                });
                 break;
         }
-        return cursor;
+        return cursor[0];
     }
 
+    private synchronized void checkUpdateSqlite() {
 
+
+        SharedPreferences sharedPreferences =
+                mContext.getSharedPreferences("DownLoadProviderImp", Context.MODE_PRIVATE);
+        final int code = sharedPreferences.getInt("code", -1);
+        if (code < BuildConfig.VERSION_CODE) {
+            updateSqlite(code, BuildConfig.VERSION_CODE);
+            sharedPreferences.edit().putInt("code", BuildConfig.VERSION_CODE).apply();
+        }
+    }
+
+    private void updateSqlite(int thisV, int newV) {
+
+        switch (thisV) {
+            case -1:
+                switch (newV) {
+                    case 20171121:
+                        createTable();
+                        break;
+                }
+                break;
+            case 20171121:
+                break;
+        }
+
+
+    }
 
     @Nullable
     String getType(Uri uri) {

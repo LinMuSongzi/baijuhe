@@ -49,15 +49,6 @@ final class SqliteMain implements AppMain,IEmployee{
         return imDataBaseHelper.getWritableDatabase();
     }
 
-    @Override
-    public SQLiteOpenHelper getSQLiteOpenHelper() {
-        return imDataBaseHelper;
-    }
-
-    @Override
-    public void stopAllRunnable() {
-
-    }
 
     public boolean isInitialized() {
         return imDataBaseHelper != null;

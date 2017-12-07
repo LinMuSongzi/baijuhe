@@ -5,6 +5,8 @@ package com.lin.download.basic;
  */
 public final class Factory {
 
+    public static final String TAG = "DOANLOAD_FM";
+
     private Factory(){}
 
 

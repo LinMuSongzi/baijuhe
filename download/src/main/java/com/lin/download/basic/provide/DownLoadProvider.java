@@ -13,8 +13,8 @@ import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
 /**
  * Created by linhui on 2017/12/7.
  */
-public class DownLoadProvider extends ContentProvider{
-    static final String TAG = DownLoadProvider.class.getSimpleName();
+public class DownLoadProvider extends ContentProvider {
+
     public static final String DOWNLOAD_DB_NAME = "download_framwork";
     public static final String PROVIDER_NAME = "com.download.lin.file.provide";
     static UriMatcher matcher;
@@ -26,10 +26,10 @@ public class DownLoadProvider extends ContentProvider{
     static final int UPDATE_CODE = 0x2abcd;
     static final int DELETE_ONE_CODE = 0x3abcd;
     static final int INSERT_ONE_CODE = 0x4abcd;
-    public static final Uri CONTENT_QUERY_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + QUERY);
+    public static final Uri CONTENT_QUERY_ALL_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + QUERY);
     public static final Uri CONTENT_UPDATE_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + UPDATE);
     public static final Uri CONTENT_DELETE_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + DELETE);
-    public static final Uri CONTENT_INSERT_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + INSERT);
+    public static final Uri CONTENT_INSERT_ONE_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + INSERT);
 
     static {
         matcher = new UriMatcher(UriMatcher.NO_MATCH);
