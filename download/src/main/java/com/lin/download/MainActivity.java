@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lin.download.basic.provide.DownLoadProvider;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadLargeFileListener;
 import com.liulishuo.filedownloader.FileDownloader;
@@ -94,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
                 });
         id_puase_btn.setEnabled(false);
         test();
+
+
+//        getContentResolver().delete(DownLoadProvider.CONTENT_DELETE_URI,null,null);
+
 
     }
 
