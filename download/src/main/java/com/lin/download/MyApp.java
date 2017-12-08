@@ -6,6 +6,8 @@ import android.widget.ZoomButton;
 
 import com.yeyuanyuan.web.Zygote;
 
+import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
+
 /**
  * Created by linhui on 2017/12/5.
  */
@@ -15,9 +17,6 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-
-        Zygote.init(this);
 
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override

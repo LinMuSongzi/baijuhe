@@ -31,9 +31,9 @@ public interface IBasicInfo extends Cloneable,Serializable{
 
     String getSavePath();
 
-    String getToTalLeng();
+    long getToTalLeng();
 
-    String getCurrentLeng();
+    long getCurrentLeng();
 
     int getStatus();
 

@@ -206,7 +206,7 @@ public final class BusinessUtil {
             return " integer ";
         } else if (field.getType().toString().endsWith("long")
                 || field.getType().toString().endsWith("Long")) {
-            return " integer ";
+            return " BIGINT ";
         } else if (field.getType().toString().endsWith("Boolean")
                 || field.getType().toString().endsWith("boolean")) {
             return " bit ";

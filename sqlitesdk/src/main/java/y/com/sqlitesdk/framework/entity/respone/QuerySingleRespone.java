@@ -8,7 +8,7 @@ import y.com.sqlitesdk.framework.interface_model.IModel;
 /**
  * Created by lpds on 2017/4/17.
  */
-public class QuerySingleRespone<T extends IModel<T>> extends BaseEntity{
+public class QuerySingleRespone<T extends IModel> extends BaseEntity{
 
     T model;
 

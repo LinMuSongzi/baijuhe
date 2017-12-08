@@ -127,8 +127,35 @@ public final class DownLoadProviderImp implements AppMain {
         return null;
     }
 
-    int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
+    int delete(Uri uri, final String selection, final String[] selectionArgs) {
+
+        final int[] leng = {0};
+
+        switch (DownLoadProvider.matcher.match(uri)) {
+
+            case DownLoadProvider.DELETE_ONE_CODE:
+
+                Access.run(new Execute() {
+                    @Override
+                    public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+                        leng[0] = sqLiteDatabase.delete(DownLoadTable.TB_NAME, selection, selectionArgs);
+                        if(leng[0] > 0){
+                            mContext.getContentResolver().notifyChange(DownLoadProvider.CONTENT_QUERY_ALL_URI,null);
+                        }
+                    }
+
+                    @Override
+                    public void onExternalError() {
+
+                    }
+                });
+
+                break;
+
+        }
+
+
+        return leng[0];
     }
 
     int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {

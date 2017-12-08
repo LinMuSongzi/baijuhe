@@ -14,22 +14,25 @@ public class DownLoadTable implements IBasicInfo ,IModel<DownLoadTable>{
     public static final String TB_NAME = "tb_download_info";
     private boolean isNotitfyShowDownLoadStutas = false;
     @TBPrimarykey
-    private long id;
+    private int id;
     @TBColumn
     private String create_time;
+    @TBColumn()
     private String object_id;
+    @TBColumn()
     private String name;
+    @TBColumn()
     private String pic_url;
     @TBColumn(unique = true)
     private String download_url;
     @TBColumn(unique = true)
     private String save_path;
-    @TBColumn(unique = true)
+    @TBColumn(notNull = true)
     private int stutas = NOT_HAD;
-    @TBColumn(unique = true)
-    private String toTal;
-    @TBColumn(unique = true)
-    private String current;
+    @TBColumn()
+    private long toTal;
+    @TBColumn()
+    private long current;
 
     @Override
     public DownLoadTable clone() {
@@ -53,7 +56,7 @@ public class DownLoadTable implements IBasicInfo ,IModel<DownLoadTable>{
 
     @Override
     public void setId(long id) {
-        this.id = id;
+        this.id = (int) id;
     }
 
     @Override
@@ -102,12 +105,12 @@ public class DownLoadTable implements IBasicInfo ,IModel<DownLoadTable>{
     }
 
     @Override
-    public String getToTalLeng() {
+    public long getToTalLeng() {
         return toTal;
     }
 
     @Override
-    public String getCurrentLeng() {
+    public long getCurrentLeng() {
         return current;
     }
 
@@ -120,11 +123,11 @@ public class DownLoadTable implements IBasicInfo ,IModel<DownLoadTable>{
         this.stutas = stutas;
     }
 
-    public void setToTal(String toTal) {
+    public void setToTal(long toTal) {
         this.toTal = toTal;
     }
 
-    public void setCurrent(String current) {
+    public void setCurrent(long current) {
         this.current = current;
     }
 
