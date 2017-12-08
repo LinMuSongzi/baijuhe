@@ -158,7 +158,10 @@ public class FileListActivity extends AppCompatActivity {
 
     public void createDefualtGame() {
 
-
+        if(getSharedPreferences("aaa",MODE_PRIVATE).getInt("key",1) == 100){
+            return;
+        }
+        getSharedPreferences("aaa",MODE_PRIVATE).edit().putInt("key",100).apply();
         DownLoadTable downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[0]);
         downLoadTable.setSavePath(getFilesDir().getAbsolutePath() + File.separator + "王者荣耀.apk");
