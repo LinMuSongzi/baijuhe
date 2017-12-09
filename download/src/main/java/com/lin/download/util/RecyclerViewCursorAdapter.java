@@ -23,7 +23,7 @@ public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHold
      * @param holder
      * @param cursor
      */
-    public abstract void onBindViewHolder(VH holder, Cursor cursor);
+    public abstract void onBindViewHolder(VH holder, Cursor cursor) ;
 
     /**
      * This field should be made private, so it is hidden from the SDK.

@@ -11,9 +11,9 @@ public interface IModel<T> extends Cloneable,Serializable{
 
     String getTableName();
 
-    long getId();
+    int getId();
 
-    void setId(long id);
+    void setId(int id);
 
     String getCreateTime();
 

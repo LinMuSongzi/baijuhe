@@ -12,6 +12,7 @@ import java.util.List;
 import y.com.sqlitesdk.framework.annotation.TBColumn;
 import y.com.sqlitesdk.framework.annotation.TBForeign;
 import y.com.sqlitesdk.framework.annotation.TBPrimarykey;
+import y.com.sqlitesdk.framework.annotation.TBTable;
 import y.com.sqlitesdk.framework.db.Access;
 import y.com.sqlitesdk.framework.db.exception.NoColumnException;
 import y.com.sqlitesdk.framework.db.exception.PrimarykeyException;
@@ -79,6 +80,51 @@ public final class BusinessUtil {
     }
 
     /**
+     * 反射获得一行数据
+     * @param cursor 必须已经移动的数据
+     * @param tClass
+     * @param <T>
+     * @return
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws NoSuchFieldException
+     */
+    public static <T extends IModel<T>> T reflectCursorOne(Cursor cursor, Class<T> tClass)
+            throws IllegalAccessException, InstantiationException, NoSuchFieldException {
+
+        String[] column = new String[cursor.getColumnCount()];
+
+        int leng = 0;
+        for (; leng < column.length; leng++) {
+            column[leng] = cursor.getColumnName(leng);
+        }
+        leng = 0;
+        T t = tClass.newInstance();
+        for (; leng < column.length; leng++) {
+            Field field = getDeclaredField(t, column[leng]);
+            field.setAccessible(true);
+            final String type = field.getType().toString();
+            if (type.endsWith("String")) {
+                field.set(t, cursor.getString(cursor.getColumnIndex(column[leng])));
+            } else if (type.endsWith("int") || type.endsWith("Integer") ||
+                    type.endsWith("long") || type.endsWith("Long")) {
+                field.setInt(t, cursor.getInt(cursor.getColumnIndex(column[leng])));
+            } else if (type.endsWith("Boolean") || type.endsWith("boolean")) {
+                if (cursor.getInt(cursor.getColumnIndex(column[leng])) == 1) {
+                    field.setBoolean(t, true);
+                } else if (cursor.getInt(cursor.getColumnIndex(column[leng])) == 0) {
+                    field.setBoolean(t, false);
+                }
+            } else if (type.endsWith("Double") || type.endsWith("double")
+                    || type.endsWith("Float") || type.endsWith("float")) {
+                field.setFloat(t, cursor.getFloat(cursor.getColumnIndex(column[leng])));
+            }
+        }
+        return t;
+    }
+
+
+    /**
      * 寻找此属性，递归到父类
      *
      * @param object
@@ -140,13 +186,13 @@ public final class BusinessUtil {
                 } else if (annotation instanceof TBColumn) {
                     lineSentence += String.format(" %s %s  ", field.getName(), getColumnStr(field));
                     TBColumn tbColumn = (TBColumn) annotation;
-                    if(tbColumn.notNull()){
-                        lineSentence +=" NOT NULL ";
+                    if (tbColumn.notNull()) {
+                        lineSentence += " NOT NULL ";
                     }
-                    if(tbColumn.unique()){
-                        lineSentence +=" UNIQUE ";
+                    if (tbColumn.unique()) {
+                        lineSentence += " UNIQUE ";
                     }
-                    if(field.getType().toString().endsWith("Integer")
+                    if (field.getType().toString().endsWith("Integer")
                             || field.getType().toString().endsWith("Long")) {
                         if (tbColumn.autoincrememt()) {
                             lineSentence += " autoincrement ";
@@ -158,8 +204,8 @@ public final class BusinessUtil {
                     final String tbColunm = tbForeign.referencesTableField();
                     if (!StringDdUtil.isNull(tbName) && !StringDdUtil.isNull(tbColunm)) {
                         //lineSentence += String.format(",FOREIGN KEY(%s) REFERENCES %s(%s)", field.getName(), tbName, tbColunm);
-                        String name = "trigger_"+field.getName() + "_" + tableName;
-                        if(!Access.getAlltriggers().contains(name)) {
+                        String name = "trigger_" + field.getName() + "_" + tableName;
+                        if (!Access.getAlltriggers().contains(name)) {
                             sqls.add(String.format(
                                     "\nCREATE TRIGGER " + name + " BEFORE DELETE ON " + tbName + "\n" +
                                             "FOR EACH ROW \n" +
@@ -183,7 +229,7 @@ public final class BusinessUtil {
         String oneSql = "";
         for (int i = 0; i < sqlList.size(); i++) {
             if (i == sqlList.size() - 1) {
-                oneSql += sqlList.get(i).substring(0,sqlList.get(i).length()-1)+")";
+                oneSql += sqlList.get(i).substring(0, sqlList.get(i).length() - 1) + ")";
             } else {
                 oneSql += sqlList.get(i);
             }
@@ -261,13 +307,14 @@ public final class BusinessUtil {
 
     /**
      * 转换获得属性值
+     *
      * @param field
      * @param model
      * @param <T>
      * @return
      * @throws IllegalAccessException
      */
-    public static <T extends IModel<T>> String convertField(Field field,T model) throws IllegalAccessException {
+    public static <T extends IModel<T>> String convertField(Field field, T model) throws IllegalAccessException {
         field.setAccessible(true);
         if (field.getType().toString().endsWith("String")) {
             final String str;
@@ -276,18 +323,18 @@ public final class BusinessUtil {
             }
         } else if (field.getType().toString().endsWith("int")
                 || field.getType().toString().endsWith("Integer")) {
-            return field.getInt(model)+"";
+            return field.getInt(model) + "";
         } else if (field.getType().toString().endsWith("long")
                 || field.getType().toString().endsWith("Long")) {
-            return field.getLong(model)+"";
+            return field.getLong(model) + "";
         } else if (field.getType().toString().endsWith("Boolean")
                 || field.getType().toString().endsWith("boolean")) {
-            return field.getBoolean(model)?1+"":0+"";
+            return field.getBoolean(model) ? 1 + "" : 0 + "";
         } else if (field.getType().toString().endsWith("Double")
                 || field.getType().toString().endsWith("double")
                 || field.getType().toString().endsWith("Float")
                 || field.getType().toString().endsWith("float")) {
-            return field.getFloat(model)+"";
+            return field.getFloat(model) + "";
         }
         return null;
     }
@@ -322,6 +369,7 @@ public final class BusinessUtil {
 
     /**
      * 获取表格名
+     *
      * @param tclass
      * @param <T>
      * @return
@@ -329,11 +377,31 @@ public final class BusinessUtil {
      * @throws InstantiationException
      */
     public static <T extends IModel> String getTbNmae(Class<T> tclass) throws IllegalAccessException, InstantiationException {
-        return tclass.newInstance().getTableName();
+
+        String tableName = null;
+
+        Field[] fields = tclass.getDeclaredFields();
+
+        for(Field field : fields){
+
+            Annotation[] annotations = field.getAnnotations();
+
+            for(Annotation annotation : annotations){
+
+                if(annotation instanceof TBTable){
+                    return (String) field.get(null);
+                }
+
+            }
+
+        }
+
+        return tableName;
     }
 
     /**
      * 获取所有唯一字段
+     *
      * @param model
      * @param <T>
      * @return
@@ -341,12 +409,12 @@ public final class BusinessUtil {
     public static <T extends IModel<T>> Field[] getAllUniqueFields(T model) {
         List<Field> uniqueFields = new ArrayList<>();
         Field[] fields = model.getClass().getDeclaredFields();
-        for(Field field : fields){
+        for (Field field : fields) {
             Annotation[] annotations = field.getAnnotations();
-            for(Annotation annotation : annotations){
-                if(annotation instanceof TBColumn){
-                    final TBColumn tBColumn  = (TBColumn) annotation;
-                    if(tBColumn.unique()){
+            for (Annotation annotation : annotations) {
+                if (annotation instanceof TBColumn) {
+                    final TBColumn tBColumn = (TBColumn) annotation;
+                    if (tBColumn.unique()) {
                         uniqueFields.add(field);
                         break;
                     }
@@ -355,7 +423,7 @@ public final class BusinessUtil {
 //                    uniqueFields.add(field);
 //                    break;
 //                }
-        }
+            }
         }
         return uniqueFields.toArray(new Field[uniqueFields.size()]);
     }
@@ -363,12 +431,13 @@ public final class BusinessUtil {
 
     /**
      * cursor转换实体类
+     *
      * @param tClass
      * @param cursor
      * @param <T>
      * @return
      */
-    public static <T extends IModel<T>> T getLineModelByCursor(Class<T> tClass, Cursor cursor){
+    public static <T extends IModel<T>> T getLineModelByCursor(Class<T> tClass, Cursor cursor) {
 
         String[] column = cursor.getColumnNames();
         int leng = 0;
@@ -395,7 +464,7 @@ public final class BusinessUtil {
                 }
             }
             return t;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 

@@ -13,11 +13,11 @@ public class DownloadUtil {
 
 
     public static String[] GAME_LIST = {
+            WANGZHERONGYAO_URL,
             "http://wap.apk.anzhi.com/data3/apk/201709/13/33374f6b45597cb2224b66eba0f9390a_76544000.apk",//火影
             "http://wap.apk.anzhi.com/data3/apk/201709/06/59e2f3aef39f3071857dae0f5c471272_56624200.apk",//天龙八部,
             WEIXIN_URL,
             QQ_URL,
-            WANGZHERONGYAO_URL,
             KAIXINXIAOXIAOLE_URL
 
     };

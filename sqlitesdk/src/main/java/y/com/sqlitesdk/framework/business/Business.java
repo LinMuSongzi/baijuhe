@@ -84,7 +84,7 @@ public final class Business {
      * @param <T>
      */
     public <T extends IModel<T>> long insert(SQLiteDatabase sqLiteDatabase, T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
-        model.setId(checkInsert(sqLiteDatabase, model));
+        model.setId((int) checkInsert(sqLiteDatabase, model));
         return model.getId();
     }
 
@@ -97,7 +97,7 @@ public final class Business {
 
     public <T extends IModel<T>> boolean insert(SQLiteDatabase sqLiteDatabase, List<T> models) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
         for (T model : models) {
-            model.setId(checkInsert(sqLiteDatabase, model));
+            model.setId((int) checkInsert(sqLiteDatabase, model));
         }
         return true;
     }
@@ -139,7 +139,7 @@ public final class Business {
                 }
             }
         }
-        return sqLiteDatabase.insert(model.getTableName(), null, contentvalues);
+        return (int)sqLiteDatabase.insert(model.getTableName(), null, contentvalues);
 
 
     }
@@ -195,7 +195,7 @@ public final class Business {
         if(sqLiteDatabase.update(model.getTableName(), contentValues, where, agrs) == 1){
             id = this.queryLineByWhere(sqLiteDatabase, model.getClass(),where, agrs).getId();
         }
-        model.setId(id);
+        model.setId((int) id);
         return id;
     }
 
@@ -278,7 +278,6 @@ public final class Business {
     /**
      * 获取某列的所有值
      * @param sqLiteDatabase
-     * @param tb
      * @param field
      * @param where
      * @param args

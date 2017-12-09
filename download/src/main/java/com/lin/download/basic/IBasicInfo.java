@@ -1,18 +1,19 @@
 package com.lin.download.basic;
 
-import java.io.Serializable;
+import com.lin.download.business.model.UrlInfo;
 
-import y.com.sqlitesdk.framework.interface_model.IModel;
+import java.io.Serializable;
 
 /**
  * Created by linhui on 2017/12/7.
  */
-public interface IBasicInfo extends Cloneable,Serializable{
+public interface IBasicInfo extends UrlInfo{
 
 
     int PAUSE = 100;
     int COMPLETED = 200;
     int DOING = 201;
+    int ERROR = 402;
     int NOT_HAD = 400;
 
     void setDownLoadId(String id);
@@ -26,8 +27,6 @@ public interface IBasicInfo extends Cloneable,Serializable{
     String getName();
 
     String getPicUrl();
-
-    String getDownLoadUrl();
 
     String getSavePath();
 

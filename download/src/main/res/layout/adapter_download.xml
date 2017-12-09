@@ -35,6 +35,13 @@
             android:minHeight="10dp"
             android:progress="0" />
 
+        <TextView
+            android:id="@+id/id_progressBar_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"/>
+
+
 
         <TextView
             android:id="@+id/id_size"
@@ -54,9 +61,20 @@
             android:id="@+id/id_download_path"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"/>
+
+
+
+
+        <TextView
+            android:id="@+id/id_status_path"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
+            android:background="?attr/selectableItemBackground"
             android:layout_marginBottom="10dp"/>
 
 

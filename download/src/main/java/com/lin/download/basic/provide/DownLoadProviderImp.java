@@ -76,6 +76,7 @@ public final class DownLoadProviderImp implements AppMain {
                     @Override
                     public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                         cursor[0] = sqLiteDatabase.rawQuery("select * from " + DownLoadTable.TB_NAME, null);
+                        cursor[0].setNotificationUri(mContext.getContentResolver(), DownLoadProvider.CONTENT_QUERY_ALL_URI);
                     }
 
                     @Override

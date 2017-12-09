@@ -4,10 +4,13 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lin.download.basic.DownLoadImp;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.basic.provide.table.DownLoadTable;
 import com.lin.download.util.DownloadUtil;
@@ -33,7 +37,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import dalvik.system.DexClassLoader;
+import y.com.sqlitesdk.framework.AppMain;
 import y.com.sqlitesdk.framework.business.Business;
+import y.com.sqlitesdk.framework.business.BusinessUtil;
 import y.com.sqlitesdk.framework.db.Access;
 import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 
@@ -42,6 +49,7 @@ public class FileListActivity extends AppCompatActivity {
     RecyclerView id_RecyclerView;
     private List<DownLoadTable> loadEntities = new ArrayList<>();
     MyAdapter adapter;
+    Loader<Cursor> loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +76,7 @@ public class FileListActivity extends AppCompatActivity {
         });
         id_RecyclerView.setAdapter((adapter = new MyAdapter(this, null, 1)));
 
-        Loader<Cursor> loader = getLoaderManager().initLoader(100, null, new LoaderManager.LoaderCallbacks<Cursor>() {
+        loader = getLoaderManager().initLoader(100, null, new LoaderManager.LoaderCallbacks<Cursor>() {
 
             @Override
             public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -87,7 +95,6 @@ public class FileListActivity extends AppCompatActivity {
 
             }
         });
-        loader.startLoading();
     }
 
 
@@ -99,17 +106,83 @@ public class FileListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(MyViewHodler holder, Cursor cursor) {
-            final int id = cursor.getInt(0);
-            final String name = cursor.getString(cursor.getColumnIndex("name"));
-            holder.id_file.setText(name);
+            DownLoadTable downLoadTable = null;
+
+            try {
+                downLoadTable = BusinessUtil.reflectCursorOne(cursor, DownLoadTable.class);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            if (downLoadTable == null) {
+                return;
+            }
+            final String savePath = downLoadTable.getSavePath();
+            final int stutas = downLoadTable.getStatus();
+            final int id = downLoadTable.getId();
+            final String name = downLoadTable.getName();
+
+
+
+            holder.id_file.setText(downLoadTable.getName());
             holder.id_download_path.setText("下载地址：" + cursor.getString(cursor.getColumnIndex("download_url")));
-//            holder.id_progressBar.setText(cursor.getString(cursor.getColumnIndex("name")));
+            holder.id_progressBar_tv.setText("已下载：" + String.format("%.2f M", downLoadTable.getCurrentLeng() / 1024f / 1024));
             holder.id_save_path.setText("存储地址：" + cursor.getString(cursor.getColumnIndex("save_path")));
-            holder.id_size.setText("总大小：" + cursor.getInt(cursor.getColumnIndex("toTal")));
+            holder.id_size.setText("总大小：" + String.format("%.2f M", downLoadTable.getToTalLeng() / 1024f / 1024));
+            holder.id_progressBar.setProgress((int) ((downLoadTable.getCurrentLeng() * 1f / downLoadTable.getToTalLeng()) * 100));
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     deleteItem(id, name);
+                }
+            });
+
+
+            switch (downLoadTable.getStatus()) {
+                case DownLoadTable.COMPLETED:
+                    holder.id_status_path.setText("完成");
+                    holder.id_status_path.setEnabled(true);
+                    holder.id_progressBar.setProgress(100);
+                    break;
+                case DownLoadTable.ERROR:
+                    holder.id_status_path.setText("下载错误");
+                    break;
+                case DownLoadTable.PAUSE:
+                    holder.id_status_path.setText("已暂停");
+                    break;
+                case DownLoadTable.DOING:
+                    holder.id_status_path.setText("正在下载");
+                    holder.id_status_path.setEnabled(false);
+                    break;
+                case DownLoadTable.NOT_HAD:
+                    holder.id_status_path.setText("可以下载");
+                    break;
+            }
+
+            holder.id_status_path.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    v.setEnabled(false);
+                    switch (stutas) {
+                        case DownLoadTable.COMPLETED:
+                            launchApp(getpaasdas(savePath),savePath);
+                            break;
+                        case DownLoadTable.ERROR:
+                            download(id);
+                            break;
+                        case DownLoadTable.PAUSE:
+                            download(id);
+                            break;
+                        case DownLoadTable.DOING:
+                            break;
+                        case DownLoadTable.NOT_HAD:
+                            download(id);
+                            break;
+                    }
                 }
             });
         }
@@ -126,6 +199,42 @@ public class FileListActivity extends AppCompatActivity {
         }
     }
 
+
+    private String getpaasdas(String apk){
+
+        return getPackageManager().getPackageArchiveInfo(apk, PackageManager.GET_ACTIVITIES).packageName;
+    }
+
+    private boolean isInstallByread(String packageName) {
+        return new File("/data/data/" + packageName).exists();
+    }
+
+    private void launchApp(String packageName, String appPath) {
+        // 启动目标应用
+        if (isInstallByread(packageName)) {
+            // 获取目标应用安装包的Intent
+            Intent intent = getPackageManager().getLaunchIntentForPackage(
+                    packageName);
+            startActivity(intent);
+        }
+        // 安装目标应用
+        else {
+            Intent intent = new Intent();
+            // 设置目标应用安装包路径
+            intent.setDataAndType(Uri.fromFile(new File(appPath)),
+                    "application/vnd.android.package-archive");
+            startActivity(intent);
+        }
+    }
+
+    private void download(int id) {
+
+
+        new Thread(new DownLoadImp(id)).start();
+
+
+    }
+
     private void deleteItem(final int id, String name) {
         new AlertDialog.Builder(this)
                 .setCancelable(false)
@@ -134,17 +243,18 @@ public class FileListActivity extends AppCompatActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        runOnUiThread(new Runnable() {
+                        Access.run(new Execute() {
                             @Override
-                            public void run() {
-                                if (getContentResolver().delete(DownLoadProvider.CONTENT_DELETE_URI, "id = ?", new String[]{id + ""}) > 0) {
+                            public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+                                sqLiteDatabase.delete(DownLoadTable.TB_NAME, "id = ?", new String[]{String.valueOf(id)});
+                                getContentResolver().notifyChange(DownLoadProvider.CONTENT_QUERY_ALL_URI, null);
+                            }
 
-                                    Toast.makeText(FileListActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onExternalError() {
 
-                                }
                             }
                         });
-
                         dialog.dismiss();
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -158,43 +268,43 @@ public class FileListActivity extends AppCompatActivity {
 
     public void createDefualtGame() {
 
-        if(getSharedPreferences("aaa",MODE_PRIVATE).getInt("key",1) == 100){
+        if (getSharedPreferences("aaa", MODE_PRIVATE).getInt("key", 1) == 100) {
             return;
         }
-        getSharedPreferences("aaa",MODE_PRIVATE).edit().putInt("key",100).apply();
+        getSharedPreferences("aaa", MODE_PRIVATE).edit().putInt("key", 100).apply();
         DownLoadTable downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[0]);
-        downLoadTable.setSavePath(getFilesDir().getAbsolutePath() + File.separator + "王者荣耀.apk");
+        downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "王者荣耀.apk");
         downLoadTable.setName("王者荣耀");
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[1]);
-        downLoadTable.setSavePath(getFilesDir().getAbsolutePath() + File.separator + "火影忍者.apk");
+        downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "火影忍者.apk");
         downLoadTable.setName("火影忍者");
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[2]);
-        downLoadTable.setSavePath(getFilesDir().getAbsolutePath() + File.separator + "天龙八部.apk");
+        downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "天龙八部.apk");
         downLoadTable.setName("天龙八部");
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[3]);
-        downLoadTable.setSavePath(getFilesDir().getAbsolutePath() + File.separator + "微信.apk");
+        downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "微信.apk");
         downLoadTable.setName("微信");
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[4]);
-        downLoadTable.setSavePath(getFilesDir().getAbsolutePath() + File.separator + "QQ.apk");
+        downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "QQ.apk");
         downLoadTable.setName("QQ");
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[5]);
-        downLoadTable.setSavePath(getFilesDir().getAbsolutePath() + File.separator + "开心消消乐.apk");
+        downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "开心消消乐.apk");
         downLoadTable.setName("开心消消乐");
         loadEntities.add(downLoadTable);
 
@@ -246,6 +356,8 @@ public class FileListActivity extends AppCompatActivity {
         TextView id_size;
         TextView id_save_path;
         TextView id_download_path;
+        TextView id_status_path;
+        TextView id_progressBar_tv;
 
         public MyViewHodler(View itemView) {
             super(itemView);
@@ -254,6 +366,8 @@ public class FileListActivity extends AppCompatActivity {
             id_save_path = (TextView) itemView.findViewById(R.id.id_save_path);
             id_download_path = (TextView) itemView.findViewById(R.id.id_download_path);
             id_progressBar = (ProgressBar) itemView.findViewById(R.id.id_progressBar);
+            id_status_path = (TextView) itemView.findViewById(R.id.id_status_path);
+            id_progressBar_tv = (TextView) itemView.findViewById(R.id.id_progressBar_tv);
         }
     }
 

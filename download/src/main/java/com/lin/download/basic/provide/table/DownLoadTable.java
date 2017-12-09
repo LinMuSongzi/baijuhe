@@ -4,6 +4,7 @@ import com.lin.download.basic.IBasicInfo;
 
 import y.com.sqlitesdk.framework.annotation.TBColumn;
 import y.com.sqlitesdk.framework.annotation.TBPrimarykey;
+import y.com.sqlitesdk.framework.annotation.TBTable;
 import y.com.sqlitesdk.framework.interface_model.IModel;
 
 /**
@@ -11,6 +12,7 @@ import y.com.sqlitesdk.framework.interface_model.IModel;
  */
 public class DownLoadTable implements IBasicInfo ,IModel<DownLoadTable>{
 
+    @TBTable
     public static final String TB_NAME = "tb_download_info";
     private boolean isNotitfyShowDownLoadStutas = false;
     @TBPrimarykey
@@ -50,13 +52,13 @@ public class DownLoadTable implements IBasicInfo ,IModel<DownLoadTable>{
     }
 
     @Override
-    public long getId() {
+    public int getId() {
         return id;
     }
 
     @Override
-    public void setId(long id) {
-        this.id = (int) id;
+    public void setId(int id) {
+        this.id =  id;
     }
 
     @Override

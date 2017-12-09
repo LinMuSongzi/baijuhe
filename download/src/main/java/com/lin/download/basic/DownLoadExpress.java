@@ -10,6 +10,5 @@ public interface DownLoadExpress {
 
     int AUTO_RETRY_TIMES = 1;
 
-    BaseDownloadTask download(IBasicInfo info);
 
 }
