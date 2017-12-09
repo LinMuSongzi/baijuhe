@@ -1,6 +1,7 @@
 package com.lin.download.basic.provide.table;
 
 import com.lin.download.basic.IBasicInfo;
+import com.lin.download.business.model.BaseModel;
 
 import y.com.sqlitesdk.framework.annotation.TBColumn;
 import y.com.sqlitesdk.framework.annotation.TBPrimarykey;
@@ -10,7 +11,7 @@ import y.com.sqlitesdk.framework.interface_model.IModel;
 /**
  * Created by linhui on 2017/12/7.
  */
-public class DownLoadTable implements IBasicInfo ,IModel<DownLoadTable>{
+public class DownLoadTable extends BaseModel<DownLoadTable> implements IBasicInfo{
 
     @TBTable
     public static final String TB_NAME = "tb_download_info";
@@ -18,14 +19,13 @@ public class DownLoadTable implements IBasicInfo ,IModel<DownLoadTable>{
     @TBPrimarykey
     private int id;
     @TBColumn
-    private String create_time;
+    private long create_time = System.currentTimeMillis();
     @TBColumn()
     private String object_id;
     @TBColumn()
     private String name;
     @TBColumn()
     private String pic_url;
-    @TBColumn(unique = true)
     private String download_url;
     @TBColumn(unique = true)
     private String save_path;
@@ -35,36 +35,6 @@ public class DownLoadTable implements IBasicInfo ,IModel<DownLoadTable>{
     private long toTal;
     @TBColumn()
     private long current;
-
-    @Override
-    public DownLoadTable clone() {
-        try {
-            return (DownLoadTable) super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public String getTableName() {
-        return TB_NAME;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id =  id;
-    }
-
-    @Override
-    public String getCreateTime() {
-        return create_time;
-    }
 
     @Override
     public void setDownLoadId(String id) {
@@ -137,7 +107,7 @@ public class DownLoadTable implements IBasicInfo ,IModel<DownLoadTable>{
         isNotitfyShowDownLoadStutas = notitfyShowDownLoadStutas;
     }
 
-    public void setCreateTime(String create_time) {
+    public void setCreateTime(long create_time) {
         this.create_time = create_time;
     }
 

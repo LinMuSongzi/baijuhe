@@ -57,7 +57,7 @@ public final class Business {
      * @param tClass
      * @param <T>
      */
-    public final <T extends IModel<T>> boolean createTable(SQLiteDatabase sqLiteDatabase, final Class<T> tClass) throws Exception {
+    public final <T extends IModel> boolean createTable(SQLiteDatabase sqLiteDatabase, final Class<T> tClass) throws Exception {
         String tb_name = BusinessUtil.getTbNmae(tClass);
         String[] sqls;
         sqls = BusinessUtil.getTableStr(tb_name, tClass);
@@ -83,7 +83,7 @@ public final class Business {
      * @param model
      * @param <T>
      */
-    public <T extends IModel<T>> long insert(SQLiteDatabase sqLiteDatabase, T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public <T extends IModel> long insert(SQLiteDatabase sqLiteDatabase, T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
         model.setId((int) checkInsert(sqLiteDatabase, model));
         return model.getId();
     }
@@ -109,13 +109,14 @@ public final class Business {
      * @param model
      * @param <T>
      */
-    private <T extends IModel<T>> long checkInsert(SQLiteDatabase sqLiteDatabase, T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    private <T extends IModel> long checkInsert(SQLiteDatabase sqLiteDatabase, T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
         ContentValues contentvalues = BusinessUtil.getAllValues(model);
         Field[] fields = BusinessUtil.getAllUniqueFields(model);
+        String tbName = BusinessUtil.getTbNmae(model.getClass());
         if (fields.length == 0) {
-            return sqLiteDatabase.insert(model.getTableName(), null, contentvalues);
+            return sqLiteDatabase.insert(tbName, null, contentvalues);
         }
-        String sqlExecute = "SELECT * FROM " + model.getTableName();
+        String sqlExecute = "SELECT * FROM " + tbName;
         String where = "";
         List<String> values = new ArrayList<>();
         for (int i = 0; i < fields.length; i++) {
@@ -134,12 +135,12 @@ public final class Business {
             Log.i(TAG, "checkInsert: 已在在，进行修改" + sqlExecute + where);
             Cursor c = sqLiteDatabase.rawQuery(sqlExecute + where, values.toArray(new String[values.size()]));
             if (c.getCount() == 1) {
-                if(sqLiteDatabase.update(model.getTableName(), contentvalues, where, values.toArray(new String[values.size()]))>0){
+                if(sqLiteDatabase.update(BusinessUtil.getTbNmae(model.getClass()), contentvalues, where, values.toArray(new String[values.size()]))>0){
                     return Business.getInstances().queryLineByWhere(sqLiteDatabase,model.getClass(),where, values.toArray(new String[values.size()])).getId();
                 }
             }
         }
-        return (int)sqLiteDatabase.insert(model.getTableName(), null, contentvalues);
+        return (int)sqLiteDatabase.insert(BusinessUtil.getTbNmae(model.getClass()), null, contentvalues);
 
 
     }
@@ -151,7 +152,7 @@ public final class Business {
      * @param <T>
      */
     @Deprecated
-    public <T extends IModel<T>> long deleteById(SQLiteDatabase sqLiteDatabase, T model) {
+    public <T extends IModel<T>> long deleteById(SQLiteDatabase sqLiteDatabase, T model) throws IllegalAccessException, InstantiationException {
         return delete(sqLiteDatabase, model, String.format("%s = %s", "id", String.valueOf(model.getId())),null);
     }
 
@@ -162,8 +163,8 @@ public final class Business {
      * @param where
      * @param <T>
      */
-    public <T extends IModel<T>> long delete(SQLiteDatabase sqLiteDatabase, T model, final String where,String[] args) {
-        return sqLiteDatabase.delete(model.getTableName(), where, args);
+    public <T extends IModel> long delete(SQLiteDatabase sqLiteDatabase, T model, final String where,String[] args) throws InstantiationException, IllegalAccessException {
+        return sqLiteDatabase.delete(BusinessUtil.getTbNmae(model.getClass()), where, args);
     }
 
 
@@ -192,7 +193,7 @@ public final class Business {
     public <T extends IModel<T>> long modify(SQLiteDatabase sqLiteDatabase, T model, final String where,String[] agrs) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
         ContentValues contentValues = BusinessUtil.getAllValues(model);
         long id = -1;
-        if(sqLiteDatabase.update(model.getTableName(), contentValues, where, agrs) == 1){
+        if(sqLiteDatabase.update(BusinessUtil.getTbNmae(model.getClass()), contentValues, where, agrs) == 1){
             id = this.queryLineByWhere(sqLiteDatabase, model.getClass(),where, agrs).getId();
         }
         model.setId((int) id);
@@ -206,14 +207,14 @@ public final class Business {
 
     public <T extends IModel<T>> T queryById(SQLiteDatabase sqLiteDatabase, final T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
         T queryModel = null;
-        Cursor cursor = sqLiteDatabase.query(model.getTableName(), null, "id = " + model.getId(), null, null, null, null);
+        Cursor cursor = sqLiteDatabase.query(BusinessUtil.getTbNmae(model.getClass()), null, "id = " + model.getId(), null, null, null, null);
         if (cursor.getCount() == 1) {
             queryModel = (T) BusinessUtil.reflectCursor(cursor, model.getClass()).get(0);
         }
         return queryModel;
     }
 
-    public <T extends IModel<T>> T queryLineByWhere(SQLiteDatabase sqLiteDatabase, final Class<T> tClass,String where,String[] whereArgs) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public <T extends IModel> T queryLineByWhere(SQLiteDatabase sqLiteDatabase, final Class<T> tClass,String where,String[] whereArgs) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
         T queryModel = null;
         Cursor cursor = sqLiteDatabase.query(BusinessUtil.getTbNmae(tClass), null, where, whereArgs, null, null, null);
         if (cursor.getCount() == 1) {

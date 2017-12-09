@@ -9,12 +9,11 @@ public interface IModel<T> extends Cloneable,Serializable{
 
     T clone();
 
-    String getTableName();
-
     int getId();
 
     void setId(int id);
 
-    String getCreateTime();
+    @Deprecated
+    long getCreateTime();
 
 }

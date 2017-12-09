@@ -18,6 +18,9 @@ import android.util.Log;
 import com.lin.download.BuildConfig;
 import com.lin.download.basic.Factory;
 import com.lin.download.basic.provide.table.DownLoadTable;
+import com.lin.download.business.model.BaseModel;
+import com.lin.download.business.model.Download2UrlTable;
+import com.lin.download.business.model.UrlTable;
 
 import y.com.sqlitesdk.framework.AppMain;
 import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
@@ -59,11 +62,19 @@ public final class DownLoadProviderImp implements AppMain {
     }
 
     private void createTable() {
-        try {
-            CenterServer.getInstances().createTable(DownLoadTable.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Access.run(new Execute() {
+            @Override
+            public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+                Business.getInstances().createTable(sqLiteDatabase,UrlTable.class);
+                Business.getInstances().createTable(sqLiteDatabase,DownLoadTable.class);
+                Business.getInstances().createTable(sqLiteDatabase, Download2UrlTable.class);
+            }
+
+            @Override
+            public void onExternalError() {
+
+            }
+        });
     }
 
     Cursor query(Uri uri, String[] projection, final String selection, final String[] selectionArgs, String sortOrder) {
@@ -75,7 +86,14 @@ public final class DownLoadProviderImp implements AppMain {
                 Access.runCustomThread(new Execute() {
                     @Override
                     public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-                        cursor[0] = sqLiteDatabase.rawQuery("select * from " + DownLoadTable.TB_NAME, null);
+                        cursor[0] = sqLiteDatabase.rawQuery(String.format(
+                                "select %s.*,%s.%s from %s,%s",
+                                DownLoadTable.TB_NAME,
+                                UrlTable.TB_NAME,
+                                "download_url",
+                                DownLoadTable.TB_NAME,
+                                UrlTable.TB_NAME
+                                ), null);
                         cursor[0].setNotificationUri(mContext.getContentResolver(), DownLoadProvider.CONTENT_QUERY_ALL_URI);
                     }
 
