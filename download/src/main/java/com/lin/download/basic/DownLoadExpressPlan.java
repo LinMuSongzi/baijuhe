@@ -12,19 +12,18 @@ import java.io.File;
 /**
  * Created by linhui on 2017/12/7.
  */
-public class DownLoadExpressPlan implements Plan, Runnable {
+public class DownLoadExpressPlan implements Plan {
 
 
     private DownLoadTable downLoadTable;
-    private int baseDownloadTaskId;
     private BaseDownloadTask baseDownloadTask;
+    private int baseDownloadTaskId;
     private int id;
 
     public DownLoadExpressPlan(int id) {
         this.id = id;
     }
-
-
+    @Override
     public void download() {
         if (baseDownloadTask == null) {
             DownLoadTable d1 = new DownLoadTable();
@@ -42,7 +41,6 @@ public class DownLoadExpressPlan implements Plan, Runnable {
             }
         }
     }
-
     private BaseDownloadTask download2() {
         baseDownloadTaskId = (baseDownloadTask = FileDownloader.getImpl().
                 create(downLoadTable.getDownLoadUrl()).setListener(new SimpleFileListenerImp() {
@@ -81,15 +79,15 @@ public class DownLoadExpressPlan implements Plan, Runnable {
         return baseDownloadTask;
 
     }
-
+    @Override
     public void run() {
         download();
     }
-
-    public int getId() {
+    @Override
+    public int getModelId() {
         return id;
     }
-
+    @Override
     public void delete() {
         if (baseDownloadTask != null) {
             if (baseDownloadTask.isRunning()) {
@@ -108,10 +106,10 @@ public class DownLoadExpressPlan implements Plan, Runnable {
         MyApp.app.getContentResolver().delete(
                 DownLoadProvider.CONTENT_DELETE_URI, "id = " + id, null);
     }
-
+    @Override
     public void reset() {
     }
-
+    @Override
     public void pause() {
         if (baseDownloadTask.isRunning()) {
             baseDownloadTask.pause();

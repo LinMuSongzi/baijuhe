@@ -1,6 +1,7 @@
 package com.lin.download.business;
 
 import com.lin.download.basic.DownLoadExpressPlan;
+import com.lin.download.basic.Plan;
 import com.lin.download.basic.provide.table.DownLoadTable;
 
 import java.util.HashSet;
@@ -9,7 +10,7 @@ import java.util.Set;
 /**
  * Created by linhui on 2017/12/11.
  */
-public class DownLoadViewController {
+public class DownLoadViewController implements Controller{
 
 
     private static DownLoadViewController downLoadViewController;
@@ -21,14 +22,13 @@ public class DownLoadViewController {
     private DownLoadViewController() {
     }
 
-    public static DownLoadViewController getInstance() {
+    public static Controller getInstance() {
         return downLoadViewController;
     }
 
-
-    private final Set<DownLoadExpressPlan> PLANS = new HashSet<DownLoadExpressPlan>() {
+    private final Set<Plan> PLANS = new HashSet<Plan>() {
         @Override
-        public boolean add(DownLoadExpressPlan o) {
+        public boolean add(Plan o) {
             synchronized (DownLoadViewController.this) {
                 return super.add(o);
             }
@@ -42,13 +42,12 @@ public class DownLoadViewController {
         }
     };
 
-
-    private DownLoadExpressPlan userDownLoadImp(int id) {
+    private Plan userDownLoadImp(int modelId) {
 
         synchronized (this) {
-            for (DownLoadExpressPlan downLoadImp : PLANS) {
+            for (Plan downLoadImp : PLANS) {
 
-                if (downLoadImp.getId() == id) {
+                if (downLoadImp.getModelId() == modelId) {
                     return downLoadImp;
                 }
 
@@ -57,30 +56,28 @@ public class DownLoadViewController {
         return null;
     }
 
-    public void pause(int id) {
-        DownLoadExpressPlan downLoadImp = userDownLoadImp(id);
+    public void pause(int tableId) {
+        Plan downLoadImp = userDownLoadImp(tableId);
         if (downLoadImp != null) {
             downLoadImp.pause();
         }
     }
 
-
-    public void download(int id) {
+    public void download(int tableId) {
         Runnable runnable;
-        DownLoadExpressPlan plan = userDownLoadImp(id);
+        Plan plan = userDownLoadImp(tableId);
         if (plan != null) {
             runnable = plan;
         } else {
-            DownLoadExpressPlan plan1 = new DownLoadExpressPlan(id);
+            Plan plan1 = new DownLoadExpressPlan(tableId);
             PLANS.add(plan1);
             runnable = plan1;
         }
         new Thread(runnable).start();
     }
 
-
-    public void delete(int id) {
-        DownLoadExpressPlan plan = userDownLoadImp(id);
+    public void delete(int tableId) {
+        Plan plan = userDownLoadImp(tableId);
         if (plan != null) {
             plan.delete();
             PLANS.remove(plan);
@@ -89,8 +86,8 @@ public class DownLoadViewController {
         }
     }
 
-    public void reset(int id) {
-        DownLoadExpressPlan plan = userDownLoadImp(id);
+    public void reset(int tableId) {
+        Plan plan = userDownLoadImp(tableId);
         if (plan != null) {
             plan.reset();
         }
