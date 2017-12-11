@@ -8,28 +8,26 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.lin.download.basic.DownLoadImp;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.basic.provide.table.DownLoadTable;
+import com.lin.download.business.DownLoadViewController;
 import com.lin.download.util.DownloadUtil;
 import com.lin.download.util.RecyclerViewCursorAdapter;
 
@@ -37,19 +35,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import dalvik.system.DexClassLoader;
-import y.com.sqlitesdk.framework.AppMain;
-import y.com.sqlitesdk.framework.business.Business;
 import y.com.sqlitesdk.framework.business.BusinessUtil;
-import y.com.sqlitesdk.framework.db.Access;
-import y.com.sqlitesdk.framework.sqliteinterface.Execute;
+import y.com.sqlitesdk.framework.util.MD5Util;
 
 public class FileListActivity extends AppCompatActivity {
 
     RecyclerView id_RecyclerView;
-    private List<DownLoadTable> loadEntities = new ArrayList<>();
+//    private List<DownLoadTable> loadEntities = new ArrayList<>();
     MyAdapter adapter;
     Loader<Cursor> loader;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +92,6 @@ public class FileListActivity extends AppCompatActivity {
         });
     }
 
-
     private class MyAdapter extends RecyclerViewCursorAdapter<MyViewHodler> {
 
         public MyAdapter(Context context, Cursor c, int flags) {
@@ -125,6 +119,7 @@ public class FileListActivity extends AppCompatActivity {
             final int id = downLoadTable.getId();
             final String name = downLoadTable.getName();
 
+            Log.i("downLoadTable", "onBindViewHolder: downLoadTable = "+downLoadTable);
 
 
             holder.id_file.setText(downLoadTable.getName());
@@ -145,7 +140,7 @@ public class FileListActivity extends AppCompatActivity {
             switch (downLoadTable.getStatus()) {
                 case DownLoadTable.COMPLETED:
                     holder.id_status_path.setText("完成");
-                    holder.id_status_path.setEnabled(true);
+//                    holder.id_status_path.setEnabled(true);
                     holder.id_progressBar.setProgress(100);
                     break;
                 case DownLoadTable.ERROR:
@@ -156,7 +151,7 @@ public class FileListActivity extends AppCompatActivity {
                     break;
                 case DownLoadTable.DOING:
                     holder.id_status_path.setText("正在下载");
-                    holder.id_status_path.setEnabled(false);
+//                    holder.id_status_path.setEnabled(false);
                     break;
                 case DownLoadTable.NOT_HAD:
                     holder.id_status_path.setText("可以下载");
@@ -178,6 +173,7 @@ public class FileListActivity extends AppCompatActivity {
                             download(id);
                             break;
                         case DownLoadTable.DOING:
+                            DownLoadViewController.getInstance().pause(id);
                             break;
                         case DownLoadTable.NOT_HAD:
                             download(id);
@@ -198,7 +194,6 @@ public class FileListActivity extends AppCompatActivity {
             return new MyViewHodler(v);
         }
     }
-
 
     private String getpaasdas(String apk){
 
@@ -228,11 +223,7 @@ public class FileListActivity extends AppCompatActivity {
     }
 
     private void download(int id) {
-
-
-        new Thread(new DownLoadImp(id)).start();
-
-
+        DownLoadViewController.getInstance().download(id);
     }
 
     private void deleteItem(final int id, String name) {
@@ -243,18 +234,7 @@ public class FileListActivity extends AppCompatActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Access.run(new Execute() {
-                            @Override
-                            public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-                                sqLiteDatabase.delete(DownLoadTable.TB_NAME, "id = ?", new String[]{String.valueOf(id)});
-                                getContentResolver().notifyChange(DownLoadProvider.CONTENT_QUERY_ALL_URI, null);
-                            }
-
-                            @Override
-                            public void onExternalError() {
-
-                            }
-                        });
+                        DownLoadViewController.getInstance().delete(id);
                         dialog.dismiss();
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -267,7 +247,7 @@ public class FileListActivity extends AppCompatActivity {
 
 
     public void createDefualtGame() {
-
+        List<DownLoadTable> loadEntities = new ArrayList<>();
         if (getSharedPreferences("aaa", MODE_PRIVATE).getInt("key", 1) == 100) {
             return;
         }
@@ -276,75 +256,47 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[0]);
         downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "王者荣耀.apk");
         downLoadTable.setName("王者荣耀");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[0]));
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[1]);
         downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "火影忍者.apk");
         downLoadTable.setName("火影忍者");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[1]));
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[2]);
         downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "天龙八部.apk");
         downLoadTable.setName("天龙八部");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[2]));
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[3]);
-        downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "微信.apk");
+        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "微信.apk");
         downLoadTable.setName("微信");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[3]));
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[4]);
         downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "QQ.apk");
         downLoadTable.setName("QQ");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[4]));
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadTable();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[5]);
         downLoadTable.setSavePath(getExternalFilesDir(null).getAbsolutePath() + File.separator + "开心消消乐.apk");
         downLoadTable.setName("开心消消乐");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[5]));
         loadEntities.add(downLoadTable);
 
         for (final DownLoadTable d : loadEntities) {
-
-            Access.run(new Execute() {
-                @Override
-                public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-                    Business.getInstances().insert(sqLiteDatabase, d);
-                    getContentResolver().notifyChange(DownLoadProvider.CONTENT_QUERY_ALL_URI, null);
-                }
-
-                @Override
-                public void onExternalError() {
-
-                }
-            });
+            DownLoadViewController.getInstance().addTask(d);
         }
-
-//        for (String url : DownloadUtil.GAME_LIST) {
-//
-//
-//
-//            final DownLoadTable downLoadTable = new DownLoadTable();
-//            downLoadTable.setDownloadUrl(url);
-//            downLoadTable.setSavePath(getFilesDir().getAbsolutePath()+);
-//            Access.run(new Execute() {
-//                @Override
-//                public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-//                    Business.getInstances().insert(sqLiteDatabase, downLoadTable);
-//                    getContentResolver().notifyChange(DownLoadProvider.CONTENT_QUERY_ALL_URI,null);
-//                }
-//
-//                @Override
-//                public void onExternalError() {
-//
-//                }
-//            });
-//        }
-
 
     }
 

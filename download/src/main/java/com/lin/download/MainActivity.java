@@ -12,13 +12,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lin.download.basic.provide.DownLoadProvider;
+
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadLargeFileListener;
 import com.liulishuo.filedownloader.FileDownloader;
-import com.liulishuo.filedownloader.model.FileDownloadModel;
-import com.yeyuanyuan.web.StrEntity;
-import com.yeyuanyuan.web.Zygote;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -94,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         id_puase_btn.setEnabled(false);
-        test();
+//        test();
 
 
 //        getContentResolver().delete(DownLoadProvider.CONTENT_DELETE_URI,null,null);
@@ -102,19 +99,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void test() {
-        EventBus.getDefault().register(this);
-        Zygote.createGet(StrEntity.class,"http://www.baidu.com",null).asyncExecute();
-
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessage(StrEntity strEntity){
-        if(strEntity.getRequet()!=null){
-
-        }
-    }
-
+//    private void test() {
+//        EventBus.getDefault().register(this);
+//        Zygote.createGet(StrEntity.class,"http://www.baidu.com",null).asyncExecute();
+//
+//    }
+//
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onMessage(StrEntity strEntity){
+//        if(strEntity.getRequet()!=null){
+//
+//        }
+//    }
+//
 
     public void onStartClick(View view) {
         if(baseDownloadTask.isUsing()){

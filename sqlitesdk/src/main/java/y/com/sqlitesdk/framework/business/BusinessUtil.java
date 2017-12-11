@@ -7,6 +7,8 @@ import android.database.Cursor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import y.com.sqlitesdk.framework.annotation.TBColumn;
@@ -37,7 +39,7 @@ public final class BusinessUtil {
      * @throws InstantiationException
      * @throws NoSuchFieldException
      */
-    public static <T extends IModel<T>> List<T> reflectCursor(Cursor cursor, Class<T> tClass)
+    public static <T extends IModel> List<T> reflectCursor(Cursor cursor, Class<T> tClass)
             throws IllegalAccessException, InstantiationException, NoSuchFieldException {
         List<T> list = new ArrayList<>();
         if (cursor.isClosed()) {
@@ -151,6 +153,25 @@ public final class BusinessUtil {
     }
 
     /**
+     * 获得IModel子类的所有属性
+     * @param c
+     * @return
+     */
+    public static List<Field> getAllFieldFlag(Class c){
+        List<Field> fields = new ArrayList<>();
+        Field[] findFields = c.getDeclaredFields();
+        fields.addAll(Arrays.asList(findFields));
+        Class<?>[] interfaces = c.getSuperclass().getInterfaces();
+        for(Class interfaceClass : interfaces){
+            if(interfaceClass.getName().equals(IModel.class.getName())){
+                fields.addAll(getAllFieldFlag(c.getSuperclass()));
+                break;
+            }
+        }
+        return fields;
+    }
+
+    /**
      * 创建构建表格数据库sql语句
      *
      * @param tClass
@@ -159,7 +180,12 @@ public final class BusinessUtil {
      * @throws Exception
      */
     public static <T extends IModel> String[] getTableStr(String tableName, Class<T> tClass) throws Exception {
-        Field[] fields = tClass.getDeclaredFields();
+        List<Field> fieldList = getAllFieldFlag(tClass);
+
+        Field[] fields = new Field[fieldList.size()];
+
+        fieldList.toArray(fields);
+
         List<String> sqls = new ArrayList<>();
         //语句拼装的组合
         List<String> sqlList = new ArrayList<>();

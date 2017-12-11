@@ -12,7 +12,7 @@ public abstract class BaseModel<T> implements IModel<T> {
     @TBPrimarykey
     protected int id;
     @TBColumn
-    protected long createTime = System.currentTimeMillis();
+    protected long create_time = System.currentTimeMillis();
 
     @Override
     public T clone() {
@@ -36,6 +36,6 @@ public abstract class BaseModel<T> implements IModel<T> {
 
     @Override
     public long getCreateTime() {
-        return createTime;
+        return create_time;
     }
 }

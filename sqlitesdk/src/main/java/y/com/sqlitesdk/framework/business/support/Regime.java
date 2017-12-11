@@ -26,7 +26,7 @@ public abstract class Regime<T extends IModel<T>> implements Plant,Execute {
 
     protected Regime(T t){
         model = t;
-        tableName = t.getTableName();
+//        tableName = t.getTableName();
     }
 
     public static final <T extends IModel<T>> Plant insert(T t){

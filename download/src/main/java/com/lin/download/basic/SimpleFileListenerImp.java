@@ -3,6 +3,7 @@ package com.lin.download.basic;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.lin.download.basic.provide.Factory;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 
@@ -17,6 +18,30 @@ public class SimpleFileListenerImp extends FileDownloadListener {
     protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
         Log.i(Factory.TAG, "pending: ");
 
+    }
+
+    @Override
+    protected void retry(BaseDownloadTask task, Throwable ex, int retryingTimes, int soFarBytes) {
+        super.retry(task, ex, retryingTimes, soFarBytes);
+        Log.i(Factory.TAG, "retry: ");
+    }
+
+    @Override
+    protected void connected(BaseDownloadTask task, String etag, boolean isContinue, int soFarBytes, int totalBytes) {
+        super.connected(task, etag, isContinue, soFarBytes, totalBytes);
+        Log.i(Factory.TAG, "connected: ");
+    }
+
+    @Override
+    protected void blockComplete(BaseDownloadTask task) throws Throwable {
+        super.blockComplete(task);
+        Log.i(Factory.TAG, "blockComplete: ");
+    }
+
+    @Override
+    protected void started(BaseDownloadTask task) {
+        super.started(task);
+        Log.i(Factory.TAG, "started: ");
     }
 
     @Override
@@ -37,6 +62,7 @@ public class SimpleFileListenerImp extends FileDownloadListener {
     @Override
     protected void error(BaseDownloadTask task, Throwable e) {
         Log.i(Factory.TAG, "error: ");
+        e.printStackTrace();
     }
 
     @Override

@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ZoomButton;
 
 import com.liulishuo.filedownloader.FileDownloader;
-import com.yeyuanyuan.web.Zygote;
-
 import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
 
 /**

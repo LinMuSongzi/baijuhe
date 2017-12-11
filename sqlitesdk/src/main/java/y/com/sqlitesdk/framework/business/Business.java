@@ -205,7 +205,7 @@ public final class Business {
 //    }
 
 
-    public <T extends IModel<T>> T queryById(SQLiteDatabase sqLiteDatabase, final T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public <T extends IModel> T queryById(SQLiteDatabase sqLiteDatabase, final T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
         T queryModel = null;
         Cursor cursor = sqLiteDatabase.query(BusinessUtil.getTbNmae(model.getClass()), null, "id = " + model.getId(), null, null, null, null);
         if (cursor.getCount() == 1) {

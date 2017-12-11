@@ -120,7 +120,7 @@ public class CenterServer implements TableServer {
         final T m = model.clone();
         Access.run(new Execute() {
             @Override
-            public void onExecute(SQLiteDatabase sqLiteDatabase) {
+            public void onExecute(SQLiteDatabase sqLiteDatabase) throws IllegalAccessException, InstantiationException {
                 long id = Business.getInstances().delete(sqLiteDatabase, m, where,args);
                 EventBus.getDefault().post(new DeleteRespone(id, m));
             }

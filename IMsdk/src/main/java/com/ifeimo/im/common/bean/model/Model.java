@@ -7,6 +7,12 @@ import y.com.sqlitesdk.framework.interface_model.IModel;
  */
 public abstract class Model<T> implements IModel<T> {
 
+
+    @Override
+    public long getCreateTime() {
+        return 0;
+    }
+
     @Override
     public T clone() {
         try {

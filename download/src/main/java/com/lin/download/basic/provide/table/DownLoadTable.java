@@ -15,17 +15,16 @@ public class DownLoadTable extends BaseModel<DownLoadTable> implements IBasicInf
 
     @TBTable
     public static final String TB_NAME = "tb_download_info";
+
     private boolean isNotitfyShowDownLoadStutas = false;
-    @TBPrimarykey
-    private int id;
-    @TBColumn
-    private long create_time = System.currentTimeMillis();
+
     @TBColumn()
     private String object_id;
     @TBColumn()
     private String name;
     @TBColumn()
     private String pic_url;
+    @TBColumn()
     private String download_url;
     @TBColumn(unique = true)
     private String save_path;
@@ -35,6 +34,16 @@ public class DownLoadTable extends BaseModel<DownLoadTable> implements IBasicInf
     private long toTal;
     @TBColumn()
     private long current;
+    @TBColumn(unique = true,notNull = true)
+    private String gameId;
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
 
     @Override
     public void setDownLoadId(String id) {
@@ -129,5 +138,21 @@ public class DownLoadTable extends BaseModel<DownLoadTable> implements IBasicInf
 
     public void setSavePath(String save_path) {
         this.save_path = save_path;
+    }
+
+    @Override
+    public String toString() {
+        return "DownLoadTable{" +
+                "isNotitfyShowDownLoadStutas=" + isNotitfyShowDownLoadStutas +
+                ", object_id='" + object_id + '\'' +
+                ", name='" + name + '\'' +
+                ", pic_url='" + pic_url + '\'' +
+                ", download_url='" + download_url + '\'' +
+                ", save_path='" + save_path + '\'' +
+                ", stutas=" + stutas +
+                ", toTal=" + toTal +
+                ", current=" + current +
+                ", gameId='" + gameId + '\'' +
+                '}';
     }
 }
