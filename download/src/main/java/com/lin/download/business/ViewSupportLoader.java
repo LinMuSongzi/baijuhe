@@ -21,13 +21,9 @@ import y.com.sqlitesdk.framework.db.Access;
  */
 public class ViewSupportLoader implements LoaderManager.LoaderCallbacks<Cursor>{
 
-
     private Loader<Cursor> loader;
-
     private AppCompatActivity context;
-
     private  CursorLoader cursorLoader;
-
     private RecyclerViewCursorAdapter adapter;
 
     public void init(AppCompatActivity context, int id, final CursorLoader cursorLoader, RecyclerViewCursorAdapter adapter){
@@ -35,7 +31,7 @@ public class ViewSupportLoader implements LoaderManager.LoaderCallbacks<Cursor>{
             this.context = context;
             this.cursorLoader = cursorLoader;
             this.adapter = adapter;
-            context.getLoaderManager().initLoader(id,null,this);
+            loader = this.context.getLoaderManager().initLoader(id,null,this);
         }
     }
 

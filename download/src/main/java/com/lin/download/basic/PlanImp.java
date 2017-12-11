@@ -67,7 +67,6 @@ public class PlanImp implements Plan {
                 BusinessWrap.error(downLoadTable.getId());
             }
         }).setPath(downLoadTable.getSavePath()).setSyncCallback(true).setAutoRetryTimes(AUTO_RETRY_TIMES)).start();
-//        downLoadTable.setDownLoadId(String.valueOf(i));
         return baseDownloadTask;
 
     }

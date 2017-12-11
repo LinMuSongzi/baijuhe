@@ -14,6 +14,6 @@ public interface Controller {
     void delete(int tableId);
     void reset(int tableId);
     void addTask(DownLoadTable downLoadTable);
-    void pauseAdd();
+    void pauseAll();
 
 }

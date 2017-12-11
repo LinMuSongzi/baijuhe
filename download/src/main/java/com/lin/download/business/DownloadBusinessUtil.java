@@ -30,11 +30,11 @@ class DownloadBusinessUtil {
     }
 
     public static void addOperatorRespone(OperatorRespone operatorRespone) {
-        DownLoadViewController.getOperatorRespones().add(operatorRespone);
+        DownLoadViewController.downLoadViewController.addOperatorRespone(operatorRespone);
     }
 
     public static void removeOperatorRespone(OperatorRespone operatorRespone) {
-        DownLoadViewController.getOperatorRespones().remove(operatorRespone);
+        DownLoadViewController.downLoadViewController.removeOperatorRespone(operatorRespone);
     }
 
     /**
@@ -43,14 +43,12 @@ class DownloadBusinessUtil {
      * @param downLoadTable
      */
     public static void addDownloadTask(final DownLoadTable downLoadTable) {
-//        final int c = code;
         Access.run(new Execute() {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 long leng = Business.getInstances().insert(sqLiteDatabase, downLoadTable);
                 if (leng > 0) {
                     notifyAllQueryDownload(null);
-//                    useOperatorRespone(c, leng);
                 }
             }
 

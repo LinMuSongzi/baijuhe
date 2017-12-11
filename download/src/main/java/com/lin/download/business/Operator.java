@@ -5,8 +5,8 @@ package com.lin.download.business;
  */
 public interface Operator {
 
-    void add(OperatorRespone operatorRespone);
+    void addOperatorRespone(OperatorRespone operatorRespone);
 
-    void remove(OperatorRespone operatorRespone);
+    void removeOperatorRespone(OperatorRespone operatorRespone);
 
 }

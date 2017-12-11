@@ -149,7 +149,7 @@ public class DownLoadViewController implements Controller, Operator {
     }
 
     @Override
-    public void pauseAdd() {
+    public void pauseAll() {
         FileDownloader.getImpl().pauseAll();
     }
 
@@ -158,14 +158,14 @@ public class DownLoadViewController implements Controller, Operator {
     }
 
     @Override
-    public void add(OperatorRespone operatorRespone) {
+    public void addOperatorRespone(OperatorRespone operatorRespone) {
         if (operatorRespone != null) {
             operatorRespones.add(operatorRespone);
         }
     }
 
     @Override
-    public void remove(OperatorRespone operatorRespone) {
+    public void removeOperatorRespone(OperatorRespone operatorRespone) {
         if (operatorRespone != null) {
             operatorRespones.remove(operatorRespone);
         }
