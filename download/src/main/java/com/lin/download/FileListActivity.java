@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.lin.download.basic.Entrance;
 import com.lin.download.basic.IBasicInfo;
 import com.lin.download.basic.provide.DownLoadProvider;
+import com.lin.download.business.ViewSupportLoader;
 import com.lin.download.business.model.DownLoadTable;
 import com.lin.download.business.OperatorRespone;
 import com.lin.download.util.DownloadUtil;
@@ -41,15 +42,10 @@ import y.com.sqlitesdk.framework.business.BusinessUtil;
 import y.com.sqlitesdk.framework.util.MD5Util;
 
 public class FileListActivity extends AppCompatActivity {
-
-    RecyclerView id_RecyclerView;
-    //    private List<DownLoadTable> loadEntities = new ArrayList<>();
-    MyAdapter adapter;
-    Loader<Cursor> loader;
-
     private final int CODE = 0x9131;
-
-    OperatorRespone operatorRespone = new OperatorRespone<List<DownLoadTable>>() {
+    private RecyclerView id_RecyclerView;
+    private MyAdapter adapter;
+    private OperatorRespone operatorRespone = new OperatorRespone<List<DownLoadTable>>() {
         @Override
         public int getCode() {
             return CODE;
@@ -58,7 +54,7 @@ public class FileListActivity extends AppCompatActivity {
         @Override
         public void success(List<DownLoadTable> object) {
 
-            if(!isFinishing()) {
+            if (!isFinishing()) {
 
                 for (DownLoadTable downLoadTable : object) {
 
@@ -78,24 +74,21 @@ public class FileListActivity extends AppCompatActivity {
 
         }
     };
-
-    @Override
+    private ViewSupportLoader loader = new ViewSupportLoader();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_list);
         createDefualtGame();
         init();
-
+        loader.init(this, 100, new CursorLoader(FileListActivity.this, DownLoadProvider.CONTENT_QUERY_ALL_URI
+                , null, null, null, null), adapter);
         Entrance.addOperatorRespone(operatorRespone);
         Entrance.findStutasDownloadList(CODE, IBasicInfo.PAUSE_STATUS);
     }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         Entrance.removeOperatorRespone(operatorRespone);
     }
-
     private void init() {
         id_RecyclerView = (RecyclerView) findViewById(R.id.id_RecyclerView);
         id_RecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -113,25 +106,130 @@ public class FileListActivity extends AppCompatActivity {
         });
         id_RecyclerView.setAdapter((adapter = new MyAdapter(this, null, 1)));
 
-        loader = getLoaderManager().initLoader(100, null, new LoaderManager.LoaderCallbacks<Cursor>() {
+//        loader = getLoaderManager().initLoader(100, null, new LoaderManager.LoaderCallbacks<Cursor>() {
+//
+//            @Override
+//            public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+//                return new CursorLoader(FileListActivity.this, DownLoadProvider.CONTENT_QUERY_ALL_URI
+//                        , null, null, null, null);
+//            }
+//
+//            @Override
+//            public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+//                adapter.swapCursor(data);
+//            }
+//
+//            @Override
+//            public void onLoaderReset(Loader<Cursor> loader) {
+//                adapter.swapCursor(null);
+//
+//            }
+//        });
+    }
 
+    private void download(int id) {
+        Entrance.download(id);
+    }
+
+    private void deleteItem(final int id, String name) {
+        new AlertDialog.Builder(this)
+                .setCancelable(false)
+                .setMessage(Html.fromHtml("是否删除 <font color=#a09f51>\"" + name + "\"</font> 下载？"))
+                .setTitle("提示")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Entrance.delete(id);
+                        dialog.dismiss();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
-            public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-                return new CursorLoader(FileListActivity.this, DownLoadProvider.CONTENT_QUERY_ALL_URI
-                        , null, null, null, null);
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
+        }).show();
+    }
 
-            @Override
-            public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-                adapter.swapCursor(data);
-            }
+    public void createDefualtGame() {
+        List<DownLoadTable> loadEntities = new ArrayList<>();
+        if (getSharedPreferences("aaa", MODE_PRIVATE).getInt("key", 1) == 100) {
+            return;
+        }
+        getSharedPreferences("aaa", MODE_PRIVATE).edit().putInt("key", 100).apply();
+        DownLoadTable downLoadTable = new DownLoadTable();
+        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[0]);
+        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                + "lin-download" + File.separator + "王者荣耀.apk");
+        downLoadTable.setName("王者荣耀");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[0]));
+        loadEntities.add(downLoadTable);
 
-            @Override
-            public void onLoaderReset(Loader<Cursor> loader) {
-                adapter.swapCursor(null);
+        downLoadTable = new DownLoadTable();
+        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[1]);
+        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                + "lin-download" + File.separator + "火影忍者.apk");
+        downLoadTable.setName("火影忍者");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[1]));
+        loadEntities.add(downLoadTable);
 
-            }
-        });
+        downLoadTable = new DownLoadTable();
+        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[2]);
+        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                + "lin-download" + File.separator + "天龙八部.apk");
+        downLoadTable.setName("天龙八部");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[2]));
+        loadEntities.add(downLoadTable);
+
+        downLoadTable = new DownLoadTable();
+        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[3]);
+        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                + "lin-download" + File.separator + "微信.apk");
+        downLoadTable.setName("微信");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[3]));
+        loadEntities.add(downLoadTable);
+
+        downLoadTable = new DownLoadTable();
+        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[4]);
+        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                + "lin-download" + File.separator + "QQ.apk");
+        downLoadTable.setName("QQ");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[4]));
+        loadEntities.add(downLoadTable);
+
+        downLoadTable = new DownLoadTable();
+        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[5]);
+        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                + "lin-download" + File.separator + "开心消消乐.apk");
+        downLoadTable.setName("开心消消乐");
+        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[5]));
+        loadEntities.add(downLoadTable);
+
+        for (final DownLoadTable d : loadEntities) {
+            Entrance.addTask(d);
+        }
+
+    }
+
+    private static class MyViewHodler extends RecyclerView.ViewHolder {
+
+        TextView id_file;
+        ProgressBar id_progressBar;
+        TextView id_size;
+        TextView id_save_path;
+        TextView id_download_path;
+        TextView id_status_path;
+        TextView id_progressBar_tv;
+
+        public MyViewHodler(View itemView) {
+            super(itemView);
+            id_file = (TextView) itemView.findViewById(R.id.id_file);
+            id_size = (TextView) itemView.findViewById(R.id.id_size);
+            id_save_path = (TextView) itemView.findViewById(R.id.id_save_path);
+            id_download_path = (TextView) itemView.findViewById(R.id.id_download_path);
+            id_progressBar = (ProgressBar) itemView.findViewById(R.id.id_progressBar);
+            id_status_path = (TextView) itemView.findViewById(R.id.id_status_path);
+            id_progressBar_tv = (TextView) itemView.findViewById(R.id.id_progressBar_tv);
+        }
     }
 
     private class MyAdapter extends RecyclerViewCursorAdapter<MyViewHodler> {
@@ -204,7 +302,7 @@ public class FileListActivity extends AppCompatActivity {
 //                    v.setEnabled(false);
                     switch (stutas) {
                         case DownLoadTable.COMPLETED_STATUS:
-                            launchApp(getpaasdas(savePath), savePath);
+                            Entrance.launchApp(v.getContext(), savePath);
                             break;
                         case DownLoadTable.ERROR_STATUS:
                             download(id);
@@ -234,140 +332,4 @@ public class FileListActivity extends AppCompatActivity {
             return new MyViewHodler(v);
         }
     }
-
-    private String getpaasdas(String apk) {
-
-        return getPackageManager().getPackageArchiveInfo(apk, PackageManager.GET_ACTIVITIES).packageName;
-    }
-
-    private boolean isInstallByread(String packageName) {
-        return new File("/data/data/" + packageName).exists();
-    }
-
-    private void launchApp(String packageName, String appPath) {
-        // 启动目标应用
-        if (isInstallByread(packageName)) {
-            // 获取目标应用安装包的Intent
-            Intent intent = getPackageManager().getLaunchIntentForPackage(
-                    packageName);
-            startActivity(intent);
-        }
-        // 安装目标应用
-        else {
-            Intent intent = new Intent();
-            // 设置目标应用安装包路径
-            intent.setDataAndType(Uri.fromFile(new File(appPath)),
-                    "application/vnd.android.package-archive");
-            startActivity(intent);
-        }
-    }
-
-    private void download(int id) {
-        Entrance.download(id);
-    }
-
-    private void deleteItem(final int id, String name) {
-        new AlertDialog.Builder(this)
-                .setCancelable(false)
-                .setMessage(Html.fromHtml("是否删除 <font color=#a09f51>\"" + name + "\"</font> 下载？"))
-                .setTitle("提示")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Entrance.delete(id);
-                        dialog.dismiss();
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).show();
-    }
-
-
-    public void createDefualtGame() {
-        List<DownLoadTable> loadEntities = new ArrayList<>();
-        if (getSharedPreferences("aaa", MODE_PRIVATE).getInt("key", 1) == 100) {
-            return;
-        }
-        getSharedPreferences("aaa", MODE_PRIVATE).edit().putInt("key", 100).apply();
-        DownLoadTable downLoadTable = new DownLoadTable();
-        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[0]);
-        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-                + "lin-download" + File.separator + "王者荣耀.apk");
-        downLoadTable.setName("王者荣耀");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[0]));
-        loadEntities.add(downLoadTable);
-
-        downLoadTable = new DownLoadTable();
-        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[1]);
-        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-                + "lin-download" + File.separator + "火影忍者.apk");
-        downLoadTable.setName("火影忍者");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[1]));
-        loadEntities.add(downLoadTable);
-
-        downLoadTable = new DownLoadTable();
-        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[2]);
-        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-                + "lin-download" + File.separator + "天龙八部.apk");
-        downLoadTable.setName("天龙八部");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[2]));
-        loadEntities.add(downLoadTable);
-
-        downLoadTable = new DownLoadTable();
-        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[3]);
-        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-                + "lin-download" + File.separator + "微信.apk");
-        downLoadTable.setName("微信");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[3]));
-        loadEntities.add(downLoadTable);
-
-        downLoadTable = new DownLoadTable();
-        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[4]);
-        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-                + "lin-download" + File.separator + "QQ.apk");
-        downLoadTable.setName("QQ");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[4]));
-        loadEntities.add(downLoadTable);
-
-        downLoadTable = new DownLoadTable();
-        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[5]);
-        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-                + "lin-download" + File.separator + "开心消消乐.apk");
-        downLoadTable.setName("开心消消乐");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[5]));
-        loadEntities.add(downLoadTable);
-
-        for (final DownLoadTable d : loadEntities) {
-            Entrance.addTask(d);
-        }
-
-    }
-
-
-    private static class MyViewHodler extends RecyclerView.ViewHolder {
-
-        TextView id_file;
-        ProgressBar id_progressBar;
-        TextView id_size;
-        TextView id_save_path;
-        TextView id_download_path;
-        TextView id_status_path;
-        TextView id_progressBar_tv;
-
-        public MyViewHodler(View itemView) {
-            super(itemView);
-            id_file = (TextView) itemView.findViewById(R.id.id_file);
-            id_size = (TextView) itemView.findViewById(R.id.id_size);
-            id_save_path = (TextView) itemView.findViewById(R.id.id_save_path);
-            id_download_path = (TextView) itemView.findViewById(R.id.id_download_path);
-            id_progressBar = (ProgressBar) itemView.findViewById(R.id.id_progressBar);
-            id_status_path = (TextView) itemView.findViewById(R.id.id_status_path);
-            id_progressBar_tv = (TextView) itemView.findViewById(R.id.id_progressBar_tv);
-        }
-    }
-
-
 }

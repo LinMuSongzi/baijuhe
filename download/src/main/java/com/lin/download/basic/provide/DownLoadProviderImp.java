@@ -20,6 +20,7 @@ import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
 import y.com.sqlitesdk.framework.business.Business;
 import y.com.sqlitesdk.framework.db.Access;
 import y.com.sqlitesdk.framework.sqliteinterface.Execute;
+import y.com.sqlitesdk.framework.util.StringDdUtil;
 
 /**
  * Created by linhui on 2017/12/7.
@@ -68,9 +69,11 @@ public final class DownLoadProviderImp implements AppMain {
         });
     }
 
-    Cursor query(Uri uri, String[] projection, final String selection, final String[] selectionArgs, String sortOrder) {
+    Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
         final Cursor[] cursor = new Cursor[1];
+
+        final String selection_ = StringDdUtil.isNull(selection) ? "" : selection;
 
         switch (DownLoadProvider.matcher.match(uri)) {
             case DownLoadProvider.QUERY_ALL_CODE:
@@ -78,7 +81,7 @@ public final class DownLoadProviderImp implements AppMain {
                     @Override
                     public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                         cursor[0] = sqLiteDatabase.rawQuery(
-                                "select * from " + DownLoadTable.TB_NAME, null);
+                                "select * from " + DownLoadTable.TB_NAME + selection_, null);
                         cursor[0].setNotificationUri(mContext.getContentResolver(), DownLoadProvider.CONTENT_QUERY_ALL_URI);
                     }
 

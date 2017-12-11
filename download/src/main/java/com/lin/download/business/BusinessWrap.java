@@ -1,6 +1,9 @@
 package com.lin.download.business;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
+import android.net.Uri;
 
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.model.DownLoadTable;
@@ -118,4 +121,23 @@ public class BusinessWrap {
         }
 
     }
+
+    public static void launchApp(Context context,String packageName, String appPath) {
+        // 启动目标应用
+        if (new File("/data/data/" + packageName).exists()) {
+            // 获取目标应用安装包的Intent
+            Intent intent = context.getPackageManager().getLaunchIntentForPackage(
+                    packageName);
+            context.startActivity(intent);
+        }
+        // 安装目标应用
+        else {
+            Intent intent = new Intent();
+            // 设置目标应用安装包路径
+            intent.setDataAndType(Uri.fromFile(new File(appPath)),
+                    "application/vnd.android.package-archive");
+            context.startActivity(intent);
+        }
+    }
+
 }

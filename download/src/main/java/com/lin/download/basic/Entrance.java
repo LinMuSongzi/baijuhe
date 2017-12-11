@@ -1,6 +1,7 @@
 package com.lin.download.basic;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 
 import com.lin.download.business.model.DownLoadTable;
@@ -42,23 +43,24 @@ public class Entrance {
 
     public static void addTask(DownLoadTable downLoadTable) {DownLoadViewController.getInstance().addTask(downLoadTable);}
 
-    /**
-     * 唤醒contentprovide
-     *
-     * @param c
-     */
     public static void notifyAllQueryDownload(ContentObserver c) {
         BusinessWrap.notifyAllQueryDownload(c);
     }
 
-    /**
-     * 找到对应状态的下载文件
-     *
-     * @param code
-     * @param stutas
-     */
     public static void findStutasDownloadList(int code, int stutas) {
         BusinessWrap.findStutasDownloadList(code, stutas);
+    }
+
+    public static void launchApp(Context context,String packageName, String appPath){
+        BusinessWrap.launchApp(context,packageName,appPath);
+    }
+
+    public static void launchApp(Context context, String appPath){
+        BusinessWrap.launchApp(context,getPackageName(context,appPath),appPath);
+    }
+
+    public static String getPackageName(Context context,String appPath) {
+        return context.getPackageManager().getPackageArchiveInfo(appPath, PackageManager.GET_ACTIVITIES).packageName;
     }
 
 }
