@@ -1,12 +1,9 @@
-package com.lin.download.basic.provide.table;
+package com.lin.download.business.model;
 
 import com.lin.download.basic.IBasicInfo;
-import com.lin.download.business.model.BaseModel;
 
 import y.com.sqlitesdk.framework.annotation.TBColumn;
-import y.com.sqlitesdk.framework.annotation.TBPrimarykey;
 import y.com.sqlitesdk.framework.annotation.TBTable;
-import y.com.sqlitesdk.framework.interface_model.IModel;
 
 /**
  * Created by linhui on 2017/12/7.
@@ -29,13 +26,23 @@ public class DownLoadTable extends BaseModel<DownLoadTable> implements IBasicInf
     @TBColumn(unique = true)
     private String save_path;
     @TBColumn(notNull = true)
-    private int stutas = NOT_HAD;
+    private int status = NOT_HAD_STATUS;
     @TBColumn()
     private long toTal;
     @TBColumn()
     private long current;
     @TBColumn(unique = true,notNull = true)
     private String gameId;
+    @TBColumn(notNull = true)
+    private int donwloadType = GAME_FEIMO_TYPE;
+
+    public int getDonwloadType() {
+        return donwloadType;
+    }
+
+    public void setDonwloadType(int donwloadType) {
+        this.donwloadType = donwloadType;
+    }
 
     public String getGameId() {
         return gameId;
@@ -97,11 +104,11 @@ public class DownLoadTable extends BaseModel<DownLoadTable> implements IBasicInf
 
     @Override
     public int getStatus() {
-        return stutas;
+        return status;
     }
 
-    public void setStutas(int stutas) {
-        this.stutas = stutas;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public void setToTal(long toTal) {
@@ -149,7 +156,7 @@ public class DownLoadTable extends BaseModel<DownLoadTable> implements IBasicInf
                 ", pic_url='" + pic_url + '\'' +
                 ", download_url='" + download_url + '\'' +
                 ", save_path='" + save_path + '\'' +
-                ", stutas=" + stutas +
+                ", status=" + status +
                 ", toTal=" + toTal +
                 ", current=" + current +
                 ", gameId='" + gameId + '\'' +

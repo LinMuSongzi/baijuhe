@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ZoomButton;
 
+import com.lin.download.basic.Entrance;
 import com.liulishuo.filedownloader.FileDownloader;
 import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
 
@@ -13,14 +14,12 @@ import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
  */
 public class MyApp extends Application {
 
-    public static MyApp app;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        app = this;
 
-        FileDownloader.setup(this);
+        Entrance.init(this);
+
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override
             public void uncaughtException(Thread t, Throwable e) {

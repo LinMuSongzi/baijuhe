@@ -9,12 +9,17 @@ import java.io.Serializable;
  */
 public interface IBasicInfo extends UrlInfo{
 
+    int WAITTING = 150;
+    int PAUSE_STATUS = 100;
+    int COMPLETED_STATUS = 200;
+    int DOING_STATUS = 201;
+    int ERROR_STATUS = 402;
+    int NOT_HAD_STATUS = 400;
 
-    int PAUSE = 100;
-    int COMPLETED = 200;
-    int DOING = 201;
-    int ERROR = 402;
-    int NOT_HAD = 400;
+    int GAME_FEIMO_TYPE = 1000;
+    int PIC_TYPE = 1001;
+    int MUSIC_TYPE = 1050;
+    int VIDEO_TYPE = 1100;
 
     void setDownLoadId(String id);
 

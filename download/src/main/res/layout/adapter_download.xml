@@ -31,8 +31,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:max="100"
-            android:maxHeight="10dp"
+            android:maxHeight="20dp"
             android:minHeight="10dp"
+            android:background="@drawable/shape_bg"
             android:progress="0" />
 
         <TextView
@@ -74,6 +75,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
+            android:textColor="#1b211d"
             android:background="?attr/selectableItemBackground"
             android:layout_marginBottom="10dp"/>
 

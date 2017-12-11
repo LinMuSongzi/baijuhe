@@ -11,10 +11,9 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.lin.download.BuildConfig;
-import com.lin.download.basic.provide.table.DownLoadTable;
+import com.lin.download.business.model.DownLoadTable;
 
 import y.com.sqlitesdk.framework.AppMain;
 import y.com.sqlitesdk.framework.IfeimoSqliteSdk;

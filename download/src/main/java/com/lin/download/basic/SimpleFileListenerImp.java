@@ -1,14 +1,9 @@
 package com.lin.download.basic;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.lin.download.basic.provide.Factory;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
-
-import y.com.sqlitesdk.framework.db.Access;
-import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 
 /**
  * Created by linhui on 2017/12/7.
@@ -16,57 +11,57 @@ import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 public class SimpleFileListenerImp extends FileDownloadListener {
     @Override
     protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-        Log.i(Factory.TAG, "pending: ");
+        Log.i(Entrance.TAG, "pending: ");
 
     }
 
     @Override
     protected void retry(BaseDownloadTask task, Throwable ex, int retryingTimes, int soFarBytes) {
         super.retry(task, ex, retryingTimes, soFarBytes);
-        Log.i(Factory.TAG, "retry: ");
+        Log.i(Entrance.TAG, "retry: ");
     }
 
     @Override
     protected void connected(BaseDownloadTask task, String etag, boolean isContinue, int soFarBytes, int totalBytes) {
         super.connected(task, etag, isContinue, soFarBytes, totalBytes);
-        Log.i(Factory.TAG, "connected: ");
+        Log.i(Entrance.TAG, "connected: ");
     }
 
     @Override
     protected void blockComplete(BaseDownloadTask task) throws Throwable {
         super.blockComplete(task);
-        Log.i(Factory.TAG, "blockComplete: ");
+        Log.i(Entrance.TAG, "blockComplete: ");
     }
 
     @Override
     protected void started(BaseDownloadTask task) {
         super.started(task);
-        Log.i(Factory.TAG, "started: ");
+        Log.i(Entrance.TAG, "started: ");
     }
 
     @Override
     protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-        Log.i(Factory.TAG, "progress: ");
+        Log.i(Entrance.TAG, "progress: ");
     }
 
     @Override
     protected void completed(BaseDownloadTask task) {
-        Log.i(Factory.TAG, "completed: ");
+        Log.i(Entrance.TAG, "completed: ");
     }
 
     @Override
     protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-        Log.i(Factory.TAG, "paused: ");
+        Log.i(Entrance.TAG, "paused: ");
     }
 
     @Override
     protected void error(BaseDownloadTask task, Throwable e) {
-        Log.i(Factory.TAG, "error: ");
+        Log.i(Entrance.TAG, "error: ");
         e.printStackTrace();
     }
 
     @Override
     protected void warn(BaseDownloadTask task) {
-        Log.i(Factory.TAG, "warn: ");
+        Log.i(Entrance.TAG, "warn: ");
     }
 }

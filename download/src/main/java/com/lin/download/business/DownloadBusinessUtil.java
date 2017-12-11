@@ -2,18 +2,11 @@ package com.lin.download.business;
 
 import android.database.ContentObserver;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.lin.download.MyApp;
 import com.lin.download.basic.provide.DownLoadProvider;
-import com.lin.download.basic.provide.table.DownLoadTable;
-import com.lin.download.business.model.Download2UrlTable;
-import com.lin.download.business.model.UrlTable;
+import com.lin.download.business.model.DownLoadTable;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import y.com.sqlitesdk.framework.business.Business;
 import y.com.sqlitesdk.framework.business.BusinessUtil;
@@ -23,33 +16,11 @@ import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 /**
  * Created by linhui on 2017/12/9.
  */
-public class DownloadBusiness {
+class DownloadBusinessUtil {
 
-
-    private Set<OperatorRespone> operatorRespones = new HashSet<>();
-    private AtomicBoolean isLeave = new AtomicBoolean(false);
-
-    public void leave() {
-        synchronized (this) {
-            isLeave.set(true);
-            operatorRespones.clear();
-            operatorRespones = null;
-        }
-    }
-
-    private void useOperatorRespone(int code, Object object) {
-        if (!isLeave.get()) {
-            final OperatorRespone operatorRespone
-                    = findOperatorRespone(code);
-            if (operatorRespone != null) {
-                operatorRespone.success(object);
-            }
-        }
-    }
-
-    private OperatorRespone findOperatorRespone(int code) {
-        synchronized (this) {
-            for (OperatorRespone operatorRespone : operatorRespones) {
+    public static OperatorRespone findOperatorRespone(int code) {
+        synchronized (DownLoadViewController.getOperatorRespones()) {
+            for (OperatorRespone operatorRespone : DownLoadViewController.getOperatorRespones()) {
                 if (operatorRespone.getCode() == code) {
                     return operatorRespone;
                 }
@@ -58,22 +29,13 @@ public class DownloadBusiness {
         }
     }
 
-    public void addOperatorRespone(OperatorRespone operatorRespone) {
-        if (operatorRespone != null) {
-            synchronized (this) {
-                operatorRespones.add(operatorRespone);
-            }
-        }
+    public static void addOperatorRespone(OperatorRespone operatorRespone) {
+        DownLoadViewController.getOperatorRespones().add(operatorRespone);
     }
 
-    public void removeOperatorRespone(OperatorRespone operatorRespone) {
-        if (operatorRespone != null) {
-            synchronized (this) {
-                operatorRespones.remove(operatorRespone);
-            }
-        }
+    public static void removeOperatorRespone(OperatorRespone operatorRespone) {
+        DownLoadViewController.getOperatorRespones().remove(operatorRespone);
     }
-
 
     /**
      * 添加一个下载任务任务
@@ -100,15 +62,21 @@ public class DownloadBusiness {
 
     }
 
-
+    /**
+     * 暂停
+     *
+     * @param id
+     * @param soFarBytes
+     * @param totalBytes
+     */
     public static void progress(int id, final long soFarBytes, final long totalBytes) {
         final int i = id;
         Access.run(new Execute() {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 String sql = String.format(
-                        "update %s set stutas = %d,current = %d,toTal = %d where id = %d",
-                        DownLoadTable.TB_NAME, DownLoadTable.DOING, soFarBytes, totalBytes, i);
+                        "update %s set status = %d,current = %d,toTal = %d where id = %d",
+                        DownLoadTable.TB_NAME, DownLoadTable.DOING_STATUS, soFarBytes, totalBytes, i);
                 sqLiteDatabase.execSQL(sql);
                 notifyAllQueryDownload(null);
             }
@@ -120,14 +88,19 @@ public class DownloadBusiness {
         });
     }
 
+    /**
+     * 完成
+     *
+     * @param id
+     */
     public static void completed(int id) {
         final int i = id;
         Access.run(new Execute() {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 String sql = String.format(
-                        "update %s set stutas = %d where id = %d",
-                        DownLoadTable.TB_NAME, DownLoadTable.COMPLETED, i);
+                        "update %s set status = %d where id = %d",
+                        DownLoadTable.TB_NAME, DownLoadTable.COMPLETED_STATUS, i);
 //                Log.i(TAG, "completed: "+sql);
 
                 sqLiteDatabase.execSQL(sql);
@@ -139,17 +112,21 @@ public class DownloadBusiness {
 
             }
         });
-
     }
 
+    /**
+     * 暂停
+     *
+     * @param id
+     */
     public static void paused(int id) {
         final int i = id;
         Access.run(new Execute() {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 String sql = String.format(
-                        "update %s set stutas = %d where id = %d",
-                        DownLoadTable.TB_NAME, DownLoadTable.PAUSE, i);
+                        "update %s set status = %d where id = %d",
+                        DownLoadTable.TB_NAME, DownLoadTable.PAUSE_STATUS, i);
 
 
 //                Log.i(TAG, "paused: "+sql);
@@ -166,6 +143,12 @@ public class DownloadBusiness {
 
     }
 
+    /**
+     * 错误
+     * 有可能没有存储权限，或者磁盘不够，或者网络错误
+     *
+     * @param id
+     */
     public static void error(int id) {
 
         final int i = id;
@@ -175,8 +158,8 @@ public class DownloadBusiness {
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
 
                 String sql = String.format(
-                        "update %s set stutas = %d where id = %d",
-                        DownLoadTable.TB_NAME, DownLoadTable.ERROR, i);
+                        "update %s set status = %d where id = %d",
+                        DownLoadTable.TB_NAME, DownLoadTable.ERROR_STATUS, i);
 
 //                Log.i(TAG, "paused: "+sql);
 
@@ -192,7 +175,12 @@ public class DownloadBusiness {
 
     }
 
-
+    /**
+     * id查找
+     *
+     * @param d
+     * @return
+     */
     public static DownLoadTable queryById(final DownLoadTable d) {
         final DownLoadTable[] downLoadTable = {null};
         Access.runCustomThread(new Execute() {
@@ -209,13 +197,22 @@ public class DownloadBusiness {
         return downLoadTable[0];
     }
 
-
+    /**
+     * 唤醒contentprovide
+     *
+     * @param c
+     */
     public static void notifyAllQueryDownload(ContentObserver c) {
-        MyApp.app.getContentResolver().notifyChange(DownLoadProvider.CONTENT_QUERY_ALL_URI, c);
+        DownLoadViewController.getContext().getContentResolver().notifyChange(DownLoadProvider.CONTENT_QUERY_ALL_URI, c);
     }
 
-
-    public void findStutasDownloadList(final int code, final int stutas) {
+    /**
+     * 找到对应状态的下载文件
+     *
+     * @param code
+     * @param stutas
+     */
+    public static void findStutasDownloadList(final int code, final int stutas) {
         Access.run(new Execute() {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
@@ -229,8 +226,20 @@ public class DownloadBusiness {
 
             }
         });
+    }
 
-
+    /**
+     * 使用操作回调
+     *
+     * @param code   标识
+     * @param object 回调对象
+     */
+    private static void useOperatorRespone(int code, Object object) {
+        final OperatorRespone operatorRespone
+                = findOperatorRespone(code);
+        if (operatorRespone != null) {
+            operatorRespone.success(object);
+        }
     }
 
 }
