@@ -205,11 +205,21 @@ public final class Business {
 //    }
 
 
-    public <T extends IModel> T queryById(SQLiteDatabase sqLiteDatabase, final T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public <T extends IModel> T queryById(SQLiteDatabase sqLiteDatabase,T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
         T queryModel = null;
         Cursor cursor = sqLiteDatabase.query(BusinessUtil.getTbNmae(model.getClass()), null, "id = " + model.getId(), null, null, null, null);
         if (cursor.getCount() == 1) {
-            queryModel = (T) BusinessUtil.reflectCursor(cursor, model.getClass()).get(0);
+            queryModel = (T) BusinessUtil.reflectCursorOne(cursor, model.getClass());
+        }
+        return queryModel;
+    }
+
+    public <T extends IModel> T queryById(SQLiteDatabase sqLiteDatabase, int id,Class<T> tClass) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+        T queryModel = null;
+        Cursor cursor = sqLiteDatabase.query(BusinessUtil.getTbNmae(tClass),
+                null, "id = ?", new String[]{String.valueOf(id)}, null, null, null);
+        if (cursor.getCount() == 1) {
+            queryModel = BusinessUtil.reflectCursorOne(cursor, tClass);
         }
         return queryModel;
     }
