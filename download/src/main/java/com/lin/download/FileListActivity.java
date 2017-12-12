@@ -238,7 +238,7 @@ public class FileListActivity extends AppCompatActivity {
             DownLoadInfo downLoadTable = null;
 
             try {
-                downLoadTable = BusinessUtil.reflectCursorOne(cursor, DownLoadInfo.class);
+                downLoadTable = BusinessUtil.reflectCursorOne(cursor, DownLoadInfo.class,false);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InstantiationException e) {

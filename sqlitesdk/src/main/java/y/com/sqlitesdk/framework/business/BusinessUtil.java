@@ -91,11 +91,12 @@ public final class BusinessUtil {
      * @throws InstantiationException
      * @throws NoSuchFieldException
      */
-    public static <T extends IModel> T reflectCursorOne(Cursor cursor, Class<T> tClass)
+    public static <T extends IModel> T reflectCursorOne(Cursor cursor, Class<T> tClass,boolean isMove)
             throws IllegalAccessException, InstantiationException, NoSuchFieldException {
 
-
-        cursor.moveToFirst();
+        if (isMove) {
+            cursor.moveToFirst();
+        }
 
         String[] column = new String[cursor.getColumnCount()];
 

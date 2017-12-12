@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
+import com.lin.download.basic.IBasicInfo;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.model.DownLoadInfo;
 
@@ -16,6 +17,7 @@ import java.util.List;
 import y.com.sqlitesdk.framework.business.Business;
 import y.com.sqlitesdk.framework.business.BusinessUtil;
 import y.com.sqlitesdk.framework.db.Access;
+import y.com.sqlitesdk.framework.interface_model.IModel;
 import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 import y.com.sqlitesdk.framework.util.StringDdUtil;
 
@@ -200,7 +202,7 @@ class WorkUtil {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 List<DownLoadInfo> loadTables = BusinessUtil.reflectCursor(sqLiteDatabase.rawQuery("select * from " +
-                        DownLoadInfo.TB_NAME + " where stutas = " + stutas, null), DownLoadInfo.class);
+                        DownLoadInfo.TB_NAME + " where status = " + stutas, null), DownLoadInfo.class);
                 useOperatorRespone(code, loadTables);
             }
 
@@ -226,51 +228,47 @@ class WorkUtil {
     }
 
     /**
+     * 删除某个id，刷新页面
+     *
+     * @param tableId
+     */
+    static void resolverDeleteInfoById(int tableId) {
+        if (tableId > 0) {
+            WorkController.getContext().getContentResolver().delete(
+                    DownLoadProvider.CONTENT_DELETE_URI, "id = ?",
+                    new String[]{String.valueOf(tableId)});
+        }
+    }
+
+    /**
      * 删除
      *
      * @param tableId
      * @param savePath
      */
     static void delete(final int tableId, final String savePath) {
-        WorkController.downLoadViewController.getHandler().post(new Runnable() {
-            @Override
-            public void run() {
 
-                boolean deleteFileFlag = false;
-                if (!StringDdUtil.isNull(savePath)) {
-                    File f = new File(savePath);
-                    try {
-                        if (!f.delete()) {
-                            f = new File(savePath + ".temp");
-                            if (f.delete()) {
-                                deleteFileFlag = true;
-                            }
-                        } else {
-                            deleteFileFlag = true;
-                        }
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
 
-                if (tableId > 0) {
-                    WorkController.getContext().getContentResolver().delete(
-                            DownLoadProvider.CONTENT_DELETE_URI, "id = ?",
-                            new String[]{String.valueOf(tableId)});
-                } else if (!deleteFileFlag && !StringDdUtil.isNull(savePath)) {
-                    DownLoadInfo downLoadInfo = WorkUtil.getInfoBySavePath(savePath);
-                    if (downLoadInfo.getId() > 0) {
-                        WorkController.getContext().getContentResolver().delete(
-                                DownLoadProvider.CONTENT_DELETE_URI, "id = ?",
-                                new String[]{String.valueOf(downLoadInfo.getId())});
-                    }
-                }
+        if (tableId > 0 && !StringDdUtil.isNull(savePath)) {
+            deleteSavePath(savePath);
+            resolverDeleteInfoById(tableId);
+        } else if (tableId > 0 && StringDdUtil.isNull(savePath)) {
+            IBasicInfo info = WorkUtil.getInfoById(tableId);
+            deleteSavePath(info == null ? "" : info.getSavePath());
+            resolverDeleteInfoById(tableId);
+        } else if (tableId < 0 && !StringDdUtil.isNull(savePath)) {
+            deleteSavePath(savePath);
+            IModel info = WorkUtil.getInfoBySavePath(savePath);
+            if (info != null && info.getId() > 0) {
+                resolverDeleteInfoById(info.getId());
             }
-        });
+        }
+
     }
 
     /**
      * 根据存储路径获取单行消息
+     *
      * @param savePath
      * @return
      */
@@ -283,7 +281,8 @@ class WorkUtil {
                         sqLiteDatabase.query(
                                 DownLoadInfo.TB_NAME, null, "save_path = ?",
                                 new String[]{savePath}, null, null, null),
-                        DownLoadInfo.class);
+                        DownLoadInfo.class,
+                        true);
             }
 
             @Override
@@ -344,25 +343,16 @@ class WorkUtil {
      * @param tableid
      */
     static void reset(final int tableid) {
+        IBasicInfo downLoadInfo = WorkUtil.getInfoById(tableid);
 
-        WorkController.downLoadViewController.getHandler().post(new Runnable() {
-            @Override
-            public void run() {
-
-                DownLoadInfo downLoadInfo = WorkUtil.getInfoById(tableid);
-
-                if (downLoadInfo != null) {
-                    deleteSavePath(downLoadInfo.getSavePath());
-                }
-
-            }
-        });
-
-
+        if (downLoadInfo != null) {
+            deleteSavePath(downLoadInfo.getSavePath());
+        }
     }
 
     /**
      * 删除源文件
+     *
      * @param savePath
      */
     static void deleteSavePath(String savePath) {

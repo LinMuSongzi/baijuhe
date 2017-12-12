@@ -209,7 +209,7 @@ public final class Business {
         T queryModel = null;
         Cursor cursor = sqLiteDatabase.query(BusinessUtil.getTbNmae(model.getClass()), null, "id = " + model.getId(), null, null, null, null);
         if (cursor.getCount() == 1) {
-            queryModel = (T) BusinessUtil.reflectCursorOne(cursor, model.getClass());
+            queryModel = (T) BusinessUtil.reflectCursorOne(cursor, model.getClass(),true);
         }
         return queryModel;
     }
@@ -219,7 +219,7 @@ public final class Business {
         Cursor cursor = sqLiteDatabase.query(BusinessUtil.getTbNmae(tClass),
                 null, "id = ?", new String[]{String.valueOf(id)}, null, null, null);
         if (cursor.getCount() == 1) {
-            queryModel = BusinessUtil.reflectCursorOne(cursor, tClass);
+            queryModel = BusinessUtil.reflectCursorOne(cursor, tClass,true);
         }
         return queryModel;
     }

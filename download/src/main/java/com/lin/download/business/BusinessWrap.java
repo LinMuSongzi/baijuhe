@@ -96,31 +96,49 @@ public class BusinessWrap {
         WorkUtil.removeOperatorRespone(operatorRespone);
     }
 
+    /**
+     * 删除下载文件与数据库行，不建议直接使用
+     *
+     * @param tableId
+     * @param savePath
+     */
     public static void delete(int tableId, String savePath) {
         WorkUtil.delete(tableId, savePath);
     }
 
     public static void launchApp(Context context, String packageName, String appPath) {
-        WorkUtil.launchApp(context,packageName,appPath);
+        WorkUtil.launchApp(context, packageName, appPath);
     }
 
+    /**
+     * 重新下载删除源文件，不建议直接使用
+     *
+     * @param table
+     */
     public static void reset(int table) {
         WorkUtil.reset(table);
     }
 
     /**
      * 只删除文件
+     *
      * @param savePath
      */
-    public static void deleteSavePath(String  savePath) {
+    public static void deleteSavePath(String savePath) {
         WorkUtil.deleteSavePath(savePath);
     }
 
-    public static DownLoadInfo getInfoBySavePath(String savePath){
+    /**
+     * 根据path获取一行数据看信息
+     *
+     * @param savePath
+     * @return
+     */
+    public static DownLoadInfo getInfoBySavePath(String savePath) {
         return WorkUtil.getInfoBySavePath(savePath);
     }
 
-    public static void pauseAll(){
+    public static void pauseAll() {
         FileDownloader.getImpl().pauseAll();
     }
 }

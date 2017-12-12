@@ -7,6 +7,8 @@ import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.exception.FileDownloadOutOfSpaceException;
 
+import java.net.UnknownHostException;
+
 import y.com.sqlitesdk.framework.business.Business;
 
 /**
@@ -72,6 +74,10 @@ public class PlanImp implements Plan {
 
                     //空间不足
 
+
+                }else if(e instanceof UnknownHostException){
+
+                    //无网络或者硬件损坏
 
                 }
 
