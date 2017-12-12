@@ -4,9 +4,9 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
 
-import com.lin.download.basic.PlanImp;
+import com.lin.download.basic.Entrance;
 import com.lin.download.basic.Plan;
-import com.lin.download.business.model.DownLoadTable;
+import com.lin.download.business.model.DownLoadInfo;
 import com.liulishuo.filedownloader.FileDownloader;
 
 import java.util.HashSet;
@@ -15,26 +15,30 @@ import java.util.Set;
 /**
  * Created by linhui on 2017/12/11.
  */
-public class DownLoadViewController implements Controller, Operator {
+public class WorkController implements Controller, Operator {
 
 
-    static DownLoadViewController downLoadViewController;
+    static WorkController downLoadViewController;
 
     public static Controller getInstance() {
         return downLoadViewController;
     }
 
     static {
-        downLoadViewController = new DownLoadViewController();
+        downLoadViewController = new WorkController();
     }
 
     private Context context;
     private Handler handler;
 
-    private DownLoadViewController() {
+    private WorkController() {
         HandlerThread handlerThread = new HandlerThread("DownLoadViewController");
         handlerThread.start();
         handler = new Handler(handlerThread.getLooper());
+    }
+
+    Handler getHandler() {
+        return handler;
     }
 
     /**
@@ -48,14 +52,14 @@ public class DownLoadViewController implements Controller, Operator {
     private final Set<Plan> PLANS = new HashSet<Plan>() {
         @Override
         public boolean add(Plan o) {
-            synchronized (DownLoadViewController.this) {
+            synchronized (WorkController.this) {
                 return super.add(o);
             }
         }
 
         @Override
         public boolean remove(Object o) {
-            synchronized (DownLoadViewController.this) {
+            synchronized (WorkController.this) {
                 return super.remove(o);
             }
         }
@@ -63,21 +67,19 @@ public class DownLoadViewController implements Controller, Operator {
 
     /**
      * 根据数据库表格id得到下载计划
+     *
      * @param modelId
      * @return
      */
     private Plan userDownLoadImp(int modelId) {
-
-        synchronized (this) {
-            for (Plan downLoadImp : PLANS) {
-
-                if (downLoadImp.getModelId() == modelId) {
-                    return downLoadImp;
-                }
-
+        for (Plan plan : PLANS) {
+            if (plan.getModelId() == modelId) {
+                return plan;
             }
         }
-        return null;
+        Plan plan = Entrance.createSimplePlan(modelId);
+        PLANS.add(plan);
+        return plan;
     }
 
     @Override
@@ -88,69 +90,75 @@ public class DownLoadViewController implements Controller, Operator {
 
     /**
      * 暂停
+     *
      * @param tableId 数据库 下载表 id
      */
     @Override
-    public void pause(int tableId) {
-        Plan downLoadImp = userDownLoadImp(tableId);
-        if (downLoadImp != null) {
-            downLoadImp.pause();
-        }
+    public void pause(final int tableId) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                userDownLoadImp(tableId).pause();
+            }
+        });
     }
 
     /**
      * 下载
+     *
      * @param tableId
      */
     @Override
     public void download(int tableId) {
-        Runnable runnable;
-        Plan plan = userDownLoadImp(tableId);
-        if (plan != null) {
-            runnable = plan;
-        } else {
-            Plan plan1 = new PlanImp(tableId);
-            PLANS.add(plan1);
-            runnable = plan1;
-        }
-        handler.post(runnable);
+        handler.post(userDownLoadImp(tableId));
     }
 
     /**
      * 删除
+     *
      * @param tableId
      */
     @Override
-    public void delete(int tableId) {
-        Plan plan = userDownLoadImp(tableId);
-        if (plan != null) {
-            plan.delete();
-            PLANS.remove(plan);
-        } else {
-            BusinessWrap.delete(tableId,null);
-        }
+    public void delete(final int tableId) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Plan plan = userDownLoadImp(tableId);
+                plan.delete();
+                PLANS.remove(plan);
+            }
+        });
+
     }
 
     @Override
-    public void reset(int tableId) {
-        Plan plan = userDownLoadImp(tableId);
-        if (plan != null) {
-            plan.reset();
-        }
+    public void reset(final int tableId) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                userDownLoadImp(tableId).reset();
+            }
+        });
     }
 
     /**
      * 添加一个新任务
+     *
      * @param downLoadTable
      */
     @Override
-    public void addTask(DownLoadTable downLoadTable) {
+    public void addTask(DownLoadInfo downLoadTable) {
         BusinessWrap.addDownloadTask(downLoadTable);
     }
 
     @Override
     public void pauseAll() {
-        FileDownloader.getImpl().pauseAll();
+        BusinessWrap.pauseAll();
+    }
+
+    @Override
+    public void deleteSavePath(String savePath) {
+        BusinessWrap.deleteSavePath(savePath);
     }
 
     static Set<OperatorRespone> getOperatorRespones() {

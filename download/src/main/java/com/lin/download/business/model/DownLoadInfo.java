@@ -8,7 +8,7 @@ import y.com.sqlitesdk.framework.annotation.TBTable;
 /**
  * Created by linhui on 2017/12/7.
  */
-public class DownLoadTable extends BaseModel<DownLoadTable> implements IBasicInfo{
+public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo{
 
     @TBTable
     public static final String TB_NAME = "tb_download_info";

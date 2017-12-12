@@ -1,9 +1,13 @@
 package com.lin.download.basic;
 
-import com.lin.download.business.model.DownLoadTable;
+import com.lin.download.business.WorkController;
+import com.lin.download.business.model.DownLoadInfo;
 import com.lin.download.business.BusinessWrap;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloader;
+import com.liulishuo.filedownloader.exception.FileDownloadOutOfSpaceException;
+
+import y.com.sqlitesdk.framework.business.Business;
 
 /**
  * Created by linhui on 2017/12/7.
@@ -11,21 +15,20 @@ import com.liulishuo.filedownloader.FileDownloader;
 public class PlanImp implements Plan {
 
 
-    private DownLoadTable downLoadTable;
+    private DownLoadInfo downLoadTable;
     private BaseDownloadTask baseDownloadTask;
     private int baseDownloadTaskId;
     private int tableId;
-
-    public PlanImp(int tableId) {
+    private PlanImp(int tableId) {
         this.tableId = tableId;
     }
-
+    static Plan getNewInstance(int tableId) {
+        return new PlanImp(tableId);
+    }
     @Override
     public void download() {
         if (baseDownloadTask == null) {
-            DownLoadTable d1 = new DownLoadTable();
-            d1.setId(tableId);
-            downLoadTable = BusinessWrap.queryById(d1);
+            downLoadTable = BusinessWrap.getInfoById(tableId);
             if (downLoadTable.getId() > 0) {
                 download2();
             }
@@ -38,7 +41,6 @@ public class PlanImp implements Plan {
             }
         }
     }
-
     private BaseDownloadTask download2() {
         baseDownloadTaskId = (baseDownloadTask = FileDownloader.getImpl().
                 create(downLoadTable.getDownLoadUrl()).setListener(new SimpleFileListenerImp() {
@@ -65,47 +67,42 @@ public class PlanImp implements Plan {
             protected void error(BaseDownloadTask task, Throwable e) {
                 super.error(task, e);
                 BusinessWrap.error(downLoadTable.getId());
+
+                if (e instanceof FileDownloadOutOfSpaceException) {
+
+                    //空间不足
+
+
+                }
+
+
             }
         }).setPath(downLoadTable.getSavePath()).setSyncCallback(true).setAutoRetryTimes(AUTO_RETRY_TIMES)).start();
         return baseDownloadTask;
 
     }
-
     @Override
     public void run() {
         download();
     }
-
     @Override
     public int getModelId() {
         return tableId;
     }
-
     @Override
     public void delete() {
-        if (baseDownloadTask != null) {
-            if (baseDownloadTask.isRunning()) {
-                baseDownloadTask.pause();
-            }
-            while (!baseDownloadTask.isRunning()) {
-                break;
-            }
-        }
+        this.pause();
         BusinessWrap.delete(tableId, downLoadTable != null ? downLoadTable.getSavePath() : "");
     }
-
     @Override
     public void reset() {
-        if (baseDownloadTask!=null && baseDownloadTask.isRunning()) {
-            baseDownloadTask.pause();
-        }
-        BusinessWrap.delete(-1, downLoadTable != null ? downLoadTable.getSavePath() : "");
-        download();
+        this.pause();
+        BusinessWrap.reset(tableId);
+        WorkController.getInstance().download(tableId);
     }
-
     @Override
     public void pause() {
-        if (baseDownloadTask!=null &&baseDownloadTask.isRunning()) {
+        if (baseDownloadTask != null && baseDownloadTask.isRunning()) {
             baseDownloadTask.pause();
         }
     }

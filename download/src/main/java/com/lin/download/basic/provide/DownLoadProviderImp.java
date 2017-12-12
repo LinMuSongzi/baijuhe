@@ -13,7 +13,7 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 
 import com.lin.download.BuildConfig;
-import com.lin.download.business.model.DownLoadTable;
+import com.lin.download.business.model.DownLoadInfo;
 
 import y.com.sqlitesdk.framework.AppMain;
 import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
@@ -58,7 +58,7 @@ public final class DownLoadProviderImp implements AppMain {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
 //                Business.getInstances().createTable(sqLiteDatabase,UrlTable.class);
-                Business.getInstances().createTable(sqLiteDatabase, DownLoadTable.class);
+                Business.getInstances().createTable(sqLiteDatabase, DownLoadInfo.class);
 //                Business.getInstances().createTable(sqLiteDatabase, Download2UrlTable.class);
             }
 
@@ -81,7 +81,7 @@ public final class DownLoadProviderImp implements AppMain {
                     @Override
                     public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                         cursor[0] = sqLiteDatabase.rawQuery(
-                                "select * from " + DownLoadTable.TB_NAME + selection_, null);
+                                "select * from " + DownLoadInfo.TB_NAME + selection_, null);
                         cursor[0].setNotificationUri(mContext.getContentResolver(), DownLoadProvider.CONTENT_QUERY_ALL_URI);
                     }
 
@@ -145,7 +145,7 @@ public final class DownLoadProviderImp implements AppMain {
                 Access.run(new Execute() {
                     @Override
                     public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-                        leng[0] = sqLiteDatabase.delete(DownLoadTable.TB_NAME, selection, selectionArgs);
+                        leng[0] = sqLiteDatabase.delete(DownLoadInfo.TB_NAME, selection, selectionArgs);
                         if (leng[0] > 0) {
                             mContext.getContentResolver().notifyChange(DownLoadProvider.CONTENT_QUERY_ALL_URI, null);
                         }

@@ -1,15 +1,10 @@
 package com.lin.download;
 
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.Loader;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +24,7 @@ import com.lin.download.basic.Entrance;
 import com.lin.download.basic.IBasicInfo;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.ViewSupportLoader;
-import com.lin.download.business.model.DownLoadTable;
+import com.lin.download.business.model.DownLoadInfo;
 import com.lin.download.business.OperatorRespone;
 import com.lin.download.util.DownloadUtil;
 import com.lin.download.util.RecyclerViewCursorAdapter;
@@ -45,18 +40,18 @@ public class FileListActivity extends AppCompatActivity {
     private final int CODE = 0x9131;
     private RecyclerView id_RecyclerView;
     private MyAdapter adapter;
-    private OperatorRespone operatorRespone = new OperatorRespone<List<DownLoadTable>>() {
+    private OperatorRespone operatorRespone = new OperatorRespone<List<DownLoadInfo>>() {
         @Override
         public int getCode() {
             return CODE;
         }
 
         @Override
-        public void success(List<DownLoadTable> object) {
+        public void success(List<DownLoadInfo> object) {
 
             if (!isFinishing()) {
 
-                for (DownLoadTable downLoadTable : object) {
+                for (DownLoadInfo downLoadTable : object) {
 
                     Log.i("success", "success: " + downLoadTable);
 
@@ -151,12 +146,12 @@ public class FileListActivity extends AppCompatActivity {
     }
 
     public void createDefualtGame() {
-        List<DownLoadTable> loadEntities = new ArrayList<>();
+        List<DownLoadInfo> loadEntities = new ArrayList<>();
         if (getSharedPreferences("aaa", MODE_PRIVATE).getInt("key", 1) == 100) {
             return;
         }
         getSharedPreferences("aaa", MODE_PRIVATE).edit().putInt("key", 100).apply();
-        DownLoadTable downLoadTable = new DownLoadTable();
+        DownLoadInfo downLoadTable = new DownLoadInfo();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[0]);
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "王者荣耀.apk");
@@ -164,7 +159,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[0]));
         loadEntities.add(downLoadTable);
 
-        downLoadTable = new DownLoadTable();
+        downLoadTable = new DownLoadInfo();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[1]);
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "火影忍者.apk");
@@ -172,7 +167,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[1]));
         loadEntities.add(downLoadTable);
 
-        downLoadTable = new DownLoadTable();
+        downLoadTable = new DownLoadInfo();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[2]);
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "天龙八部.apk");
@@ -180,7 +175,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[2]));
         loadEntities.add(downLoadTable);
 
-        downLoadTable = new DownLoadTable();
+        downLoadTable = new DownLoadInfo();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[3]);
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "微信.apk");
@@ -188,7 +183,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[3]));
         loadEntities.add(downLoadTable);
 
-        downLoadTable = new DownLoadTable();
+        downLoadTable = new DownLoadInfo();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[4]);
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "QQ.apk");
@@ -196,7 +191,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[4]));
         loadEntities.add(downLoadTable);
 
-        downLoadTable = new DownLoadTable();
+        downLoadTable = new DownLoadInfo();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[5]);
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "开心消消乐.apk");
@@ -204,7 +199,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[5]));
         loadEntities.add(downLoadTable);
 
-        for (final DownLoadTable d : loadEntities) {
+        for (final DownLoadInfo d : loadEntities) {
             Entrance.addTask(d);
         }
 
@@ -240,10 +235,10 @@ public class FileListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(MyViewHodler holder, Cursor cursor) {
-            DownLoadTable downLoadTable = null;
+            DownLoadInfo downLoadTable = null;
 
             try {
-                downLoadTable = BusinessUtil.reflectCursorOne(cursor, DownLoadTable.class);
+                downLoadTable = BusinessUtil.reflectCursorOne(cursor, DownLoadInfo.class);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InstantiationException e) {
@@ -276,22 +271,22 @@ public class FileListActivity extends AppCompatActivity {
 
 
             switch (downLoadTable.getStatus()) {
-                case DownLoadTable.COMPLETED_STATUS:
+                case DownLoadInfo.COMPLETED_STATUS:
                     holder.id_status_path.setText("完成");
 //                    holder.id_status_path.setEnabled(true);
                     holder.id_progressBar.setProgress(100);
                     break;
-                case DownLoadTable.ERROR_STATUS:
+                case DownLoadInfo.ERROR_STATUS:
                     holder.id_status_path.setText("下载错误");
                     break;
-                case DownLoadTable.PAUSE_STATUS:
+                case DownLoadInfo.PAUSE_STATUS:
                     holder.id_status_path.setText("已暂停");
                     break;
-                case DownLoadTable.DOING_STATUS:
+                case DownLoadInfo.DOING_STATUS:
                     holder.id_status_path.setText("正在下载");
 //                    holder.id_status_path.setEnabled(false);
                     break;
-                case DownLoadTable.NOT_HAD_STATUS:
+                case DownLoadInfo.NOT_HAD_STATUS:
                     holder.id_status_path.setText("可以下载");
                     break;
             }
@@ -301,19 +296,19 @@ public class FileListActivity extends AppCompatActivity {
                 public void onClick(View v) {
 //                    v.setEnabled(false);
                     switch (stutas) {
-                        case DownLoadTable.COMPLETED_STATUS:
+                        case DownLoadInfo.COMPLETED_STATUS:
                             Entrance.launchApp(v.getContext(), savePath);
                             break;
-                        case DownLoadTable.ERROR_STATUS:
+                        case DownLoadInfo.ERROR_STATUS:
                             download(id);
                             break;
-                        case DownLoadTable.PAUSE_STATUS:
+                        case DownLoadInfo.PAUSE_STATUS:
                             download(id);
                             break;
-                        case DownLoadTable.DOING_STATUS:
+                        case DownLoadInfo.DOING_STATUS:
                             Entrance.pause(id);
                             break;
-                        case DownLoadTable.NOT_HAD_STATUS:
+                        case DownLoadInfo.NOT_HAD_STATUS:
                             download(id);
                             break;
                     }

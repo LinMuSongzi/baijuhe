@@ -23,7 +23,7 @@ public class ViewSupportLoader implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private Loader<Cursor> loader;
     private AppCompatActivity context;
-    private  CursorLoader cursorLoader;
+    private CursorLoader cursorLoader;
     private RecyclerViewCursorAdapter adapter;
 
     public void init(AppCompatActivity context, int id, final CursorLoader cursorLoader, RecyclerViewCursorAdapter adapter){
