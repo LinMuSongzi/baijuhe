@@ -69,19 +69,17 @@ public final class DownLoadProviderImp implements AppMain {
         });
     }
 
-    Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    Cursor query(Uri uri,final String[] projection, final String selection, final String[] selectionArgs, final String sortOrder) {
 
         final Cursor[] cursor = new Cursor[1];
-
-        final String selection_ = StringDdUtil.isNull(selection) ? "" : selection;
 
         switch (DownLoadProvider.matcher.match(uri)) {
             case DownLoadProvider.QUERY_ALL_CODE:
                 Access.runCustomThread(new Execute() {
                     @Override
                     public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-                        cursor[0] = sqLiteDatabase.rawQuery(
-                                "select * from " + DownLoadInfo.TB_NAME + selection_, null);
+                        cursor[0] = sqLiteDatabase.query(DownLoadInfo.TB_NAME,
+                                projection, selection, selectionArgs, null, null, sortOrder, null);
                         cursor[0].setNotificationUri(mContext.getContentResolver(), DownLoadProvider.CONTENT_QUERY_ALL_URI);
                     }
 
@@ -90,6 +88,23 @@ public final class DownLoadProviderImp implements AppMain {
 
                     }
                 });
+                break;
+            case DownLoadProvider.QUERY_StATUS_CODE:
+
+                Access.runCustomThread(new Execute() {
+                    @Override
+                    public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+                        cursor[0] = sqLiteDatabase.query(DownLoadInfo.TB_NAME,
+                                projection, selection, selectionArgs, null, null, sortOrder, null);
+                        cursor[0].setNotificationUri(mContext.getContentResolver(), DownLoadProvider.CONTENT_QUERY_StATUS_URI);
+                    }
+
+                    @Override
+                    public void onExternalError() {
+
+                    }
+                });
+
                 break;
         }
         return cursor[0];

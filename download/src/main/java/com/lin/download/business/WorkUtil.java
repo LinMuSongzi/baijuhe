@@ -3,11 +3,11 @@ package com.lin.download.business;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import com.lin.download.basic.IBasicInfo;
+import com.lin.download.basic.OperatorRespone;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.model.DownLoadInfo;
 
@@ -101,24 +101,8 @@ class WorkUtil {
      * @param id
      */
     static void completed(int id) {
-        final int i = id;
-        Access.run(new Execute() {
-            @Override
-            public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-                String sql = String.format(
-                        "update %s set status = %d where id = %d",
-                        DownLoadInfo.TB_NAME, DownLoadInfo.COMPLETED_STATUS, i);
-//                Log.i(TAG, "completed: "+sql);
-
-                sqLiteDatabase.execSQL(sql);
-                notifyAllQueryDownload(null);
-            }
-
-            @Override
-            public void onExternalError() {
-
-            }
-        });
+        modiStatus(id,IBasicInfo.COMPLETED_STATUS);
+//        notifyStatus();
     }
 
     /**
@@ -127,27 +111,8 @@ class WorkUtil {
      * @param id
      */
     static void paused(int id) {
-        final int i = id;
-        Access.run(new Execute() {
-            @Override
-            public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-                String sql = String.format(
-                        "update %s set status = %d where id = %d",
-                        DownLoadInfo.TB_NAME, DownLoadInfo.PAUSE_STATUS, i);
-
-
-//                Log.i(TAG, "paused: "+sql);
-
-                sqLiteDatabase.execSQL(sql);
-                notifyAllQueryDownload(null);
-            }
-
-            @Override
-            public void onExternalError() {
-
-            }
-        });
-
+        modiStatus(id,IBasicInfo.PAUSE_STATUS);
+//        notifyStatus();
     }
 
     /**
@@ -157,21 +122,30 @@ class WorkUtil {
      * @param id
      */
     static void error(int id) {
+        modiStatus(id, IBasicInfo.ERROR_STATUS);
+    }
 
+    static void waitting(int id){
+        modiStatus(id, IBasicInfo.WAITTING_STATUS);
+//        notifyStatus();
+    }
+
+    static void modiStatus(int id, final int status) {
         final int i = id;
-
+        final int s = status;
         Access.run(new Execute() {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
 
                 String sql = String.format(
                         "update %s set status = %d where id = %d",
-                        DownLoadInfo.TB_NAME, DownLoadInfo.ERROR_STATUS, i);
+                        DownLoadInfo.TB_NAME, s, i);
 
 //                Log.i(TAG, "paused: "+sql);
 
                 sqLiteDatabase.execSQL(sql);
                 notifyAllQueryDownload(null);
+                checkStatus(status);
             }
 
             @Override
@@ -179,6 +153,25 @@ class WorkUtil {
 
             }
         });
+    }
+
+    private static void checkStatus(int status) {
+
+        switch (status){
+            case IBasicInfo.COMPLETED_STATUS:
+            case IBasicInfo.PAUSE_STATUS:
+            case IBasicInfo.WAITTING_STATUS:
+                WorkController.downLoadViewController.getHandler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        notifyStatus();
+                    }
+                });
+                break;
+            default:
+                break;
+        }
+
 
     }
 
@@ -189,6 +182,15 @@ class WorkUtil {
      */
     static void notifyAllQueryDownload(ContentObserver c) {
         WorkController.getContext().getContentResolver().notifyChange(DownLoadProvider.CONTENT_QUERY_ALL_URI, c);
+
+    }
+
+    static void notifyStatus(){
+        WorkController.getContext().
+                getContentResolver().
+                notifyChange(
+                        DownLoadProvider.CONTENT_QUERY_StATUS_URI,
+                        null);
     }
 
     /**
@@ -246,18 +248,24 @@ class WorkUtil {
      * @param tableId
      * @param savePath
      */
-    static void delete(final int tableId, final String savePath) {
+    static void delete(final int tableId, final String savePath, boolean isDeleteFile) {
 
 
         if (tableId > 0 && !StringDdUtil.isNull(savePath)) {
-            deleteSavePath(savePath);
+            if (isDeleteFile) {
+                deleteSavePath(savePath);
+            }
             resolverDeleteInfoById(tableId);
         } else if (tableId > 0 && StringDdUtil.isNull(savePath)) {
             IBasicInfo info = WorkUtil.getInfoById(tableId);
-            deleteSavePath(info == null ? "" : info.getSavePath());
+            if (isDeleteFile) {
+                deleteSavePath(info == null ? "" : info.getSavePath());
+            }
             resolverDeleteInfoById(tableId);
         } else if (tableId < 0 && !StringDdUtil.isNull(savePath)) {
-            deleteSavePath(savePath);
+            if (isDeleteFile) {
+                deleteSavePath(savePath);
+            }
             IModel info = WorkUtil.getInfoBySavePath(savePath);
             if (info != null && info.getId() > 0) {
                 resolverDeleteInfoById(info.getId());

@@ -75,7 +75,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            android:textColor="#1b211d"
+            android:textColor="#61303a"
             android:background="?attr/selectableItemBackground"
             android:layout_marginBottom="10dp"/>
 

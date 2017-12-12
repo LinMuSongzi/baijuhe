@@ -7,12 +7,12 @@ import android.database.ContentObserver;
 import com.lin.download.business.model.DownLoadInfo;
 import com.lin.download.business.BusinessWrap;
 import com.lin.download.business.WorkController;
-import com.lin.download.business.OperatorRespone;
-
-import y.com.sqlitesdk.framework.business.Business;
 
 /**
  * Created by linhui on 2017/12/11.
+ *
+ * 尽量所有操作都在此类中调用
+ *
  */
 public class Entrance {
     public static final String TAG = "DownloadPlan";
@@ -32,8 +32,8 @@ public class Entrance {
     public static void download(int tableId) {
         WorkController.getInstance().download(tableId);}
 
-    public static void delete(int tableId) {
-        WorkController.getInstance().delete(tableId);
+    public static void delete(int tableId,boolean isdeleteFile) {
+        WorkController.getInstance().delete(tableId,isdeleteFile);
     }
 
     public static void reset(int tableId) {

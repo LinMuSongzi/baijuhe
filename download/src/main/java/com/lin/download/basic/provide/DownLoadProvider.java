@@ -19,20 +19,27 @@ public class DownLoadProvider extends ContentProvider {
     public static final String PROVIDER_NAME = "com.download.lin.file.provide";
     static UriMatcher matcher;
     static final String QUERY = "query";
+    static final String QUERY_WAITTING = "query_waitting";
     static final String UPDATE = "update";
     static final String DELETE = "delete";
     static final String INSERT = "insert";
     static final int QUERY_ALL_CODE = 0x1abcd;
+    static final int QUERY_StATUS_CODE = 0x1abc9;
     static final int UPDATE_CODE = 0x2abcd;
     static final int DELETE_ONE_CODE = 0x3abcd;
     static final int INSERT_ONE_CODE = 0x4abcd;
     public static final Uri CONTENT_QUERY_ALL_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + QUERY);
+
+
+    public static final Uri CONTENT_QUERY_StATUS_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + QUERY_WAITTING);
+
     public static final Uri CONTENT_UPDATE_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + UPDATE);
     public static final Uri CONTENT_DELETE_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + DELETE);
     public static final Uri CONTENT_INSERT_ONE_URI = Uri.parse("content://" + PROVIDER_NAME + "/" + INSERT);
 
     static {
         matcher = new UriMatcher(UriMatcher.NO_MATCH);
+        matcher.addURI(PROVIDER_NAME, QUERY_WAITTING, QUERY_StATUS_CODE);
         matcher.addURI(PROVIDER_NAME, QUERY, QUERY_ALL_CODE);
         matcher.addURI(PROVIDER_NAME, UPDATE, UPDATE_CODE);
         matcher.addURI(PROVIDER_NAME, DELETE, DELETE_ONE_CODE);

@@ -1,6 +1,7 @@
 package com.lin.download.basic;
 
 import com.lin.download.business.WorkController;
+import com.lin.download.business.model.BaseModel;
 import com.lin.download.business.model.DownLoadInfo;
 import com.lin.download.business.BusinessWrap;
 import com.liulishuo.filedownloader.BaseDownloadTask;
@@ -15,18 +16,19 @@ import y.com.sqlitesdk.framework.business.Business;
  * Created by linhui on 2017/12/7.
  */
 public class PlanImp implements Plan {
-
-
     private DownLoadInfo downLoadTable;
     private BaseDownloadTask baseDownloadTask;
     private int baseDownloadTaskId;
     private int tableId;
+
     private PlanImp(int tableId) {
         this.tableId = tableId;
     }
+
     static Plan getNewInstance(int tableId) {
         return new PlanImp(tableId);
     }
+
     @Override
     public void download() {
         if (baseDownloadTask == null) {
@@ -43,6 +45,7 @@ public class PlanImp implements Plan {
             }
         }
     }
+
     private BaseDownloadTask download2() {
         baseDownloadTaskId = (baseDownloadTask = FileDownloader.getImpl().
                 create(downLoadTable.getDownLoadUrl()).setListener(new SimpleFileListenerImp() {
@@ -75,7 +78,7 @@ public class PlanImp implements Plan {
                     //空间不足
 
 
-                }else if(e instanceof UnknownHostException){
+                } else if (e instanceof UnknownHostException) {
 
                     //无网络或者硬件损坏
 
@@ -87,29 +90,41 @@ public class PlanImp implements Plan {
         return baseDownloadTask;
 
     }
+
     @Override
     public void run() {
         download();
     }
+
     @Override
     public int getModelId() {
         return tableId;
     }
+
     @Override
-    public void delete() {
-        this.pause();
-        BusinessWrap.delete(tableId, downLoadTable != null ? downLoadTable.getSavePath() : "");
+    public boolean isRunning() {
+        return baseDownloadTask != null && baseDownloadTask.isRunning();
     }
+
+    @Override
+    public void delete(boolean isDeleteFile) {
+        this.pause();
+        BusinessWrap.delete(tableId, downLoadTable != null ? downLoadTable.getSavePath() : "", isDeleteFile);
+    }
+
     @Override
     public void reset() {
         this.pause();
         BusinessWrap.reset(tableId);
         WorkController.getInstance().download(tableId);
     }
+
     @Override
     public void pause() {
         if (baseDownloadTask != null && baseDownloadTask.isRunning()) {
             baseDownloadTask.pause();
+        }else{
+            BusinessWrap.paused(tableId);
         }
     }
 }

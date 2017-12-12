@@ -14,6 +14,7 @@ import com.lin.download.FileListActivity;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.util.RecyclerViewCursorAdapter;
 
+import y.com.sqlitesdk.framework.business.BusinessUtil;
 import y.com.sqlitesdk.framework.db.Access;
 
 /**

@@ -9,6 +9,7 @@ public interface Plan extends Runnable{
     void reset();
     void pause();
     void download();
-    void delete();
+    void delete(boolean isDeleteFile);
     int getModelId();
+    boolean isRunning();
 }

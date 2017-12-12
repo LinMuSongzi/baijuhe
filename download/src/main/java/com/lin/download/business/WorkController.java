@@ -1,22 +1,42 @@
 package com.lin.download.business;
 
 import android.content.Context;
+import android.database.ContentObservable;
+import android.database.ContentObserver;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 
+import com.lin.download.basic.Controller;
 import com.lin.download.basic.Entrance;
+import com.lin.download.basic.IBasicInfo;
+import com.lin.download.basic.OperatorRespone;
 import com.lin.download.basic.Plan;
+import com.lin.download.basic.Regulation;
+import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.model.DownLoadInfo;
 import com.liulishuo.filedownloader.FileDownloader;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+
+import y.com.sqlitesdk.framework.business.BusinessUtil;
+import y.com.sqlitesdk.framework.db.Access;
+import y.com.sqlitesdk.framework.interface_model.IModel;
+import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 
 /**
  * Created by linhui on 2017/12/11.
  */
 public class WorkController implements Controller, Operator {
-
 
     static WorkController downLoadViewController;
 
@@ -31,14 +51,27 @@ public class WorkController implements Controller, Operator {
     private Context context;
     private Handler handler;
 
+    private ContentObserver contentObserver;
+
+    private List<DownLoadInfo> loadInfos = new ArrayList<>();
+
+    private int thisDownLoad;
+
     private WorkController() {
         HandlerThread handlerThread = new HandlerThread("DownLoadViewController");
         handlerThread.start();
         handler = new Handler(handlerThread.getLooper());
+
     }
+
 
     Handler getHandler() {
         return handler;
+    }
+
+
+    ContentObserver getContentObserver() {
+        return contentObserver;
     }
 
     /**
@@ -86,6 +119,38 @@ public class WorkController implements Controller, Operator {
     public void init(Context context) {
         this.context = context;
         FileDownloader.setup(context);
+        contentObserver = new ContentObserver(handler) {
+            @Override
+            public void onChange(boolean selfChange) {
+                Log.i(Entrance.TAG, "onChange: 刷新等待");
+                loadInfos.clear();
+                loadInfos.addAll(
+                        BusinessUtil.reflectCursor(
+                                getContext().getContentResolver().query(DownLoadProvider.CONTENT_QUERY_StATUS_URI,
+                                        null,
+                                        "status = ?",
+                                        new String[]{String.valueOf(IBasicInfo.WAITTING_STATUS)},
+                                        null,
+                                        null), DownLoadInfo.class));
+
+                if (loadInfos.size() > 0) {
+                        List<DownLoadInfo> collections = new ArrayList<>(loadInfos);
+                        for (DownLoadInfo d : collections) {
+                            /**
+                             * 优先找到当前的选择的下载
+                             */
+                            if(d.getId() == thisDownLoad){
+                                download2(d);
+                                return;
+                            }
+                        }
+                    download2(collections.get(0));
+                }
+            }
+        };
+        getContext().
+                getContentResolver().
+                registerContentObserver(DownLoadProvider.CONTENT_QUERY_StATUS_URI, true, contentObserver);
     }
 
     /**
@@ -109,8 +174,24 @@ public class WorkController implements Controller, Operator {
      * @param tableId
      */
     @Override
-    public void download(int tableId) {
-        handler.post(userDownLoadImp(tableId));
+    public synchronized void download(int tableId) {
+        /**
+         * 先改为等待状态，之后刷新数据库 contentObserver
+         */
+        thisDownLoad = tableId;
+        BusinessWrap.waitting(tableId);
+    }
+
+    /**
+     * 真正的下载
+     * @param downLoadInfo
+     */
+    private void download2(DownLoadInfo downLoadInfo) {
+
+        if (getRunningPlan() < 1) {
+            handler.post(userDownLoadImp(downLoadInfo.getId()));
+        }
+
     }
 
     /**
@@ -119,12 +200,12 @@ public class WorkController implements Controller, Operator {
      * @param tableId
      */
     @Override
-    public void delete(final int tableId) {
+    public void delete(final int tableId, final boolean isDeleteFile) {
         handler.post(new Runnable() {
             @Override
             public void run() {
                 Plan plan = userDownLoadImp(tableId);
-                plan.delete();
+                plan.delete(isDeleteFile);
                 PLANS.remove(plan);
             }
         });
@@ -181,5 +262,15 @@ public class WorkController implements Controller, Operator {
 
     static Context getContext() {
         return downLoadViewController.context;
+    }
+
+    private synchronized int getRunningPlan() {
+        int i = 0;
+        for (Plan plan : PLANS) {
+            if(plan.isRunning()) {
+                i++;
+            }
+        }
+        return i;
     }
 }

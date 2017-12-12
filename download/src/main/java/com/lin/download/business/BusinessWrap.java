@@ -3,6 +3,7 @@ package com.lin.download.business;
 import android.content.Context;
 import android.database.ContentObserver;
 
+import com.lin.download.basic.OperatorRespone;
 import com.lin.download.business.model.DownLoadInfo;
 import com.liulishuo.filedownloader.FileDownloader;
 
@@ -49,6 +50,10 @@ public class BusinessWrap {
         WorkUtil.paused(tableId);
     }
 
+    public static void notifyStatus(){
+        WorkUtil.notifyStatus();
+    }
+
     /**
      * 错误
      * 有可能没有存储权限，或者磁盘不够，或者网络错误
@@ -58,6 +63,8 @@ public class BusinessWrap {
     public static void error(int tableId) {
         WorkUtil.error(tableId);
     }
+
+    public static void waitting(int id){WorkUtil.waitting(id);}
 
     /**
      * id查找
@@ -102,8 +109,8 @@ public class BusinessWrap {
      * @param tableId
      * @param savePath
      */
-    public static void delete(int tableId, String savePath) {
-        WorkUtil.delete(tableId, savePath);
+    public static void delete(int tableId, String savePath,boolean isDeleteFile) {
+        WorkUtil.delete(tableId, savePath,isDeleteFile);
     }
 
     public static void launchApp(Context context, String packageName, String appPath) {

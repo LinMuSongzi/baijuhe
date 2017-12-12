@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
@@ -23,9 +24,10 @@ import android.widget.TextView;
 import com.lin.download.basic.Entrance;
 import com.lin.download.basic.IBasicInfo;
 import com.lin.download.basic.provide.DownLoadProvider;
+import com.lin.download.business.BusinessWrap;
 import com.lin.download.business.ViewSupportLoader;
 import com.lin.download.business.model.DownLoadInfo;
-import com.lin.download.business.OperatorRespone;
+import com.lin.download.basic.OperatorRespone;
 import com.lin.download.util.DownloadUtil;
 import com.lin.download.util.RecyclerViewCursorAdapter;
 
@@ -70,6 +72,7 @@ public class FileListActivity extends AppCompatActivity {
         }
     };
     private ViewSupportLoader loader = new ViewSupportLoader();
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_list);
@@ -79,11 +82,33 @@ public class FileListActivity extends AppCompatActivity {
                 , null, null, null, null), adapter);
         Entrance.addOperatorRespone(operatorRespone);
         Entrance.findStutasDownloadList(CODE, IBasicInfo.PAUSE_STATUS);
+        show();
     }
+
+    private void show() {
+        new AlertDialog.Builder(this)
+                .setCancelable(false)
+                .setMessage(Html.fromHtml("是开启自动下载？"))
+                .setTitle("提示")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                      BusinessWrap.notifyStatus();
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).show();
+
+    }
+
     protected void onDestroy() {
         super.onDestroy();
         Entrance.removeOperatorRespone(operatorRespone);
     }
+
     private void init() {
         id_RecyclerView = (RecyclerView) findViewById(R.id.id_RecyclerView);
         id_RecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -100,26 +125,6 @@ public class FileListActivity extends AppCompatActivity {
             }
         });
         id_RecyclerView.setAdapter((adapter = new MyAdapter(this, null, 1)));
-
-//        loader = getLoaderManager().initLoader(100, null, new LoaderManager.LoaderCallbacks<Cursor>() {
-//
-//            @Override
-//            public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-//                return new CursorLoader(FileListActivity.this, DownLoadProvider.CONTENT_QUERY_ALL_URI
-//                        , null, null, null, null);
-//            }
-//
-//            @Override
-//            public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-//                adapter.swapCursor(data);
-//            }
-//
-//            @Override
-//            public void onLoaderReset(Loader<Cursor> loader) {
-//                adapter.swapCursor(null);
-//
-//            }
-//        });
     }
 
     private void download(int id) {
@@ -134,13 +139,20 @@ public class FileListActivity extends AppCompatActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Entrance.delete(id);
                         dialog.dismiss();
+                        Entrance.delete(id, false);
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+            }
+        }).setNeutralButton("确定(删除源文件)", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Entrance.delete(id, true);
+
             }
         }).show();
     }
@@ -238,7 +250,7 @@ public class FileListActivity extends AppCompatActivity {
             DownLoadInfo downLoadTable = null;
 
             try {
-                downLoadTable = BusinessUtil.reflectCursorOne(cursor, DownLoadInfo.class,false);
+                downLoadTable = BusinessUtil.reflectCursorOne(cursor, DownLoadInfo.class, false);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InstantiationException e) {
@@ -269,11 +281,11 @@ public class FileListActivity extends AppCompatActivity {
                 }
             });
 
-
+            holder.id_status_path.setTextColor(Color.GRAY);
             switch (downLoadTable.getStatus()) {
                 case DownLoadInfo.COMPLETED_STATUS:
                     holder.id_status_path.setText("完成");
-//                    holder.id_status_path.setEnabled(true);
+                    holder.id_status_path.setTextColor(Color.RED);
                     holder.id_progressBar.setProgress(100);
                     break;
                 case DownLoadInfo.ERROR_STATUS:
@@ -283,11 +295,16 @@ public class FileListActivity extends AppCompatActivity {
                     holder.id_status_path.setText("已暂停");
                     break;
                 case DownLoadInfo.DOING_STATUS:
-                    holder.id_status_path.setText("正在下载");
+                    holder.id_status_path.setText("正在下载 "+((int) ((downLoadTable.getCurrentLeng() * 1f / downLoadTable.getToTalLeng()) * 100))+" %");
+
 //                    holder.id_status_path.setEnabled(false);
                     break;
                 case DownLoadInfo.NOT_HAD_STATUS:
                     holder.id_status_path.setText("可以下载");
+                    break;
+                case DownLoadInfo.WAITTING_STATUS:
+                    holder.id_status_path.setText("等待中");
+                    holder.id_status_path.setTextColor(Color.BLUE);
                     break;
             }
 
@@ -309,6 +326,9 @@ public class FileListActivity extends AppCompatActivity {
                             Entrance.pause(id);
                             break;
                         case DownLoadInfo.NOT_HAD_STATUS:
+                            download(id);
+                            break;
+                        case DownLoadInfo.WAITTING_STATUS:
                             download(id);
                             break;
                     }

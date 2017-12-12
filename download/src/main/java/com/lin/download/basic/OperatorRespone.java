@@ -1,4 +1,4 @@
-package com.lin.download.business;
+package com.lin.download.basic;
 
 /**
  * Created by linhui on 2017/12/11.

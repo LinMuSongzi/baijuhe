@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public interface IBasicInfo extends UrlInfo{
 
-    int WAITTING = 150;
+    int WAITTING_STATUS = 150;
     int PAUSE_STATUS = 100;
     int COMPLETED_STATUS = 200;
     int DOING_STATUS = 201;

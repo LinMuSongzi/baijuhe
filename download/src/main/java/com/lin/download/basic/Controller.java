@@ -1,4 +1,4 @@
-package com.lin.download.business;
+package com.lin.download.basic;
 
 import android.content.Context;
 
@@ -11,7 +11,7 @@ public interface Controller {
     void init(Context context);
     void pause(int tableId);
     void download(int tableId);
-    void delete(int tableId);
+    void delete(int tableId,boolean isDeleteFile);
     void reset(int tableId);
     void addTask(DownLoadInfo downLoadTable);
     void pauseAll();
