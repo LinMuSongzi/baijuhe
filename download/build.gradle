@@ -8,8 +8,8 @@ android {
         applicationId "com.lin.download"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 20171121
-        versionName "1.0"
+        versionCode 20171212
+        versionName "1.0.0"
     }
     buildTypes {
         release {
