@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
     android:minHeight="50dp"
     android:orientation="vertical"
-    android:clickable="true"
     app:cardCornerRadius="3dp"
     app:cardElevation="5dp">
 
@@ -17,10 +17,10 @@
 
         <TextView
             android:id="@+id/id_file"
-            android:textColor="#4e6ce2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"
+            android:textColor="#4e6ce2" />
 
 
         <ProgressBar
@@ -30,18 +30,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:background="@drawable/shape_bg"
             android:max="100"
             android:maxHeight="20dp"
             android:minHeight="10dp"
-            android:background="@drawable/shape_bg"
             android:progress="0" />
 
         <TextView
             android:id="@+id/id_progressBar_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"/>
-
+            android:layout_margin="5dp" />
 
 
         <TextView
@@ -62,22 +61,18 @@
             android:id="@+id/id_download_path"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"/>
-
-
+            android:layout_margin="5dp" />
 
 
         <TextView
             android:id="@+id/id_status_path"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:textColor="#61303a"
+            android:layout_marginBottom="5dp"
             android:background="?attr/selectableItemBackground"
-            android:layout_marginBottom="10dp"/>
+            android:minHeight="20dp"
+            android:padding="5dp"
+            android:textColor="#61303a" />
 
 
     </LinearLayout>

@@ -3,6 +3,7 @@ package y.com.sqlitesdk.framework.db;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
 import y.com.sqlitesdk.framework.Mode;
+import y.com.sqlitesdk.framework.entity.BaseEntity;
 import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 
 /**
@@ -17,18 +19,10 @@ import y.com.sqlitesdk.framework.sqliteinterface.Execute;
  */
 public final class Access{
     private static Access access;
-    private static Handler handler;
+    private Handler handler;
 
     static{
         access = new Access();
-        new Thread(){
-            @Override
-            public void run() {
-                Looper.prepare();
-                handler = new Handler();
-                Looper.loop();
-            }
-        }.start();
     }
 
     private final String TAG = "ifeimo_sqlite_Access";
@@ -37,6 +31,9 @@ public final class Access{
     private List<String> triggers;
 
     private Access(){
+        HandlerThread handlerThread = new HandlerThread("Access_sqlite");
+        handlerThread.start();
+        handler = new Handler(handlerThread.getLooper());
         triggers = new ArrayList<>();
     }
 
@@ -117,6 +114,11 @@ public final class Access{
     }
 
     private void post(Runnable runnable){
+        while (true){
+            if(handler != null){
+                break;
+            }
+        }
         handler.post(runnable);
     }
 

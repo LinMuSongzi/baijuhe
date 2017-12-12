@@ -17,6 +17,7 @@ import com.lin.download.basic.Plan;
 import com.lin.download.basic.Regulation;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.model.DownLoadInfo;
+import com.lin.download.util.DownloadUtil;
 import com.liulishuo.filedownloader.FileDownloader;
 
 import java.util.ArrayList;
@@ -129,28 +130,39 @@ public class WorkController implements Controller, Operator {
                                 getContext().getContentResolver().query(DownLoadProvider.CONTENT_QUERY_StATUS_URI,
                                         null,
                                         "status = ?",
-                                        new String[]{String.valueOf(IBasicInfo.WAITTING_STATUS)},
+                                        new String[]{
+                                                String.valueOf(IBasicInfo.WAITTING_STATUS),
+                                        },
                                         null,
                                         null), DownLoadInfo.class));
 
                 if (loadInfos.size() > 0) {
-                        List<DownLoadInfo> collections = new ArrayList<>(loadInfos);
-                        for (DownLoadInfo d : collections) {
-                            /**
-                             * 优先找到当前的选择的下载
-                             */
-                            if(d.getId() == thisDownLoad){
-                                download2(d);
-                                return;
-                            }
+                    List<DownLoadInfo> collections = new ArrayList<>(loadInfos);
+                    DownLoadInfo thisDownloadInfo = null;
+                    for (DownLoadInfo d : collections) {
+                        /**
+                         * 优先找到当前的选择的下载
+                         */
+                        if (d.getId() == thisDownLoad) {
+                            thisDownloadInfo = d;
+                            break;
                         }
-                    download2(collections.get(0));
+                    }
+
+                    if(thisDownloadInfo == null) {
+                        download2(collections.get(0));
+                    }else {
+                        download2(thisDownloadInfo);
+                    }
                 }
             }
         };
-        getContext().
-                getContentResolver().
-                registerContentObserver(DownLoadProvider.CONTENT_QUERY_StATUS_URI, true, contentObserver);
+        scanner();
+        getContext().getContentResolver().registerContentObserver(DownLoadProvider.CONTENT_QUERY_StATUS_URI, true, contentObserver);
+    }
+
+    private void scanner() {
+        WorkUtil.scannerDoingStatusException();
     }
 
     /**
@@ -184,11 +196,12 @@ public class WorkController implements Controller, Operator {
 
     /**
      * 真正的下载
+     *
      * @param downLoadInfo
      */
-    private void download2(DownLoadInfo downLoadInfo) {
+    private synchronized void download2(DownLoadInfo downLoadInfo) {
 
-        if (getRunningPlan() < 1) {
+        if (getRunningPlan() < MAX_DOWNLOAD_COUNT) {
             handler.post(userDownLoadImp(downLoadInfo.getId()));
         }
 
@@ -264,10 +277,10 @@ public class WorkController implements Controller, Operator {
         return downLoadViewController.context;
     }
 
-    private synchronized int getRunningPlan() {
+    private int getRunningPlan() {
         int i = 0;
         for (Plan plan : PLANS) {
-            if(plan.isRunning()) {
+            if (plan.isRunning()) {
                 i++;
             }
         }

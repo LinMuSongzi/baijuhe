@@ -39,46 +39,51 @@ public final class BusinessUtil {
      * @throws InstantiationException
      * @throws NoSuchFieldException
      */
-    public static <T extends IModel> List<T> reflectCursor(Cursor cursor, Class<T> tClass)
-            throws IllegalAccessException, InstantiationException, NoSuchFieldException {
+    public static <T extends IModel> List<T> reflectCursor(Cursor cursor, Class<T> tClass) {
         List<T> list = new ArrayList<>();
-        if (cursor.isClosed()) {
+        try {
+
+            if (cursor.isClosed()) {
+                return list;
+            }
+            String[] column = new String[cursor.getColumnCount()];
+            if (cursor.moveToFirst()) {
+
+                int leng = 0;
+                for (; leng < column.length; leng++) {
+                    column[leng] = cursor.getColumnName(leng);
+                }
+                do {
+                    leng = 0;
+                    T t = tClass.newInstance();
+                    for (; leng < column.length; leng++) {
+                        Field field = getDeclaredField(t, column[leng]);
+                        field.setAccessible(true);
+                        final String type = field.getType().toString();
+                        if (type.endsWith("String")) {
+                            field.set(t, cursor.getString(cursor.getColumnIndex(column[leng])));
+                        } else if (type.endsWith("int") || type.endsWith("Integer") ||
+                                type.endsWith("long") || type.endsWith("Long")) {
+                            field.setInt(t, cursor.getInt(cursor.getColumnIndex(column[leng])));
+                        } else if (type.endsWith("Boolean") || type.endsWith("boolean")) {
+                            if (cursor.getInt(cursor.getColumnIndex(column[leng])) == 1) {
+                                field.setBoolean(t, true);
+                            } else if (cursor.getInt(cursor.getColumnIndex(column[leng])) == 0) {
+                                field.setBoolean(t, false);
+                            }
+                        } else if (type.endsWith("Double") || type.endsWith("double")
+                                || type.endsWith("Float") || type.endsWith("float")) {
+                            field.setFloat(t, cursor.getFloat(cursor.getColumnIndex(column[leng])));
+                        }
+                    }
+                    list.add(t);
+                } while (cursor.moveToNext());
+            }
+            return list;
+        }catch (Exception e){
+            e.printStackTrace();
             return list;
         }
-        String[] column = new String[cursor.getColumnCount()];
-        if (cursor.moveToFirst()) {
-
-            int leng = 0;
-            for (; leng < column.length; leng++) {
-                column[leng] = cursor.getColumnName(leng);
-            }
-            do {
-                leng = 0;
-                T t = tClass.newInstance();
-                for (; leng < column.length; leng++) {
-                    Field field = getDeclaredField(t, column[leng]);
-                    field.setAccessible(true);
-                    final String type = field.getType().toString();
-                    if (type.endsWith("String")) {
-                        field.set(t, cursor.getString(cursor.getColumnIndex(column[leng])));
-                    } else if (type.endsWith("int") || type.endsWith("Integer") ||
-                            type.endsWith("long") || type.endsWith("Long")) {
-                        field.setInt(t, cursor.getInt(cursor.getColumnIndex(column[leng])));
-                    } else if (type.endsWith("Boolean") || type.endsWith("boolean")) {
-                        if (cursor.getInt(cursor.getColumnIndex(column[leng])) == 1) {
-                            field.setBoolean(t, true);
-                        } else if (cursor.getInt(cursor.getColumnIndex(column[leng])) == 0) {
-                            field.setBoolean(t, false);
-                        }
-                    } else if (type.endsWith("Double") || type.endsWith("double")
-                            || type.endsWith("Float") || type.endsWith("float")) {
-                        field.setFloat(t, cursor.getFloat(cursor.getColumnIndex(column[leng])));
-                    }
-                }
-                list.add(t);
-            } while (cursor.moveToNext());
-        }
-        return list;
     }
 
     /**

@@ -7,6 +7,8 @@ import com.lin.download.basic.OperatorRespone;
  */
 interface Operator {
 
+
+
     void addOperatorRespone(OperatorRespone operatorRespone);
 
     void removeOperatorRespone(OperatorRespone operatorRespone);

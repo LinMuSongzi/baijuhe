@@ -125,11 +125,20 @@ class WorkUtil {
         modiStatus(id, IBasicInfo.ERROR_STATUS);
     }
 
+    /**
+     * 等待状态
+     * @param id
+     */
     static void waitting(int id){
         modiStatus(id, IBasicInfo.WAITTING_STATUS);
 //        notifyStatus();
     }
 
+    /**
+     * 改变状态
+     * @param id
+     * @param status
+     */
     static void modiStatus(int id, final int status) {
         final int i = id;
         final int s = status;
@@ -378,6 +387,30 @@ class WorkUtil {
                 }
             }
         }
+
+    }
+
+    /**
+     * 正在下载的doing状态的若是被杀死进曾，则下次打开初始化的时候自动修改为pause状态
+     */
+    static void scannerDoingStatusException() {
+
+        Access.run(new Execute() {
+            @Override
+            public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+                sqLiteDatabase.execSQL(String.format(
+                        "update %s set status = %d where status = %d",
+                        DownLoadInfo.TB_NAME,IBasicInfo.PAUSE_STATUS,IBasicInfo.DOING_STATUS));
+                notifyAllQueryDownload(null);
+            }
+
+            @Override
+            public void onExternalError() {
+
+            }
+        });
+
+
 
     }
 }

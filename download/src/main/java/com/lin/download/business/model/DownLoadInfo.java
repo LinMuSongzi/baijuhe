@@ -4,6 +4,7 @@ import com.lin.download.basic.IBasicInfo;
 
 import y.com.sqlitesdk.framework.annotation.TBColumn;
 import y.com.sqlitesdk.framework.annotation.TBTable;
+import y.com.sqlitesdk.framework.util.MD5Util;
 
 /**
  * Created by linhui on 2017/12/7.
@@ -15,9 +16,9 @@ public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo{
 
     private boolean isNotitfyShowDownLoadStutas = false;
 
-    @TBColumn()
+    @TBColumn(notNull = true,unique = true)
     private String object_id;
-    @TBColumn()
+    @TBColumn(notNull = true)
     private String name;
     @TBColumn()
     private String pic_url;
@@ -31,25 +32,15 @@ public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo{
     private long toTal;
     @TBColumn()
     private long current;
-    @TBColumn(unique = true,notNull = true)
-    private String gameId;
     @TBColumn(notNull = true)
     private int donwloadType = GAME_FEIMO_TYPE;
-
+//    gameId
     public int getDonwloadType() {
         return donwloadType;
     }
 
     public void setDonwloadType(int donwloadType) {
         this.donwloadType = donwloadType;
-    }
-
-    public String getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(String gameId) {
-        this.gameId = gameId;
     }
 
     @Override
@@ -128,7 +119,7 @@ public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo{
     }
 
     public void setObjectId(String object_id) {
-        this.object_id = object_id;
+        this.object_id = MD5Util.convert(object_id);
     }
 
     public void setName(String name) {
@@ -158,8 +149,7 @@ public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo{
                 ", save_path='" + save_path + '\'' +
                 ", status=" + status +
                 ", toTal=" + toTal +
-                ", current=" + current +
-                ", gameId='" + gameId + '\'' +
+                ", current=" + current  + '\'' +
                 '}';
     }
 }

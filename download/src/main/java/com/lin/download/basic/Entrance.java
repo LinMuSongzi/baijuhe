@@ -3,10 +3,16 @@ package com.lin.download.basic;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
+import android.os.Environment;
 
 import com.lin.download.business.model.DownLoadInfo;
 import com.lin.download.business.BusinessWrap;
 import com.lin.download.business.WorkController;
+import com.lin.download.util.DownloadUtil;
+
+import java.io.File;
+
+import y.com.sqlitesdk.framework.util.MD5Util;
 
 /**
  * Created by linhui on 2017/12/11.
@@ -68,5 +74,16 @@ public class Entrance {
         return BusinessWrap.getInfoBySavePath(savePath);
     }
 
+
+    public static DownLoadInfo createInfo(String objectId,String downloadUrl,String savePath,String name){
+
+        DownLoadInfo downLoadTable = new DownLoadInfo();
+        downLoadTable.setDownloadUrl(downloadUrl);
+        downLoadTable.setSavePath(savePath);
+        downLoadTable.setName(name);
+        downLoadTable.setObjectId(objectId);
+        return downLoadTable;
+
+    }
 
 }

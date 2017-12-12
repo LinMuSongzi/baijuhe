@@ -168,7 +168,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "王者荣耀.apk");
         downLoadTable.setName("王者荣耀");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[0]));
+        downLoadTable.setObjectId(DownloadUtil.GAME_LIST[0]);
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadInfo();
@@ -176,7 +176,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "火影忍者.apk");
         downLoadTable.setName("火影忍者");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[1]));
+        downLoadTable.setObjectId(DownloadUtil.GAME_LIST[1]);
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadInfo();
@@ -184,7 +184,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "天龙八部.apk");
         downLoadTable.setName("天龙八部");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[2]));
+        downLoadTable.setObjectId(DownloadUtil.GAME_LIST[2]);
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadInfo();
@@ -192,7 +192,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "微信.apk");
         downLoadTable.setName("微信");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[3]));
+        downLoadTable.setObjectId(DownloadUtil.GAME_LIST[3]);
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadInfo();
@@ -200,7 +200,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "QQ.apk");
         downLoadTable.setName("QQ");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[4]));
+        downLoadTable.setObjectId(DownloadUtil.GAME_LIST[4]);
         loadEntities.add(downLoadTable);
 
         downLoadTable = new DownLoadInfo();
@@ -208,7 +208,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
                 + "lin-download" + File.separator + "开心消消乐.apk");
         downLoadTable.setName("开心消消乐");
-        downLoadTable.setGameId(MD5Util.convert(DownloadUtil.GAME_LIST[5]));
+        downLoadTable.setObjectId(DownloadUtil.GAME_LIST[5]);
         loadEntities.add(downLoadTable);
 
         for (final DownLoadInfo d : loadEntities) {

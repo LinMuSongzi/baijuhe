@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
 
     public Toast toast;
-
-    BaseDownloadTask baseDownloadTask;
     @Bind(R.id.id_progressBar)
     SeekBar id_progressBar;
     @Bind(R.id.id_start_btn)
@@ -49,53 +47,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         FileDownloader.setup(this);
-        baseDownloadTask = FileDownloader.
-                getImpl().
-                create("http://gdown.baidu.com/data/wisegame/f28ba370126f3605/QQ_744.apk").
-                setPath(Environment.getExternalStorageDirectory().getPath() + File.separator + "QQ_744.apk").
-                setWifiRequired(true).
-                setListener(new FileDownloadLargeFileListener() {
-                    @Override
-                    protected void pending(BaseDownloadTask task, long soFarBytes, long totalBytes) {
-                        Log.i(TAG, "pending: soFarBytes = " + soFarBytes + "  totalBytes = " + totalBytes);
-                    }
-
-                    @Override
-                    protected void progress(BaseDownloadTask task, long soFarBytes, long totalBytes) {
-                        Log.i(TAG, "progress: soFarBytes = " + soFarBytes + "  totalBytes = " + totalBytes);
-//                toastShow(soFarBytes);
-                        id_progressBar.setProgress((int) (soFarBytes * 1f/totalBytes * 100.2f));
-                    }
-
-                    @Override
-                    protected void paused(BaseDownloadTask task, long soFarBytes, long totalBytes) {
-                        Log.i(TAG, "paused: soFarBytes = " + soFarBytes + "  totalBytes = " + totalBytes);
-                    }
-
-                    @Override
-                    protected void completed(BaseDownloadTask task) {
-                        Log.i(TAG, "completed: ");
-                        id_start_btn.setEnabled(true);
-                        id_puase_btn.setEnabled(false);
-                        toastShow("下载完成");
-                    }
-
-                    @Override
-                    protected void error(BaseDownloadTask task, Throwable e) {
-                        Log.i(TAG, "error: ");
-                    }
-
-                    @Override
-                    protected void warn(BaseDownloadTask task) {
-                        Log.i(TAG, "warn: ");
-                    }
-                });
-        id_puase_btn.setEnabled(false);
-//        test();
-
-
-//        getContentResolver().delete(DownLoadProvider.CONTENT_DELETE_URI,null,null);
-
 
     }
 
@@ -114,24 +65,10 @@ public class MainActivity extends AppCompatActivity {
 //
 
     public void onStartClick(View view) {
-        if(baseDownloadTask.isUsing()){
-            if(baseDownloadTask.reuse()){
-                toastShow("重新开始");
-                view.performClick();
-            }
-        }else {
-            toastShow("开始");
-            baseDownloadTask.start();
-            view.setEnabled(false);
-            id_puase_btn.setEnabled(true);
-        }
+        startActivity(new Intent(this,FileListActivity.class));
     }
 
     public void onPauseClick(View view) {
-        toastShow("暂停");
-        baseDownloadTask.pause();
-        view.setEnabled(false);
-        id_start_btn.setEnabled(true);
     }
 
     private void toastShow(String s) {
