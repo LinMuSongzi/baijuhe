@@ -10,12 +10,14 @@ import android.widget.Filter;
 import android.widget.FilterQueryProvider;
 import android.widget.Filterable;
 
+import com.lin.download.business.ISwapCursorData;
+
 
 /**
  * Created by lpds on 2017/2/18.
  */
 public abstract class RecyclerViewCursorAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> implements Filterable,
-        CursorFilter.CursorFilterClient {
+        CursorFilter.CursorFilterClient,ISwapCursorData {
 
     /**
      * Call when bind view with the cursor

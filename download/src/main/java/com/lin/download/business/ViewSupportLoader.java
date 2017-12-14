@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.lin.download.FileListActivity;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.util.RecyclerViewCursorAdapter;
+import com.liulishuo.filedownloader.services.DownloadMgrInitialParams;
 
 import y.com.sqlitesdk.framework.business.BusinessUtil;
 import y.com.sqlitesdk.framework.db.Access;
@@ -20,19 +21,27 @@ import y.com.sqlitesdk.framework.db.Access;
 /**
  * Created by linhui on 2017/12/11.
  */
-public class ViewSupportLoader implements LoaderManager.LoaderCallbacks<Cursor>{
+public class ViewSupportLoader implements LoaderManager.LoaderCallbacks<Cursor> {
+
 
     private Loader<Cursor> loader;
     private AppCompatActivity context;
     private CursorLoader cursorLoader;
-    private RecyclerViewCursorAdapter adapter;
+    private ISwapCursorData swapCursor;
 
-    public void init(AppCompatActivity context, int id, final CursorLoader cursorLoader, RecyclerViewCursorAdapter adapter){
-        if(loader == null){
+    public void init(AppCompatActivity context, int id, ISwapCursorData swapCursor) {
+        init(context,
+                id,
+                new CursorLoader(context, DownLoadProvider.CONTENT_QUERY_ALL_URI, null, null, null, null),
+                swapCursor);
+    }
+
+    public void init(AppCompatActivity context, int id, CursorLoader cursorLoader, ISwapCursorData swapCursor) {
+        if (loader == null) {
             this.context = context;
             this.cursorLoader = cursorLoader;
-            this.adapter = adapter;
-            loader = this.context.getLoaderManager().initLoader(id,null,this);
+            this.swapCursor = swapCursor;
+            loader = this.context.getLoaderManager().initLoader(id, null, this);
         }
     }
 
@@ -43,11 +52,11 @@ public class ViewSupportLoader implements LoaderManager.LoaderCallbacks<Cursor>{
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        adapter.swapCursor(data);
+        swapCursor.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        adapter.swapCursor(null);
+        swapCursor.swapCursor(null);
     }
 }

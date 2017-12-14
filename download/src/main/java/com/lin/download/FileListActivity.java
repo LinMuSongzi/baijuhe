@@ -30,6 +30,7 @@ import com.lin.download.business.model.DownLoadInfo;
 import com.lin.download.basic.OperatorRespone;
 import com.lin.download.util.DownloadUtil;
 import com.lin.download.util.RecyclerViewCursorAdapter;
+import com.liulishuo.filedownloader.FileDownloader;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -76,10 +77,10 @@ public class FileListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_list);
+        FileDownloader.setup(this);
         createDefualtGame();
         init();
-        loader.init(this, 100, new CursorLoader(FileListActivity.this, DownLoadProvider.CONTENT_QUERY_ALL_URI
-                , null, null, null, null), adapter);
+        loader.init(this, 100, adapter);
         Entrance.addOperatorRespone(operatorRespone);
         Entrance.findStutasDownloadList(CODE, IBasicInfo.PAUSE_STATUS);
         show();
@@ -93,7 +94,7 @@ public class FileListActivity extends AppCompatActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                      BusinessWrap.notifyStatus();
+                      Entrance.notifyStatus();
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
@@ -128,6 +129,10 @@ public class FileListActivity extends AppCompatActivity {
     }
 
     private void download(int id) {
+        Entrance.download(id);
+    }
+
+    private void download(DownLoadInfo id) {
         Entrance.download(id);
     }
 
@@ -308,6 +313,7 @@ public class FileListActivity extends AppCompatActivity {
                     break;
             }
 
+            final DownLoadInfo finalDownLoadTable = downLoadTable;
             holder.id_status_path.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -317,19 +323,19 @@ public class FileListActivity extends AppCompatActivity {
                             Entrance.launchApp(v.getContext(), savePath);
                             break;
                         case DownLoadInfo.ERROR_STATUS:
-                            download(id);
+                            download(finalDownLoadTable);
                             break;
                         case DownLoadInfo.PAUSE_STATUS:
-                            download(id);
+                            download(finalDownLoadTable);
                             break;
                         case DownLoadInfo.DOING_STATUS:
                             Entrance.pause(id);
                             break;
                         case DownLoadInfo.NOT_HAD_STATUS:
-                            download(id);
+                            download(finalDownLoadTable);
                             break;
                         case DownLoadInfo.WAITTING_STATUS:
-                            download(id);
+                            download(finalDownLoadTable);
                             break;
                     }
                 }

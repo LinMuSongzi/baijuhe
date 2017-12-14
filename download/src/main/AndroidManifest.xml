@@ -20,7 +20,6 @@
         </activity>
 
         <activity android:name=".FileListActivity"
-            android:noHistory="true"
             android:allowTaskReparenting="true"
             />
 
@@ -28,6 +27,18 @@
             android:name=".basic.provide.DownLoadProvider"
             android:authorities="com.download.lin.file.provide"
             android:exported="true" />
+
+        <!--<receiver android:name="com.lin.download.PlanDownloadReceiver">-->
+
+            <!--<intent-filter>-->
+
+                <!--<action android:name="vi">-->
+                    <!---->
+                <!--</action>-->
+
+            <!--</intent-filter>-->
+
+        <!--</receiver>-->
 
         <!--<activity android:name=".FileListActivity"></activity>-->
     </application>

@@ -145,13 +145,9 @@ class WorkUtil {
         Access.run(new Execute() {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-
                 String sql = String.format(
                         "update %s set status = %d where id = %d",
                         DownLoadInfo.TB_NAME, s, i);
-
-//                Log.i(TAG, "paused: "+sql);
-
                 sqLiteDatabase.execSQL(sql);
                 notifyAllQueryDownload(null);
                 checkStatus(status);
@@ -170,12 +166,7 @@ class WorkUtil {
             case IBasicInfo.COMPLETED_STATUS:
             case IBasicInfo.PAUSE_STATUS:
             case IBasicInfo.WAITTING_STATUS:
-                WorkController.downLoadViewController.getHandler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        notifyStatus();
-                    }
-                });
+                notifyStatus();
                 break;
             default:
                 break;

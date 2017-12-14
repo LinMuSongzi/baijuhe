@@ -69,7 +69,7 @@ public class BusinessWrap {
     /**
      * id查找
      *
-     * @param d
+     * @param tableId
      * @return
      */
     public static DownLoadInfo getInfoById(int tableId) {
@@ -147,5 +147,9 @@ public class BusinessWrap {
 
     public static void pauseAll() {
         FileDownloader.getImpl().pauseAll();
+    }
+
+    public static void scannerDoingStatusException() {
+        WorkUtil.scannerDoingStatusException();
     }
 }

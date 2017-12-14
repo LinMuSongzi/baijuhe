@@ -3,15 +3,23 @@ package com.lin.download.basic;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.util.Log;
 
+import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.model.DownLoadInfo;
 import com.lin.download.business.BusinessWrap;
 import com.lin.download.business.WorkController;
 import com.lin.download.util.DownloadUtil;
+import com.liulishuo.filedownloader.FileDownloader;
 
 import java.io.File;
 
+import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
+import y.com.sqlitesdk.framework.business.Business;
+import y.com.sqlitesdk.framework.db.Access;
 import y.com.sqlitesdk.framework.util.MD5Util;
 
 /**
@@ -24,6 +32,8 @@ public class Entrance {
     public static final String TAG = "DownloadPlan";
 
     public static void init(Context context){
+
+        Access.setSqliteDB(new DonwloadSqlLiteOpenHelp(context).getWritableDatabase());
         WorkController.getInstance().init(context);
     }
 
@@ -36,7 +46,12 @@ public class Entrance {
     }
 
     public static void download(int tableId) {
-        WorkController.getInstance().download(tableId);}
+        WorkController.getInstance().download(tableId);
+    }
+
+    public static void download(DownLoadInfo info) {
+        WorkController.getInstance().download(info);
+    }
 
     public static void delete(int tableId,boolean isdeleteFile) {
         WorkController.getInstance().delete(tableId,isdeleteFile);
@@ -86,4 +101,7 @@ public class Entrance {
 
     }
 
+    public static void notifyStatus() {
+        BusinessWrap.notifyStatus();
+    }
 }

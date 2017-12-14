@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,9 +55,7 @@ public final class Access{
     }
 
     public static SQLiteDatabase get(){
-        synchronized (access){
             return access.getSqLiteDatabase();
-        }
     }
 
     private void switchMode(int mode) {
@@ -100,6 +99,11 @@ public final class Access{
                 }
                 if (Looper.getMainLooper().getThread() == Thread.currentThread()) {
                     throw new Exception("不允许在主线程调用此方法");
+                }
+                if(sqLiteDatabase == null){
+
+                    Log.i(TAG, "execute: "+sqLiteDatabase);
+
                 }
                 sqLiteDatabase.beginTransaction();
                 execute.onExecute(sqLiteDatabase);

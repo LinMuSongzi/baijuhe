@@ -3,6 +3,7 @@ package y.com.sqlitesdk.framework.server;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import java.lang.annotation.Documented;
 import java.util.List;
 
 import y.com.sqlitesdk.framework.interface_model.IModel;
@@ -11,6 +12,7 @@ import y.com.sqlitesdk.framework.interface_model.IModel;
  * 成功与否，eventbus返回
  * Created by lpds on 2017/4/12.
  */
+@Deprecated
 public interface TableServer extends ITag{
     /**
      * TableCreateRespone

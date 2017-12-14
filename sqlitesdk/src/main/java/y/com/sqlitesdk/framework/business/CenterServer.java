@@ -31,6 +31,7 @@ import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 /**
  * Created by lpds on 2017/4/19.
  */
+@Deprecated
 public class CenterServer implements TableServer {
 
     private static CenterServer centerServer;

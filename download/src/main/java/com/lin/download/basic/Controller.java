@@ -14,6 +14,7 @@ public interface Controller {
     void init(Context context);
     void pause(int tableId);
     void download(int tableId);
+    void download(DownLoadInfo info);
     void delete(int tableId,boolean isDeleteFile);
     void reset(int tableId);
     void addTask(DownLoadInfo downLoadTable);

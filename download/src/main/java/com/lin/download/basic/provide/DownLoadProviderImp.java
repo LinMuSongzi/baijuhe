@@ -13,6 +13,8 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 
 import com.lin.download.BuildConfig;
+import com.lin.download.basic.DonwloadSqlLiteOpenHelp;
+import com.lin.download.basic.Entrance;
 import com.lin.download.business.model.DownLoadInfo;
 
 import y.com.sqlitesdk.framework.AppMain;
@@ -25,11 +27,8 @@ import y.com.sqlitesdk.framework.util.StringDdUtil;
 /**
  * Created by linhui on 2017/12/7.
  */
-public final class DownLoadProviderImp implements AppMain {
+public final class DownLoadProviderImp {
 
-    private DatabaseErrorHandler mDatabaseErrorHandler;
-    @Deprecated
-    private SQLiteDatabase mSqLiteDatabase = null;
     private Context mContext;
 
     public DownLoadProviderImp(Context mContext) {
@@ -37,39 +36,10 @@ public final class DownLoadProviderImp implements AppMain {
     }
 
     boolean create() {
-        try {
-            mDatabaseErrorHandler = new DatabaseErrorHandler() {
-                @Override
-                public void onCorruption(SQLiteDatabase dbObj) {
-                }
-            };
-            mSqLiteDatabase = mContext.openOrCreateDatabase(DownLoadProvider.DOWNLOAD_DB_NAME, Context.MODE_PRIVATE, null, mDatabaseErrorHandler);
-            IfeimoSqliteSdk.init(this);
-            checkUpdateSqlite();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
         return true;
     }
 
-    private void createTable() {
-        Access.run(new Execute() {
-            @Override
-            public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-//                Business.getInstances().createTable(sqLiteDatabase,UrlTable.class);
-                Business.getInstances().createTable(sqLiteDatabase, DownLoadInfo.class);
-//                Business.getInstances().createTable(sqLiteDatabase, Download2UrlTable.class);
-            }
-
-            @Override
-            public void onExternalError() {
-
-            }
-        });
-    }
-
-    Cursor query(Uri uri,final String[] projection, final String selection, final String[] selectionArgs, final String sortOrder) {
+    Cursor query(Uri uri, final String[] projection, final String selection, final String[] selectionArgs, final String sortOrder) {
 
         final Cursor[] cursor = new Cursor[1];
 
@@ -108,35 +78,6 @@ public final class DownLoadProviderImp implements AppMain {
                 break;
         }
         return cursor[0];
-    }
-
-    private synchronized void checkUpdateSqlite() {
-
-
-        SharedPreferences sharedPreferences =
-                mContext.getSharedPreferences("DownLoadProviderImp", Context.MODE_PRIVATE);
-        final int code = sharedPreferences.getInt("code", -1);
-        if (code < BuildConfig.VERSION_CODE) {
-            updateSqlite(code, BuildConfig.VERSION_CODE);
-            sharedPreferences.edit().putInt("code", BuildConfig.VERSION_CODE).apply();
-        }
-    }
-
-    private void updateSqlite(int thisV, int newV) {
-
-        switch (thisV) {
-            case -1:
-                switch (newV) {
-                    case 20171121:
-                        createTable();
-                        break;
-                }
-                break;
-            case 20171121:
-                break;
-        }
-
-
     }
 
     @Nullable
@@ -182,21 +123,5 @@ public final class DownLoadProviderImp implements AppMain {
 
     int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         return 0;
-    }
-
-
-    @Override
-    public Application getApplication() {
-        return (Application) mContext.getApplicationContext();
-    }
-
-    @Override
-    public void runOnUiThread(Runnable runnable) {
-        new Handler(Looper.getMainLooper()).post(runnable);
-    }
-
-    @Override
-    public SQLiteDatabase getSQLiteDatabase() {
-        return mSqLiteDatabase;
     }
 }
