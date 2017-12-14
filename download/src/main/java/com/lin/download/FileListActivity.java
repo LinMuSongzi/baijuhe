@@ -313,7 +313,7 @@ public class FileListActivity extends AppCompatActivity {
                     break;
             }
 
-            final DownLoadInfo finalDownLoadTable = downLoadTable;
+//            final DownLoadInfo finalDownLoadTable = downLoadTable;
             holder.id_status_path.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -323,19 +323,19 @@ public class FileListActivity extends AppCompatActivity {
                             Entrance.launchApp(v.getContext(), savePath);
                             break;
                         case DownLoadInfo.ERROR_STATUS:
-                            download(finalDownLoadTable);
+                            download(id);
                             break;
                         case DownLoadInfo.PAUSE_STATUS:
-                            download(finalDownLoadTable);
+                            download(id);
                             break;
                         case DownLoadInfo.DOING_STATUS:
                             Entrance.pause(id);
                             break;
                         case DownLoadInfo.NOT_HAD_STATUS:
-                            download(finalDownLoadTable);
+                            download(id);
                             break;
                         case DownLoadInfo.WAITTING_STATUS:
-                            download(finalDownLoadTable);
+                            download(id);
                             break;
                     }
                 }

@@ -120,7 +120,7 @@ public class PlanImp implements Plan {
     public void reset() {
         this.pause();
         BusinessWrap.reset(tableId);
-        WorkController.getInstance().download(tableId);
+        WorkController.getInstance().download(downLoadTable);
     }
 
     @Override

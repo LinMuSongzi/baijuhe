@@ -23,6 +23,8 @@ import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloadQueueSet;
 import com.liulishuo.filedownloader.FileDownloader;
+import com.liulishuo.filedownloader.util.FileDownloadHelper;
+import com.liulishuo.filedownloader.util.FileDownloadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +43,7 @@ import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 /**
  * Created by linhui on 2017/12/11.
  */
-public class WorkController implements Controller, Operator {
+public class WorkController implements Controller, Operator, Subscription {
 
     static WorkController downLoadViewController;
 
@@ -56,11 +58,13 @@ public class WorkController implements Controller, Operator {
     private Context context;
     private Handler handler;
 
-//    private ContentObserver contentObserver;
+    private IObserverWork contentObserver;
+    private List<DownLoadInfo> loadInfos = new ArrayList<>();//等待的队列
 
-//    private List<DownLoadInfo> loadInfos = new ArrayList<>();
-
-//    private int thisDownLoad;
+    /**
+     * 当前想下载的id
+     */
+    private int thisDownLoad;
 
     private WorkController() {
         HandlerThread handlerThread = new HandlerThread("DownLoadViewController");
@@ -68,10 +72,6 @@ public class WorkController implements Controller, Operator {
         handler = new Handler(handlerThread.getLooper());
 
     }
-
-//    ContentObserver getContentObserver() {
-//        return contentObserver;
-//    }
 
     /**
      * 操作回调
@@ -114,66 +114,22 @@ public class WorkController implements Controller, Operator {
     }
 
     @Override
-    public void init(Context context) {
+    public void init(final Context context) {
         this.context = context;
         FileDownloader.setup(context);
+        initContentObserver();
+    }
 
-//        HandlerThread handlerThread = new HandlerThread("contentObserver");
-//        handlerThread.start();
-//        Handler contentObserverhandler = new Handler(handlerThread.getLooper());
-
-//        contentObserver = new ContentObserver(handler) {
-//            @Override
-//            public void onChange(boolean selfChange) {
-//                Log.i(Entrance.TAG, "onChange: 刷新等待");
-//                loadInfos.clear();
-//                loadInfos.addAll(
-//                        BusinessUtil.reflectCursor(
-//                                getContext().getContentResolver().query(DownLoadProvider.CONTENT_QUERY_StATUS_URI,
-//                                        null,
-//                                        "status = ?",
-//                                        new String[]{
-//                                                String.valueOf(IBasicInfo.WAITTING_STATUS),
-//                                        },
-//                                        null,
-//                                        null), DownLoadInfo.class));
-//
-//                if (loadInfos.size() > 0) {
-//                    List<DownLoadInfo> collections = new ArrayList<>(loadInfos);
-//                    DownLoadInfo thisDownloadInfo = null;
-//                    for (DownLoadInfo d : collections) {
-//                        /**
-//                         * 优先找到当前的选择的下载
-//                         */
-//                        if (d.getId() == thisDownLoad) {
-//                            thisDownloadInfo = d;
-//                            break;
-//                        }
-//                    }
-//
-//                    if(thisDownloadInfo == null) {
-//                        final DownLoadInfo info = collections.get(0);
-//                        handler.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                download2(info);
-//                            }
-//                        });
-//                    }else {
-//                        final DownLoadInfo info = thisDownloadInfo;
-//                        handler.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                download2(info);
-//                            }
-//                        });
-//
-//                    }
-//                }
-//            }
-//        };
+    private void initContentObserver(){
+        contentObserver = ContentObserverWork.create(this, "download_thead", new Runnable() {
+            @Override
+            public void run() {
+                FileDownloader.getImpl().bindService();
+            }
+        });
         scanner();
-//        getContext().getContentResolver().registerContentObserver(DownLoadProvider.CONTENT_QUERY_StATUS_URI, true, contentObserver);
+        getContext().getContentResolver().registerContentObserver(DownLoadProvider.CONTENT_QUERY_StATUS_URI, true, contentObserver.getContentObserver());
+
     }
 
     private void scanner() {
@@ -205,9 +161,8 @@ public class WorkController implements Controller, Operator {
         /**
          * 先改为等待状态，之后刷新数据库 contentObserver
          */
-//        thisDownLoad = tableId;
-
-//        handler.post()
+        thisDownLoad = tableId;
+        BusinessWrap.waitting(tableId);
     }
 
     @Override
@@ -221,7 +176,7 @@ public class WorkController implements Controller, Operator {
      * @param downLoadInfo
      */
     private synchronized void download2(DownLoadInfo downLoadInfo) {
-        BusinessWrap.waitting(downLoadInfo.getId());
+//        BusinessWrap.waitting(downLoadInfo.getId());
         if (getRunningPlan() < MAX_DOWNLOAD_COUNT) {
             handler.post(userDownLoadImp(downLoadInfo.getId()));
         }
@@ -306,5 +261,58 @@ public class WorkController implements Controller, Operator {
             }
         }
         return i;
+    }
+
+    /**
+     * 刷新，等待的就会进行下载
+     * @param selfChange
+     */
+    @Override
+    public void onChange(boolean selfChange) {
+        Log.i(Entrance.TAG, "onChange: 刷新等待");
+        loadInfos.clear();
+        loadInfos.addAll(
+                BusinessUtil.reflectCursor(
+                        getContext().getContentResolver().query(DownLoadProvider.CONTENT_QUERY_StATUS_URI,
+                                null,
+                                "status = ?",
+                                new String[]{
+                                        String.valueOf(IBasicInfo.WAITTING_STATUS),
+                                },
+                                null,
+                                null), DownLoadInfo.class));
+
+        if (loadInfos.size() > 0) {
+            List<DownLoadInfo> collections = new ArrayList<>(loadInfos);
+            DownLoadInfo thisDownloadInfo = null;
+            for (DownLoadInfo d : collections) {
+                /**
+                 * 优先找到当前的选择的下载
+                 */
+                if (d.getId() == thisDownLoad) {
+                    thisDownloadInfo = d;
+                    break;
+                }
+            }
+
+            if (thisDownloadInfo == null) {
+                final DownLoadInfo info = collections.get(0);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        download2(info);
+                    }
+                });
+            } else {
+                final DownLoadInfo info = thisDownloadInfo;
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        download2(info);
+                    }
+                });
+
+            }
+        }
     }
 }
