@@ -19,11 +19,6 @@ public class DonwloadSqlLiteOpenHelp extends SQLiteOpenHelper {
         super(context, "tb_download.db", null, BuildConfig.VERSION_CODE);
     }
 
-
-    public DonwloadSqlLiteOpenHelp(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
-    }
-
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
@@ -36,6 +31,14 @@ public class DonwloadSqlLiteOpenHelp extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        switch (oldVersion){
+            case 20171212:
+                break;
+
+
+
+        }
 
     }
 }

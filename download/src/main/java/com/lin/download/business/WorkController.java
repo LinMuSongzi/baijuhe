@@ -1,13 +1,8 @@
 package com.lin.download.business;
 
 import android.content.Context;
-import android.database.ContentObservable;
-import android.database.ContentObserver;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
 import android.util.Log;
 
 import com.lin.download.basic.Controller;
@@ -15,30 +10,16 @@ import com.lin.download.basic.Entrance;
 import com.lin.download.basic.IBasicInfo;
 import com.lin.download.basic.OperatorRespone;
 import com.lin.download.basic.Plan;
-import com.lin.download.basic.Regulation;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.model.DownLoadInfo;
-import com.lin.download.util.DownloadUtil;
-import com.liulishuo.filedownloader.BaseDownloadTask;
-import com.liulishuo.filedownloader.FileDownloadListener;
-import com.liulishuo.filedownloader.FileDownloadQueueSet;
 import com.liulishuo.filedownloader.FileDownloader;
-import com.liulishuo.filedownloader.util.FileDownloadHelper;
-import com.liulishuo.filedownloader.util.FileDownloadUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import y.com.sqlitesdk.framework.business.BusinessUtil;
-import y.com.sqlitesdk.framework.db.Access;
-import y.com.sqlitesdk.framework.interface_model.IModel;
-import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 
 /**
  * Created by linhui on 2017/12/11.
@@ -57,21 +38,12 @@ public class WorkController implements Controller, Operator, Subscription {
 
     private Context context;
     private Handler handler;
-
     private IObserverWork contentObserver;
     private List<DownLoadInfo> loadInfos = new ArrayList<>();//等待的队列
-
     /**
      * 当前想下载的id
      */
-    private int thisDownLoad;
-
-    private WorkController() {
-        HandlerThread handlerThread = new HandlerThread("DownLoadViewController");
-        handlerThread.start();
-        handler = new Handler(handlerThread.getLooper());
-
-    }
+    private String thisDownLoadObjectId;
 
     /**
      * 操作回调
@@ -96,19 +68,25 @@ public class WorkController implements Controller, Operator, Subscription {
         }
     };
 
+    private WorkController() {
+        HandlerThread handlerThread = new HandlerThread("DownLoadViewController");
+        handlerThread.start();
+        handler = new Handler(handlerThread.getLooper());
+    }
+
     /**
-     * 根据数据库表格id得到下载计划
+     * 根据数据库表格objectId得到下载计划
      *
-     * @param modelId
+     * @param object_id
      * @return
      */
-    private Plan userDownLoadImp(int modelId) {
+    private Plan userDownLoadImp(String object_id) {
         for (Plan plan : PLANS) {
-            if (plan.getModelId() == modelId) {
+            if (object_id.equals(plan.getModelId())) {
                 return plan;
             }
         }
-        Plan plan = Entrance.createSimplePlan(modelId);
+        Plan plan = Entrance.createSimplePlan(object_id);
         PLANS.add(plan);
         return plan;
     }
@@ -120,10 +98,13 @@ public class WorkController implements Controller, Operator, Subscription {
         initContentObserver();
     }
 
-    private void initContentObserver(){
+    private void initContentObserver() {
         contentObserver = ContentObserverWork.create(this, "download_thead", new Runnable() {
             @Override
             public void run() {
+                /**
+                 * 线程里必须bind 下载服务，不然下载会掉失败
+                 */
                 FileDownloader.getImpl().bindService();
             }
         });
@@ -139,14 +120,14 @@ public class WorkController implements Controller, Operator, Subscription {
     /**
      * 暂停
      *
-     * @param tableId 数据库 下载表 id
+     * @param object_id 数据库 下载表 id
      */
     @Override
-    public void pause(final int tableId) {
+    public void pause(final String object_id) {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                userDownLoadImp(tableId).pause();
+                userDownLoadImp(object_id).pause();
             }
         });
     }
@@ -154,15 +135,15 @@ public class WorkController implements Controller, Operator, Subscription {
     /**
      * 下载
      *
-     * @param tableId
+     * @param object_id
      */
     @Override
-    public synchronized void download(int tableId) {
+    public synchronized void download(String object_id) {
         /**
          * 先改为等待状态，之后刷新数据库 contentObserver
          */
-        thisDownLoad = tableId;
-        BusinessWrap.waitting(tableId);
+        thisDownLoadObjectId = object_id;
+        BusinessWrap.waitting(object_id);
     }
 
     @Override
@@ -176,9 +157,8 @@ public class WorkController implements Controller, Operator, Subscription {
      * @param downLoadInfo
      */
     private synchronized void download2(DownLoadInfo downLoadInfo) {
-//        BusinessWrap.waitting(downLoadInfo.getId());
         if (getRunningPlan() < MAX_DOWNLOAD_COUNT) {
-            handler.post(userDownLoadImp(downLoadInfo.getId()));
+            handler.post(userDownLoadImp(downLoadInfo.getObjectId()));
         }
 
     }
@@ -186,14 +166,14 @@ public class WorkController implements Controller, Operator, Subscription {
     /**
      * 删除
      *
-     * @param tableId
+     * @param objectId
      */
     @Override
-    public void delete(final int tableId, final boolean isDeleteFile) {
+    public void delete(final String objectId, final boolean isDeleteFile) {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                Plan plan = userDownLoadImp(tableId);
+                Plan plan = userDownLoadImp(objectId);
                 plan.delete(isDeleteFile);
                 PLANS.remove(plan);
             }
@@ -202,11 +182,11 @@ public class WorkController implements Controller, Operator, Subscription {
     }
 
     @Override
-    public void reset(final int tableId) {
+    public void reset(final String objectId) {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                userDownLoadImp(tableId).reset();
+                userDownLoadImp(objectId).reset();
             }
         });
     }
@@ -229,6 +209,13 @@ public class WorkController implements Controller, Operator, Subscription {
     @Override
     public void deleteSavePath(String savePath) {
         BusinessWrap.deleteSavePath(savePath);
+    }
+
+    @Override
+    public void removePlan(Plan plan) {
+        if (plan != null) {
+            PLANS.remove(plan);
+        }
     }
 
     static Set<OperatorRespone> getOperatorRespones() {
@@ -265,6 +252,7 @@ public class WorkController implements Controller, Operator, Subscription {
 
     /**
      * 刷新，等待的就会进行下载
+     *
      * @param selfChange
      */
     @Override
@@ -289,7 +277,7 @@ public class WorkController implements Controller, Operator, Subscription {
                 /**
                  * 优先找到当前的选择的下载
                  */
-                if (d.getId() == thisDownLoad) {
+                if (d.getObjectId().equals(thisDownLoadObjectId)) {
                     thisDownloadInfo = d;
                     break;
                 }

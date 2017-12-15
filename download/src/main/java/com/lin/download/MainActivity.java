@@ -66,10 +66,11 @@ public class MainActivity extends AppCompatActivity {
 //
 
     public void onStartClick(View view) {
-        startActivity(new Intent(this,FileListActivity.class));
+        startActivity(new Intent(this,AdActivity.class));
     }
 
     public void onPauseClick(View view) {
+        startActivity(new Intent(this,FileListActivity.class));
     }
 
     private void toastShow(String s) {

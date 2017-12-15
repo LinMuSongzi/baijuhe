@@ -2,6 +2,8 @@ package com.lin.download.basic;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.lin.download.business.WorkController;
 import com.lin.download.business.model.BaseModel;
@@ -23,21 +25,24 @@ public class PlanImp implements Plan {
     private DownLoadInfo downLoadTable;
     private BaseDownloadTask baseDownloadTask;
     private int baseDownloadTaskId;
-    private int tableId;
+    private String objectId = "";
 
-
-    private PlanImp(int tableId) {
-        this.tableId = tableId;
+    private PlanImp(String object_id) {
+        this.objectId = object_id;
     }
 
-    static Plan getNewInstance(int tableId) {
-        return new PlanImp(tableId);
+    static Plan getNewInstance(String object_id) {
+        return new PlanImp(object_id);
     }
 
     @Override
     public void download() {
         if (baseDownloadTask == null) {
-            downLoadTable = BusinessWrap.getInfoById(tableId);
+            downLoadTable = BusinessWrap.getInfoByObjectId(objectId);
+            if(downLoadTable.getStatus() == IBasicInfo.COMPLETED_STATUS){
+                Log.i(Entrance.TAG, "download: 下载已完成！无须再次此下载");
+                return;
+            }
             if (downLoadTable.getId() > 0) {
                 download2();
             }
@@ -52,32 +57,34 @@ public class PlanImp implements Plan {
     }
 
     private void download2() {
-        final int id = downLoadTable.getId();
+        final String  objectId = downLoadTable.getObjectId();
+//        final DownLoadInfo downLoadInfo = downLoadTable.clone();
         baseDownloadTaskId = (baseDownloadTask = FileDownloader.getImpl().
                 create(downLoadTable.getDownLoadUrl()).setListener(new SimpleFileListenerImp() {
 
             @Override
             protected void progress(BaseDownloadTask task, final int soFarBytes, final int totalBytes) {
                 super.progress(task, soFarBytes, totalBytes);
-                BusinessWrap.progress(id, soFarBytes, totalBytes);
+                BusinessWrap.progress(objectId, soFarBytes, totalBytes);
+
             }
 
             @Override
             protected void completed(BaseDownloadTask task) {
                 super.completed(task);
-                BusinessWrap.completed(id);
+                BusinessWrap.completed(objectId);
             }
 
             @Override
             protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                 super.paused(task, soFarBytes, totalBytes);
-                BusinessWrap.paused(id);
+                BusinessWrap.paused(objectId);
             }
 
             @Override
             protected void error(BaseDownloadTask task, Throwable e) {
                 super.error(task, e);
-                BusinessWrap.error(id);
+                BusinessWrap.error(objectId);
 
                 if (e instanceof FileDownloadOutOfSpaceException) {
 
@@ -101,8 +108,8 @@ public class PlanImp implements Plan {
     }
 
     @Override
-    public int getModelId() {
-        return tableId;
+    public String getModelId() {
+        return objectId;
     }
 
     @Override
@@ -113,13 +120,13 @@ public class PlanImp implements Plan {
     @Override
     public void delete(boolean isDeleteFile) {
         this.pause();
-        BusinessWrap.delete(tableId, downLoadTable != null ? downLoadTable.getSavePath() : "", isDeleteFile);
+        BusinessWrap.delete(objectId, downLoadTable != null ? downLoadTable.getSavePath() : "", isDeleteFile);
     }
 
     @Override
     public void reset() {
         this.pause();
-        BusinessWrap.reset(tableId);
+        BusinessWrap.reset(objectId);
         WorkController.getInstance().download(downLoadTable);
     }
 
@@ -129,7 +136,7 @@ public class PlanImp implements Plan {
             baseDownloadTask.pause();
             baseDownloadTask = null;
         } else {
-            BusinessWrap.paused(tableId);
+            BusinessWrap.paused(objectId);
         }
     }
 }

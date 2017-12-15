@@ -152,4 +152,10 @@ public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo{
                 ", current=" + current  + '\'' +
                 '}';
     }
+
+    public static String  externalObject(String object_id){
+
+        return MD5Util.convert(object_id);
+    }
+
 }

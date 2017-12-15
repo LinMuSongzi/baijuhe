@@ -29,19 +29,19 @@ public class ViewSupportLoader implements LoaderManager.LoaderCallbacks<Cursor> 
     private CursorLoader cursorLoader;
     private ISwapCursorData swapCursor;
 
-    public void init(AppCompatActivity context, int id, ISwapCursorData swapCursor) {
+    public void init(AppCompatActivity context, int loadId, ISwapCursorData swapCursor) {
         init(context,
-                id,
-                new CursorLoader(context, DownLoadProvider.CONTENT_QUERY_ALL_URI, null, null, null, null),
+                loadId,
+                new CursorLoader(context, DownLoadProvider.CONTENT_QUERY_ALL_URI, null, null, null,null),
                 swapCursor);
     }
 
-    public void init(AppCompatActivity context, int id, CursorLoader cursorLoader, ISwapCursorData swapCursor) {
+    public void init(AppCompatActivity context, int loadId, CursorLoader cursorLoader, ISwapCursorData swapCursor) {
         if (loader == null) {
             this.context = context;
             this.cursorLoader = cursorLoader;
             this.swapCursor = swapCursor;
-            loader = this.context.getLoaderManager().initLoader(id, null, this);
+            loader = this.context.getLoaderManager().initLoader(loadId, null, this);
         }
     }
 
@@ -57,6 +57,10 @@ public class ViewSupportLoader implements LoaderManager.LoaderCallbacks<Cursor> 
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        swapCursor.swapCursor(null);
+        try {
+            swapCursor.swapCursor(null);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }

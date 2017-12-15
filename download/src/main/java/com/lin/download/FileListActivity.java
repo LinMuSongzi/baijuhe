@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Environment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,17 +21,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lin.download.basic.Entrance;
 import com.lin.download.basic.IBasicInfo;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.BusinessWrap;
 import com.lin.download.business.ViewSupportLoader;
+import com.lin.download.business.event.InsertEvent;
 import com.lin.download.business.model.DownLoadInfo;
 import com.lin.download.basic.OperatorRespone;
 import com.lin.download.util.DownloadUtil;
 import com.lin.download.util.RecyclerViewCursorAdapter;
 import com.liulishuo.filedownloader.FileDownloader;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,6 +49,7 @@ import y.com.sqlitesdk.framework.util.MD5Util;
 public class FileListActivity extends AppCompatActivity {
     private final int CODE = 0x9131;
     private RecyclerView id_RecyclerView;
+    private FloatingActionButton id_floatingActionButton;
     private MyAdapter adapter;
     private OperatorRespone operatorRespone = new OperatorRespone<List<DownLoadInfo>>() {
         @Override
@@ -77,6 +85,7 @@ public class FileListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_list);
+        EventBus.getDefault().register(this);
         FileDownloader.setup(this);
         createDefualtGame();
         init();
@@ -94,7 +103,7 @@ public class FileListActivity extends AppCompatActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                      Entrance.notifyStatus();
+                        Entrance.notifyStatus();
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
@@ -107,10 +116,12 @@ public class FileListActivity extends AppCompatActivity {
 
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         Entrance.removeOperatorRespone(operatorRespone);
     }
 
     private void init() {
+        id_floatingActionButton = (FloatingActionButton) findViewById(R.id.id_floatingActionButton);
         id_RecyclerView = (RecyclerView) findViewById(R.id.id_RecyclerView);
         id_RecyclerView.setLayoutManager(new LinearLayoutManager(this));
         id_RecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -126,17 +137,42 @@ public class FileListActivity extends AppCompatActivity {
             }
         });
         id_RecyclerView.setAdapter((adapter = new MyAdapter(this, null, 1)));
+        id_floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DownLoadInfo downLoadTable = new DownLoadInfo();
+                downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[5]);
+                downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                        + "lin-download" + File.separator + "开心消消乐.apk");
+                downLoadTable.setName("开心消消乐");
+                downLoadTable.setObjectId(DownloadUtil.GAME_LIST[5]);
+
+                Entrance.addTask(downLoadTable);
+
+            }
+        });
     }
 
-    private void download(int id) {
-        Entrance.download(id);
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessage(InsertEvent insertEvent){
+
+        if(insertEvent.objectId.equals(DownLoadInfo.externalObject(DownloadUtil.GAME_LIST[5]))){
+
+            Toast.makeText(this,"新增成功",Toast.LENGTH_SHORT).show();
+
+        }
+
+
     }
 
-    private void download(DownLoadInfo id) {
-        Entrance.download(id);
+
+    private void download(String objectId) {
+        Entrance.download(objectId);
     }
 
-    private void deleteItem(final int id, String name) {
+
+    private void deleteItem(final String objectId, String name) {
         new AlertDialog.Builder(this)
                 .setCancelable(false)
                 .setMessage(Html.fromHtml("是否删除 <font color=#a09f51>\"" + name + "\"</font> 下载？"))
@@ -145,7 +181,7 @@ public class FileListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        Entrance.delete(id, false);
+                        Entrance.delete(objectId, false);
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
@@ -156,7 +192,7 @@ public class FileListActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                Entrance.delete(id, true);
+                Entrance.delete(objectId, true);
 
             }
         }).show();
@@ -175,7 +211,7 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setName("王者荣耀");
         downLoadTable.setObjectId(DownloadUtil.GAME_LIST[0]);
         loadEntities.add(downLoadTable);
-
+//
         downLoadTable = new DownLoadInfo();
         downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[1]);
         downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
@@ -208,13 +244,13 @@ public class FileListActivity extends AppCompatActivity {
         downLoadTable.setObjectId(DownloadUtil.GAME_LIST[4]);
         loadEntities.add(downLoadTable);
 
-        downLoadTable = new DownLoadInfo();
-        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[5]);
-        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-                + "lin-download" + File.separator + "开心消消乐.apk");
-        downLoadTable.setName("开心消消乐");
-        downLoadTable.setObjectId(DownloadUtil.GAME_LIST[5]);
-        loadEntities.add(downLoadTable);
+//        downLoadTable = new DownLoadInfo();
+//        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[5]);
+//        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+//                + "lin-download" + File.separator + "开心消消乐.apk");
+//        downLoadTable.setName("开心消消乐");
+//        downLoadTable.setObjectId(DownloadUtil.GAME_LIST[5]);
+//        loadEntities.add(downLoadTable);
 
         for (final DownLoadInfo d : loadEntities) {
             Entrance.addTask(d);
@@ -270,6 +306,7 @@ public class FileListActivity extends AppCompatActivity {
             final int stutas = downLoadTable.getStatus();
             final int id = downLoadTable.getId();
             final String name = downLoadTable.getName();
+            final String objectId = downLoadTable.getObjectId();
 
 
             holder.id_file.setText(downLoadTable.getName());
@@ -282,7 +319,7 @@ public class FileListActivity extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteItem(id, name);
+                    deleteItem(objectId, name);
                 }
             });
 
@@ -297,10 +334,12 @@ public class FileListActivity extends AppCompatActivity {
                     holder.id_status_path.setText("下载错误");
                     break;
                 case DownLoadInfo.PAUSE_STATUS:
-                    holder.id_status_path.setText("已暂停");
+                    holder.id_status_path.setText("已暂停"+String.format("%.2f",
+                            (downLoadTable.getCurrentLeng() * 1f / downLoadTable.getToTalLeng()) * 100) + " %");
                     break;
                 case DownLoadInfo.DOING_STATUS:
-                    holder.id_status_path.setText("正在下载 "+((int) ((downLoadTable.getCurrentLeng() * 1f / downLoadTable.getToTalLeng()) * 100))+" %");
+                    holder.id_status_path.setText("正在下载 " + String.format("%.2f",
+                            (downLoadTable.getCurrentLeng() * 1f / downLoadTable.getToTalLeng()) * 100) + " %");
 
 //                    holder.id_status_path.setEnabled(false);
                     break;
@@ -323,19 +362,19 @@ public class FileListActivity extends AppCompatActivity {
                             Entrance.launchApp(v.getContext(), savePath);
                             break;
                         case DownLoadInfo.ERROR_STATUS:
-                            download(id);
+                            download(objectId);
                             break;
                         case DownLoadInfo.PAUSE_STATUS:
-                            download(id);
+                            download(objectId);
                             break;
                         case DownLoadInfo.DOING_STATUS:
-                            Entrance.pause(id);
+                            Entrance.pause(objectId);
                             break;
                         case DownLoadInfo.NOT_HAD_STATUS:
-                            download(id);
+                            download(objectId);
                             break;
                         case DownLoadInfo.WAITTING_STATUS:
-                            download(id);
+                            download(objectId);
                             break;
                     }
                 }

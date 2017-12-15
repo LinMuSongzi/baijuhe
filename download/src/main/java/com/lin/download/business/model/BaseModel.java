@@ -11,7 +11,7 @@ public abstract class BaseModel<T> implements IModel<T> {
 
     @TBPrimarykey
     protected int id;
-    @TBColumn
+    @TBColumn(notNull = true)
     protected long create_time = System.currentTimeMillis();
 
     @Override

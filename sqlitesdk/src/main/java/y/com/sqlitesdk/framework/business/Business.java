@@ -132,9 +132,10 @@ public final class Business {
         }
         if (values.size() > 0) {
             where = where.substring(0, where.length() - 4);
-            Log.i(TAG, "checkInsert: 已在在，进行修改" + sqlExecute + where);
+
             Cursor c = sqLiteDatabase.rawQuery(sqlExecute + where, values.toArray(new String[values.size()]));
             if (c.getCount() == 1) {
+                Log.i(TAG, "checkInsert: 已在在，进行修改" + sqlExecute + where);
                 if(sqLiteDatabase.update(BusinessUtil.getTbNmae(model.getClass()), contentvalues, where, values.toArray(new String[values.size()]))>0){
                     return Business.getInstances().queryLineByWhere(sqLiteDatabase,model.getClass(),where, values.toArray(new String[values.size()])).getId();
                 }

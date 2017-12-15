@@ -48,8 +48,13 @@ public final class DownLoadProviderImp {
                 Access.runCustomThread(new Execute() {
                     @Override
                     public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+                        String sortOrder_ = sortOrder;
+                        if(StringDdUtil.isNull(sortOrder)){
+                            sortOrder_ = "create_time DESC";
+                        }
+
                         cursor[0] = sqLiteDatabase.query(DownLoadInfo.TB_NAME,
-                                projection, selection, selectionArgs, null, null, sortOrder, null);
+                                projection, selection, selectionArgs, null, null, sortOrder_, null);
                         cursor[0].setNotificationUri(mContext.getContentResolver(), DownLoadProvider.CONTENT_QUERY_ALL_URI);
                     }
 

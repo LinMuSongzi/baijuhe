@@ -24,30 +24,30 @@ public class BusinessWrap {
     /**
      * 暂停
      *
-     * @param tableId
+     * @param object_id
      * @param soFarBytes
      * @param totalBytes
      */
-    public static void progress(int tableId, final long soFarBytes, final long totalBytes) {
-        WorkUtil.progress(tableId, soFarBytes, totalBytes);
+    public static void progress(String object_id, final long soFarBytes, final long totalBytes) {
+        WorkUtil.progress(object_id, soFarBytes, totalBytes);
     }
 
     /**
      * 完成
      *
-     * @param tableId
+     * @param ObjectId
      */
-    public static void completed(int tableId) {
-        WorkUtil.completed(tableId);
+    public static void completed(String ObjectId) {
+        WorkUtil.completed(ObjectId);
     }
 
     /**
      * 暂停
      *
-     * @param tableId
+     * @param ObjectId
      */
-    public static void paused(int tableId) {
-        WorkUtil.paused(tableId);
+    public static void paused(String ObjectId) {
+        WorkUtil.paused(ObjectId);
     }
 
     public static void notifyStatus(){
@@ -58,22 +58,22 @@ public class BusinessWrap {
      * 错误
      * 有可能没有存储权限，或者磁盘不够，或者网络错误
      *
-     * @param tableId
+     * @param ObjectId
      */
-    public static void error(int tableId) {
-        WorkUtil.error(tableId);
+    public static void error(String ObjectId) {
+        WorkUtil.error(ObjectId);
     }
 
-    public static void waitting(int id){WorkUtil.waitting(id);}
+    public static void waitting(String ObjectId){WorkUtil.waitting(ObjectId);}
 
     /**
      * id查找
      *
-     * @param tableId
+     * @param object_id
      * @return
      */
-    public static DownLoadInfo getInfoById(int tableId) {
-        return WorkUtil.getInfoById(tableId);
+    public static DownLoadInfo getInfoByObjectId(String object_id) {
+        return WorkUtil.getInfoByObjectId(object_id);
     }
 
     /**
@@ -106,11 +106,11 @@ public class BusinessWrap {
     /**
      * 删除下载文件与数据库行，不建议直接使用
      *
-     * @param tableId
+     * @param object_id
      * @param savePath
      */
-    public static void delete(int tableId, String savePath,boolean isDeleteFile) {
-        WorkUtil.delete(tableId, savePath,isDeleteFile);
+    public static void delete(String object_id, String savePath,boolean isDeleteFile) {
+        WorkUtil.delete(object_id, savePath,isDeleteFile);
     }
 
     public static void launchApp(Context context, String packageName, String appPath) {
@@ -122,7 +122,7 @@ public class BusinessWrap {
      *
      * @param table
      */
-    public static void reset(int table) {
+    public static void reset(String table) {
         WorkUtil.reset(table);
     }
 
@@ -151,5 +151,9 @@ public class BusinessWrap {
 
     public static void scannerDoingStatusException() {
         WorkUtil.scannerDoingStatusException();
+    }
+
+    public static void modiStatus2(String appPath, int notHadStatus) {
+        WorkUtil.modiStatus2(appPath,notHadStatus);
     }
 }

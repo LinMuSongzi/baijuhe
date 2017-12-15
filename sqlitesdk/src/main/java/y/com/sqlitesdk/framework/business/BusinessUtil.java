@@ -307,8 +307,10 @@ public final class BusinessUtil {
      * @param <T>
      * @return
      */
-    public static <T extends IModel<T>> ContentValues getAllValues(T clone) throws IllegalAccessException {
-        Field[] fields = clone.getClass().getDeclaredFields();
+    public static <T extends IModel> ContentValues getAllValues(T clone) throws IllegalAccessException {
+        List<Field> fieldList = BusinessUtil.getAllFieldFlag(clone.getClass());
+        Field[] fields = new Field[fieldList.size()];
+        fieldList.toArray(fields);
         ContentValues contentValues = new ContentValues();
         fields = BusinessUtil.checkHasColunm(fields);
         for (int i = 0; i < fields.length; i++) {

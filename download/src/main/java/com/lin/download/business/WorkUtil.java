@@ -3,13 +3,17 @@ package com.lin.download.business;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import com.lin.download.basic.IBasicInfo;
 import com.lin.download.basic.OperatorRespone;
 import com.lin.download.basic.provide.DownLoadProvider;
+import com.lin.download.business.event.InsertEvent;
 import com.lin.download.business.model.DownLoadInfo;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.List;
@@ -56,9 +60,12 @@ class WorkUtil {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 long leng = Business.getInstances().insert(sqLiteDatabase, downLoadTable);
+                boolean flag = false;
                 if (leng > 0) {
                     notifyAllQueryDownload(null);
+                    flag = true;
                 }
+                EventBus.getDefault().post(new InsertEvent(downLoadTable.getObjectId(),flag));
             }
 
             @Override
@@ -72,18 +79,17 @@ class WorkUtil {
     /**
      * 暂停
      *
-     * @param id
+     * @param objectId
      * @param soFarBytes
      * @param totalBytes
      */
-    static void progress(int id, final long soFarBytes, final long totalBytes) {
-        final int i = id;
+    static void progress(final String objectId, final long soFarBytes, final long totalBytes) {
         Access.run(new Execute() {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 String sql = String.format(
-                        "update %s set status = %d,current = %d,toTal = %d where id = %d",
-                        DownLoadInfo.TB_NAME, DownLoadInfo.DOING_STATUS, soFarBytes, totalBytes, i);
+                        "update %s set status = %d,current = %d,toTal = %d where object_id = '%s'",
+                        DownLoadInfo.TB_NAME, DownLoadInfo.DOING_STATUS, soFarBytes, totalBytes, objectId);
                 sqLiteDatabase.execSQL(sql);
                 notifyAllQueryDownload(null);
             }
@@ -98,56 +104,54 @@ class WorkUtil {
     /**
      * 完成
      *
-     * @param id
+     * @param object_id
      */
-    static void completed(int id) {
-        modiStatus(id,IBasicInfo.COMPLETED_STATUS);
-//        notifyStatus();
+    static void completed(String object_id) {
+        modiStatus(object_id,IBasicInfo.COMPLETED_STATUS);
     }
 
     /**
      * 暂停
      *
-     * @param id
+     * @param object_id
      */
-    static void paused(int id) {
-        modiStatus(id,IBasicInfo.PAUSE_STATUS);
-//        notifyStatus();
+    static void paused(String object_id) {
+        modiStatus(object_id,IBasicInfo.PAUSE_STATUS);
     }
 
     /**
      * 错误
      * 有可能没有存储权限，或者磁盘不够，或者网络错误
      *
-     * @param id
+     * @param object_id
      */
-    static void error(int id) {
-        modiStatus(id, IBasicInfo.ERROR_STATUS);
+    static void error(String object_id) {
+        modiStatus(object_id, IBasicInfo.ERROR_STATUS);
     }
 
     /**
      * 等待状态
      * @param id
      */
-    static void waitting(int id){
+    static void waitting(String id){
         modiStatus(id, IBasicInfo.WAITTING_STATUS);
 //        notifyStatus();
     }
 
     /**
      * 改变状态
-     * @param id
+     * @param objectId
      * @param status
      */
-    static void modiStatus(int id, final int status) {
-        final int i = id;
+    static void modiStatus(String objectId, final int status) {
+        final String object_id = objectId;
         final int s = status;
         Access.run(new Execute() {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 String sql = String.format(
-                        "update %s set status = %d where id = %d",
-                        DownLoadInfo.TB_NAME, s, i);
+                        "update %s set status = %d where object_id = '%s'",
+                        DownLoadInfo.TB_NAME, s,object_id);
                 sqLiteDatabase.execSQL(sql);
                 notifyAllQueryDownload(null);
                 checkStatus(status);
@@ -159,6 +163,32 @@ class WorkUtil {
             }
         });
     }
+
+    /**
+     * 改变状态
+     * @param savePath
+     * @param status
+     */
+    static void modiStatus2(final String savePath, final int status) {
+        final int s = status;
+        Access.run(new Execute() {
+            @Override
+            public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+                String sql = String.format(
+                        "update %s set status = %d where save_path = '%s'",
+                        DownLoadInfo.TB_NAME, s,savePath);
+                sqLiteDatabase.execSQL(sql);
+                notifyAllQueryDownload(null);
+                checkStatus(status);
+            }
+
+            @Override
+            public void onExternalError() {
+
+            }
+        });
+    }
+
 
     private static void checkStatus(int status) {
 
@@ -232,43 +262,43 @@ class WorkUtil {
     /**
      * 删除某个id，刷新页面
      *
-     * @param tableId
+     * @param object_id
      */
-    static void resolverDeleteInfoById(int tableId) {
-        if (tableId > 0) {
+    static void resolverDeleteInfoById(String object_id) {
+        if (!StringDdUtil.isNull(object_id)) {
             WorkController.getContext().getContentResolver().delete(
-                    DownLoadProvider.CONTENT_DELETE_URI, "id = ?",
-                    new String[]{String.valueOf(tableId)});
+                    DownLoadProvider.CONTENT_DELETE_URI, "object_id = ?",
+                    new String[]{String.valueOf(object_id)});
         }
     }
 
     /**
      * 删除
      *
-     * @param tableId
+     * @param object_id
      * @param savePath
      */
-    static void delete(final int tableId, final String savePath, boolean isDeleteFile) {
+    static void delete(final String object_id, final String savePath, boolean isDeleteFile) {
 
 
-        if (tableId > 0 && !StringDdUtil.isNull(savePath)) {
+        if (!StringDdUtil.isNull(object_id) && !StringDdUtil.isNull(savePath)) {
             if (isDeleteFile) {
                 deleteSavePath(savePath);
             }
-            resolverDeleteInfoById(tableId);
-        } else if (tableId > 0 && StringDdUtil.isNull(savePath)) {
-            IBasicInfo info = WorkUtil.getInfoById(tableId);
+            resolverDeleteInfoById(object_id);
+        } else if (!StringDdUtil.isNull(object_id) && StringDdUtil.isNull(savePath)) {
+            IBasicInfo info = WorkUtil.getInfoByObjectId(object_id);
             if (isDeleteFile) {
                 deleteSavePath(info == null ? "" : info.getSavePath());
             }
-            resolverDeleteInfoById(tableId);
-        } else if (tableId < 0 && !StringDdUtil.isNull(savePath)) {
+            resolverDeleteInfoById(object_id);
+        } else if (StringDdUtil.isNull(object_id) && !StringDdUtil.isNull(savePath)) {
             if (isDeleteFile) {
                 deleteSavePath(savePath);
             }
-            IModel info = WorkUtil.getInfoBySavePath(savePath);
+            DownLoadInfo info = WorkUtil.getInfoBySavePath(savePath);
             if (info != null && info.getId() > 0) {
-                resolverDeleteInfoById(info.getId());
+                resolverDeleteInfoById(info.getObjectId());
             }
         }
 
@@ -310,6 +340,8 @@ class WorkUtil {
      */
     static void launchApp(Context context, String packageName, String appPath) {
 
+
+
         // 启动目标应用
         if (new File("/data/data/" + packageName).exists()) {
             // 获取目标应用安装包的Intent
@@ -329,12 +361,15 @@ class WorkUtil {
     }
 
 
-    static DownLoadInfo getInfoById(final int tableId) {
+    static DownLoadInfo getInfoByObjectId(final String objectId) {
         final DownLoadInfo[] downLoadInfo = {null};
         Access.runCustomThread(new Execute() {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-                downLoadInfo[0] = Business.getInstances().queryById(sqLiteDatabase, tableId, DownLoadInfo.class);
+
+                Cursor cursor = sqLiteDatabase.query(DownLoadInfo.TB_NAME,null,"object_id = ?",new String[]{objectId},null,null,null,null);
+
+                downLoadInfo[0] = BusinessUtil.reflectCursorOne(cursor,DownLoadInfo.class,true);
             }
 
             @Override
@@ -348,10 +383,10 @@ class WorkUtil {
     /**
      * 重新下载
      *
-     * @param tableid
+     * @param object_id
      */
-    static void reset(final int tableid) {
-        IBasicInfo downLoadInfo = WorkUtil.getInfoById(tableid);
+    static void reset(final String object_id) {
+        IBasicInfo downLoadInfo = WorkUtil.getInfoByObjectId(object_id);
 
         if (downLoadInfo != null) {
             deleteSavePath(downLoadInfo.getSavePath());
