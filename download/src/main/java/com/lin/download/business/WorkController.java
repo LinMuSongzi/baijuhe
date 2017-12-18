@@ -7,19 +7,18 @@ import android.util.Log;
 
 import com.lin.download.basic.Controller;
 import com.lin.download.basic.Entrance;
-import com.lin.download.basic.IBasicInfo;
-import com.lin.download.basic.OperatorRespone;
+import com.lin.download.business.callback.FileDownloadExceptionListener;
+import com.lin.download.business.callback.OperatorRespone;
 import com.lin.download.basic.Plan;
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.model.DownLoadInfo;
+import com.lin.download.business.work.BusinessWrap;
 import com.liulishuo.filedownloader.FileDownloader;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import y.com.sqlitesdk.framework.business.BusinessUtil;
 
 /**
  * Created by linhui on 2017/12/11.
@@ -40,15 +39,11 @@ public class WorkController implements Controller, Operator, Subscription {
     private Handler handler;
     private IObserverWork contentObserver;
     private List<DownLoadInfo> loadInfos = new ArrayList<>();//等待的队列
+    private Operator operatorImp = new OperatorImp();
     /**
      * 当前想下载的id
      */
     private String thisDownLoadObjectId;
-
-    /**
-     * 操作回调
-     */
-    private final Set<OperatorRespone> operatorRespones = new HashSet<>();
     /**
      * 下载计划
      */
@@ -114,7 +109,7 @@ public class WorkController implements Controller, Operator, Subscription {
     }
 
     private void scanner() {
-        BusinessWrap.scannerDoingStatusException();
+        BusinessWrap.scannerStatusException();
     }
 
     /**
@@ -146,10 +141,10 @@ public class WorkController implements Controller, Operator, Subscription {
         BusinessWrap.waitting(object_id);
     }
 
-    @Override
-    public void download(DownLoadInfo info) {
-        download2(info);
-    }
+//    @Override
+//    public void download(DownLoadInfo info) {
+//        download2(info);
+//    }
 
     /**
      * 真正的下载
@@ -218,25 +213,47 @@ public class WorkController implements Controller, Operator, Subscription {
         }
     }
 
-    static Set<OperatorRespone> getOperatorRespones() {
-        return downLoadViewController.operatorRespones;
+    @Override
+    public Operator getOperator() {
+        return this;
+    }
+
+    @Override
+    public Set<OperatorRespone> getOperatorRespones() {
+        return operatorImp.getOperatorRespones();
+    }
+
+    @Override
+    public Set<FileDownloadExceptionListener> getFileDownloadExceptionListeners() {
+        return operatorImp.getFileDownloadExceptionListeners();
+    }
+
+    @Override
+    public void handlerFileDownloadException(Throwable throwable) {
+        operatorImp.handlerFileDownloadException(throwable);
+    }
+
+    @Override
+    public void addFileDownloadException(FileDownloadExceptionListener fileDownloadOutOfSpaceExceptionListener) {
+        operatorImp.addFileDownloadException(fileDownloadOutOfSpaceExceptionListener);
+    }
+
+    @Override
+    public void removeFileDownloadException(Object fileDownloadOutOfSpaceExceptionListener) {
+        operatorImp.removeFileDownloadException(fileDownloadOutOfSpaceExceptionListener);
     }
 
     @Override
     public void addOperatorRespone(OperatorRespone operatorRespone) {
-        if (operatorRespone != null) {
-            operatorRespones.add(operatorRespone);
-        }
+        operatorImp.addOperatorRespone(operatorRespone);
     }
 
     @Override
     public void removeOperatorRespone(OperatorRespone operatorRespone) {
-        if (operatorRespone != null) {
-            operatorRespones.remove(operatorRespone);
-        }
+        operatorImp.addOperatorRespone(operatorRespone);
     }
 
-    static Context getContext() {
+    public static Context getContext() {
         return downLoadViewController.context;
     }
 
@@ -259,17 +276,7 @@ public class WorkController implements Controller, Operator, Subscription {
     public void onChange(boolean selfChange) {
         Log.i(Entrance.TAG, "onChange: 刷新等待");
         loadInfos.clear();
-        loadInfos.addAll(
-                BusinessUtil.reflectCursor(
-                        getContext().getContentResolver().query(DownLoadProvider.CONTENT_QUERY_StATUS_URI,
-                                null,
-                                "status = ?",
-                                new String[]{
-                                        String.valueOf(IBasicInfo.WAITTING_STATUS),
-                                },
-                                null,
-                                null), DownLoadInfo.class));
-
+        loadInfos.addAll(BusinessWrap.findStutasDownloadList2(getContext()));
         if (loadInfos.size() > 0) {
             List<DownLoadInfo> collections = new ArrayList<>(loadInfos);
             DownLoadInfo thisDownloadInfo = null;

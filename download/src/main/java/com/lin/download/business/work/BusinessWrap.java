@@ -1,11 +1,13 @@
-package com.lin.download.business;
+package com.lin.download.business.work;
 
 import android.content.Context;
 import android.database.ContentObserver;
 
-import com.lin.download.basic.OperatorRespone;
+import com.lin.download.business.callback.OperatorRespone;
 import com.lin.download.business.model.DownLoadInfo;
 import com.liulishuo.filedownloader.FileDownloader;
+
+import java.util.Collection;
 
 /**
  * Created by linhui on 2017/12/11.
@@ -13,7 +15,7 @@ import com.liulishuo.filedownloader.FileDownloader;
 public class BusinessWrap {
 
     /**
-     * 添加一个下载任务任务
+     * 添加一个下载任务任务（必须先添加任务，才能下载）
      *
      * @param downLoadTable
      */
@@ -50,6 +52,9 @@ public class BusinessWrap {
         WorkUtil.paused(ObjectId);
     }
 
+    /**
+     * 唤醒等待状态，进行下载
+     */
     public static void notifyStatus(){
         WorkUtil.notifyStatus();
     }
@@ -64,11 +69,14 @@ public class BusinessWrap {
         WorkUtil.error(ObjectId);
     }
 
+    /**
+     * 等待
+     * @param ObjectId
+     */
     public static void waitting(String ObjectId){WorkUtil.waitting(ObjectId);}
 
     /**
-     * id查找
-     *
+     * 对象id，查找（业务项的唯一标识）
      * @param object_id
      * @return
      */
@@ -113,6 +121,12 @@ public class BusinessWrap {
         WorkUtil.delete(object_id, savePath,isDeleteFile);
     }
 
+    /**
+     * 开启app
+     * @param context
+     * @param packageName
+     * @param appPath
+     */
     public static void launchApp(Context context, String packageName, String appPath) {
         WorkUtil.launchApp(context, packageName, appPath);
     }
@@ -145,15 +159,30 @@ public class BusinessWrap {
         return WorkUtil.getInfoBySavePath(savePath);
     }
 
+    /**
+     * 暂停所有
+     */
     public static void pauseAll() {
         FileDownloader.getImpl().pauseAll();
     }
 
-    public static void scannerDoingStatusException() {
-        WorkUtil.scannerDoingStatusException();
+    /**
+     * 扫描正在执行的并且把他们改变为已暂停，因为正在执行的进程被异常关闭后，状态还没来得及修复
+     */
+    public static void scannerStatusException() {
+        WorkUtil.scannerStatusException();
     }
 
+    /**
+     * 改变状态，根据存储地址
+     * @param appPath
+     * @param notHadStatus
+     */
     public static void modiStatus2(String appPath, int notHadStatus) {
         WorkUtil.modiStatus2(appPath,notHadStatus);
+    }
+
+    public static Collection<? extends DownLoadInfo> findStutasDownloadList2(Context context) {
+        return WorkUtil.findStutasDownloadList2(context);
     }
 }

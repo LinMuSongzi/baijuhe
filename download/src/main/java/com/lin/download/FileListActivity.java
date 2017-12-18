@@ -1,7 +1,6 @@
 package com.lin.download;
 
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -25,28 +24,29 @@ import android.widget.Toast;
 
 import com.lin.download.basic.Entrance;
 import com.lin.download.basic.IBasicInfo;
-import com.lin.download.basic.provide.DownLoadProvider;
-import com.lin.download.business.BusinessWrap;
 import com.lin.download.business.ViewSupportLoader;
+import com.lin.download.business.WorkController;
+import com.lin.download.business.callback.FileDownloadExceptionListener;
 import com.lin.download.business.event.InsertEvent;
 import com.lin.download.business.model.DownLoadInfo;
-import com.lin.download.basic.OperatorRespone;
+import com.lin.download.business.callback.OperatorRespone;
 import com.lin.download.util.DownloadUtil;
 import com.lin.download.util.RecyclerViewCursorAdapter;
 import com.liulishuo.filedownloader.FileDownloader;
+import com.liulishuo.filedownloader.exception.FileDownloadOutOfSpaceException;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
 import y.com.sqlitesdk.framework.business.BusinessUtil;
-import y.com.sqlitesdk.framework.util.MD5Util;
 
-public class FileListActivity extends AppCompatActivity {
+public class FileListActivity extends AppCompatActivity implements FileDownloadExceptionListener {
     private final int CODE = 0x9131;
     private RecyclerView id_RecyclerView;
     private FloatingActionButton id_floatingActionButton;
@@ -92,6 +92,7 @@ public class FileListActivity extends AppCompatActivity {
         loader.init(this, 100, adapter);
         Entrance.addOperatorRespone(operatorRespone);
         Entrance.findStutasDownloadList(CODE, IBasicInfo.PAUSE_STATUS);
+        Entrance.addFileDownloadExceptionListener(this);
         show();
     }
 
@@ -118,6 +119,7 @@ public class FileListActivity extends AppCompatActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
         Entrance.removeOperatorRespone(operatorRespone);
+        Entrance.removeFileDownloadExceptionListener(this);
     }
 
     private void init() {
@@ -155,11 +157,11 @@ public class FileListActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessage(InsertEvent insertEvent){
+    public void onMessage(InsertEvent insertEvent) {
 
-        if(insertEvent.objectId.equals(DownLoadInfo.externalObject(DownloadUtil.GAME_LIST[5]))){
+        if (insertEvent.objectId.equals(DownLoadInfo.externalObject(DownloadUtil.GAME_LIST[5]))) {
 
-            Toast.makeText(this,"新增成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "新增成功", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -258,6 +260,26 @@ public class FileListActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onException(Throwable ex) {
+        if (ex instanceof FileDownloadOutOfSpaceException) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getBaseContext(), "存储空间不足！", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        } else if (ex instanceof UnknownHostException) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getBaseContext(), "没有网络！", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
     private static class MyViewHodler extends RecyclerView.ViewHolder {
 
         TextView id_file;
@@ -334,7 +356,7 @@ public class FileListActivity extends AppCompatActivity {
                     holder.id_status_path.setText("下载错误");
                     break;
                 case DownLoadInfo.PAUSE_STATUS:
-                    holder.id_status_path.setText("已暂停"+String.format("%.2f",
+                    holder.id_status_path.setText("已暂停" + String.format("%.2f",
                             (downLoadTable.getCurrentLeng() * 1f / downLoadTable.getToTalLeng()) * 100) + " %");
                     break;
                 case DownLoadInfo.DOING_STATUS:

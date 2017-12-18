@@ -1,22 +1,17 @@
 package com.lin.download.basic;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.lin.download.business.WorkController;
-import com.lin.download.business.model.BaseModel;
+import com.lin.download.business.callback.FileDownloadExceptionListener;
 import com.lin.download.business.model.DownLoadInfo;
-import com.lin.download.business.BusinessWrap;
+import com.lin.download.business.work.BusinessWrap;
 import com.liulishuo.filedownloader.BaseDownloadTask;
-import com.liulishuo.filedownloader.FileDownloadQueueSet;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.exception.FileDownloadOutOfSpaceException;
 
 import java.net.UnknownHostException;
-
-import y.com.sqlitesdk.framework.business.Business;
+import java.util.Iterator;
 
 /**
  * Created by linhui on 2017/12/7.
@@ -85,21 +80,25 @@ public class PlanImp implements Plan {
             protected void error(BaseDownloadTask task, Throwable e) {
                 super.error(task, e);
                 BusinessWrap.error(objectId);
-
-                if (e instanceof FileDownloadOutOfSpaceException) {
-
-                    //空间不足
-
-
-                } else if (e instanceof UnknownHostException) {
-
-                    //无网络或者硬件损坏
-
-                }
+                PlanImp.this.error(e);
+//                if (e instanceof FileDownloadOutOfSpaceException) {
+//
+//                    //空间不足
+//
+//
+//                } else if (e instanceof UnknownHostException) {
+//
+//                    //无网络或者硬件损坏
+//
+//                }
 
 
             }
         }).setPath(downLoadTable.getSavePath()).setSyncCallback(true)).start();
+    }
+
+    private void error(Throwable ex){
+        WorkController.getInstance().getOperator().handlerFileDownloadException(ex);
     }
 
     @Override
@@ -127,7 +126,7 @@ public class PlanImp implements Plan {
     public void reset() {
         this.pause();
         BusinessWrap.reset(objectId);
-        WorkController.getInstance().download(downLoadTable);
+        WorkController.getInstance().download(objectId);
     }
 
     @Override

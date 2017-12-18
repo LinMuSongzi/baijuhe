@@ -9,14 +9,14 @@ import y.com.sqlitesdk.framework.util.MD5Util;
 /**
  * Created by linhui on 2017/12/7.
  */
-public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo{
+public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo {
 
     @TBTable
     public static final String TB_NAME = "tb_download_info";
 
     private boolean isNotitfyShowDownLoadStutas = false;
 
-    @TBColumn(notNull = true,unique = true)
+    @TBColumn(notNull = true, unique = true)
     private String object_id;
     @TBColumn(notNull = true)
     private String name;
@@ -34,7 +34,8 @@ public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo{
     private long current;
     @TBColumn(notNull = true)
     private int donwloadType = GAME_FEIMO_TYPE;
-//    gameId
+
+    //    gameId
     public int getDonwloadType() {
         return donwloadType;
     }
@@ -149,11 +150,11 @@ public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo{
                 ", save_path='" + save_path + '\'' +
                 ", status=" + status +
                 ", toTal=" + toTal +
-                ", current=" + current  + '\'' +
+                ", current=" + current + '\'' +
                 '}';
     }
 
-    public static String  externalObject(String object_id){
+    public static String externalObject(String object_id) {
 
         return MD5Util.convert(object_id);
     }

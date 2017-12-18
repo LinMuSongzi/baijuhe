@@ -2,6 +2,7 @@ package com.lin.download.basic;
 
 import android.content.Context;
 
+import com.lin.download.business.Operator;
 import com.lin.download.business.model.DownLoadInfo;
 
 /**
@@ -14,11 +15,11 @@ public interface Controller {
     void init(Context context);
     void pause(String objectId);
     void download(String  objectId);
-    void download(DownLoadInfo info);
     void delete(String  objectId,boolean isDeleteFile);
     void reset(String  objectId);
     void addTask(DownLoadInfo downLoadTable);
     void pauseAll();
     void deleteSavePath(String savePath);
     void removePlan(Plan plan);
+    Operator getOperator();
 }

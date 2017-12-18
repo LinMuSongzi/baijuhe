@@ -1,4 +1,4 @@
-package com.lin.download.business;
+package com.lin.download.business.work;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,20 +8,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import com.lin.download.basic.IBasicInfo;
-import com.lin.download.basic.OperatorRespone;
+import com.lin.download.business.callback.OperatorRespone;
 import com.lin.download.basic.provide.DownLoadProvider;
+import com.lin.download.business.Operator;
+import com.lin.download.business.WorkController;
 import com.lin.download.business.event.InsertEvent;
 import com.lin.download.business.model.DownLoadInfo;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 import y.com.sqlitesdk.framework.business.Business;
 import y.com.sqlitesdk.framework.business.BusinessUtil;
 import y.com.sqlitesdk.framework.db.Access;
-import y.com.sqlitesdk.framework.interface_model.IModel;
 import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 import y.com.sqlitesdk.framework.util.StringDdUtil;
 
@@ -31,8 +33,8 @@ import y.com.sqlitesdk.framework.util.StringDdUtil;
 class WorkUtil {
 
     static OperatorRespone findOperatorRespone(int code) {
-        synchronized (WorkController.getOperatorRespones()) {
-            for (OperatorRespone operatorRespone : WorkController.getOperatorRespones()) {
+        synchronized (WorkController.getInstance().getOperator().getOperatorRespones()) {
+            for (OperatorRespone operatorRespone : ((Operator)WorkController.getInstance()).getOperatorRespones()) {
                 if (operatorRespone.getCode() == code) {
                     return operatorRespone;
                 }
@@ -42,11 +44,11 @@ class WorkUtil {
     }
 
     static void addOperatorRespone(OperatorRespone operatorRespone) {
-        WorkController.downLoadViewController.addOperatorRespone(operatorRespone);
+        WorkController.getInstance().getOperator().addOperatorRespone(operatorRespone);
     }
 
     static void removeOperatorRespone(OperatorRespone operatorRespone) {
-        WorkController.downLoadViewController.removeOperatorRespone(operatorRespone);
+        WorkController.getInstance().getOperator().removeOperatorRespone(operatorRespone);
     }
 
     /**
@@ -245,6 +247,21 @@ class WorkUtil {
         });
     }
 
+    static Collection<DownLoadInfo> findStutasDownloadList2(Context context){
+
+
+        return BusinessUtil.reflectCursor(
+                context.getContentResolver().query(DownLoadProvider.CONTENT_QUERY_StATUS_URI,
+                        null,
+                        "status = ?",
+                        new String[]{
+                                String.valueOf(IBasicInfo.WAITTING_STATUS),
+                        },
+                        null,
+                        null), DownLoadInfo.class);
+
+    }
+
     /**
      * 使用操作回调
      *
@@ -419,7 +436,7 @@ class WorkUtil {
     /**
      * 正在下载的doing状态的若是被杀死进曾，则下次打开初始化的时候自动修改为pause状态
      */
-    static void scannerDoingStatusException() {
+    static void scannerStatusException() {
 
         Access.run(new Execute() {
             @Override

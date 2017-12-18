@@ -4,24 +4,17 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
-import android.util.Log;
 
 import com.lin.download.basic.provide.DownLoadProvider;
+import com.lin.download.business.callback.FileDownloadExceptionListener;
+import com.lin.download.business.callback.OperatorRespone;
 import com.lin.download.business.model.DownLoadInfo;
-import com.lin.download.business.BusinessWrap;
+import com.lin.download.business.work.BusinessWrap;
 import com.lin.download.business.WorkController;
-import com.lin.download.util.DownloadUtil;
-import com.liulishuo.filedownloader.FileDownloader;
 
 import java.io.File;
 
-import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
-import y.com.sqlitesdk.framework.business.Business;
 import y.com.sqlitesdk.framework.db.Access;
-import y.com.sqlitesdk.framework.util.MD5Util;
 
 /**
  * Created by linhui on 2017/12/11.
@@ -45,6 +38,14 @@ public class Entrance {
         BusinessWrap.removeOperatorRespone(operatorRespone);
     }
 
+    public static void addFileDownloadExceptionListener(FileDownloadExceptionListener fileDownloadExceptionListener){
+        WorkController.getInstance().getOperator().addFileDownloadException(fileDownloadExceptionListener);
+    }
+
+    public static void removeFileDownloadExceptionListener(FileDownloadExceptionListener fileDownloadExceptionListener){
+        WorkController.getInstance().getOperator().removeFileDownloadException(fileDownloadExceptionListener);
+    }
+
     public static void pause(String objectId) {
         WorkController.getInstance().pause(objectId);
     }
@@ -53,9 +54,9 @@ public class Entrance {
         WorkController.getInstance().download(objectId);
     }
 
-    public static void download(DownLoadInfo info) {
-        WorkController.getInstance().download(info);
-    }
+//    public static void download(DownLoadInfo info) {
+//        WorkController.getInstance().download(info);
+//    }
 
     public static void delete(String objectId, boolean isdeleteFile) {
         WorkController.getInstance().delete(objectId, isdeleteFile);
