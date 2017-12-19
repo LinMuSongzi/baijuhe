@@ -22,6 +22,16 @@ public interface Operator {
 
     Set<FileDownloadExceptionListener> getFileDownloadExceptionListeners();
 
+    /**
+     *
+     * swich(throwable){
+     *     case FileDownloadOutOfSpaceException 空间不足
+     *          break;
+     *     case UnknownHostException 无网络或者硬件损坏
+     *          break
+     * }
+     * @param throwable
+     */
     void handlerFileDownloadException(Throwable throwable);
 
 

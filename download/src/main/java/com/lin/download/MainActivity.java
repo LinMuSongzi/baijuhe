@@ -1,9 +1,11 @@
 package com.lin.download;
 
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
-
 
     }
 

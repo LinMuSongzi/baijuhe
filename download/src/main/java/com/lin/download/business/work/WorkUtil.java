@@ -2,10 +2,12 @@ package com.lin.download.business.work;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 import com.lin.download.basic.IBasicInfo;
 import com.lin.download.business.callback.OperatorRespone;
@@ -361,6 +363,7 @@ class WorkUtil {
 
         // 启动目标应用
         if (new File("/data/data/" + packageName).exists()) {
+            WorkController.getInstance().getInstall().onOpenApk(appPath);
             // 获取目标应用安装包的Intent
             Intent intent = context.getPackageManager().getLaunchIntentForPackage(
                     packageName);
@@ -368,6 +371,7 @@ class WorkUtil {
         }
         // 安装目标应用
         else {
+            WorkController.getInstance().getInstall().onStartInstall(appPath);
             Intent intent = new Intent();
             // 设置目标应用安装包路径
             intent.setDataAndType(Uri.fromFile(new File(appPath)),
@@ -456,4 +460,25 @@ class WorkUtil {
 
 
     }
+
+
+    /**
+     * 安装应用
+     */
+    static void installApp(Context context, String filePath) {
+        if (context == null)
+            return;
+        if (filePath == null)
+            return;
+        Uri uri = Uri.fromFile(new File(filePath));
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(uri, "application/vnd.android.package-archive");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            context.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

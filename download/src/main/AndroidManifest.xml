@@ -4,7 +4,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REMOVED" />
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
+    <uses-permission android:name="android.permission.DELETE_PACKAGES" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -32,24 +37,17 @@
             android:authorities="com.download.lin.file.provide"
             android:exported="true" />
 
-        <!-- <receiver android:name="com.lin.download.PlanDownloadReceiver"> -->
+        <receiver android:name="com.lin.download.business.WorkInstallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <action android:name="android.intent.action.PACKAGE_INSTALL"/>
+                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED"/>
+                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH"/>
+                <data android:scheme="package" />
+            </intent-filter>
 
-
-        <!-- <intent-filter> -->
-
-
-        <!-- <action android:name="vi"> -->
-        <!--  -->
-        <!-- </action> -->
-
-
-        <!-- </intent-filter> -->
-
-
-        <!-- </receiver> -->
-
-
-        <!-- <activity android:name=".FileListActivity"></activity> -->
+        </receiver>
     </application>
 
 </manifest>

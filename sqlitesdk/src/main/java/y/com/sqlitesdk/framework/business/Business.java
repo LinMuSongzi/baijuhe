@@ -95,7 +95,7 @@ public final class Business {
      * @param <T>
      */
 
-    public <T extends IModel<T>> boolean insert(SQLiteDatabase sqLiteDatabase, List<T> models) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public <T extends IModel> boolean insert(SQLiteDatabase sqLiteDatabase, List<T> models) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
         for (T model : models) {
             model.setId((int) checkInsert(sqLiteDatabase, model));
         }

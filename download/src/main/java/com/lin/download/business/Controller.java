@@ -1,7 +1,9 @@
-package com.lin.download.basic;
+package com.lin.download.business;
 
 import android.content.Context;
 
+import com.lin.download.basic.Plan;
+import com.lin.download.business.Install;
 import com.lin.download.business.Operator;
 import com.lin.download.business.model.DownLoadInfo;
 
@@ -22,4 +24,5 @@ public interface Controller {
     void deleteSavePath(String savePath);
     void removePlan(Plan plan);
     Operator getOperator();
+    Install getInstall();
 }

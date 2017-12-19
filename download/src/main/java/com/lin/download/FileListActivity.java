@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Environment;
+import android.os.IInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.LoginFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +26,11 @@ import android.widget.Toast;
 
 import com.lin.download.basic.Entrance;
 import com.lin.download.basic.IBasicInfo;
+import com.lin.download.business.Install;
 import com.lin.download.business.ViewSupportLoader;
 import com.lin.download.business.WorkController;
 import com.lin.download.business.callback.FileDownloadExceptionListener;
+import com.lin.download.business.callback.InstallListener;
 import com.lin.download.business.event.InsertEvent;
 import com.lin.download.business.model.DownLoadInfo;
 import com.lin.download.business.callback.OperatorRespone;
@@ -46,7 +50,8 @@ import java.util.List;
 
 import y.com.sqlitesdk.framework.business.BusinessUtil;
 
-public class FileListActivity extends AppCompatActivity implements FileDownloadExceptionListener {
+public class FileListActivity extends AppCompatActivity implements FileDownloadExceptionListener, InstallListener {
+    private static final String TAG = "FileListActivity";
     private final int CODE = 0x9131;
     private RecyclerView id_RecyclerView;
     private FloatingActionButton id_floatingActionButton;
@@ -93,6 +98,7 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
         Entrance.addOperatorRespone(operatorRespone);
         Entrance.findStutasDownloadList(CODE, IBasicInfo.PAUSE_STATUS);
         Entrance.addFileDownloadExceptionListener(this);
+        Entrance.addInstallListener(this);
         show();
     }
 
@@ -120,6 +126,7 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
         EventBus.getDefault().unregister(this);
         Entrance.removeOperatorRespone(operatorRespone);
         Entrance.removeFileDownloadExceptionListener(this);
+        Entrance.removeInstallListener(this);
     }
 
     private void init() {
@@ -413,5 +420,40 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
             View v = LayoutInflater.from(id_RecyclerView.getContext()).inflate(R.layout.adapter_download, parent, false);
             return new MyViewHodler(v);
         }
+    }
+
+    @Override
+    public void onDownloadComplete(DownLoadInfo downLoadInfo) {
+        Log.i(TAG, "onDownloadComplete: " + downLoadInfo);
+    }
+
+    @Override
+    public void onDownloading(DownLoadInfo downLoadInfo) {
+        Log.i(TAG, "onDownloading: " + downLoadInfo);
+    }
+
+    @Override
+    public void onErrorDownload(DownLoadInfo downLoadInfo) {
+        Log.i(TAG, "onErrorDownload: " + downLoadInfo);
+    }
+
+    @Override
+    public void onInstallComplete(DownLoadInfo downLoadInfo) {
+        Log.i(TAG, "onInstallComplete: " + downLoadInfo);
+    }
+
+    @Override
+    public void onStartInstall(String path) {
+        Log.i(TAG, "onStartInstall: " + path);
+    }
+
+    @Override
+    public void onOpenApk(String path) {
+        Log.i(TAG, "onOpenApk: " + path);
+    }
+
+    @Override
+    public void onApkPathError(String path) {
+        Log.i(TAG, "onApkPathError: " + path);
     }
 }

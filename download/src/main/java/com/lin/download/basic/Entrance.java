@@ -7,6 +7,7 @@ import android.database.ContentObserver;
 
 import com.lin.download.basic.provide.DownLoadProvider;
 import com.lin.download.business.callback.FileDownloadExceptionListener;
+import com.lin.download.business.callback.InstallListener;
 import com.lin.download.business.callback.OperatorRespone;
 import com.lin.download.business.model.DownLoadInfo;
 import com.lin.download.business.work.BusinessWrap;
@@ -89,6 +90,7 @@ public class Entrance {
     public static void launchApp(Context context, String appPath) {
         if(!new File(appPath).exists()){
             BusinessWrap.modiStatus2(appPath,IBasicInfo.NOT_HAD_STATUS);
+            WorkController.getInstance().getInstall().onApkPathError(appPath);
             return;
         }
         BusinessWrap.launchApp(context, getPackageName(context, appPath), appPath);
@@ -143,5 +145,13 @@ public class Entrance {
 
     }
 
+
+    public static void addInstallListener(InstallListener installListener){
+        WorkController.getInstance().getInstall().addInstallListener(installListener);
+    }
+
+    public static void removeInstallListener(InstallListener installListener){
+        WorkController.getInstance().getInstall().removeInstallListener(installListener);
+    }
 
 }

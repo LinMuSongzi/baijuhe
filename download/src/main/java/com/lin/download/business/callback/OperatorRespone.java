@@ -1,5 +1,7 @@
 package com.lin.download.business.callback;
 
+import com.lin.download.business.IHierarchy;
+
 import java.lang.annotation.Documented;
 
 /**
@@ -7,7 +9,7 @@ import java.lang.annotation.Documented;
  * 获得数据库操作的操作回调
  */
 @Deprecated
-public interface OperatorRespone<T> {
+public interface OperatorRespone<T> extends IHierarchy {
 
     int getCode();
 

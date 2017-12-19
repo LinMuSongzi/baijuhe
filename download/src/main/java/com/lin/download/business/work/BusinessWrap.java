@@ -1,12 +1,15 @@
 package com.lin.download.business.work;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
+import android.net.Uri;
 
 import com.lin.download.business.callback.OperatorRespone;
 import com.lin.download.business.model.DownLoadInfo;
 import com.liulishuo.filedownloader.FileDownloader;
 
+import java.io.File;
 import java.util.Collection;
 
 /**
@@ -185,4 +188,9 @@ public class BusinessWrap {
     public static Collection<? extends DownLoadInfo> findStutasDownloadList2(Context context) {
         return WorkUtil.findStutasDownloadList2(context);
     }
+
+    public static void installApp(Context context, String filePath) {
+        WorkUtil.installApp(context,filePath);
+    }
+
 }

@@ -52,10 +52,16 @@ public class PlanImp implements Plan {
     }
 
     private void download2() {
+        final DownLoadInfo downLoadInfo = downLoadTable.clone();
         final String  objectId = downLoadTable.getObjectId();
 //        final DownLoadInfo downLoadInfo = downLoadTable.clone();
         baseDownloadTaskId = (baseDownloadTask = FileDownloader.getImpl().
                 create(downLoadTable.getDownLoadUrl()).setListener(new SimpleFileListenerImp() {
+            @Override
+            protected void started(BaseDownloadTask task) {
+                super.started(task);
+                WorkController.getInstance().getInstall().onDownloading(downLoadInfo);
+            }
 
             @Override
             protected void progress(BaseDownloadTask task, final int soFarBytes, final int totalBytes) {
@@ -68,6 +74,7 @@ public class PlanImp implements Plan {
             protected void completed(BaseDownloadTask task) {
                 super.completed(task);
                 BusinessWrap.completed(objectId);
+                WorkController.getInstance().getInstall().onDownloadComplete(downLoadInfo);
             }
 
             @Override
@@ -80,19 +87,8 @@ public class PlanImp implements Plan {
             protected void error(BaseDownloadTask task, Throwable e) {
                 super.error(task, e);
                 BusinessWrap.error(objectId);
+                WorkController.getInstance().getInstall().onErrorDownload(downLoadInfo);
                 PlanImp.this.error(e);
-//                if (e instanceof FileDownloadOutOfSpaceException) {
-//
-//                    //空间不足
-//
-//
-//                } else if (e instanceof UnknownHostException) {
-//
-//                    //无网络或者硬件损坏
-//
-//                }
-
-
             }
         }).setPath(downLoadTable.getSavePath()).setSyncCallback(true)).start();
     }

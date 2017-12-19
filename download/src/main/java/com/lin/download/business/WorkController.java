@@ -5,9 +5,9 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
 
-import com.lin.download.basic.Controller;
 import com.lin.download.basic.Entrance;
 import com.lin.download.business.callback.FileDownloadExceptionListener;
+import com.lin.download.business.callback.InstallListener;
 import com.lin.download.business.callback.OperatorRespone;
 import com.lin.download.basic.Plan;
 import com.lin.download.basic.provide.DownLoadProvider;
@@ -23,7 +23,7 @@ import java.util.Set;
 /**
  * Created by linhui on 2017/12/11.
  */
-public class WorkController implements Controller, Operator, Subscription {
+public class WorkController implements Controller, Operator, Subscription,Install {
 
     static WorkController downLoadViewController;
 
@@ -141,11 +141,6 @@ public class WorkController implements Controller, Operator, Subscription {
         BusinessWrap.waitting(object_id);
     }
 
-//    @Override
-//    public void download(DownLoadInfo info) {
-//        download2(info);
-//    }
-
     /**
      * 真正的下载
      *
@@ -215,6 +210,11 @@ public class WorkController implements Controller, Operator, Subscription {
 
     @Override
     public Operator getOperator() {
+        return this;
+    }
+
+    @Override
+    public Install getInstall() {
         return this;
     }
 
@@ -309,5 +309,50 @@ public class WorkController implements Controller, Operator, Subscription {
 
             }
         }
+    }
+
+    @Override
+    public void onDownloadComplete(DownLoadInfo downLoadInfo) {
+        InstallManager.getInstance().onDownloadComplete(downLoadInfo);
+    }
+
+    @Override
+    public void onDownloading(DownLoadInfo downLoadInfo) {
+        InstallManager.getInstance().onDownloading(downLoadInfo);
+    }
+
+    @Override
+    public void onErrorDownload(DownLoadInfo downLoadInfo) {
+        InstallManager.getInstance().onErrorDownload(downLoadInfo);
+    }
+
+    @Override
+    public void onInstallComplete(DownLoadInfo downLoadInfo) {
+        InstallManager.getInstance().onInstallComplete(downLoadInfo);
+    }
+
+    @Override
+    public void onStartInstall(String path) {
+        InstallManager.getInstance().onStartInstall(path);
+    }
+
+    @Override
+    public void onOpenApk(String path) {
+        InstallManager.getInstance().onOpenApk(path);
+    }
+
+    @Override
+    public void onApkPathError(String path) {
+        InstallManager.getInstance().onApkPathError(path);
+    }
+
+    @Override
+    public void addInstallListener(InstallListener installListener) {
+        InstallManager.getInstance().addInstallListener(installListener);
+    }
+
+    @Override
+    public void removeInstallListener(InstallListener installListener) {
+        InstallManager.getInstance().removeInstallListener(installListener);
     }
 }
