@@ -36,7 +36,7 @@ class WorkUtil {
 
     static OperatorRespone findOperatorRespone(int code) {
         synchronized (WorkController.getInstance().getOperator().getOperatorRespones()) {
-            for (OperatorRespone operatorRespone : ((Operator)WorkController.getInstance()).getOperatorRespones()) {
+            for (OperatorRespone operatorRespone : ((Operator) WorkController.getInstance()).getOperatorRespones()) {
                 if (operatorRespone.getCode() == code) {
                     return operatorRespone;
                 }
@@ -69,7 +69,7 @@ class WorkUtil {
                     notifyAllQueryDownload(null);
                     flag = true;
                 }
-                EventBus.getDefault().post(new InsertEvent(downLoadTable.getObjectId(),flag));
+                EventBus.getDefault().post(new InsertEvent(downLoadTable.getObjectId(), flag));
             }
 
             @Override
@@ -111,7 +111,7 @@ class WorkUtil {
      * @param object_id
      */
     static void completed(String object_id) {
-        modiStatus(object_id,IBasicInfo.COMPLETED_STATUS);
+        modiStatus(object_id, IBasicInfo.COMPLETED_STATUS);
     }
 
     /**
@@ -120,7 +120,7 @@ class WorkUtil {
      * @param object_id
      */
     static void paused(String object_id) {
-        modiStatus(object_id,IBasicInfo.PAUSE_STATUS);
+        modiStatus(object_id, IBasicInfo.PAUSE_STATUS);
     }
 
     /**
@@ -135,15 +135,17 @@ class WorkUtil {
 
     /**
      * 等待状态
+     *
      * @param id
      */
-    static void waitting(String id){
+    static void waitting(String id) {
         modiStatus(id, IBasicInfo.WAITTING_STATUS);
 //        notifyStatus();
     }
 
     /**
      * 改变状态
+     *
      * @param objectId
      * @param status
      */
@@ -155,7 +157,7 @@ class WorkUtil {
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 String sql = String.format(
                         "update %s set status = %d where object_id = '%s'",
-                        DownLoadInfo.TB_NAME, s,object_id);
+                        DownLoadInfo.TB_NAME, s, object_id);
                 sqLiteDatabase.execSQL(sql);
                 notifyAllQueryDownload(null);
                 checkStatus(status);
@@ -170,6 +172,7 @@ class WorkUtil {
 
     /**
      * 改变状态
+     *
      * @param savePath
      * @param status
      */
@@ -180,7 +183,7 @@ class WorkUtil {
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 String sql = String.format(
                         "update %s set status = %d where save_path = '%s'",
-                        DownLoadInfo.TB_NAME, s,savePath);
+                        DownLoadInfo.TB_NAME, s, savePath);
                 sqLiteDatabase.execSQL(sql);
                 notifyAllQueryDownload(null);
                 checkStatus(status);
@@ -196,7 +199,7 @@ class WorkUtil {
 
     private static void checkStatus(int status) {
 
-        switch (status){
+        switch (status) {
             case IBasicInfo.COMPLETED_STATUS:
             case IBasicInfo.PAUSE_STATUS:
             case IBasicInfo.WAITTING_STATUS:
@@ -219,7 +222,7 @@ class WorkUtil {
 
     }
 
-    static void notifyStatus(){
+    static void notifyStatus() {
         WorkController.getContext().
                 getContentResolver().
                 notifyChange(
@@ -249,7 +252,7 @@ class WorkUtil {
         });
     }
 
-    static Collection<DownLoadInfo> findStutasDownloadList2(Context context){
+    static Collection<DownLoadInfo> findStutasDownloadList2(Context context) {
 
 
         return BusinessUtil.reflectCursor(
@@ -360,7 +363,6 @@ class WorkUtil {
     static void launchApp(Context context, String packageName, String appPath) {
 
 
-
         // 启动目标应用
         if (new File("/data/data/" + packageName).exists()) {
             WorkController.getInstance().getInstall().onOpenApk(appPath);
@@ -388,9 +390,9 @@ class WorkUtil {
             @Override
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
 
-                Cursor cursor = sqLiteDatabase.query(DownLoadInfo.TB_NAME,null,"object_id = ?",new String[]{objectId},null,null,null,null);
+                Cursor cursor = sqLiteDatabase.query(DownLoadInfo.TB_NAME, null, "object_id = ?", new String[]{objectId}, null, null, null, null);
 
-                downLoadInfo[0] = BusinessUtil.reflectCursorOne(cursor,DownLoadInfo.class,true);
+                downLoadInfo[0] = BusinessUtil.reflectCursorOne(cursor, DownLoadInfo.class, true);
             }
 
             @Override
@@ -447,7 +449,7 @@ class WorkUtil {
             public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
                 sqLiteDatabase.execSQL(String.format(
                         "update %s set status = %d where status = %d",
-                        DownLoadInfo.TB_NAME,IBasicInfo.PAUSE_STATUS,IBasicInfo.DOING_STATUS));
+                        DownLoadInfo.TB_NAME, IBasicInfo.PAUSE_STATUS, IBasicInfo.DOING_STATUS));
                 notifyAllQueryDownload(null);
             }
 
@@ -456,7 +458,6 @@ class WorkUtil {
 
             }
         });
-
 
 
     }
@@ -480,5 +481,53 @@ class WorkUtil {
             e.printStackTrace();
         }
     }
+
+    static void previewPhoto(String path) {
+        File file = null;
+        try {
+            file = new File(path);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (file != null && file.isFile()) {
+            Intent intent = new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.fromFile(file), "image/*");
+            WorkController.getContext().startActivity(intent);
+        }
+    }
+
+    static void previewVideo(String path) {
+        File file = null;
+        try {
+            file = new File(path);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (file != null && file.isFile()) {
+            Intent intent = new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.fromFile(file), "video/*");
+            WorkController.getContext().startActivity(intent);
+        }
+    }
+
+//    static void previewText(String path) {
+//        File file = null;
+//        try {
+//            file = new File(path);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        if (file != null && file.isFile()) {
+//            Intent intent = new Intent();
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.setAction(android.content.Intent.ACTION_VIEW);
+//            intent.setDataAndType(Uri.fromFile(file), "video/*");
+//            WorkController.getContext().startActivity(intent);
+//        }
+//    }
 
 }

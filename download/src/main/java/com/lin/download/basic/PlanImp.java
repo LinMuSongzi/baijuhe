@@ -73,8 +73,10 @@ public class PlanImp implements Plan {
             @Override
             protected void completed(BaseDownloadTask task) {
                 super.completed(task);
+                WorkController.getInstance().removePlan(PlanImp.this);
                 BusinessWrap.completed(objectId);
                 WorkController.getInstance().getInstall().onDownloadComplete(downLoadInfo);
+
             }
 
             @Override
@@ -133,5 +135,15 @@ public class PlanImp implements Plan {
         } else {
             BusinessWrap.paused(objectId);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "PlanImp{" +
+                "downLoadTable=" + downLoadTable +
+                ", baseDownloadTask=" + baseDownloadTask +
+                ", baseDownloadTaskId=" + baseDownloadTaskId +
+                ", objectId='" + objectId + '\'' +
+                '}';
     }
 }

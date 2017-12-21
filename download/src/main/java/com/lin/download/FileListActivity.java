@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Environment;
-import android.os.IInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +14,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.text.LoginFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +24,7 @@ import android.widget.Toast;
 
 import com.lin.download.basic.Entrance;
 import com.lin.download.basic.IBasicInfo;
-import com.lin.download.business.Install;
 import com.lin.download.business.ViewSupportLoader;
-import com.lin.download.business.WorkController;
 import com.lin.download.business.callback.FileDownloadExceptionListener;
 import com.lin.download.business.callback.InstallListener;
 import com.lin.download.business.event.InsertEvent;
@@ -99,7 +95,7 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
         Entrance.findStutasDownloadList(CODE, IBasicInfo.PAUSE_STATUS);
         Entrance.addFileDownloadExceptionListener(this);
         Entrance.addInstallListener(this);
-        show();
+//        show();
     }
 
     private void show() {
@@ -127,6 +123,7 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
         Entrance.removeOperatorRespone(operatorRespone);
         Entrance.removeFileDownloadExceptionListener(this);
         Entrance.removeInstallListener(this);
+        Entrance.releaseAll();
     }
 
     private void init() {
@@ -253,13 +250,14 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
         downLoadTable.setObjectId(DownloadUtil.GAME_LIST[4]);
         loadEntities.add(downLoadTable);
 
-//        downLoadTable = new DownLoadInfo();
-//        downLoadTable.setDownloadUrl(DownloadUtil.GAME_LIST[5]);
-//        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-//                + "lin-download" + File.separator + "开心消消乐.apk");
-//        downLoadTable.setName("开心消消乐");
-//        downLoadTable.setObjectId(DownloadUtil.GAME_LIST[5]);
-//        loadEntities.add(downLoadTable);
+        downLoadTable = new DownLoadInfo();
+        downLoadTable.setDownloadUrl(DownloadUtil.PHOTO_LIST[0]);
+        downLoadTable.setSavePath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+                + "lin-download" + File.separator + "0.jpg");
+        downLoadTable.setName("一个图片");
+        downLoadTable.setDonwloadType(DownLoadInfo.PHOTO_TYPE);
+        downLoadTable.setObjectId(DownloadUtil.PHOTO_LIST[0]);
+        loadEntities.add(downLoadTable);
 
         for (final DownLoadInfo d : loadEntities) {
             Entrance.addTask(d);
@@ -336,6 +334,7 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
             final int id = downLoadTable.getId();
             final String name = downLoadTable.getName();
             final String objectId = downLoadTable.getObjectId();
+            final int downloadType = downLoadTable.getDonwloadType();
 
 
             holder.id_file.setText(downLoadTable.getName());
@@ -388,7 +387,14 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
 //                    v.setEnabled(false);
                     switch (stutas) {
                         case DownLoadInfo.COMPLETED_STATUS:
-                            Entrance.launchApp(v.getContext(), savePath);
+                            switch (downloadType) {
+                                case DownLoadInfo.APK_TYPE:
+                                    Entrance.launchApp(v.getContext(), savePath);
+                                    break;
+                                case DownLoadInfo.PHOTO_TYPE:
+                                    Entrance.previewPhoto(savePath);
+                                    break;
+                            }
                             break;
                         case DownLoadInfo.ERROR_STATUS:
                             download(objectId);

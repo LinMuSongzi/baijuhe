@@ -23,6 +23,7 @@ public interface Controller {
     void pauseAll();
     void deleteSavePath(String savePath);
     void removePlan(Plan plan);
+    void releaseAll();
     Operator getOperator();
     Install getInstall();
 }

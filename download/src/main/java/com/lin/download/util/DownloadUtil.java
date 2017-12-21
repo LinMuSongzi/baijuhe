@@ -23,4 +23,9 @@ public class DownloadUtil {
     };
 
 
+    public static String[] PHOTO_LIST = new String[]{
+        "http://img5.imgtn.bdimg.com/it/u=2553350902,1669178425&fm=11&gp=0.jpg"
+    };
+
+
 }

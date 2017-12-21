@@ -33,7 +33,7 @@ public class DownLoadInfo extends BaseModel<DownLoadInfo> implements IBasicInfo 
     @TBColumn()
     private long current;
     @TBColumn(notNull = true)
-    private int donwloadType = GAME_FEIMO_TYPE;
+    private int donwloadType = APK_TYPE;
 
     //    gameId
     public int getDonwloadType() {

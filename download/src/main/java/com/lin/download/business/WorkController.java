@@ -6,6 +6,7 @@ import android.os.HandlerThread;
 import android.util.Log;
 
 import com.lin.download.basic.Entrance;
+import com.lin.download.basic.PlanImp;
 import com.lin.download.business.callback.FileDownloadExceptionListener;
 import com.lin.download.business.callback.InstallListener;
 import com.lin.download.business.callback.OperatorRespone;
@@ -23,7 +24,7 @@ import java.util.Set;
 /**
  * Created by linhui on 2017/12/11.
  */
-public class WorkController implements Controller, Operator, Subscription,Install {
+public class WorkController implements Controller, Operator, Subscription, Install {
 
     static WorkController downLoadViewController;
 
@@ -51,6 +52,8 @@ public class WorkController implements Controller, Operator, Subscription,Instal
         @Override
         public boolean add(Plan o) {
             synchronized (WorkController.this) {
+                Log.i(Entrance.TAG, "add: 新增一个任务 plan = " + o);
+                Log.i(Entrance.TAG, "add: 当前工头 " + (size() + 1));
                 return super.add(o);
             }
         }
@@ -58,8 +61,15 @@ public class WorkController implements Controller, Operator, Subscription,Instal
         @Override
         public boolean remove(Object o) {
             synchronized (WorkController.this) {
+                Log.i(Entrance.TAG, "add: 移除一个任务 plan = " + o);
                 return super.remove(o);
             }
+        }
+
+        @Override
+        public void clear() {
+            Log.i(Entrance.TAG, "clear: 清空任务栏");
+            super.clear();
         }
     };
 
@@ -209,6 +219,12 @@ public class WorkController implements Controller, Operator, Subscription,Instal
     }
 
     @Override
+    public void releaseAll() {
+        this.pauseAll();
+        PLANS.clear();
+    }
+
+    @Override
     public Operator getOperator() {
         return this;
     }
@@ -250,7 +266,7 @@ public class WorkController implements Controller, Operator, Subscription,Instal
 
     @Override
     public void removeOperatorRespone(OperatorRespone operatorRespone) {
-        operatorImp.addOperatorRespone(operatorRespone);
+        operatorImp.removeOperatorRespone(operatorRespone);
     }
 
     public static Context getContext() {

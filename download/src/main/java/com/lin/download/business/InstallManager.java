@@ -30,7 +30,7 @@ class InstallManager implements Install {
         while (listenerIterator.hasNext()){
             listenerIterator.next().onDownloadComplete(downLoadInfo);
         }
-        BusinessWrap.installApp(WorkController.getContext(),downLoadInfo.getSavePath());
+//        BusinessWrap.installApp(WorkController.getContext(),downLoadInfo.getSavePath());
     }
 
     @Override

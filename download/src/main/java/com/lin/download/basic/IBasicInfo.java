@@ -16,10 +16,12 @@ public interface IBasicInfo extends UrlInfo{
     int ERROR_STATUS = 402;
     int NOT_HAD_STATUS = 400;
 
-    int GAME_FEIMO_TYPE = 1000;
-    int PIC_TYPE = 1001;
+    int APK_TYPE = 1000;
+    int APK_FEIMO_TYPE = 2000;
+    int PHOTO_TYPE = 1001;
     int MUSIC_TYPE = 1050;
     int VIDEO_TYPE = 1100;
+    int SIMPLE_TYPE = 100;
 
     void setDownLoadId(String id);
 

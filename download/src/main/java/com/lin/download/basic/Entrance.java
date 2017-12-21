@@ -154,4 +154,21 @@ public class Entrance {
         WorkController.getInstance().getInstall().removeInstallListener(installListener);
     }
 
+    public static void previewPhoto(String path){
+
+        BusinessWrap.previewPhoto(path);
+
+    }
+
+    public static void previewVideo(String path){
+
+        BusinessWrap.previewVideo(path);
+
+    }
+
+
+    public static void releaseAll(){
+        WorkController.getInstance().releaseAll();
+    }
+
 }

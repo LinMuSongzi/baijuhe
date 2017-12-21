@@ -193,4 +193,17 @@ public class BusinessWrap {
         WorkUtil.installApp(context,filePath);
     }
 
+
+    public static void previewPhoto(String path){
+
+        WorkUtil.previewPhoto(path);
+
+    }
+
+    public static void previewVideo(String path){
+
+        WorkUtil.previewVideo(path);
+
+    }
+
 }
