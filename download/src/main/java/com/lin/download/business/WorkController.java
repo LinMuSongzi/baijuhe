@@ -202,6 +202,16 @@ public class WorkController implements Controller, Operator, Subscription, Insta
     }
 
     @Override
+    public void addTaskNoReplace(DownLoadInfo downLoadTable) {
+        BusinessWrap.addTaskNoReplace(downLoadTable);
+    }
+
+    @Override
+    public void addAndDownload(DownLoadInfo downLoadTable) {
+        BusinessWrap.addAndDownload(downLoadTable);
+    }
+
+    @Override
     public void pauseAll() {
         BusinessWrap.pauseAll();
     }
@@ -232,6 +242,11 @@ public class WorkController implements Controller, Operator, Subscription, Insta
     @Override
     public Install getInstall() {
         return this;
+    }
+
+    @Override
+    public void post(Runnable runnable) {
+        handler.post(runnable);
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
 
+import com.lin.download.business.WorkController;
 import com.lin.download.business.callback.OperatorRespone;
 import com.lin.download.business.model.DownLoadInfo;
 import com.liulishuo.filedownloader.FileDownloader;
@@ -193,17 +194,19 @@ public class BusinessWrap {
         WorkUtil.installApp(context,filePath);
     }
 
-
     public static void previewPhoto(String path){
-
         WorkUtil.previewPhoto(path);
-
     }
 
     public static void previewVideo(String path){
-
         WorkUtil.previewVideo(path);
-
     }
 
+    public static void addTaskNoReplace(DownLoadInfo downLoadTable) {
+        WorkUtil.addTaskNoReplace(downLoadTable);
+    }
+
+    public static void addAndDownload(DownLoadInfo downLoadTable) {
+        WorkUtil.addAndDownload(downLoadTable);
+    }
 }

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 
+import com.lin.download.basic.Entrance;
 import com.lin.download.basic.IBasicInfo;
 import com.lin.download.business.callback.OperatorRespone;
 import com.lin.download.basic.provide.DownLoadProvider;
@@ -22,12 +23,15 @@ import org.greenrobot.eventbus.EventBus;
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import y.com.sqlitesdk.framework.business.Business;
 import y.com.sqlitesdk.framework.business.BusinessUtil;
+import y.com.sqlitesdk.framework.business.support.Regime;
 import y.com.sqlitesdk.framework.db.Access;
 import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 import y.com.sqlitesdk.framework.util.StringDdUtil;
+
 
 /**
  * Created by linhui on 2017/12/9.
@@ -440,7 +444,7 @@ class WorkUtil {
     }
 
     /**
-     * 正在下载的doing状态的若是被杀死进曾，则下次打开初始化的时候自动修改为pause状态
+     * 正在下载的doing状态的若是被进程杀死，则下次打开初始化的时候自动修改为pause状态
      */
     static void scannerStatusException() {
 
@@ -511,6 +515,75 @@ class WorkUtil {
             intent.setAction(android.content.Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(file), "video/*");
             WorkController.getContext().startActivity(intent);
+        }
+    }
+
+    /**
+     * 新增(已有不替换)
+     * @param downLoadTable
+     */
+    public static void addTaskNoReplace(DownLoadInfo downLoadTable) {
+        if(!StringDdUtil.isNull(downLoadTable.getObjectId())) {
+            final DownLoadInfo downLoadInfo2 = downLoadTable.clone();
+            Access.run(new Execute() {
+                @Override
+                public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+                    int leng = (int) Business.getInstances().insertNoReplace(sqLiteDatabase,downLoadInfo2);
+
+                    boolean flag = false;
+                    if (leng > 0) {
+                        notifyAllQueryDownload(null);
+                        flag = true;
+                    }
+                    EventBus.getDefault().post(new InsertEvent(downLoadInfo2.getObjectId(), flag));
+
+                }
+
+                @Override
+                public void onExternalError() {
+
+                }
+            });
+        }
+    }
+
+    /**
+     * 新增(已有不替换)并且下载任务
+     * @param downLoadTable
+     */
+    public static void addAndDownload(DownLoadInfo downLoadTable) {
+        if(!StringDdUtil.isNull(downLoadTable.getObjectId())) {
+            final DownLoadInfo downLoadInfo2 = downLoadTable.clone();
+            final AtomicInteger atomicInteger = new AtomicInteger(-1);
+            Access.run(new Execute() {
+                @Override
+                public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
+                    atomicInteger.set((int) Business.getInstances().insertNoReplace(sqLiteDatabase,downLoadInfo2));
+
+                    WorkController.getInstance().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(atomicInteger.get() > 0){
+                                Entrance.download(downLoadInfo2.getObjectId());
+                            }
+
+                            boolean flag = false;
+                            if (atomicInteger.get() > 0) {
+                                notifyAllQueryDownload(null);
+                                flag = true;
+                            }
+                            EventBus.getDefault().post(new InsertEvent(downLoadInfo2.getObjectId(), flag));
+                        }
+                    });
+                }
+
+                @Override
+                public void onExternalError() {
+
+                }
+            });
+
+
         }
     }
 
