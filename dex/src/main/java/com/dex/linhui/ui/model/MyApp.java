@@ -1,13 +1,8 @@
-package com.lin.download;
+package com.dex.linhui.ui.model;
 
 import android.app.Application;
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.widget.ZoomButton;
 
-import com.lin.download.basic.Entrance;
-import com.liulishuo.filedownloader.FileDownloader;
-import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
+import com.lin.downloadwork.basic.Entrance;
 
 /**
  * Created by linhui on 2017/12/5.

@@ -88,6 +88,15 @@ public final class Business {
         return model.getId();
     }
 
+
+    public <T extends IModel> long insertNoReplace(SQLiteDatabase sqLiteDatabase, T model)throws IllegalAccessException, NoSuchFieldException, InstantiationException{
+        model.setId((int) checkInsertNoReplace(sqLiteDatabase, model));
+        return model.getId();
+    }
+
+
+
+
     /**
      * 新增一组数据
      *
@@ -100,6 +109,45 @@ public final class Business {
             model.setId((int) checkInsert(sqLiteDatabase, model));
         }
         return true;
+    }
+
+
+    private <T extends IModel> long checkInsertNoReplace(SQLiteDatabase sqLiteDatabase, T model) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+        ContentValues contentvalues = BusinessUtil.getAllValues(model);
+        Field[] fields = BusinessUtil.getAllUniqueFields(model);
+        String tbName = BusinessUtil.getTbNmae(model.getClass());
+        if (fields.length == 0) {
+            return sqLiteDatabase.insert(tbName, null, contentvalues);
+        }
+        String sqlExecute = "SELECT * FROM " + tbName;
+        String where = "";
+        List<String> values = new ArrayList<>();
+        for (int i = 0; i < fields.length; i++) {
+            final String value = BusinessUtil.convertField(fields[i], model);
+            if (!StringDdUtil.isNull(value)) {
+                if (!sqlExecute.contains("WHERE")) {
+                    sqlExecute += " WHERE ";
+                }
+                values.add(value);
+                where += fields[i].getName() + " = ?";
+                where += " AND ";
+            }
+        }
+        if (values.size() > 0) {
+            where = where.substring(0, where.length() - 4);
+
+            Cursor c = sqLiteDatabase.rawQuery(sqlExecute + where, values.toArray(new String[values.size()]));
+            if (c.getCount() == 1) {
+                Log.i(TAG, "checkInsert: 已在在");
+                model.setId(BusinessUtil.reflectCursorOne(c,model.getClass(),true).getId());
+                return model.getId();
+//                if(sqLiteDatabase.update(BusinessUtil.getTbNmae(model.getClass()), contentvalues, where, values.toArray(new String[values.size()]))>0){
+//                    return Business.getInstances().queryLineByWhere(sqLiteDatabase,model.getClass(),where, values.toArray(new String[values.size()])).getId();
+//                }
+            }
+        }
+        return (int)sqLiteDatabase.insert(BusinessUtil.getTbNmae(model.getClass()), null, contentvalues);
+
     }
 
     /**

@@ -1,1 +1,1 @@
-include ':app', ':llib', ':sqlitesdk', ':IMsdk', ':ipc', ':dextest', ':pathtest', ':fileengine', ':hzc', ':dex', ':download', ':yuanyuanweb', ':mylibrary'
+include ':app', ':llib', ':sqlitesdk', ':ipc', ':dextest', ':pathtest', ':fileengine', ':hzc', ':dex', ':download', ':yuanyuanweb', ':mylibrary'

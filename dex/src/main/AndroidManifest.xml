@@ -9,9 +9,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".DexApplication"
+        android:name=".ui.model.MyApp"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.NavigationActivity">
+        <activity android:name=".ui.model.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +20,33 @@
             </intent-filter>
 
         </activity>
+
+
+        <activity
+            android:name=".ui.model.FileListActivity"
+            android:allowTaskReparenting="true" />
+        <activity
+            android:name=".ui.model.AdActivity"
+            android:allowTaskReparenting="true" />
+
+
+        <provider
+            android:name=".ui.model.MyProvide"
+            android:authorities="com.download.lin.file.provide.test"
+            android:exported="true" />
+
+        <receiver android:name="com.lin.downloadwork.business.WorkInstallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <action android:name="android.intent.action.PACKAGE_INSTALL"/>
+                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED"/>
+                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH"/>
+                <data android:scheme="package" />
+            </intent-filter>
+
+        </receiver>
+
     </application>
 
 </manifest>

@@ -33,7 +33,7 @@
 
 
         <provider
-            android:name=".basic.provide.DownLoadProvider"
+            android:name=".basic.provide.MyProvide"
             android:authorities="com.download.lin.file.provide"
             android:exported="true" />
 

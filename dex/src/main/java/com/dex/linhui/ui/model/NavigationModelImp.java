@@ -21,6 +21,7 @@ import com.dex.linhui.ui.activity.NavigationActivity;
 import com.dex.linhui.ui.activity.NavigationActivity.INavigationModel;
 import com.lin.alllib.Model;
 import com.lin.alllib.test.MainTest;
+import com.lin.downloadwork.basic.Entrance;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -75,6 +76,7 @@ public class NavigationModelImp extends Model<INavigationModel> implements INavi
         getLayout();
 
 //        getContextActivity();
+
 
     }
 

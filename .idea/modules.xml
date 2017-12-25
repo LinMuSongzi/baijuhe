@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/IMsdk/IMsdk.iml" filepath="$PROJECT_DIR$/IMsdk/IMsdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baijuhe.iml" filepath="$PROJECT_DIR$/baijuhe.iml" />
       <module fileurl="file://$PROJECT_DIR$/dex/dex.iml" filepath="$PROJECT_DIR$/dex/dex.iml" />

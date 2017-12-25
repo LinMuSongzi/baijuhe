@@ -1,15 +1,15 @@
-package com.lin.download;
+package com.dex.linhui.ui.model;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,18 +22,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lin.download.basic.Entrance;
-import com.lin.download.basic.IBasicInfo;
-import com.lin.download.business.ViewSupportLoader;
-import com.lin.download.business.callback.FileDownloadExceptionListener;
-import com.lin.download.business.callback.InstallListener;
-import com.lin.download.business.event.InsertEvent;
-import com.lin.download.business.model.DownLoadInfo;
-import com.lin.download.business.callback.OperatorRespone;
-import com.lin.download.util.DownloadUtil;
-import com.lin.download.util.RecyclerViewCursorAdapter;
+import com.dex.linhui.R;
+import com.lin.downloadwork.basic.Entrance;
+import com.lin.downloadwork.basic.IBasicInfo;
+import com.lin.downloadwork.business.ViewSupportLoader;
+import com.lin.downloadwork.business.callback.FileDownloadExceptionListener;
+import com.lin.downloadwork.business.callback.InstallListener;
+import com.lin.downloadwork.business.callback.OperatorRespone;
+import com.lin.downloadwork.business.event.InsertEvent;
+import com.lin.downloadwork.business.model.DownLoadInfo;
+import com.lin.downloadwork.util.DownloadUtil;
+import com.lin.downloadwork.util.RecyclerViewCursorAdapter;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.exception.FileDownloadOutOfSpaceException;
+import com.sqlitesdk.framework.business.BusinessUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -44,7 +46,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import y.com.sqlitesdk.framework.business.BusinessUtil;
 
 public class FileListActivity extends AppCompatActivity implements FileDownloadExceptionListener, InstallListener {
     private static final String TAG = "FileListActivity";
@@ -154,9 +155,7 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
                 downLoadTable.setName("开心消消乐");
                 downLoadTable.setObjectId(DownloadUtil.GAME_LIST[5]);
 
-
-
-                Entrance.addAndDownload(downLoadTable);
+                Entrance.addTask(downLoadTable);
 
             }
         });
@@ -262,7 +261,7 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
         loadEntities.add(downLoadTable);
 
         for (final DownLoadInfo d : loadEntities) {
-            Entrance.addTaskNoReplace(d);
+            Entrance.addTask(d);
         }
 
     }

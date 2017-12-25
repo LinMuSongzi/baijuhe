@@ -1,31 +1,17 @@
-package com.lin.download;
+package com.dex.linhui.ui.model;
 
-import android.Manifest;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Environment;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.lin.download.basic.Entrance;
-import com.liulishuo.filedownloader.BaseDownloadTask;
-import com.liulishuo.filedownloader.FileDownloadLargeFileListener;
-import com.liulishuo.filedownloader.FileDownloader;
-import com.liulishuo.filedownloader.util.FileDownloadUtils;
+import com.dex.linhui.R;
+import com.lin.downloadwork.basic.Entrance;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
