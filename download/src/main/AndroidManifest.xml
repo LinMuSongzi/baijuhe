@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
     <uses-permission android:name="android.permission.DELETE_PACKAGES" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -31,23 +32,24 @@
             android:name=".AdActivity"
             android:allowTaskReparenting="true" />
 
-
         <provider
             android:name=".basic.provide.MyProvide"
             android:authorities="com.download.lin.file.provide"
             android:exported="true" />
 
-        <receiver android:name="com.lin.download.business.WorkInstallReceiver">
+        <receiver android:name=".business.WorkInstallReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED"/>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <action android:name="android.intent.action.PACKAGE_INSTALL"/>
-                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED"/>
-                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH"/>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_INSTALL" />
+                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED" />
+                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH" />
+
                 <data android:scheme="package" />
             </intent-filter>
-
         </receiver>
+
+        <activity android:name=".ViewPageActivity"></activity>
     </application>
 
 </manifest>

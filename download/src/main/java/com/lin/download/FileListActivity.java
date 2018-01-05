@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
     private static final String TAG = "FileListActivity";
     private final int CODE = 0x9131;
     private RecyclerView id_RecyclerView;
+    private SwipeRefreshLayout mSwipeLayout;
     private FloatingActionButton id_floatingActionButton;
     private MyAdapter adapter;
     private OperatorRespone operatorRespone = new OperatorRespone<List<DownLoadInfo>>() {
@@ -127,6 +129,36 @@ public class FileListActivity extends AppCompatActivity implements FileDownloadE
     }
 
     private void init() {
+        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
+
+
+        mSwipeLayout.setColorSchemeColors(Color.BLUE,
+                Color.GREEN,
+                Color.YELLOW,
+                Color.RED);
+
+
+        // 设置手指在屏幕下拉多少距离会触发下拉刷新
+        mSwipeLayout.setDistanceToTriggerSync(300);
+        // 设定下拉圆圈的背景
+        mSwipeLayout.setProgressBackgroundColorSchemeColor(Color.WHITE);
+        // 设置圆圈的大小
+        mSwipeLayout.setSize(SwipeRefreshLayout.DEFAULT);
+
+
+        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipeLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipeLayout.setRefreshing(false);
+                    }
+                },1500);
+                id_floatingActionButton.performClick();
+            }
+        });
+
         id_floatingActionButton = (FloatingActionButton) findViewById(R.id.id_floatingActionButton);
         id_RecyclerView = (RecyclerView) findViewById(R.id.id_RecyclerView);
         id_RecyclerView.setLayoutManager(new LinearLayoutManager(this));
