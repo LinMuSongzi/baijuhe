@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="linTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:colorAccent">@color/red2</item>
+        <item name="android:colorPrimaryDark">@color/gay1</item>
+        <item name="android:colorPrimary">@color/gay2</item>
+        <item name="android:colorActivatedHighlight">@color/red2</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:textSize">13dp</item>
+    </style>
+</resources>
