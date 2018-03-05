@@ -31,5 +31,6 @@ android {
 
 dependencies {
     compile project(':llib')
+    compile 'com.gavin.com.library:stickyDecoration:1.0.2'
     compile project(':yuanyuanweb')
 }

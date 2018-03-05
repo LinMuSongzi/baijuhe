@@ -93,4 +93,9 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="my_ity">电白</string>
 
+    <string name="static_one_long_label">第一个</string>
+    <string name="static_one_short_label">快速点击</string>
+    <string name="static_disabled_message">***</string>
+    <string name="static_two_long_label">第二个</string>
+    <string name="static_two_short_label">精彩视频</string>
 </resources>

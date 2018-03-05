@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        bind2();
+//        bind2();
     }
 
     private void startBind() {

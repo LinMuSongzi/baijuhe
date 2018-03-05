@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fmstart>
+    <httpserver>http://define.ifeimo.com</httpserver>
+    <httpserver>http://define.ifeimo.com</httpserver>
+    <faceinfo>
+        <ad_id>186</ad_id>
+        <server_pic_a>http://apps.ifeimo.com/Public/Uploads/Advert/Flag/5881926d92ff3.jpg</server_pic_a>
+        <server_pic_i></server_pic_i>
+        <local_pic>5881926d92ff3.jpg</local_pic>
+        <go_url>http://mg.17sysj.com/Game/index/tzgid/60200.html</go_url>
+        <download_android>http://down.s.qq.com/download/1105309683/apk/10022790_com.tencent.tmgp.dragonnest.apk</download_android>
+        <download_ios></download_ios>
+        <game_id>9886</game_id>
+        <tj_url>http://apps.ifeimo.com/Sysj204/Advertisement/adClick</tj_url>
+    </faceinfo>
+</fmstart>

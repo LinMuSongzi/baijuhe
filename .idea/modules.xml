@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/fileengine/fileengine.iml" filepath="$PROJECT_DIR$/fileengine/fileengine.iml" />
       <module fileurl="file://$PROJECT_DIR$/hzc/hzc.iml" filepath="$PROJECT_DIR$/hzc/hzc.iml" />
       <module fileurl="file://$PROJECT_DIR$/ipc/ipc.iml" filepath="$PROJECT_DIR$/ipc/ipc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ipc_two/ipc_two.iml" filepath="$PROJECT_DIR$/ipc_two/ipc_two.iml" />
       <module fileurl="file://$PROJECT_DIR$/llib/llib.iml" filepath="$PROJECT_DIR$/llib/llib.iml" />
       <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/pathtest/pathtest.iml" filepath="$PROJECT_DIR$/pathtest/pathtest.iml" />

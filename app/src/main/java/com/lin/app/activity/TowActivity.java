@@ -9,7 +9,7 @@ import com.lin.app.model.SelectInfoModel;
  */
 public class TowActivity extends WoodActivity {
 
-    SelectInfoModel selectInfoModel = new SelectInfoModel();
+    Model selectInfoModel = new SelectInfoModel();
 
     @Override
     protected Model<?> configurationModel() {
