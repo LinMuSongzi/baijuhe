@@ -20,11 +20,6 @@ import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
 
 /**
  * Created by linhui on 2017/9/28.

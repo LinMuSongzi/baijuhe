@@ -11,18 +11,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import y.com.sqlitesdk.framework.db.Access;
-import y.com.sqlitesdk.framework.entity.respone.DeleteAllRespone;
-import y.com.sqlitesdk.framework.entity.respone.DeleteRespone;
-import y.com.sqlitesdk.framework.entity.respone.InsertListRespone;
-import y.com.sqlitesdk.framework.entity.respone.InsertRespone;
-import y.com.sqlitesdk.framework.entity.respone.ModifyRespone;
-import y.com.sqlitesdk.framework.entity.respone.QueryRespone;
-import y.com.sqlitesdk.framework.entity.respone.QuerySingleRespone;
-import y.com.sqlitesdk.framework.entity.respone.TableCreateRespone;
 import y.com.sqlitesdk.framework.interface_model.IModel;
-import y.com.sqlitesdk.framework.server.TableServer;
-import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 import y.com.sqlitesdk.framework.util.StringDdUtil;
 
 /**

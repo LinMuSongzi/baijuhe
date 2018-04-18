@@ -18,11 +18,23 @@ import android.widget.Toast;
 import com.lin.alllib.Model;
 import com.lin.app.R;
 import com.lin.app.data.model.TestBean;
+import com.yeyuanyuan.web.BaseRequetResult;
+import com.yeyuanyuan.web.Completed;
+import com.yeyuanyuan.web.RequestResult;
+import com.yeyuanyuan.web.RequetParameter;
+import com.yeyuanyuan.web.StrEntity;
+import com.yeyuanyuan.web.Zygote;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by Hui on 2017/9/16.
@@ -40,10 +52,20 @@ public class SelectInfoModel extends Model<SelectInfoModel> {
         return R.layout.activity_navigatiom;
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessage(StrEntity s){
+        Toast.makeText(getActivity(),s.getStrHrml(),Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     protected void init(Bundle savedInstanceState) {
 
         buildData();
+
+        Zygote.init(getActivity().getApplicationContext());
+        Zygote.asyncExecute(Zygote.createGet(StrEntity.class, "http://www.baidu.com", null));
+
 
         expandableListView.setAdapter(new BaseExpandableListAdapter() {
             @Override
@@ -83,9 +105,7 @@ public class SelectInfoModel extends Model<SelectInfoModel> {
 
             @Override
             public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-
                 GroupHolder g;
-
                 if (convertView == null) {
                     g = new GroupHolder();
                     convertView = new TextView(getActivity());
@@ -96,14 +116,12 @@ public class SelectInfoModel extends Model<SelectInfoModel> {
                     g = (GroupHolder) convertView.getTag();
                 }
                 g.title.setText(testBeanList.get(groupPosition).getTitle());
-
                 return convertView;
             }
 
             @Override
             public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
                 GroupHolder g;
-
                 if (convertView == null) {
                     g = new GroupHolder();
                     TextView t = new TextView(getActivity());
@@ -116,7 +134,6 @@ public class SelectInfoModel extends Model<SelectInfoModel> {
                     g = (GroupHolder) convertView.getTag();
                 }
                 g.title.setText(testBeanList.get(groupPosition).getText().get(childPosition));
-
                 return convertView;
             }
 
@@ -125,13 +142,6 @@ public class SelectInfoModel extends Model<SelectInfoModel> {
                 return true;
             }
         });
-
-//        expandableListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -144,7 +154,6 @@ public class SelectInfoModel extends Model<SelectInfoModel> {
                         //Toast.makeText(getActivity(),testBeanList.get(groupPosition).getText().get(childPosition),Toast.LENGTH_SHORT).show();
                     }
                 });
-
                 return true;
             }
         });

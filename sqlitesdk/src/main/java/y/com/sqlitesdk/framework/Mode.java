@@ -3,6 +3,7 @@ package y.com.sqlitesdk.framework;
 /**
  * Created by lpds on 2017/4/10.
  */
+@Deprecated
 public class Mode {
 
     public static final int KEEP_LIVE = 0x110;

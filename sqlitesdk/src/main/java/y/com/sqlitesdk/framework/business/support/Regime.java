@@ -15,7 +15,7 @@ import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 /**
  * Created by linhui on 2017/8/25.
  */
-public abstract class Regime<T extends IModel<T>> implements Plant,Execute {
+public abstract class Regime<T extends IModel> implements Plant,Execute {
     protected T model;
     protected String action;
     protected String tableName;
@@ -29,17 +29,17 @@ public abstract class Regime<T extends IModel<T>> implements Plant,Execute {
 //        tableName = t.getTableName();
     }
 
-    public static final <T extends IModel<T>> Plant insert(T t){
+    public static final <T extends IModel> Plant insert(T t){
         return new InsertRegime<T>(t);
     }
 
-    public static final <T extends IModel<T>> Plant delete(T t){
+    public static final <T extends IModel> Plant delete(T t){
 
         return new DeleteRegime<T>(t);
 
     }
 
-    public static final <T extends IModel<T>> Plant modify(T t){
+    public static final <T extends IModel> Plant modify(T t){
 
         return new ModifyRegime<T>(t);
 

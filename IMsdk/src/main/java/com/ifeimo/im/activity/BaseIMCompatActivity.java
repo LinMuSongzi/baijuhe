@@ -48,7 +48,7 @@ import y.com.sqlitesdk.framework.interface_model.IModel;
  * Created by lpds on 2017/1/9.
  */
 abstract class BaseIMCompatActivity
-        <E extends IModel<E>,T extends BaseChatReCursorAdapter<Holder,E>>
+        <E extends IModel,T extends BaseChatReCursorAdapter<Holder,E>>
         extends SuperActivity
         implements  IMWindow, OnCursorDataChange, View.OnLayoutChangeListener,
                     LoaderManager.LoaderCallbacks<Cursor>, OnItemShowListener {

@@ -8,7 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/IMsdk" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/baiduapi" />
+            <option value="$PROJECT_DIR$/databind" />
             <option value="$PROJECT_DIR$/dex" />
             <option value="$PROJECT_DIR$/dextest" />
             <option value="$PROJECT_DIR$/download" />
@@ -17,6 +20,7 @@
             <option value="$PROJECT_DIR$/ipc" />
             <option value="$PROJECT_DIR$/ipc_two" />
             <option value="$PROJECT_DIR$/llib" />
+            <option value="$PROJECT_DIR$/mideaencode" />
             <option value="$PROJECT_DIR$/mylibrary" />
             <option value="$PROJECT_DIR$/pathtest" />
             <option value="$PROJECT_DIR$/sqlitesdk" />
@@ -26,7 +30,10 @@
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/IMsdk" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/baiduapi" />
+            <option value="$PROJECT_DIR$/databind" />
             <option value="$PROJECT_DIR$/dex" />
             <option value="$PROJECT_DIR$/dextest" />
             <option value="$PROJECT_DIR$/download" />
@@ -35,6 +42,7 @@
             <option value="$PROJECT_DIR$/ipc" />
             <option value="$PROJECT_DIR$/ipc_two" />
             <option value="$PROJECT_DIR$/llib" />
+            <option value="$PROJECT_DIR$/mideaencode" />
             <option value="$PROJECT_DIR$/mylibrary" />
             <option value="$PROJECT_DIR$/pathtest" />
             <option value="$PROJECT_DIR$/sqlitesdk" />

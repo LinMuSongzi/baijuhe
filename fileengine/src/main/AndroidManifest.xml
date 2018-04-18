@@ -12,8 +12,9 @@
         android:name=".commander.FileAppclication"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.activitys.ScrollingActivity"
+            android:name="com.activitys.RxActivity"
             android:label="@string/title_activity_scrolling"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

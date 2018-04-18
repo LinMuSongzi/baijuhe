@@ -7,7 +7,7 @@ import y.com.sqlitesdk.framework.interface_model.IModel;
 /**
  * Created by linhui on 2017/9/2.
  */
-public class ModifyRegime<T extends IModel<T>> extends Regime<T> {
+public class ModifyRegime<T extends IModel> extends Regime<T> {
     protected ModifyRegime(T t) {
         super(t);
     }

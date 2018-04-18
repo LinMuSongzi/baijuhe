@@ -16,20 +16,20 @@
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\src\\main\\res\\layout\\item_contract.xml"
     },
     {
-        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\debug\\layout\\top_layout.xml",
-        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\src\\main\\res\\layout\\top_layout.xml"
-    },
-    {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_header.xml",
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.2.1\\res\\layout\\design_navigation_item_header.xml"
     },
     {
-        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\debug\\layout\\activity_test.xml",
-        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\src\\main\\res\\layout\\activity_test.xml"
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\debug\\layout\\top_layout.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\src\\main\\res\\layout\\top_layout.xml"
     },
     {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_contract.xml",
         "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\src\\main\\res\\layout\\fragment_contract.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\debug\\layout\\activity_test.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\src\\main\\res\\layout\\activity_test.xml"
     },
     {
         "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\IMsdk\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",

@@ -12,7 +12,6 @@ import java.util.List;
 
 import y.com.sqlitesdk.framework.IfeimoSqliteSdk;
 import y.com.sqlitesdk.framework.Mode;
-import y.com.sqlitesdk.framework.entity.BaseEntity;
 import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 
 /**

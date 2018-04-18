@@ -1,6 +1,7 @@
 package com.ifeimo.im.framwork;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
@@ -45,7 +46,9 @@ import java.util.Map;
 import java.util.Set;
 
 import okhttp3.Response;
-import y.com.sqlitesdk.framework.business.CenterServer;
+import y.com.sqlitesdk.framework.business.Business;
+import y.com.sqlitesdk.framework.db.Access;
+import y.com.sqlitesdk.framework.sqliteinterface.Execute;
 
 /**
  * Created by lpds on 2017/1/11.
@@ -216,10 +219,24 @@ final class IMConnectManager implements IConnect {
                 }
                 PManager.saveLogin(application);
                 log(" ------ Msg: Submit SYSJ information successfully ------ " + jsonObject);
-                CenterServer.getInstances().insert(new AccountModel(
+//                CenterServer.getInstances().insert(new AccountModel(
+//                        Proxy.getAccountManger().getUserMemberId(),
+//                        Proxy.getAccountManger().getAccount(false).getNickName(),
+//                        Proxy.getAccountManger().getAccount(false).getAvatarUrl()));
+                Access.run(new Execute() {
+                    @Override
+                    public void onExecute(SQLiteDatabase sqLiteDatabase) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+                        Business.getInstances().insert(sqLiteDatabase, new AccountModel(
                         Proxy.getAccountManger().getUserMemberId(),
                         Proxy.getAccountManger().getAccount(false).getNickName(),
                         Proxy.getAccountManger().getAccount(false).getAvatarUrl()));
+                    }
+
+                    @Override
+                    public void onExternalError() {
+                    }
+
+                });
                 return true;
             } else {
                 throw new Exception();

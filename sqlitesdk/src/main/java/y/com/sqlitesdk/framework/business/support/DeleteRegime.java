@@ -12,7 +12,7 @@ import y.com.sqlitesdk.framework.interface_model.IModel;
 /**
  * Created by linhui on 2017/9/2.
  */
-public class DeleteRegime<T extends IModel<T>> extends Regime<T> {
+public class DeleteRegime<T extends IModel> extends Regime<T> {
 
     private Map<String, String> whereMap = new HashMap<>();
 

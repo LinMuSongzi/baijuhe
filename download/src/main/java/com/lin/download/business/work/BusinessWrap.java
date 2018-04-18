@@ -59,7 +59,7 @@ public class BusinessWrap {
     /**
      * 唤醒等待状态，进行下载
      */
-    public static void notifyStatus(){
+    public static void notifyStatus() {
         WorkUtil.notifyStatus();
     }
 
@@ -75,12 +75,16 @@ public class BusinessWrap {
 
     /**
      * 等待
+     *
      * @param ObjectId
      */
-    public static void waitting(String ObjectId){WorkUtil.waitting(ObjectId);}
+    public static void waitting(String ObjectId) {
+        WorkUtil.waitting(ObjectId);
+    }
 
     /**
      * 对象id，查找（业务项的唯一标识）
+     *
      * @param object_id
      * @return
      */
@@ -121,12 +125,13 @@ public class BusinessWrap {
      * @param object_id
      * @param savePath
      */
-    public static void delete(String object_id, String savePath,boolean isDeleteFile) {
-        WorkUtil.delete(object_id, savePath,isDeleteFile);
+    public static void delete(String object_id, String savePath, boolean isDeleteFile) {
+        WorkUtil.delete(object_id, savePath, isDeleteFile);
     }
 
     /**
      * 开启app
+     *
      * @param context
      * @param packageName
      * @param appPath
@@ -179,11 +184,12 @@ public class BusinessWrap {
 
     /**
      * 改变状态，根据存储地址
+     *
      * @param appPath
      * @param notHadStatus
      */
     public static void modiStatus2(String appPath, int notHadStatus) {
-        WorkUtil.modiStatus2(appPath,notHadStatus);
+        WorkUtil.modiStatus2(appPath, notHadStatus);
     }
 
     public static Collection<? extends DownLoadInfo> findStutasDownloadList2(Context context) {
@@ -191,14 +197,14 @@ public class BusinessWrap {
     }
 
     public static void installApp(Context context, String filePath) {
-        WorkUtil.installApp(context,filePath);
+        WorkUtil.installApp(context, filePath);
     }
 
-    public static void previewPhoto(String path){
+    public static void previewPhoto(String path) {
         WorkUtil.previewPhoto(path);
     }
 
-    public static void previewVideo(String path){
+    public static void previewVideo(String path) {
         WorkUtil.previewVideo(path);
     }
 

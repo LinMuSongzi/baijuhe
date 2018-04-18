@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/IMsdk/IMsdk.iml" filepath="$PROJECT_DIR$/IMsdk/IMsdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baiduapi/baiduapi.iml" filepath="$PROJECT_DIR$/baiduapi/baiduapi.iml" />
       <module fileurl="file://$PROJECT_DIR$/baijuhe.iml" filepath="$PROJECT_DIR$/baijuhe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/databind/databind.iml" filepath="$PROJECT_DIR$/databind/databind.iml" />
       <module fileurl="file://$PROJECT_DIR$/dex/dex.iml" filepath="$PROJECT_DIR$/dex/dex.iml" />
       <module fileurl="file://$PROJECT_DIR$/dextest/dextest.iml" filepath="$PROJECT_DIR$/dextest/dextest.iml" />
       <module fileurl="file://$PROJECT_DIR$/download/download.iml" filepath="$PROJECT_DIR$/download/download.iml" />
@@ -12,6 +15,7 @@
       <module fileurl="file://$PROJECT_DIR$/ipc/ipc.iml" filepath="$PROJECT_DIR$/ipc/ipc.iml" />
       <module fileurl="file://$PROJECT_DIR$/ipc_two/ipc_two.iml" filepath="$PROJECT_DIR$/ipc_two/ipc_two.iml" />
       <module fileurl="file://$PROJECT_DIR$/llib/llib.iml" filepath="$PROJECT_DIR$/llib/llib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mideaencode/mideaencode.iml" filepath="$PROJECT_DIR$/mideaencode/mideaencode.iml" />
       <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/pathtest/pathtest.iml" filepath="$PROJECT_DIR$/pathtest/pathtest.iml" />
       <module fileurl="file://$PROJECT_DIR$/sqlitesdk/sqlitesdk.iml" filepath="$PROJECT_DIR$/sqlitesdk/sqlitesdk.iml" />

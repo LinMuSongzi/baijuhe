@@ -520,15 +520,16 @@ class WorkUtil {
 
     /**
      * 新增(已有不替换)
+     *
      * @param downLoadTable
      */
     public static void addTaskNoReplace(DownLoadInfo downLoadTable) {
-        if(!StringDdUtil.isNull(downLoadTable.getObjectId())) {
+        if (!StringDdUtil.isNull(downLoadTable.getObjectId())) {
             final DownLoadInfo downLoadInfo2 = downLoadTable.clone();
             Access.run(new Execute() {
                 @Override
                 public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-                    int leng = (int) Business.getInstances().insertNoReplace(sqLiteDatabase,downLoadInfo2);
+                    int leng = (int) Business.getInstances().insertNoReplace(sqLiteDatabase, downLoadInfo2);
 
                     boolean flag = false;
                     if (leng > 0) {
@@ -549,21 +550,22 @@ class WorkUtil {
 
     /**
      * 新增(已有不替换)并且下载任务
+     *
      * @param downLoadTable
      */
     public static void addAndDownload(DownLoadInfo downLoadTable) {
-        if(!StringDdUtil.isNull(downLoadTable.getObjectId())) {
+        if (!StringDdUtil.isNull(downLoadTable.getObjectId())) {
             final DownLoadInfo downLoadInfo2 = downLoadTable.clone();
             final AtomicInteger atomicInteger = new AtomicInteger(-1);
             Access.run(new Execute() {
                 @Override
                 public void onExecute(SQLiteDatabase sqLiteDatabase) throws Exception {
-                    atomicInteger.set((int) Business.getInstances().insertNoReplace(sqLiteDatabase,downLoadInfo2));
+                    atomicInteger.set((int) Business.getInstances().insertNoReplace(sqLiteDatabase, downLoadInfo2));
 
                     WorkController.getInstance().post(new Runnable() {
                         @Override
                         public void run() {
-                            if(atomicInteger.get() > 0){
+                            if (atomicInteger.get() > 0) {
                                 Entrance.download(downLoadInfo2.getObjectId());
                             }
 

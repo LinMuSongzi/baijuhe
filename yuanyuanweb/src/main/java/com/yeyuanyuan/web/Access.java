@@ -1,6 +1,7 @@
 package com.yeyuanyuan.web;
 
 import android.util.Log;
+import android.widget.ExpandableListView;
 
 import java.io.IOException;
 import java.util.concurrent.Executor;
@@ -33,24 +34,23 @@ final class Access implements IAccessNetwork<RequestResult> {
 
     @Override
     public void asyncExecute(final RequetParameter<RequestResult> requetEntity) {
-        Log.i(TAG, "asyncExecute: "+requetEntity);
+        Log.i(TAG, "asyncExecute: " + requetEntity);
         baseOkHttpClient.newCall(requetEntity.getRequest()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                    Zygote.getInterceptorMnager().onFailure(call, e, requetEntity);
+                Zygote.getInterceptorMnager().onFailure(call, e, requetEntity);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                    Zygote.getInterceptorMnager().onResponse(call, response, requetEntity);
+                Zygote.getInterceptorMnager().onResponse(call, response, requetEntity);
             }
         });
-
     }
 
     @Override
     public void execute(RequetParameter<RequestResult> requetEntity) {
-        Log.i(TAG, "asyncExecute: "+requetEntity);
+        Log.i(TAG, "asyncExecute: " + requetEntity);
         try {
             Response response = baseOkHttpClient.newCall(requetEntity.getRequest()).execute();
             requetEntity.setResult(response.body().string());
