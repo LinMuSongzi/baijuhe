@@ -11,6 +11,7 @@ import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Surface;
@@ -135,23 +136,13 @@ public class RxActivity extends AppCompatActivity {
     }
 
     private void test4() {
-//        Cursor c = getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, null, null, null, null, null);
-//
-//        if (c.getCount() > 0 && c.moveToFirst()) {
-//            do {
-//                c.moveToNext();
-//                System.out.print(" \n\n\n");
-//                for (int i = 0; i < c.getColumnCount(); i++) {
-//                    System.out.print(c.getColumnName(i)+" , ");
-//                }
-//                System.out.print("; \n\n\n");
-//                break;
-//            } while (c.moveToNext());
-//        }
 
-//        VideoView v = null;
-//        MediaMetadataRetriever m = new MediaMetadataRetriever();
-//        m.setDataSource();
+
+//     HVi
+
+
+
+
 
 
     }
@@ -173,7 +164,6 @@ public class RxActivity extends AppCompatActivity {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
 
         try {
             extractor.setDataSource(path);

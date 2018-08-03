@@ -9,6 +9,9 @@ import android.os.Build;
 import android.view.Surface;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -16,7 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Created by linhui on 2018/4/11.
  */
-public class SurfaceExecute extends Thread{
+public class SurfaceExecute extends Thread {
 
 
     private MediaCodec videocode;
@@ -69,7 +72,7 @@ public class SurfaceExecute extends Thread{
                 videocode.releaseOutputBuffer(i, false);
             }
 
-        }else if(i == -2 && !isStartMediaMuxer.get()){
+        } else if (i == -2 && !isStartMediaMuxer.get()) {
             mediaMuxer.addTrack(videocode.getOutputFormat());
             mediaMuxer.start();
             isStartMediaMuxer.set(true);
@@ -78,7 +81,7 @@ public class SurfaceExecute extends Thread{
     }
 
 
-    public  void initAudio() {
+    public void initAudio() {
         while (!isStop.get()) {
             try {
                 running();
@@ -100,7 +103,7 @@ public class SurfaceExecute extends Thread{
 
     }
 
-    public void stopCodec(){
+    public void stopCodec() {
         this.isStop.set(true);
     }
 
@@ -109,4 +112,61 @@ public class SurfaceExecute extends Thread{
     public void run() {
         initAudio();
     }
+
+
+    public static final void main(String args[]) {
+
+
+        DynamicProxy proxy = new DynamicProxy(new Name());
+        //加上这句将会产生一个$Proxy0.class文件，这个文件即为动态生成的代理类文件
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
+        //获取代理类实例sell
+        Person sell = (Person)(Proxy.newProxyInstance(Person.class.getClassLoader(),
+                new Class[] {Person.class}, proxy));
+        //通过代理类对象调用代理类方法，实际上会转到invoke方法调用
+        sell.println();
+        sell.haha();
+    }
+
+    public static final class DynamicProxy implements InvocationHandler {
+
+        Object object;
+
+        public DynamicProxy(Object object) {
+            this.object = object;
+        }
+
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            Object result = null;
+            if(method.getName().equals("println")) {
+                System.out.println("before");
+                result = method.invoke(object, args);
+                System.out.println("after");
+            }else{
+                result = method.invoke(object, args);
+            }
+            return result;
+        }
+    }
+
+    public interface Person {
+
+        void println();
+        void haha();
+    }
+
+    public static class Name implements Person {
+        @Override
+        public void println() {
+            System.out.println("lin");
+        }
+
+        @Override
+        public void haha() {
+            System.out.println("haha");
+        }
+    }
+
+
 }

@@ -1,1 +1,1 @@
-include ':app', ':databind', ':baiduapi', ':mideaencode', ":IMsdk", ':llib', ':sqlitesdk', ':ipc', ':dextest', ':pathtest', ':fileengine', ':hzc', ':dex', ':download', ':yuanyuanweb', ':mylibrary', ':ipc_two'
+include ':app', ':databind', ':baiduapi', ':mideaencode', ":IMsdk", ':llib', ':sqlitesdk', ':ipc', ':dextest', ':pathtest', ':fileengine', ':hzc', ':dex', ':download', ':yuanyuanweb', ':mylibrary', ':ipc_two', ':jiaozivideoplayer'

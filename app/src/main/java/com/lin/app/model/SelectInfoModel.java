@@ -64,8 +64,13 @@ public class SelectInfoModel extends Model<SelectInfoModel> {
         buildData();
 
         Zygote.init(getActivity().getApplicationContext());
-        Zygote.asyncExecute(Zygote.createGet(StrEntity.class, "http://www.baidu.com", null));
+//        Zygote.asyncExecute(Zygote.createGet(StrEntity.class, "http://www.baidu.com", null));
 
+        Zygote.asyncExecute(Zygote.createGet(StrEntity.class,
+                "http://apps.ifeimo.com/Lpds227/UserProfile/personalInformat" +
+                        "ion?android_sdk=24&current_version=2.3.7.0&manufac" +
+                        "turer=HUAWEI&member_id=1715698&" +
+                        "target=a_lpds&user_id=1715698&version_code=20180524",null));
 
         expandableListView.setAdapter(new BaseExpandableListAdapter() {
             @Override

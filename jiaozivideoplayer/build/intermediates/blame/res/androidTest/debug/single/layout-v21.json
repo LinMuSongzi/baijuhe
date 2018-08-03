@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\jiaozivideoplayer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\jiaozivideoplayer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\jiaozivideoplayer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\jiaozivideoplayer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\jiaozivideoplayer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\jiaozivideoplayer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\jiaozivideoplayer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "F:\\l2017_06_23_lpds\\OnewaySdk-Feed\\OnewaySdk-Feed\\baijuhe\\jiaozivideoplayer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_template_icon_group.xml"
+    }
+]
