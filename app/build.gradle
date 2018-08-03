@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.lin.app"
         minSdkVersion 19
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 20170726
         versionName "1.0.0"
     }
@@ -33,4 +33,5 @@ dependencies {
     compile project(':llib')
     compile 'com.gavin.com.library:stickyDecoration:1.0.2'
     compile project(':yuanyuanweb')
+    compile project(':jiaozivideoplayer')
 }
