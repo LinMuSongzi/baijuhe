@@ -31,7 +31,7 @@ public abstract class WoodActivity<T,M extends Model<?>> extends AppCompatActivi
         if (model == null) {
             model = configurationModel();
         }
-
+//        getLifecycle().
         model.onCreateBefore();
         super.onCreate(savedInstanceState);
         setContentView(model.getContentView());
